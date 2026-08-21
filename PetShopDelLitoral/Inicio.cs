@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -30,57 +31,15 @@ namespace PetShopDelLitoral
             try
             {
                 byte[] fontData = Properties.Resources.Poppins_Regular;
+                IntPtr fontPtr = Marshal.AllocCoTaskMem(fontData.Length);
 
-                IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
+                Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
+                pfc.AddMemoryFont(fontPtr, fontData.Length);
+                Marshal.FreeCoTaskMem(fontPtr);
 
-                try
-                {
-                    System.Runtime.InteropServices.Marshal.Copy(
-                        fontData,
-                        0,
-                        fontPtr,
-                        fontData.Length
-                    );
-
-                    pfc.AddMemoryFont(fontPtr, fontData.Length);
-
-                    // Usar el nombre de la familia al crear la fuente (mejor compatibilidad)
-                    string fam = pfc.Families[0].Name;
-                    Font nueva = new Font(fam, 14f, FontStyle.Regular, GraphicsUnit.Point);
-
-                    // Asignar a boton y aplicar recursivamente al panel del menú
-                    botonInicio.Font = nueva;
-                    botonInicio.FlatStyle = FlatStyle.Flat;
-                    botonInicio.UseVisualStyleBackColor = false;
-                    botonInicio.Refresh();
-                    botonInicio.Update();
-
-                    // Aplicar la fuente a todos los controles del panelMenu (opcional)
-                    ApplyFont(this.panelMenu, nueva);
-
-                    // Asegurar estilos específicos y orden de tabulación
-                    try
-                    {
-                        // Forzar uso de colores personalizados (evita que UseVisualStyleBackColor los reemplace)
-                        botonVentas.UseVisualStyleBackColor = false;
-                        botonVentas.FlatStyle = FlatStyle.Flat;
-                        botonVentas.Font = nueva;
-
-                        botonCompras.UseVisualStyleBackColor = false;
-                        botonCompras.FlatStyle = FlatStyle.Flat;
-                        botonCompras.Font = nueva;
-
-                        // Establecer un orden de tabulación coherente
-                        botonInicio.TabIndex = 0;
-                        botonVentas.TabIndex = 1;
-                        botonCompras.TabIndex = 2;
-                    }
-                    catch { }
-                }
-                finally
-                {
-                    System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
-                }
+             
+                Font fuentePoppins = new Font(pfc.Families[0], 12f, FontStyle.Regular);
+                panelMenu.Font = fuentePoppins;
             }
             catch (Exception ex)
             {
@@ -93,21 +52,6 @@ namespace PetShopDelLitoral
 
         }
 
-        // Aplica la fuente recursivamente a los controles hijos
-        private void ApplyFont(Control parent, Font font)
-        {
-            if (parent == null || font == null) return;
-            foreach (Control c in parent.Controls)
-            {
-                try
-                {
-                    c.Font = font;
-                }
-                catch { }
-                // Recursión
-                ApplyFont(c, font);
-            }
-        }
 
         private void PanelContenedor_Paint(object sender, PaintEventArgs e)
         {
@@ -132,6 +76,37 @@ namespace PetShopDelLitoral
         }
 
         private void botonVentas_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void botonProductos_Click(object sender, EventArgs e)
+        {
+            pnlSubMenuProductos.Visible = !pnlSubMenuProductos.Visible;
+        
+        }
+
+        private void botonRopa_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void iconButton2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void logo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelImagen_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panelImagen_Paint_1(object sender, PaintEventArgs e)
         {
 
         }
