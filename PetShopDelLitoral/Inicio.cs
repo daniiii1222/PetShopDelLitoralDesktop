@@ -40,6 +40,8 @@ namespace PetShopDelLitoral
              
                 Font fuentePoppins = new Font(pfc.Families[0], 12f, FontStyle.Regular);
                 panelMenu.Font = fuentePoppins;
+
+               
             }
             catch (Exception ex)
             {
@@ -77,12 +79,12 @@ namespace PetShopDelLitoral
 
         private void botonVentas_Click_1(object sender, EventArgs e)
         {
-
+            panelVentas.Visible = !panelVentas.Visible;
         }
 
         private void botonProductos_Click(object sender, EventArgs e)
         {
-            pnlSubMenuProductos.Visible = !pnlSubMenuProductos.Visible;
+            
         
         }
 
@@ -109,6 +111,16 @@ namespace PetShopDelLitoral
         private void panelImagen_Paint_1(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void iconButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void botonCompras_Click(object sender, EventArgs e)
+        {
+            panelCompra.Visible = !panelCompra.Visible;
         }
     }
 }

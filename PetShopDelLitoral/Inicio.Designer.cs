@@ -28,95 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            FontAwesome.Sharp.IconButton btnAlimentos;
-            FontAwesome.Sharp.IconButton botonRopa;
-            FontAwesome.Sharp.IconButton botonAccesorios;
             this.PanelContenedor = new System.Windows.Forms.Panel();
             this.panelCentral = new System.Windows.Forms.Panel();
             this.panelSuperior = new System.Windows.Forms.Panel();
             this.panelMenu = new System.Windows.Forms.FlowLayoutPanel();
             this.logo = new System.Windows.Forms.PictureBox();
+            this.botonInicio = new FontAwesome.Sharp.IconButton();
             this.botonVentas = new FontAwesome.Sharp.IconButton();
             this.botonCompras = new FontAwesome.Sharp.IconButton();
             this.botonProductos = new FontAwesome.Sharp.IconButton();
-            this.pnlSubMenuProductos = new System.Windows.Forms.FlowLayoutPanel();
             this.botonUsuarios = new FontAwesome.Sharp.IconButton();
             this.botonClientes = new FontAwesome.Sharp.IconButton();
             this.botonProvedores = new FontAwesome.Sharp.IconButton();
             this.botonReportes = new FontAwesome.Sharp.IconButton();
-            this.botonInicio = new FontAwesome.Sharp.IconButton();
-            btnAlimentos = new FontAwesome.Sharp.IconButton();
-            botonRopa = new FontAwesome.Sharp.IconButton();
-            botonAccesorios = new FontAwesome.Sharp.IconButton();
+            this.BotonMantenedor = new FontAwesome.Sharp.IconButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelVentas = new System.Windows.Forms.Panel();
+            this.BotonResgistroVenta = new FontAwesome.Sharp.IconButton();
+            this.BotonDetalleVentas = new FontAwesome.Sharp.IconButton();
+            this.panelCompra = new System.Windows.Forms.Panel();
+            this.BotonRegistrarCompra = new FontAwesome.Sharp.IconButton();
+            this.BotonDetalleCompra = new FontAwesome.Sharp.IconButton();
             this.PanelContenedor.SuspendLayout();
+            this.panelSuperior.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
-            this.pnlSubMenuProductos.SuspendLayout();
+            this.panelVentas.SuspendLayout();
+            this.panelCompra.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnAlimentos
-            // 
-            btnAlimentos.Dock = System.Windows.Forms.DockStyle.Top;
-            btnAlimentos.FlatAppearance.BorderSize = 0;
-            btnAlimentos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnAlimentos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            btnAlimentos.IconChar = FontAwesome.Sharp.IconChar.Bone;
-            btnAlimentos.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            btnAlimentos.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            btnAlimentos.IconSize = 40;
-            btnAlimentos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnAlimentos.Location = new System.Drawing.Point(3, 3);
-            btnAlimentos.Name = "btnAlimentos";
-            btnAlimentos.Padding = new System.Windows.Forms.Padding(5, 0, 5, 5);
-            btnAlimentos.Size = new System.Drawing.Size(190, 42);
-            btnAlimentos.TabIndex = 0;
-            btnAlimentos.Text = "Alimentos";
-            btnAlimentos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnAlimentos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            btnAlimentos.UseVisualStyleBackColor = true;
-            // 
-            // botonRopa
-            // 
-            botonRopa.Dock = System.Windows.Forms.DockStyle.Top;
-            botonRopa.FlatAppearance.BorderSize = 0;
-            botonRopa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            botonRopa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            botonRopa.IconChar = FontAwesome.Sharp.IconChar.Tshirt;
-            botonRopa.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            botonRopa.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            botonRopa.IconSize = 40;
-            botonRopa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            botonRopa.Location = new System.Drawing.Point(3, 51);
-            botonRopa.Name = "botonRopa";
-            botonRopa.Padding = new System.Windows.Forms.Padding(5, 0, 5, 5);
-            botonRopa.Size = new System.Drawing.Size(190, 42);
-            botonRopa.TabIndex = 1;
-            botonRopa.Text = "Ropa";
-            botonRopa.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            botonRopa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            botonRopa.UseVisualStyleBackColor = true;
-            botonRopa.Click += new System.EventHandler(this.botonRopa_Click);
-            // 
-            // botonAccesorios
-            // 
-            botonAccesorios.Dock = System.Windows.Forms.DockStyle.Top;
-            botonAccesorios.FlatAppearance.BorderSize = 0;
-            botonAccesorios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            botonAccesorios.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            botonAccesorios.IconChar = FontAwesome.Sharp.IconChar.Tags;
-            botonAccesorios.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            botonAccesorios.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            botonAccesorios.IconSize = 40;
-            botonAccesorios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            botonAccesorios.Location = new System.Drawing.Point(3, 99);
-            botonAccesorios.Name = "botonAccesorios";
-            botonAccesorios.Padding = new System.Windows.Forms.Padding(5, 0, 5, 5);
-            botonAccesorios.Size = new System.Drawing.Size(190, 42);
-            botonAccesorios.TabIndex = 2;
-            botonAccesorios.Text = "Accesorios";
-            botonAccesorios.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            botonAccesorios.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            botonAccesorios.UseVisualStyleBackColor = true;
             // 
             // PanelContenedor
             // 
@@ -143,6 +82,7 @@
             // panelSuperior
             // 
             this.panelSuperior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(254)))));
+            this.panelSuperior.Controls.Add(this.panel1);
             this.panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSuperior.Location = new System.Drawing.Point(200, 0);
             this.panelSuperior.Name = "panelSuperior";
@@ -155,13 +95,15 @@
             this.panelMenu.Controls.Add(this.logo);
             this.panelMenu.Controls.Add(this.botonInicio);
             this.panelMenu.Controls.Add(this.botonVentas);
+            this.panelMenu.Controls.Add(this.panelVentas);
             this.panelMenu.Controls.Add(this.botonCompras);
+            this.panelMenu.Controls.Add(this.panelCompra);
             this.panelMenu.Controls.Add(this.botonProductos);
-            this.panelMenu.Controls.Add(this.pnlSubMenuProductos);
             this.panelMenu.Controls.Add(this.botonUsuarios);
             this.panelMenu.Controls.Add(this.botonClientes);
             this.panelMenu.Controls.Add(this.botonProvedores);
             this.panelMenu.Controls.Add(this.botonReportes);
+            this.panelMenu.Controls.Add(this.BotonMantenedor);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMenu.Name = "panelMenu";
@@ -180,6 +122,24 @@
             this.logo.TabIndex = 0;
             this.logo.TabStop = false;
             this.logo.Click += new System.EventHandler(this.logo_Click);
+            // 
+            // botonInicio
+            // 
+            this.botonInicio.FlatAppearance.BorderSize = 0;
+            this.botonInicio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.botonInicio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.botonInicio.IconChar = FontAwesome.Sharp.IconChar.HomeLg;
+            this.botonInicio.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.botonInicio.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.botonInicio.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.botonInicio.Location = new System.Drawing.Point(3, 103);
+            this.botonInicio.Name = "botonInicio";
+            this.botonInicio.Size = new System.Drawing.Size(190, 45);
+            this.botonInicio.TabIndex = 9;
+            this.botonInicio.Text = "inicio";
+            this.botonInicio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.botonInicio.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.botonInicio.UseVisualStyleBackColor = true;
             // 
             // botonVentas
             // 
@@ -210,7 +170,7 @@
             this.botonCompras.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.botonCompras.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.botonCompras.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonCompras.Location = new System.Drawing.Point(3, 205);
+            this.botonCompras.Location = new System.Drawing.Point(3, 282);
             this.botonCompras.Name = "botonCompras";
             this.botonCompras.Size = new System.Drawing.Size(190, 45);
             this.botonCompras.TabIndex = 0;
@@ -218,6 +178,7 @@
             this.botonCompras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.botonCompras.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.botonCompras.UseVisualStyleBackColor = true;
+            this.botonCompras.Click += new System.EventHandler(this.botonCompras_Click);
             // 
             // botonProductos
             // 
@@ -228,7 +189,7 @@
             this.botonProductos.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.botonProductos.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.botonProductos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonProductos.Location = new System.Drawing.Point(3, 256);
+            this.botonProductos.Location = new System.Drawing.Point(3, 410);
             this.botonProductos.Name = "botonProductos";
             this.botonProductos.Size = new System.Drawing.Size(190, 45);
             this.botonProductos.TabIndex = 3;
@@ -237,19 +198,6 @@
             this.botonProductos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.botonProductos.UseVisualStyleBackColor = true;
             this.botonProductos.Click += new System.EventHandler(this.botonProductos_Click);
-            // 
-            // pnlSubMenuProductos
-            // 
-            this.pnlSubMenuProductos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(18)))), ((int)(((byte)(16)))));
-            this.pnlSubMenuProductos.Controls.Add(btnAlimentos);
-            this.pnlSubMenuProductos.Controls.Add(botonRopa);
-            this.pnlSubMenuProductos.Controls.Add(botonAccesorios);
-            this.pnlSubMenuProductos.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlSubMenuProductos.Location = new System.Drawing.Point(3, 307);
-            this.pnlSubMenuProductos.Name = "pnlSubMenuProductos";
-            this.pnlSubMenuProductos.Size = new System.Drawing.Size(197, 149);
-            this.pnlSubMenuProductos.TabIndex = 4;
-            this.pnlSubMenuProductos.Visible = false;
             // 
             // botonUsuarios
             // 
@@ -260,7 +208,7 @@
             this.botonUsuarios.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.botonUsuarios.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.botonUsuarios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonUsuarios.Location = new System.Drawing.Point(3, 462);
+            this.botonUsuarios.Location = new System.Drawing.Point(3, 461);
             this.botonUsuarios.Name = "botonUsuarios";
             this.botonUsuarios.Size = new System.Drawing.Size(190, 45);
             this.botonUsuarios.TabIndex = 5;
@@ -278,7 +226,7 @@
             this.botonClientes.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.botonClientes.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.botonClientes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonClientes.Location = new System.Drawing.Point(3, 513);
+            this.botonClientes.Location = new System.Drawing.Point(3, 512);
             this.botonClientes.Name = "botonClientes";
             this.botonClientes.Size = new System.Drawing.Size(190, 45);
             this.botonClientes.TabIndex = 6;
@@ -296,7 +244,7 @@
             this.botonProvedores.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.botonProvedores.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.botonProvedores.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonProvedores.Location = new System.Drawing.Point(3, 564);
+            this.botonProvedores.Location = new System.Drawing.Point(3, 563);
             this.botonProvedores.Name = "botonProvedores";
             this.botonProvedores.Size = new System.Drawing.Size(190, 45);
             this.botonProvedores.TabIndex = 8;
@@ -315,7 +263,7 @@
             this.botonReportes.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.botonReportes.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.botonReportes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonReportes.Location = new System.Drawing.Point(3, 615);
+            this.botonReportes.Location = new System.Drawing.Point(3, 614);
             this.botonReportes.Name = "botonReportes";
             this.botonReportes.Size = new System.Drawing.Size(190, 45);
             this.botonReportes.TabIndex = 7;
@@ -324,23 +272,125 @@
             this.botonReportes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.botonReportes.UseVisualStyleBackColor = true;
             // 
-            // botonInicio
+            // BotonMantenedor
             // 
-            this.botonInicio.FlatAppearance.BorderSize = 0;
-            this.botonInicio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.botonInicio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            this.botonInicio.IconChar = FontAwesome.Sharp.IconChar.HomeLg;
-            this.botonInicio.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            this.botonInicio.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.botonInicio.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonInicio.Location = new System.Drawing.Point(3, 103);
-            this.botonInicio.Name = "botonInicio";
-            this.botonInicio.Size = new System.Drawing.Size(190, 45);
-            this.botonInicio.TabIndex = 9;
-            this.botonInicio.Text = "inicio";
-            this.botonInicio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonInicio.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.botonInicio.UseVisualStyleBackColor = true;
+            this.BotonMantenedor.FlatAppearance.BorderSize = 0;
+            this.BotonMantenedor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BotonMantenedor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.BotonMantenedor.IconChar = FontAwesome.Sharp.IconChar.Database;
+            this.BotonMantenedor.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.BotonMantenedor.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.BotonMantenedor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BotonMantenedor.Location = new System.Drawing.Point(3, 665);
+            this.BotonMantenedor.Name = "BotonMantenedor";
+            this.BotonMantenedor.Size = new System.Drawing.Size(190, 45);
+            this.BotonMantenedor.TabIndex = 6;
+            this.BotonMantenedor.Text = "Mantenedor";
+            this.BotonMantenedor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BotonMantenedor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BotonMantenedor.UseVisualStyleBackColor = true;
+            this.BotonMantenedor.Click += new System.EventHandler(this.iconButton1_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(6, 99);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 100);
+            this.panel1.TabIndex = 0;
+            // 
+            // panelVentas
+            // 
+            this.panelVentas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(18)))), ((int)(((byte)(16)))));
+            this.panelVentas.Controls.Add(this.BotonDetalleVentas);
+            this.panelVentas.Controls.Add(this.BotonResgistroVenta);
+            this.panelVentas.Location = new System.Drawing.Point(3, 205);
+            this.panelVentas.Name = "panelVentas";
+            this.panelVentas.Size = new System.Drawing.Size(200, 71);
+            this.panelVentas.TabIndex = 10;
+            this.panelVentas.Visible = false;
+            // 
+            // BotonResgistroVenta
+            // 
+            this.BotonResgistroVenta.FlatAppearance.BorderSize = 0;
+            this.BotonResgistroVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BotonResgistroVenta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.BotonResgistroVenta.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.BotonResgistroVenta.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.BotonResgistroVenta.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.BotonResgistroVenta.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BotonResgistroVenta.Location = new System.Drawing.Point(0, 3);
+            this.BotonResgistroVenta.Name = "BotonResgistroVenta";
+            this.BotonResgistroVenta.Size = new System.Drawing.Size(190, 30);
+            this.BotonResgistroVenta.TabIndex = 4;
+            this.BotonResgistroVenta.Text = "Registrar";
+            this.BotonResgistroVenta.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BotonResgistroVenta.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.BotonResgistroVenta.UseVisualStyleBackColor = true;
+            // 
+            // BotonDetalleVentas
+            // 
+            this.BotonDetalleVentas.FlatAppearance.BorderSize = 0;
+            this.BotonDetalleVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BotonDetalleVentas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.BotonDetalleVentas.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.BotonDetalleVentas.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.BotonDetalleVentas.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.BotonDetalleVentas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BotonDetalleVentas.Location = new System.Drawing.Point(0, 44);
+            this.BotonDetalleVentas.Name = "BotonDetalleVentas";
+            this.BotonDetalleVentas.Size = new System.Drawing.Size(197, 30);
+            this.BotonDetalleVentas.TabIndex = 5;
+            this.BotonDetalleVentas.Text = "Detalle";
+            this.BotonDetalleVentas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BotonDetalleVentas.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.BotonDetalleVentas.UseVisualStyleBackColor = true;
+            // 
+            // panelCompra
+            // 
+            this.panelCompra.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(18)))), ((int)(((byte)(16)))));
+            this.panelCompra.Controls.Add(this.BotonDetalleCompra);
+            this.panelCompra.Controls.Add(this.BotonRegistrarCompra);
+            this.panelCompra.Location = new System.Drawing.Point(3, 333);
+            this.panelCompra.Name = "panelCompra";
+            this.panelCompra.Size = new System.Drawing.Size(200, 71);
+            this.panelCompra.TabIndex = 11;
+            this.panelCompra.Visible = false;
+            // 
+            // BotonRegistrarCompra
+            // 
+            this.BotonRegistrarCompra.FlatAppearance.BorderSize = 0;
+            this.BotonRegistrarCompra.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BotonRegistrarCompra.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.BotonRegistrarCompra.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.BotonRegistrarCompra.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.BotonRegistrarCompra.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.BotonRegistrarCompra.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BotonRegistrarCompra.Location = new System.Drawing.Point(0, 3);
+            this.BotonRegistrarCompra.Name = "BotonRegistrarCompra";
+            this.BotonRegistrarCompra.Size = new System.Drawing.Size(190, 30);
+            this.BotonRegistrarCompra.TabIndex = 4;
+            this.BotonRegistrarCompra.Text = "Registrar";
+            this.BotonRegistrarCompra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BotonRegistrarCompra.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.BotonRegistrarCompra.UseVisualStyleBackColor = true;
+            // 
+            // BotonDetalleCompra
+            // 
+            this.BotonDetalleCompra.FlatAppearance.BorderSize = 0;
+            this.BotonDetalleCompra.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BotonDetalleCompra.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.BotonDetalleCompra.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.BotonDetalleCompra.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.BotonDetalleCompra.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.BotonDetalleCompra.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BotonDetalleCompra.Location = new System.Drawing.Point(-3, 38);
+            this.BotonDetalleCompra.Name = "BotonDetalleCompra";
+            this.BotonDetalleCompra.Size = new System.Drawing.Size(197, 33);
+            this.BotonDetalleCompra.TabIndex = 6;
+            this.BotonDetalleCompra.Text = "Detalle";
+            this.BotonDetalleCompra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BotonDetalleCompra.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.BotonDetalleCompra.UseVisualStyleBackColor = true;
             // 
             // Inicio
             // 
@@ -354,9 +404,11 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Inicio_Load);
             this.PanelContenedor.ResumeLayout(false);
+            this.panelSuperior.ResumeLayout(false);
             this.panelMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
-            this.pnlSubMenuProductos.ResumeLayout(false);
+            this.panelVentas.ResumeLayout(false);
+            this.panelCompra.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -370,12 +422,19 @@
         private FontAwesome.Sharp.IconButton botonVentas;
         private FontAwesome.Sharp.IconButton botonCompras;
         private FontAwesome.Sharp.IconButton botonProductos;
-        private System.Windows.Forms.FlowLayoutPanel pnlSubMenuProductos;
         private FontAwesome.Sharp.IconButton botonUsuarios;
         private FontAwesome.Sharp.IconButton botonClientes;
         private FontAwesome.Sharp.IconButton botonReportes;
         private FontAwesome.Sharp.IconButton botonProvedores;
         private FontAwesome.Sharp.IconButton botonInicio;
+        private FontAwesome.Sharp.IconButton BotonMantenedor;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelVentas;
+        private FontAwesome.Sharp.IconButton BotonResgistroVenta;
+        private FontAwesome.Sharp.IconButton BotonDetalleVentas;
+        private System.Windows.Forms.Panel panelCompra;
+        private FontAwesome.Sharp.IconButton BotonDetalleCompra;
+        private FontAwesome.Sharp.IconButton BotonRegistrarCompra;
     }
 }
 
