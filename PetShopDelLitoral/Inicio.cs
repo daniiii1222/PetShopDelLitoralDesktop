@@ -80,6 +80,21 @@ namespace PetShopDelLitoral
         private void botonVentas_Click_1(object sender, EventArgs e)
         {
             panelVentas.Visible = !panelVentas.Visible;
+
+     
+
+
+            this.panelCentral.Controls.Clear();
+
+            FrmVentas frm = new FrmVentas();
+            frm.TopLevel = false;
+            frm.FormBorderStyle = FormBorderStyle.None;
+            frm.Dock = DockStyle.Fill;
+
+
+            this.panelCentral.Controls.Add(frm);
+
+            frm.Show();
         }
 
         private void botonProductos_Click(object sender, EventArgs e)
@@ -121,6 +136,18 @@ namespace PetShopDelLitoral
         private void botonCompras_Click(object sender, EventArgs e)
         {
             panelCompra.Visible = !panelCompra.Visible;
+
+            this.panelCentral.Controls.Clear();
+
+            FrmCompras frm = new FrmCompras();
+            frm.TopLevel = false;
+            frm.FormBorderStyle = FormBorderStyle.None;
+            frm.Dock = DockStyle.Fill;
+
+
+            this.panelCentral.Controls.Add(frm);
+
+            frm.Show();
         }
     }
 }
