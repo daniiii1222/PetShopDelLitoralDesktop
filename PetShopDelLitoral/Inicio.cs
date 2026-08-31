@@ -20,7 +20,7 @@ namespace PetShopDelLitoral
         private PrivateFontCollection pfc = new PrivateFontCollection();
         public Inicio()
         {
-            InitializeComponent();
+         InitializeComponent();
          CargarFuentePoppins();
         }
 
@@ -95,8 +95,18 @@ namespace PetShopDelLitoral
 
         private void botonProductos_Click(object sender, EventArgs e)
         {
-            
-        
+
+            this.panelCentral.Controls.Clear();
+
+            FrmProductos frm = new FrmProductos();
+            frm.TopLevel = false;
+            frm.FormBorderStyle = FormBorderStyle.None;
+            frm.Dock = DockStyle.Fill;
+
+
+            this.panelCentral.Controls.Add(frm);
+
+            frm.Show();
         }
 
         private void botonRopa_Click(object sender, EventArgs e)
@@ -134,6 +144,36 @@ namespace PetShopDelLitoral
             this.panelCentral.Controls.Clear();
 
             FrmCompras frm = new FrmCompras();
+            frm.TopLevel = false;
+            frm.FormBorderStyle = FormBorderStyle.None;
+            frm.Dock = DockStyle.Fill;
+
+
+            this.panelCentral.Controls.Add(frm);
+
+            frm.Show();
+        }
+
+        private void botonInicio_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelCentral_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void PanelControl_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void BtProveedor_Click(object sender, EventArgs e)
+        {
+            this.panelCentral.Controls.Clear();
+
+            FrmProveedor frm = new FrmProveedor();
             frm.TopLevel = false;
             frm.FormBorderStyle = FormBorderStyle.None;
             frm.Dock = DockStyle.Fill;
