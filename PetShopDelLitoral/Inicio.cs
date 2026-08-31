@@ -79,11 +79,7 @@ namespace PetShopDelLitoral
 
         private void botonVentas_Click_1(object sender, EventArgs e)
         {
-            panelVentas.Visible = !panelVentas.Visible;
-
      
-
-
             this.panelCentral.Controls.Clear();
 
             FrmVentas frm = new FrmVentas();
@@ -135,8 +131,6 @@ namespace PetShopDelLitoral
 
         private void botonCompras_Click(object sender, EventArgs e)
         {
-            panelCompra.Visible = !panelCompra.Visible;
-
             this.panelCentral.Controls.Clear();
 
             FrmCompras frm = new FrmCompras();
