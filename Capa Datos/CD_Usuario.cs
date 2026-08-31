@@ -12,7 +12,7 @@ namespace Capa_Datos
         public DataTable ListarUsuarios()
         {
             DataTable tabla = new DataTable();
-
+            return ListarUsuarios();
         }
     }
 }
