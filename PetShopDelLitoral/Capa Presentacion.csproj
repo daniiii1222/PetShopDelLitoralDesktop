@@ -68,11 +68,17 @@
     <Compile Include="CargaProductos.Designer.cs">
       <DependentUpon>CargaProductos.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmDetalleVentas.cs">
+    <Compile Include="FrmReportesSupervisor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmDetalleVentas.Designer.cs">
-      <DependentUpon>FrmDetalleVentas.cs</DependentUpon>
+    <Compile Include="FrmReportesSupervisor.Designer.cs">
+      <DependentUpon>FrmReportesSupervisor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmReportesVendedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReportesVendedor.Designer.cs">
+      <DependentUpon>FrmReportesVendedor.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmCompras.cs">
       <SubType>Form</SubType>
@@ -116,8 +122,11 @@
     <EmbeddedResource Include="FrmCompras.resx">
       <DependentUpon>FrmCompras.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmDetalleVentas.resx">
-      <DependentUpon>FrmDetalleVentas.cs</DependentUpon>
+    <EmbeddedResource Include="FrmReportesSupervisor.resx">
+      <DependentUpon>FrmReportesSupervisor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmReportesVendedor.resx">
+      <DependentUpon>FrmReportesVendedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmVentas.resx">
       <DependentUpon>FrmVentas.cs</DependentUpon>

@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace PetShopDelLitoral
 {
-    public partial class FrmDetalleVentas : Form
+    public partial class FrmReportesVendedor : Form
     {
-        public FrmDetalleVentas()
+        public FrmReportesVendedor()
         {
             InitializeComponent();
         }
 
-        private void FrmDetalleVentas_Load(object sender, EventArgs e)
+        private void panelTituloSec_Paint(object sender, PaintEventArgs e)
         {
 
         }

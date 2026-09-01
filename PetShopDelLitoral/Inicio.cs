@@ -183,5 +183,20 @@ namespace PetShopDelLitoral
 
             frm.Show();
         }
+
+        private void botonReportes_Click(object sender, EventArgs e)
+        {
+            this.panelCentral.Controls.Clear();
+
+            FrmReportesSupervisor frm = new FrmReportesSupervisor();
+            frm.TopLevel = false;
+            frm.FormBorderStyle = FormBorderStyle.None;
+            frm.Dock = DockStyle.Fill;
+
+
+            this.panelCentral.Controls.Add(frm);
+
+            frm.Show();
+        }
     }
 }
