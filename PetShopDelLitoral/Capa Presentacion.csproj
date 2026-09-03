@@ -68,6 +68,12 @@
     <Compile Include="CargaProductos.Designer.cs">
       <DependentUpon>CargaProductos.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmPersonas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPersonas.Designer.cs">
+      <DependentUpon>FrmPersonas.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmReportesSupervisor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,17 +116,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FrmProveedor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmProveedor.Designer.cs">
-      <DependentUpon>FrmProveedor.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="CargaProductos.resx">
       <DependentUpon>CargaProductos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCompras.resx">
       <DependentUpon>FrmCompras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPersonas.resx">
+      <DependentUpon>FrmPersonas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmReportesSupervisor.resx">
       <DependentUpon>FrmReportesSupervisor.cs</DependentUpon>
@@ -150,9 +153,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="FrmProveedor.resx">
-      <DependentUpon>FrmProveedor.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="fuentes\Poppins-Regular.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

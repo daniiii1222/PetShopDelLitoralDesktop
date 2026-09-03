@@ -267,7 +267,7 @@ namespace PetShopDelLitoral
             this.botonProvedores.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.botonProvedores.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.botonProvedores.UseVisualStyleBackColor = true;
-            this.botonProvedores.Click += new System.EventHandler(this.BtProveedor_Click);
+        
             // 
             // botonReportes
             // 

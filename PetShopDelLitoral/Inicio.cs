@@ -169,20 +169,7 @@ namespace PetShopDelLitoral
 
         }
 
-        private void BtProveedor_Click(object sender, EventArgs e)
-        {
-            this.panelCentral.Controls.Clear();
-
-            FrmProveedor frm = new FrmProveedor();
-            frm.TopLevel = false;
-            frm.FormBorderStyle = FormBorderStyle.None;
-            frm.Dock = DockStyle.Fill;
-
-
-            this.panelCentral.Controls.Add(frm);
-
-            frm.Show();
-        }
+        
 
         private void botonReportes_Click(object sender, EventArgs e)
         {
