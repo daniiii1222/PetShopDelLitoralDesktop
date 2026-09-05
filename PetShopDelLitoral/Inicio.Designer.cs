@@ -41,9 +41,7 @@ namespace PetShopDelLitoral
             this.botonVentas = new FontAwesome.Sharp.IconButton();
             this.botonCompras = new FontAwesome.Sharp.IconButton();
             this.botonProductos = new FontAwesome.Sharp.IconButton();
-            this.botonUsuarios = new FontAwesome.Sharp.IconButton();
-            this.botonClientes = new FontAwesome.Sharp.IconButton();
-            this.botonProvedores = new FontAwesome.Sharp.IconButton();
+            this.botonPersonas = new FontAwesome.Sharp.IconButton();
             this.botonReportes = new FontAwesome.Sharp.IconButton();
             this.BotonMantenedor = new FontAwesome.Sharp.IconButton();
             this.panelVentas = new System.Windows.Forms.Panel();
@@ -113,9 +111,7 @@ namespace PetShopDelLitoral
             this.panelMenu.Controls.Add(this.botonVentas);
             this.panelMenu.Controls.Add(this.botonCompras);
             this.panelMenu.Controls.Add(this.botonProductos);
-            this.panelMenu.Controls.Add(this.botonUsuarios);
-            this.panelMenu.Controls.Add(this.botonClientes);
-            this.panelMenu.Controls.Add(this.botonProvedores);
+            this.panelMenu.Controls.Add(this.botonPersonas);
             this.panelMenu.Controls.Add(this.botonReportes);
             this.panelMenu.Controls.Add(this.BotonMantenedor);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
@@ -214,60 +210,24 @@ namespace PetShopDelLitoral
             this.botonProductos.UseVisualStyleBackColor = true;
             this.botonProductos.Click += new System.EventHandler(this.botonProductos_Click);
             // 
-            // botonUsuarios
+            // botonPersonas
             // 
-            this.botonUsuarios.FlatAppearance.BorderSize = 0;
-            this.botonUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.botonUsuarios.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            this.botonUsuarios.IconChar = FontAwesome.Sharp.IconChar.UserEdit;
-            this.botonUsuarios.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            this.botonUsuarios.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.botonUsuarios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonUsuarios.Location = new System.Drawing.Point(3, 310);
-            this.botonUsuarios.Name = "botonUsuarios";
-            this.botonUsuarios.Size = new System.Drawing.Size(190, 45);
-            this.botonUsuarios.TabIndex = 5;
-            this.botonUsuarios.Text = "Usuarios";
-            this.botonUsuarios.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonUsuarios.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.botonUsuarios.UseVisualStyleBackColor = true;
-            // 
-            // botonClientes
-            // 
-            this.botonClientes.FlatAppearance.BorderSize = 0;
-            this.botonClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.botonClientes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            this.botonClientes.IconChar = FontAwesome.Sharp.IconChar.Users;
-            this.botonClientes.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            this.botonClientes.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.botonClientes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonClientes.Location = new System.Drawing.Point(3, 361);
-            this.botonClientes.Name = "botonClientes";
-            this.botonClientes.Size = new System.Drawing.Size(190, 45);
-            this.botonClientes.TabIndex = 6;
-            this.botonClientes.Text = "Clientes";
-            this.botonClientes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonClientes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.botonClientes.UseVisualStyleBackColor = true;
-            // 
-            // botonProvedores
-            // 
-            this.botonProvedores.FlatAppearance.BorderSize = 0;
-            this.botonProvedores.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.botonProvedores.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            this.botonProvedores.IconChar = FontAwesome.Sharp.IconChar.Truck;
-            this.botonProvedores.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            this.botonProvedores.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.botonProvedores.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonProvedores.Location = new System.Drawing.Point(3, 412);
-            this.botonProvedores.Name = "botonProvedores";
-            this.botonProvedores.Size = new System.Drawing.Size(190, 45);
-            this.botonProvedores.TabIndex = 8;
-            this.botonProvedores.Text = "Provedores";
-            this.botonProvedores.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonProvedores.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.botonProvedores.UseVisualStyleBackColor = true;
-        
+            this.botonPersonas.FlatAppearance.BorderSize = 0;
+            this.botonPersonas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.botonPersonas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.botonPersonas.IconChar = FontAwesome.Sharp.IconChar.UserEdit;
+            this.botonPersonas.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.botonPersonas.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.botonPersonas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.botonPersonas.Location = new System.Drawing.Point(3, 310);
+            this.botonPersonas.Name = "botonPersonas";
+            this.botonPersonas.Size = new System.Drawing.Size(190, 45);
+            this.botonPersonas.TabIndex = 5;
+            this.botonPersonas.Text = "Personas";
+            this.botonPersonas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.botonPersonas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.botonPersonas.UseVisualStyleBackColor = true;
+            this.botonPersonas.Click += new System.EventHandler(this.btnPersonas_click);
             // 
             // botonReportes
             // 
@@ -278,7 +238,7 @@ namespace PetShopDelLitoral
             this.botonReportes.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.botonReportes.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.botonReportes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonReportes.Location = new System.Drawing.Point(3, 463);
+            this.botonReportes.Location = new System.Drawing.Point(3, 361);
             this.botonReportes.Name = "botonReportes";
             this.botonReportes.Size = new System.Drawing.Size(190, 45);
             this.botonReportes.TabIndex = 7;
@@ -297,7 +257,7 @@ namespace PetShopDelLitoral
             this.BotonMantenedor.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.BotonMantenedor.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BotonMantenedor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BotonMantenedor.Location = new System.Drawing.Point(3, 514);
+            this.BotonMantenedor.Location = new System.Drawing.Point(3, 412);
             this.BotonMantenedor.Name = "BotonMantenedor";
             this.BotonMantenedor.Size = new System.Drawing.Size(190, 45);
             this.BotonMantenedor.TabIndex = 6;
@@ -363,10 +323,8 @@ namespace PetShopDelLitoral
         private FontAwesome.Sharp.IconButton botonVentas;
         private FontAwesome.Sharp.IconButton botonCompras;
         private FontAwesome.Sharp.IconButton botonProductos;
-        private FontAwesome.Sharp.IconButton botonUsuarios;
-        private FontAwesome.Sharp.IconButton botonClientes;
+        private FontAwesome.Sharp.IconButton botonPersonas;
         private FontAwesome.Sharp.IconButton botonReportes;
-        private FontAwesome.Sharp.IconButton botonProvedores;
         private FontAwesome.Sharp.IconButton botonInicio;
         private FontAwesome.Sharp.IconButton BotonMantenedor;
         private System.Windows.Forms.Panel panel1;
