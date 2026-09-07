@@ -91,16 +91,6 @@ namespace PetShopDelLitoral
 
             frm.Show();
         }
-
-        private void TxtBuscar_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2Panel5_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }
 
