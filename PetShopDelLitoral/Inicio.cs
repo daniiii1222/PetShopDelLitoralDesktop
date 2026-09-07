@@ -9,18 +9,19 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CapaDatos.Database;
+ 
+
 
 namespace PetShopDelLitoral
 {
     public partial class Inicio : Form
-
+        
     {
         private PrivateFontCollection pfc = new PrivateFontCollection();
         public Inicio()
         {
-            InitializeComponent();
-            CargarFuentePoppins();
+         InitializeComponent();
+         CargarFuentePoppins();
         }
 
 
@@ -36,11 +37,11 @@ namespace PetShopDelLitoral
                 pfc.AddMemoryFont(fontPtr, fontData.Length);
                 Marshal.FreeCoTaskMem(fontPtr);
 
-
+             
                 Font fuentePoppins = new Font(pfc.Families[0], 12f, FontStyle.Regular);
                 panelMenu.Font = fuentePoppins;
 
-
+               
             }
             catch (Exception ex)
             {
@@ -69,7 +70,7 @@ namespace PetShopDelLitoral
 
         }
 
-
+    
 
         private void botonVentas_Click(object sender, EventArgs e)
         {
@@ -78,7 +79,7 @@ namespace PetShopDelLitoral
 
         private void botonVentas_Click_1(object sender, EventArgs e)
         {
-
+     
             this.panelCentral.Controls.Clear();
 
             FrmVentas frm = new FrmVentas();
@@ -168,7 +169,7 @@ namespace PetShopDelLitoral
 
         }
 
-
+        
 
         private void botonReportes_Click(object sender, EventArgs e)
         {
@@ -185,22 +186,19 @@ namespace PetShopDelLitoral
             frm.Show();
         }
 
-        private void guna2Button1_Click(object sender, EventArgs e)
+        private void btnPersonas_click(object sender, EventArgs e)
         {
-            MessageBox.Show("¡El botón funciona y entró al evento!");
-            CapaDatos.Database.ClsDataBase db = new CapaDatos.Database.ClsDataBase();
-            string error = string.Empty;
+            this.panelCentral.Controls.Clear();
 
-            if (db.ProbarConexion(out error))
-            {
-                MessageBox.Show("¡Conexión exitosa a la base de datos petshopdellitoral!", "Todo en orden", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("Falló la conexión: " + error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            FrmPersonas frm = new FrmPersonas();
+            frm.TopLevel = false;
+            frm.FormBorderStyle = FormBorderStyle.None;
+            frm.Dock = DockStyle.Fill;
+
+
+            this.panelCentral.Controls.Add(frm);
+
+            frm.Show();
         }
-
-       
     }
 }

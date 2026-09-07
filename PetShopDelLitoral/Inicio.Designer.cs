@@ -30,361 +30,278 @@ namespace PetShopDelLitoral
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            PanelContenedor = new Panel();
-            panelCentral = new Panel();
-            PanelControl = new Guna.UI2.WinForms.Guna2Panel();
-            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            panelSuperior = new Panel();
-            panel1 = new Panel();
-            panelMenu = new FlowLayoutPanel();
-            logo = new PictureBox();
-            botonInicio = new IconButton();
-            botonVentas = new IconButton();
-            botonCompras = new IconButton();
-            botonProductos = new IconButton();
-            botonUsuarios = new IconButton();
-            botonClientes = new IconButton();
-            botonProvedores = new IconButton();
-            botonReportes = new IconButton();
-            BotonMantenedor = new IconButton();
-            panelVentas = new Panel();
-            panelCompra = new Panel();
-            PanelContenedor.SuspendLayout();
-            panelCentral.SuspendLayout();
-            PanelControl.SuspendLayout();
-            panelSuperior.SuspendLayout();
-            panelMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
-            SuspendLayout();
+            this.PanelContenedor = new System.Windows.Forms.Panel();
+            this.panelCentral = new System.Windows.Forms.Panel();
+            this.PanelControl = new Guna.UI2.WinForms.Guna2Panel();
+            this.panelSuperior = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelMenu = new System.Windows.Forms.FlowLayoutPanel();
+            this.logo = new System.Windows.Forms.PictureBox();
+            this.botonInicio = new FontAwesome.Sharp.IconButton();
+            this.botonVentas = new FontAwesome.Sharp.IconButton();
+            this.botonCompras = new FontAwesome.Sharp.IconButton();
+            this.botonProductos = new FontAwesome.Sharp.IconButton();
+            this.botonPersonas = new FontAwesome.Sharp.IconButton();
+            this.botonReportes = new FontAwesome.Sharp.IconButton();
+            this.BotonMantenedor = new FontAwesome.Sharp.IconButton();
+            this.panelVentas = new System.Windows.Forms.Panel();
+            this.panelCompra = new System.Windows.Forms.Panel();
+            this.PanelContenedor.SuspendLayout();
+            this.panelCentral.SuspendLayout();
+            this.panelSuperior.SuspendLayout();
+            this.panelMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
+            this.SuspendLayout();
             // 
             // PanelContenedor
             // 
-            PanelContenedor.BackColor = Color.White;
-            PanelContenedor.Controls.Add(panelCentral);
-            PanelContenedor.Controls.Add(panelSuperior);
-            PanelContenedor.Controls.Add(panelMenu);
-            PanelContenedor.Dock = DockStyle.Fill;
-            PanelContenedor.Location = new Point(0, 0);
-            PanelContenedor.Margin = new Padding(3, 4, 3, 4);
-            PanelContenedor.Name = "PanelContenedor";
-            PanelContenedor.Size = new Size(1280, 900);
-            PanelContenedor.TabIndex = 2;
-            PanelContenedor.Paint += PanelContenedor_Paint;
+            this.PanelContenedor.BackColor = System.Drawing.Color.White;
+            this.PanelContenedor.Controls.Add(this.panelCentral);
+            this.PanelContenedor.Controls.Add(this.panelSuperior);
+            this.PanelContenedor.Controls.Add(this.panelMenu);
+            this.PanelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelContenedor.Location = new System.Drawing.Point(0, 0);
+            this.PanelContenedor.Name = "PanelContenedor";
+            this.PanelContenedor.Size = new System.Drawing.Size(1280, 720);
+            this.PanelContenedor.TabIndex = 2;
+            this.PanelContenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelContenedor_Paint);
             // 
             // panelCentral
             // 
-            panelCentral.Controls.Add(PanelControl);
-            panelCentral.Dock = DockStyle.Top;
-            panelCentral.Font = new Font("Microsoft Sans Serif", 8.25F);
-            panelCentral.Location = new Point(200, 125);
-            panelCentral.Margin = new Padding(3, 4, 3, 4);
-            panelCentral.Name = "panelCentral";
-            panelCentral.Size = new Size(1080, 775);
-            panelCentral.TabIndex = 2;
-            panelCentral.Paint += panelCentral_Paint;
+            this.panelCentral.Controls.Add(this.PanelControl);
+            this.panelCentral.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelCentral.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.panelCentral.Location = new System.Drawing.Point(200, 100);
+            this.panelCentral.Name = "panelCentral";
+            this.panelCentral.Size = new System.Drawing.Size(1080, 620);
+            this.panelCentral.TabIndex = 2;
+            this.panelCentral.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCentral_Paint);
             // 
             // PanelControl
             // 
-            PanelControl.BackColor = Color.FromArgb(33, 24, 21);
-            PanelControl.Controls.Add(guna2Button1);
-            PanelControl.CustomizableEdges = customizableEdges3;
-            PanelControl.Location = new Point(0, 4);
-            PanelControl.Margin = new Padding(3, 4, 3, 4);
-            PanelControl.Name = "PanelControl";
-            PanelControl.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            PanelControl.Size = new Size(1080, 771);
-            PanelControl.TabIndex = 0;
-            PanelControl.Paint += PanelControl_Paint;
-            // 
-            // guna2Button1
-            // 
-            guna2Button1.CustomizableEdges = customizableEdges1;
-            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button1.Font = new Font("Segoe UI", 9F);
-            guna2Button1.ForeColor = Color.White;
-            guna2Button1.Location = new Point(392, 237);
-            guna2Button1.Margin = new Padding(3, 4, 3, 4);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Button1.Size = new Size(180, 56);
-            guna2Button1.TabIndex = 0;
-            guna2Button1.Text = "guna2Button1";
-            guna2Button1.Click += guna2Button1_Click;
+            this.PanelControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.PanelControl.Location = new System.Drawing.Point(0, 3);
+            this.PanelControl.Name = "PanelControl";
+            this.PanelControl.Size = new System.Drawing.Size(1080, 617);
+            this.PanelControl.TabIndex = 0;
+            this.PanelControl.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelControl_Paint);
             // 
             // panelSuperior
             // 
-            panelSuperior.BackColor = Color.FromArgb(247, 251, 254);
-            panelSuperior.Controls.Add(panel1);
-            panelSuperior.Dock = DockStyle.Top;
-            panelSuperior.Location = new Point(200, 0);
-            panelSuperior.Margin = new Padding(3, 4, 3, 4);
-            panelSuperior.Name = "panelSuperior";
-            panelSuperior.Size = new Size(1080, 125);
-            panelSuperior.TabIndex = 1;
+            this.panelSuperior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(254)))));
+            this.panelSuperior.Controls.Add(this.panel1);
+            this.panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelSuperior.Location = new System.Drawing.Point(200, 0);
+            this.panelSuperior.Name = "panelSuperior";
+            this.panelSuperior.Size = new System.Drawing.Size(1080, 100);
+            this.panelSuperior.TabIndex = 1;
             // 
             // panel1
             // 
-            panel1.Location = new Point(6, 124);
-            panel1.Margin = new Padding(3, 4, 3, 4);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(200, 125);
-            panel1.TabIndex = 0;
+            this.panel1.Location = new System.Drawing.Point(6, 99);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 100);
+            this.panel1.TabIndex = 0;
             // 
             // panelMenu
             // 
-            panelMenu.BackColor = Color.FromArgb(33, 24, 21);
-            panelMenu.Controls.Add(logo);
-            panelMenu.Controls.Add(botonInicio);
-            panelMenu.Controls.Add(botonVentas);
-            panelMenu.Controls.Add(botonCompras);
-            panelMenu.Controls.Add(botonProductos);
-            panelMenu.Controls.Add(botonUsuarios);
-            panelMenu.Controls.Add(botonClientes);
-            panelMenu.Controls.Add(botonProvedores);
-            panelMenu.Controls.Add(botonReportes);
-            panelMenu.Controls.Add(BotonMantenedor);
-            panelMenu.Dock = DockStyle.Left;
-            panelMenu.Location = new Point(0, 0);
-            panelMenu.Margin = new Padding(3, 4, 3, 4);
-            panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(200, 900);
-            panelMenu.TabIndex = 0;
-            panelMenu.Paint += panelMenu_Paint;
+            this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.panelMenu.Controls.Add(this.logo);
+            this.panelMenu.Controls.Add(this.botonInicio);
+            this.panelMenu.Controls.Add(this.botonVentas);
+            this.panelMenu.Controls.Add(this.botonCompras);
+            this.panelMenu.Controls.Add(this.botonProductos);
+            this.panelMenu.Controls.Add(this.botonPersonas);
+            this.panelMenu.Controls.Add(this.botonReportes);
+            this.panelMenu.Controls.Add(this.BotonMantenedor);
+            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelMenu.Location = new System.Drawing.Point(0, 0);
+            this.panelMenu.Name = "panelMenu";
+            this.panelMenu.Size = new System.Drawing.Size(200, 720);
+            this.panelMenu.TabIndex = 0;
+            this.panelMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMenu_Paint);
             // 
             // logo
             // 
-            logo.Location = new Point(3, 4);
-            logo.Margin = new Padding(3, 4, 3, 4);
-            logo.Name = "logo";
-            logo.Padding = new Padding(10, 12, 10, 12);
-            logo.Size = new Size(197, 121);
-            logo.SizeMode = PictureBoxSizeMode.Zoom;
-            logo.TabIndex = 0;
-            logo.TabStop = false;
-            logo.Click += logo_Click;
+            this.logo.Image = global::PetShopDelLitoral.Properties.Resources.logoPetShop;
+            this.logo.Location = new System.Drawing.Point(3, 3);
+            this.logo.Name = "logo";
+            this.logo.Padding = new System.Windows.Forms.Padding(10);
+            this.logo.Size = new System.Drawing.Size(197, 97);
+            this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.logo.TabIndex = 0;
+            this.logo.TabStop = false;
+            this.logo.Click += new System.EventHandler(this.logo_Click);
             // 
             // botonInicio
             // 
-            botonInicio.FlatAppearance.BorderSize = 0;
-            botonInicio.FlatStyle = FlatStyle.Flat;
-            botonInicio.ForeColor = Color.FromArgb(253, 204, 111);
-            botonInicio.IconChar = IconChar.HomeLg;
-            botonInicio.IconColor = Color.FromArgb(253, 204, 111);
-            botonInicio.IconFont = IconFont.Auto;
-            botonInicio.ImageAlign = ContentAlignment.MiddleLeft;
-            botonInicio.Location = new Point(3, 133);
-            botonInicio.Margin = new Padding(3, 4, 3, 4);
-            botonInicio.Name = "botonInicio";
-            botonInicio.Size = new Size(200, 56);
-            botonInicio.TabIndex = 9;
-            botonInicio.Text = "inicio";
-            botonInicio.TextAlign = ContentAlignment.MiddleLeft;
-            botonInicio.TextImageRelation = TextImageRelation.ImageBeforeText;
-            botonInicio.UseVisualStyleBackColor = true;
-            botonInicio.Click += botonInicio_Click_1;
+            this.botonInicio.FlatAppearance.BorderSize = 0;
+            this.botonInicio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.botonInicio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.botonInicio.IconChar = FontAwesome.Sharp.IconChar.HomeLg;
+            this.botonInicio.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.botonInicio.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.botonInicio.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.botonInicio.Location = new System.Drawing.Point(3, 106);
+            this.botonInicio.Name = "botonInicio";
+            this.botonInicio.Size = new System.Drawing.Size(200, 45);
+            this.botonInicio.TabIndex = 9;
+            this.botonInicio.Text = "inicio";
+            this.botonInicio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.botonInicio.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.botonInicio.UseVisualStyleBackColor = true;
+            this.botonInicio.Click += new System.EventHandler(this.botonInicio_Click_1);
             // 
             // botonVentas
             // 
-            botonVentas.Dock = DockStyle.Top;
-            botonVentas.FlatAppearance.BorderSize = 0;
-            botonVentas.FlatStyle = FlatStyle.Flat;
-            botonVentas.ForeColor = Color.FromArgb(253, 204, 111);
-            botonVentas.IconChar = IconChar.Store;
-            botonVentas.IconColor = Color.FromArgb(253, 204, 111);
-            botonVentas.IconFont = IconFont.Auto;
-            botonVentas.ImageAlign = ContentAlignment.MiddleLeft;
-            botonVentas.Location = new Point(3, 197);
-            botonVentas.Margin = new Padding(3, 4, 3, 4);
-            botonVentas.Name = "botonVentas";
-            botonVentas.Size = new Size(190, 56);
-            botonVentas.TabIndex = 2;
-            botonVentas.Text = "Ventas";
-            botonVentas.TextAlign = ContentAlignment.MiddleLeft;
-            botonVentas.TextImageRelation = TextImageRelation.ImageBeforeText;
-            botonVentas.UseVisualStyleBackColor = true;
-            botonVentas.Click += botonVentas_Click_1;
+            this.botonVentas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.botonVentas.FlatAppearance.BorderSize = 0;
+            this.botonVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.botonVentas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.botonVentas.IconChar = FontAwesome.Sharp.IconChar.Store;
+            this.botonVentas.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.botonVentas.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.botonVentas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.botonVentas.Location = new System.Drawing.Point(3, 157);
+            this.botonVentas.Name = "botonVentas";
+            this.botonVentas.Size = new System.Drawing.Size(190, 45);
+            this.botonVentas.TabIndex = 2;
+            this.botonVentas.Text = "Ventas";
+            this.botonVentas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.botonVentas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.botonVentas.UseVisualStyleBackColor = true;
+            this.botonVentas.Click += new System.EventHandler(this.botonVentas_Click_1);
             // 
             // botonCompras
             // 
-            botonCompras.FlatAppearance.BorderSize = 0;
-            botonCompras.FlatStyle = FlatStyle.Flat;
-            botonCompras.ForeColor = Color.FromArgb(253, 204, 111);
-            botonCompras.IconChar = IconChar.ShoppingBag;
-            botonCompras.IconColor = Color.FromArgb(253, 204, 111);
-            botonCompras.IconFont = IconFont.Auto;
-            botonCompras.ImageAlign = ContentAlignment.MiddleLeft;
-            botonCompras.Location = new Point(3, 261);
-            botonCompras.Margin = new Padding(3, 4, 3, 4);
-            botonCompras.Name = "botonCompras";
-            botonCompras.Size = new Size(190, 56);
-            botonCompras.TabIndex = 0;
-            botonCompras.Text = "Compras";
-            botonCompras.TextAlign = ContentAlignment.MiddleLeft;
-            botonCompras.TextImageRelation = TextImageRelation.ImageBeforeText;
-            botonCompras.UseVisualStyleBackColor = true;
-            botonCompras.Click += botonCompras_Click;
+            this.botonCompras.FlatAppearance.BorderSize = 0;
+            this.botonCompras.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.botonCompras.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.botonCompras.IconChar = FontAwesome.Sharp.IconChar.BagShopping;
+            this.botonCompras.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.botonCompras.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.botonCompras.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.botonCompras.Location = new System.Drawing.Point(3, 208);
+            this.botonCompras.Name = "botonCompras";
+            this.botonCompras.Size = new System.Drawing.Size(190, 45);
+            this.botonCompras.TabIndex = 0;
+            this.botonCompras.Text = "Compras";
+            this.botonCompras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.botonCompras.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.botonCompras.UseVisualStyleBackColor = true;
+            this.botonCompras.Click += new System.EventHandler(this.botonCompras_Click);
             // 
             // botonProductos
             // 
-            botonProductos.FlatAppearance.BorderSize = 0;
-            botonProductos.FlatStyle = FlatStyle.Flat;
-            botonProductos.ForeColor = Color.FromArgb(253, 204, 111);
-            botonProductos.IconChar = IconChar.Box;
-            botonProductos.IconColor = Color.FromArgb(253, 204, 111);
-            botonProductos.IconFont = IconFont.Auto;
-            botonProductos.ImageAlign = ContentAlignment.MiddleLeft;
-            botonProductos.Location = new Point(3, 325);
-            botonProductos.Margin = new Padding(3, 4, 3, 4);
-            botonProductos.Name = "botonProductos";
-            botonProductos.Size = new Size(190, 56);
-            botonProductos.TabIndex = 3;
-            botonProductos.Text = "Productos";
-            botonProductos.TextAlign = ContentAlignment.MiddleLeft;
-            botonProductos.TextImageRelation = TextImageRelation.ImageBeforeText;
-            botonProductos.UseVisualStyleBackColor = true;
-            botonProductos.Click += botonProductos_Click;
+            this.botonProductos.FlatAppearance.BorderSize = 0;
+            this.botonProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.botonProductos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.botonProductos.IconChar = FontAwesome.Sharp.IconChar.Box;
+            this.botonProductos.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.botonProductos.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.botonProductos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.botonProductos.Location = new System.Drawing.Point(3, 259);
+            this.botonProductos.Name = "botonProductos";
+            this.botonProductos.Size = new System.Drawing.Size(190, 45);
+            this.botonProductos.TabIndex = 3;
+            this.botonProductos.Text = "Productos";
+            this.botonProductos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.botonProductos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.botonProductos.UseVisualStyleBackColor = true;
+            this.botonProductos.Click += new System.EventHandler(this.botonProductos_Click);
             // 
-            // botonUsuarios
+            // botonPersonas
             // 
-            botonUsuarios.FlatAppearance.BorderSize = 0;
-            botonUsuarios.FlatStyle = FlatStyle.Flat;
-            botonUsuarios.ForeColor = Color.FromArgb(253, 204, 111);
-            botonUsuarios.IconChar = IconChar.UserPen;
-            botonUsuarios.IconColor = Color.FromArgb(253, 204, 111);
-            botonUsuarios.IconFont = IconFont.Auto;
-            botonUsuarios.ImageAlign = ContentAlignment.MiddleLeft;
-            botonUsuarios.Location = new Point(3, 389);
-            botonUsuarios.Margin = new Padding(3, 4, 3, 4);
-            botonUsuarios.Name = "botonUsuarios";
-            botonUsuarios.Size = new Size(190, 56);
-            botonUsuarios.TabIndex = 5;
-            botonUsuarios.Text = "Usuarios";
-            botonUsuarios.TextAlign = ContentAlignment.MiddleLeft;
-            botonUsuarios.TextImageRelation = TextImageRelation.ImageBeforeText;
-            botonUsuarios.UseVisualStyleBackColor = true;
-            // 
-            // botonClientes
-            // 
-            botonClientes.FlatAppearance.BorderSize = 0;
-            botonClientes.FlatStyle = FlatStyle.Flat;
-            botonClientes.ForeColor = Color.FromArgb(253, 204, 111);
-            botonClientes.IconChar = IconChar.Users;
-            botonClientes.IconColor = Color.FromArgb(253, 204, 111);
-            botonClientes.IconFont = IconFont.Auto;
-            botonClientes.ImageAlign = ContentAlignment.MiddleLeft;
-            botonClientes.Location = new Point(3, 453);
-            botonClientes.Margin = new Padding(3, 4, 3, 4);
-            botonClientes.Name = "botonClientes";
-            botonClientes.Size = new Size(190, 56);
-            botonClientes.TabIndex = 6;
-            botonClientes.Text = "Clientes";
-            botonClientes.TextAlign = ContentAlignment.MiddleLeft;
-            botonClientes.TextImageRelation = TextImageRelation.ImageBeforeText;
-            botonClientes.UseVisualStyleBackColor = true;
-            // 
-            // botonProvedores
-            // 
-            botonProvedores.FlatAppearance.BorderSize = 0;
-            botonProvedores.FlatStyle = FlatStyle.Flat;
-            botonProvedores.ForeColor = Color.FromArgb(253, 204, 111);
-            botonProvedores.IconChar = IconChar.Truck;
-            botonProvedores.IconColor = Color.FromArgb(253, 204, 111);
-            botonProvedores.IconFont = IconFont.Auto;
-            botonProvedores.ImageAlign = ContentAlignment.MiddleLeft;
-            botonProvedores.Location = new Point(3, 517);
-            botonProvedores.Margin = new Padding(3, 4, 3, 4);
-            botonProvedores.Name = "botonProvedores";
-            botonProvedores.Size = new Size(190, 56);
-            botonProvedores.TabIndex = 8;
-            botonProvedores.Text = "Provedores";
-            botonProvedores.TextAlign = ContentAlignment.MiddleLeft;
-            botonProvedores.TextImageRelation = TextImageRelation.ImageBeforeText;
-            botonProvedores.UseVisualStyleBackColor = true;
+            this.botonPersonas.FlatAppearance.BorderSize = 0;
+            this.botonPersonas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.botonPersonas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.botonPersonas.IconChar = FontAwesome.Sharp.IconChar.UserEdit;
+            this.botonPersonas.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.botonPersonas.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.botonPersonas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.botonPersonas.Location = new System.Drawing.Point(3, 310);
+            this.botonPersonas.Name = "botonPersonas";
+            this.botonPersonas.Size = new System.Drawing.Size(190, 45);
+            this.botonPersonas.TabIndex = 5;
+            this.botonPersonas.Text = "Personas";
+            this.botonPersonas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.botonPersonas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.botonPersonas.UseVisualStyleBackColor = true;
+            this.botonPersonas.Click += new System.EventHandler(this.btnPersonas_click);
             // 
             // botonReportes
             // 
-            botonReportes.FlatAppearance.BorderSize = 0;
-            botonReportes.FlatStyle = FlatStyle.Flat;
-            botonReportes.ForeColor = Color.FromArgb(253, 204, 111);
-            botonReportes.IconChar = IconChar.ChartLine;
-            botonReportes.IconColor = Color.FromArgb(253, 204, 111);
-            botonReportes.IconFont = IconFont.Auto;
-            botonReportes.ImageAlign = ContentAlignment.MiddleLeft;
-            botonReportes.Location = new Point(3, 581);
-            botonReportes.Margin = new Padding(3, 4, 3, 4);
-            botonReportes.Name = "botonReportes";
-            botonReportes.Size = new Size(190, 56);
-            botonReportes.TabIndex = 7;
-            botonReportes.Text = "Reportes";
-            botonReportes.TextAlign = ContentAlignment.MiddleLeft;
-            botonReportes.TextImageRelation = TextImageRelation.ImageBeforeText;
-            botonReportes.UseVisualStyleBackColor = true;
-            botonReportes.Click += botonReportes_Click;
+            this.botonReportes.FlatAppearance.BorderSize = 0;
+            this.botonReportes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.botonReportes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.botonReportes.IconChar = FontAwesome.Sharp.IconChar.ChartLine;
+            this.botonReportes.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.botonReportes.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.botonReportes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.botonReportes.Location = new System.Drawing.Point(3, 361);
+            this.botonReportes.Name = "botonReportes";
+            this.botonReportes.Size = new System.Drawing.Size(190, 45);
+            this.botonReportes.TabIndex = 7;
+            this.botonReportes.Text = "Reportes";
+            this.botonReportes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.botonReportes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.botonReportes.UseVisualStyleBackColor = true;
+            this.botonReportes.Click += new System.EventHandler(this.botonReportes_Click);
             // 
             // BotonMantenedor
             // 
-            BotonMantenedor.FlatAppearance.BorderSize = 0;
-            BotonMantenedor.FlatStyle = FlatStyle.Flat;
-            BotonMantenedor.ForeColor = Color.FromArgb(253, 204, 111);
-            BotonMantenedor.IconChar = IconChar.Database;
-            BotonMantenedor.IconColor = Color.FromArgb(253, 204, 111);
-            BotonMantenedor.IconFont = IconFont.Auto;
-            BotonMantenedor.ImageAlign = ContentAlignment.MiddleLeft;
-            BotonMantenedor.Location = new Point(3, 645);
-            BotonMantenedor.Margin = new Padding(3, 4, 3, 4);
-            BotonMantenedor.Name = "BotonMantenedor";
-            BotonMantenedor.Size = new Size(190, 56);
-            BotonMantenedor.TabIndex = 6;
-            BotonMantenedor.Text = "Backup";
-            BotonMantenedor.TextAlign = ContentAlignment.MiddleLeft;
-            BotonMantenedor.TextImageRelation = TextImageRelation.ImageBeforeText;
-            BotonMantenedor.UseVisualStyleBackColor = true;
-            BotonMantenedor.Click += iconButton1_Click;
+            this.BotonMantenedor.FlatAppearance.BorderSize = 0;
+            this.BotonMantenedor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BotonMantenedor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.BotonMantenedor.IconChar = FontAwesome.Sharp.IconChar.Database;
+            this.BotonMantenedor.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.BotonMantenedor.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.BotonMantenedor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BotonMantenedor.Location = new System.Drawing.Point(3, 412);
+            this.BotonMantenedor.Name = "BotonMantenedor";
+            this.BotonMantenedor.Size = new System.Drawing.Size(190, 45);
+            this.BotonMantenedor.TabIndex = 6;
+            this.BotonMantenedor.Text = "Backup";
+            this.BotonMantenedor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BotonMantenedor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BotonMantenedor.UseVisualStyleBackColor = true;
+            this.BotonMantenedor.Click += new System.EventHandler(this.iconButton1_Click);
             // 
             // panelVentas
             // 
-            panelVentas.BackColor = Color.FromArgb(25, 18, 16);
-            panelVentas.Location = new Point(3, 208);
-            panelVentas.Name = "panelVentas";
-            panelVentas.Size = new Size(200, 71);
-            panelVentas.TabIndex = 10;
-            panelVentas.Visible = false;
+            this.panelVentas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(18)))), ((int)(((byte)(16)))));
+            this.panelVentas.Location = new System.Drawing.Point(3, 208);
+            this.panelVentas.Name = "panelVentas";
+            this.panelVentas.Size = new System.Drawing.Size(200, 71);
+            this.panelVentas.TabIndex = 10;
+            this.panelVentas.Visible = false;
             // 
             // panelCompra
             // 
-            panelCompra.BackColor = Color.FromArgb(25, 18, 16);
-            panelCompra.Location = new Point(3, 336);
-            panelCompra.Name = "panelCompra";
-            panelCompra.Size = new Size(200, 71);
-            panelCompra.TabIndex = 11;
-            panelCompra.Visible = false;
+            this.panelCompra.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(18)))), ((int)(((byte)(16)))));
+            this.panelCompra.Location = new System.Drawing.Point(3, 336);
+            this.panelCompra.Name = "panelCompra";
+            this.panelCompra.Size = new System.Drawing.Size(200, 71);
+            this.panelCompra.TabIndex = 11;
+            this.panelCompra.Visible = false;
             // 
             // Inicio
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(253, 221, 200);
-            ClientSize = new Size(1280, 900);
-            Controls.Add(PanelContenedor);
-            FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 4, 3, 4);
-            Name = "Inicio";
-            Text = "Form1";
-            Load += Inicio_Load;
-            PanelContenedor.ResumeLayout(false);
-            panelCentral.ResumeLayout(false);
-            PanelControl.ResumeLayout(false);
-            panelSuperior.ResumeLayout(false);
-            panelMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)logo).EndInit();
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(221)))), ((int)(((byte)(200)))));
+            this.ClientSize = new System.Drawing.Size(1280, 720);
+            this.Controls.Add(this.PanelContenedor);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "Inicio";
+            this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Inicio_Load);
+            this.PanelContenedor.ResumeLayout(false);
+            this.panelCentral.ResumeLayout(false);
+            this.panelSuperior.ResumeLayout(false);
+            this.panelMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
+            this.ResumeLayout(false);
 
         }
 
@@ -406,15 +323,12 @@ namespace PetShopDelLitoral
         private FontAwesome.Sharp.IconButton botonVentas;
         private FontAwesome.Sharp.IconButton botonCompras;
         private FontAwesome.Sharp.IconButton botonProductos;
-        private FontAwesome.Sharp.IconButton botonUsuarios;
-        private FontAwesome.Sharp.IconButton botonClientes;
+        private FontAwesome.Sharp.IconButton botonPersonas;
         private FontAwesome.Sharp.IconButton botonReportes;
-        private FontAwesome.Sharp.IconButton botonProvedores;
         private FontAwesome.Sharp.IconButton botonInicio;
         private FontAwesome.Sharp.IconButton BotonMantenedor;
         private System.Windows.Forms.Panel panel1;
         private Guna.UI2.WinForms.Guna2Panel PanelControl;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
     }
 }
 
