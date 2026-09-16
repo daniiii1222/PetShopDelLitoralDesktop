@@ -9,7 +9,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CapaDatos.Database;
+using CapaDatos;
+
 
 namespace PetShopDelLitoral
 {
@@ -52,6 +53,7 @@ namespace PetShopDelLitoral
         {
 
         }
+
 
 
         private void PanelContenedor_Paint(object sender, PaintEventArgs e)
@@ -185,22 +187,29 @@ namespace PetShopDelLitoral
             frm.Show();
         }
 
-        private void guna2Button1_Click(object sender, EventArgs e)
+        private void btnPersonas_click(object sender, EventArgs e)
         {
-            MessageBox.Show("¡El botón funciona y entró al evento!");
-            CapaDatos.Database.ClsDataBase db = new CapaDatos.Database.ClsDataBase();
-            string error = string.Empty;
+            this.panelCentral.Controls.Clear();
 
-            if (db.ProbarConexion(out error))
-            {
-                MessageBox.Show("¡Conexión exitosa a la base de datos petshopdellitoral!", "Todo en orden", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("Falló la conexión: " + error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            FrmPersonas frm = new FrmPersonas();
+            frm.TopLevel = false;
+            frm.FormBorderStyle = FormBorderStyle.None;
+            frm.Dock = DockStyle.Fill;
+
+
+            this.panelCentral.Controls.Add(frm);
+
+            frm.Show();
         }
 
-       
+        private void Inicio_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Login frmLogin = new Login();
+            frmLogin.Show();
+        }
+
+      
+
     }
 }
+
