@@ -108,7 +108,9 @@
     <Compile Include="Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login.cs" />
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
@@ -120,6 +122,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sesion.cs" />
     <EmbeddedResource Include="CargaProductos.resx">
       <DependentUpon>CargaProductos.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,6 +178,19 @@
   <ItemGroup>
     <None Include="Resources\logoPetShop.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Capa Datos\CapaDatos.csproj">
+      <Project>{0b58df2d-c777-2213-9a54-5c48d8be93d8}</Project>
+      <Name>CapaDatos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Capa Entidad\CapaEntidad.csproj">
+      <Project>{384e1266-6581-4e83-eb56-c5c3792d17ff}</Project>
+      <Name>CapaEntidad</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Capa Negocio\CapaNegocio.csproj">
+      <Project>{a0d09158-325c-c3ee-77d2-19e686b25c4d}</Project>
+      <Name>CapaNegocio</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

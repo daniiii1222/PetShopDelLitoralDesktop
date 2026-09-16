@@ -61,8 +61,9 @@ namespace PetShopDelLitoral
             this.PanelContenedor.Controls.Add(this.panelMenu);
             this.PanelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelContenedor.Location = new System.Drawing.Point(0, 0);
+            this.PanelContenedor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.PanelContenedor.Name = "PanelContenedor";
-            this.PanelContenedor.Size = new System.Drawing.Size(1280, 720);
+            this.PanelContenedor.Size = new System.Drawing.Size(1707, 886);
             this.PanelContenedor.TabIndex = 2;
             this.PanelContenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelContenedor_Paint);
             // 
@@ -71,18 +72,21 @@ namespace PetShopDelLitoral
             this.panelCentral.Controls.Add(this.PanelControl);
             this.panelCentral.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelCentral.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.panelCentral.Location = new System.Drawing.Point(200, 100);
+            this.panelCentral.Location = new System.Drawing.Point(267, 123);
+            this.panelCentral.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelCentral.Name = "panelCentral";
-            this.panelCentral.Size = new System.Drawing.Size(1080, 620);
+            this.panelCentral.Size = new System.Drawing.Size(1440, 763);
             this.panelCentral.TabIndex = 2;
             this.panelCentral.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCentral_Paint);
             // 
             // PanelControl
             // 
             this.PanelControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.PanelControl.Location = new System.Drawing.Point(0, 3);
+            this.PanelControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelControl.Location = new System.Drawing.Point(0, 0);
+            this.PanelControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.PanelControl.Name = "PanelControl";
-            this.PanelControl.Size = new System.Drawing.Size(1080, 617);
+            this.PanelControl.Size = new System.Drawing.Size(1440, 763);
             this.PanelControl.TabIndex = 0;
             this.PanelControl.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelControl_Paint);
             // 
@@ -91,16 +95,18 @@ namespace PetShopDelLitoral
             this.panelSuperior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(254)))));
             this.panelSuperior.Controls.Add(this.panel1);
             this.panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelSuperior.Location = new System.Drawing.Point(200, 0);
+            this.panelSuperior.Location = new System.Drawing.Point(267, 0);
+            this.panelSuperior.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelSuperior.Name = "panelSuperior";
-            this.panelSuperior.Size = new System.Drawing.Size(1080, 100);
+            this.panelSuperior.Size = new System.Drawing.Size(1440, 123);
             this.panelSuperior.TabIndex = 1;
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(6, 99);
+            this.panel1.Location = new System.Drawing.Point(8, 122);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 100);
+            this.panel1.Size = new System.Drawing.Size(267, 123);
             this.panel1.TabIndex = 0;
             // 
             // panelMenu
@@ -116,18 +122,20 @@ namespace PetShopDelLitoral
             this.panelMenu.Controls.Add(this.BotonMantenedor);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
+            this.panelMenu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(200, 720);
+            this.panelMenu.Size = new System.Drawing.Size(267, 886);
             this.panelMenu.TabIndex = 0;
             this.panelMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMenu_Paint);
             // 
             // logo
             // 
             this.logo.Image = global::PetShopDelLitoral.Properties.Resources.logoPetShop;
-            this.logo.Location = new System.Drawing.Point(3, 3);
+            this.logo.Location = new System.Drawing.Point(4, 4);
+            this.logo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.logo.Name = "logo";
-            this.logo.Padding = new System.Windows.Forms.Padding(10);
-            this.logo.Size = new System.Drawing.Size(197, 97);
+            this.logo.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
+            this.logo.Size = new System.Drawing.Size(263, 119);
             this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.logo.TabIndex = 0;
             this.logo.TabStop = false;
@@ -142,9 +150,10 @@ namespace PetShopDelLitoral
             this.botonInicio.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.botonInicio.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.botonInicio.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonInicio.Location = new System.Drawing.Point(3, 106);
+            this.botonInicio.Location = new System.Drawing.Point(4, 131);
+            this.botonInicio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.botonInicio.Name = "botonInicio";
-            this.botonInicio.Size = new System.Drawing.Size(200, 45);
+            this.botonInicio.Size = new System.Drawing.Size(267, 55);
             this.botonInicio.TabIndex = 9;
             this.botonInicio.Text = "inicio";
             this.botonInicio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -162,9 +171,10 @@ namespace PetShopDelLitoral
             this.botonVentas.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.botonVentas.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.botonVentas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonVentas.Location = new System.Drawing.Point(3, 157);
+            this.botonVentas.Location = new System.Drawing.Point(4, 194);
+            this.botonVentas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.botonVentas.Name = "botonVentas";
-            this.botonVentas.Size = new System.Drawing.Size(190, 45);
+            this.botonVentas.Size = new System.Drawing.Size(253, 55);
             this.botonVentas.TabIndex = 2;
             this.botonVentas.Text = "Ventas";
             this.botonVentas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -181,9 +191,10 @@ namespace PetShopDelLitoral
             this.botonCompras.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.botonCompras.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.botonCompras.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonCompras.Location = new System.Drawing.Point(3, 208);
+            this.botonCompras.Location = new System.Drawing.Point(4, 257);
+            this.botonCompras.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.botonCompras.Name = "botonCompras";
-            this.botonCompras.Size = new System.Drawing.Size(190, 45);
+            this.botonCompras.Size = new System.Drawing.Size(253, 55);
             this.botonCompras.TabIndex = 0;
             this.botonCompras.Text = "Compras";
             this.botonCompras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -200,9 +211,10 @@ namespace PetShopDelLitoral
             this.botonProductos.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.botonProductos.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.botonProductos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonProductos.Location = new System.Drawing.Point(3, 259);
+            this.botonProductos.Location = new System.Drawing.Point(4, 320);
+            this.botonProductos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.botonProductos.Name = "botonProductos";
-            this.botonProductos.Size = new System.Drawing.Size(190, 45);
+            this.botonProductos.Size = new System.Drawing.Size(253, 55);
             this.botonProductos.TabIndex = 3;
             this.botonProductos.Text = "Productos";
             this.botonProductos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -219,9 +231,10 @@ namespace PetShopDelLitoral
             this.botonPersonas.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.botonPersonas.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.botonPersonas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonPersonas.Location = new System.Drawing.Point(3, 310);
+            this.botonPersonas.Location = new System.Drawing.Point(4, 383);
+            this.botonPersonas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.botonPersonas.Name = "botonPersonas";
-            this.botonPersonas.Size = new System.Drawing.Size(190, 45);
+            this.botonPersonas.Size = new System.Drawing.Size(253, 55);
             this.botonPersonas.TabIndex = 5;
             this.botonPersonas.Text = "Personas";
             this.botonPersonas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -238,9 +251,10 @@ namespace PetShopDelLitoral
             this.botonReportes.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.botonReportes.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.botonReportes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonReportes.Location = new System.Drawing.Point(3, 361);
+            this.botonReportes.Location = new System.Drawing.Point(4, 446);
+            this.botonReportes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.botonReportes.Name = "botonReportes";
-            this.botonReportes.Size = new System.Drawing.Size(190, 45);
+            this.botonReportes.Size = new System.Drawing.Size(253, 55);
             this.botonReportes.TabIndex = 7;
             this.botonReportes.Text = "Reportes";
             this.botonReportes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -257,9 +271,10 @@ namespace PetShopDelLitoral
             this.BotonMantenedor.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.BotonMantenedor.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BotonMantenedor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BotonMantenedor.Location = new System.Drawing.Point(3, 412);
+            this.BotonMantenedor.Location = new System.Drawing.Point(4, 509);
+            this.BotonMantenedor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BotonMantenedor.Name = "BotonMantenedor";
-            this.BotonMantenedor.Size = new System.Drawing.Size(190, 45);
+            this.BotonMantenedor.Size = new System.Drawing.Size(253, 55);
             this.BotonMantenedor.TabIndex = 6;
             this.BotonMantenedor.Text = "Backup";
             this.BotonMantenedor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -290,11 +305,14 @@ namespace PetShopDelLitoral
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(221)))), ((int)(((byte)(200)))));
-            this.ClientSize = new System.Drawing.Size(1280, 720);
+            this.ClientSize = new System.Drawing.Size(1707, 886);
             this.Controls.Add(this.PanelContenedor);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Inicio";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            
             this.Load += new System.EventHandler(this.Inicio_Load);
             this.PanelContenedor.ResumeLayout(false);
             this.panelCentral.ResumeLayout(false);
