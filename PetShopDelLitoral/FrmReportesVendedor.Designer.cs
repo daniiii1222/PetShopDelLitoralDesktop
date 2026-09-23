@@ -35,17 +35,13 @@
             this.tituloReportes = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            this.panelPrincipalSec = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.guna2DateTimePicker1 = new Guna.UI2.WinForms.Guna2DateTimePicker();
-            this.label2 = new System.Windows.Forms.Label();
-            this.guna2DateTimePicker2 = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.guna2CustomGradientPanel5 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.iconButton6 = new FontAwesome.Sharp.IconButton();
-            this.guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2Panel5 = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2DateTimePicker2 = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.guna2DateTimePicker1 = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panelPrincipalSec = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2DataGridView1 = new Guna.UI2.WinForms.Guna2DataGridView();
             this.columnaCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnaFecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,10 +50,14 @@
             this.columnaMetodoPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnaTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnaDetalle = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.guna2Panel5 = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.panelTituloSec.SuspendLayout();
             this.guna2CustomGradientPanel1.SuspendLayout();
-            this.panelPrincipalSec.SuspendLayout();
             this.guna2CustomGradientPanel5.SuspendLayout();
+            this.panelPrincipalSec.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,13 +86,13 @@
             this.tituloReportes.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tituloReportes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.tituloReportes.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tituloReportes.Location = new System.Drawing.Point(26, 16);
+            this.tituloReportes.Location = new System.Drawing.Point(20, 21);
             this.tituloReportes.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.tituloReportes.Name = "tituloReportes";
             this.tituloReportes.PasswordChar = '\0';
             this.tituloReportes.PlaceholderText = "";
             this.tituloReportes.SelectedText = "";
-            this.tituloReportes.Size = new System.Drawing.Size(350, 56);
+            this.tituloReportes.Size = new System.Drawing.Size(228, 41);
             this.tituloReportes.TabIndex = 0;
             // 
             // guna2Panel1
@@ -121,95 +121,6 @@
             this.guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(1022, 80);
             this.guna2CustomGradientPanel1.TabIndex = 1;
-            // 
-            // panelPrincipalSec
-            // 
-            this.panelPrincipalSec.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.panelPrincipalSec.Controls.Add(this.guna2DataGridView1);
-            this.panelPrincipalSec.Controls.Add(this.guna2Panel5);
-            this.panelPrincipalSec.Controls.Add(this.guna2Panel4);
-            this.panelPrincipalSec.Controls.Add(this.guna2CustomGradientPanel1);
-            this.panelPrincipalSec.Controls.Add(this.guna2Panel3);
-            this.panelPrincipalSec.Controls.Add(this.guna2Panel2);
-            this.panelPrincipalSec.Controls.Add(this.guna2Panel1);
-            this.panelPrincipalSec.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelPrincipalSec.ForeColor = System.Drawing.Color.Cornsilk;
-            this.panelPrincipalSec.Location = new System.Drawing.Point(0, 77);
-            this.panelPrincipalSec.Margin = new System.Windows.Forms.Padding(10);
-            this.panelPrincipalSec.Name = "panelPrincipalSec";
-            this.panelPrincipalSec.Padding = new System.Windows.Forms.Padding(10);
-            this.panelPrincipalSec.Size = new System.Drawing.Size(1062, 496);
-            this.panelPrincipalSec.TabIndex = 1;
-            // 
-            // guna2Panel2
-            // 
-            this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.guna2Panel2.Location = new System.Drawing.Point(10, 20);
-            this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(10, 466);
-            this.guna2Panel2.TabIndex = 2;
-            // 
-            // guna2Panel3
-            // 
-            this.guna2Panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.guna2Panel3.Location = new System.Drawing.Point(1042, 20);
-            this.guna2Panel3.Name = "guna2Panel3";
-            this.guna2Panel3.Size = new System.Drawing.Size(10, 466);
-            this.guna2Panel3.TabIndex = 3;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.label1.Location = new System.Drawing.Point(47, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 18);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Desde";
-            // 
-            // guna2DateTimePicker1
-            // 
-            this.guna2DateTimePicker1.BorderRadius = 5;
-            this.guna2DateTimePicker1.Checked = true;
-            this.guna2DateTimePicker1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2DateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.guna2DateTimePicker1.Location = new System.Drawing.Point(121, 16);
-            this.guna2DateTimePicker1.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.guna2DateTimePicker1.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            this.guna2DateTimePicker1.Name = "guna2DateTimePicker1";
-            this.guna2DateTimePicker1.Size = new System.Drawing.Size(235, 40);
-            this.guna2DateTimePicker1.TabIndex = 15;
-            this.guna2DateTimePicker1.Value = new System.DateTime(2026, 8, 28, 21, 35, 18, 468);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.label2.Location = new System.Drawing.Point(446, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 18);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "Hasta";
-            // 
-            // guna2DateTimePicker2
-            // 
-            this.guna2DateTimePicker2.BorderRadius = 5;
-            this.guna2DateTimePicker2.Checked = true;
-            this.guna2DateTimePicker2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2DateTimePicker2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2DateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.guna2DateTimePicker2.Location = new System.Drawing.Point(522, 16);
-            this.guna2DateTimePicker2.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.guna2DateTimePicker2.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            this.guna2DateTimePicker2.Name = "guna2DateTimePicker2";
-            this.guna2DateTimePicker2.Size = new System.Drawing.Size(235, 40);
-            this.guna2DateTimePicker2.TabIndex = 17;
-            this.guna2DateTimePicker2.Value = new System.DateTime(2026, 8, 28, 21, 35, 18, 468);
             // 
             // guna2CustomGradientPanel5
             // 
@@ -248,21 +159,78 @@
             this.iconButton6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.iconButton6.UseVisualStyleBackColor = true;
             // 
-            // guna2Panel4
+            // guna2DateTimePicker2
             // 
-            this.guna2Panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.guna2Panel4.Location = new System.Drawing.Point(20, 100);
-            this.guna2Panel4.Name = "guna2Panel4";
-            this.guna2Panel4.Size = new System.Drawing.Size(1022, 10);
-            this.guna2Panel4.TabIndex = 4;
+            this.guna2DateTimePicker2.BorderRadius = 5;
+            this.guna2DateTimePicker2.Checked = true;
+            this.guna2DateTimePicker2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.guna2DateTimePicker2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2DateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.guna2DateTimePicker2.Location = new System.Drawing.Point(522, 16);
+            this.guna2DateTimePicker2.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.guna2DateTimePicker2.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.guna2DateTimePicker2.Name = "guna2DateTimePicker2";
+            this.guna2DateTimePicker2.Size = new System.Drawing.Size(235, 40);
+            this.guna2DateTimePicker2.TabIndex = 17;
+            this.guna2DateTimePicker2.Value = new System.DateTime(2026, 8, 28, 21, 35, 18, 468);
             // 
-            // guna2Panel5
+            // label2
             // 
-            this.guna2Panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.guna2Panel5.Location = new System.Drawing.Point(20, 476);
-            this.guna2Panel5.Name = "guna2Panel5";
-            this.guna2Panel5.Size = new System.Drawing.Size(1022, 10);
-            this.guna2Panel5.TabIndex = 5;
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.label2.Location = new System.Drawing.Point(446, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 18);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "Hasta";
+            // 
+            // guna2DateTimePicker1
+            // 
+            this.guna2DateTimePicker1.BorderRadius = 5;
+            this.guna2DateTimePicker1.Checked = true;
+            this.guna2DateTimePicker1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.guna2DateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.guna2DateTimePicker1.Location = new System.Drawing.Point(121, 16);
+            this.guna2DateTimePicker1.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.guna2DateTimePicker1.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.guna2DateTimePicker1.Name = "guna2DateTimePicker1";
+            this.guna2DateTimePicker1.Size = new System.Drawing.Size(235, 40);
+            this.guna2DateTimePicker1.TabIndex = 15;
+            this.guna2DateTimePicker1.Value = new System.DateTime(2026, 8, 28, 21, 35, 18, 468);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.label1.Location = new System.Drawing.Point(47, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 18);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Desde";
+            // 
+            // panelPrincipalSec
+            // 
+            this.panelPrincipalSec.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
+            this.panelPrincipalSec.Controls.Add(this.guna2DataGridView1);
+            this.panelPrincipalSec.Controls.Add(this.guna2Panel5);
+            this.panelPrincipalSec.Controls.Add(this.guna2Panel4);
+            this.panelPrincipalSec.Controls.Add(this.guna2CustomGradientPanel1);
+            this.panelPrincipalSec.Controls.Add(this.guna2Panel3);
+            this.panelPrincipalSec.Controls.Add(this.guna2Panel2);
+            this.panelPrincipalSec.Controls.Add(this.guna2Panel1);
+            this.panelPrincipalSec.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelPrincipalSec.ForeColor = System.Drawing.Color.Cornsilk;
+            this.panelPrincipalSec.Location = new System.Drawing.Point(0, 77);
+            this.panelPrincipalSec.Margin = new System.Windows.Forms.Padding(10);
+            this.panelPrincipalSec.Name = "panelPrincipalSec";
+            this.panelPrincipalSec.Padding = new System.Windows.Forms.Padding(10);
+            this.panelPrincipalSec.Size = new System.Drawing.Size(1062, 496);
+            this.panelPrincipalSec.TabIndex = 1;
             // 
             // guna2DataGridView1
             // 
@@ -377,6 +345,38 @@
             this.columnaDetalle.Text = "Ver Detalle";
             this.columnaDetalle.UseColumnTextForButtonValue = true;
             // 
+            // guna2Panel5
+            // 
+            this.guna2Panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.guna2Panel5.Location = new System.Drawing.Point(20, 476);
+            this.guna2Panel5.Name = "guna2Panel5";
+            this.guna2Panel5.Size = new System.Drawing.Size(1022, 10);
+            this.guna2Panel5.TabIndex = 5;
+            // 
+            // guna2Panel4
+            // 
+            this.guna2Panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.guna2Panel4.Location = new System.Drawing.Point(20, 100);
+            this.guna2Panel4.Name = "guna2Panel4";
+            this.guna2Panel4.Size = new System.Drawing.Size(1022, 10);
+            this.guna2Panel4.TabIndex = 4;
+            // 
+            // guna2Panel3
+            // 
+            this.guna2Panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.guna2Panel3.Location = new System.Drawing.Point(1042, 20);
+            this.guna2Panel3.Name = "guna2Panel3";
+            this.guna2Panel3.Size = new System.Drawing.Size(10, 466);
+            this.guna2Panel3.TabIndex = 3;
+            // 
+            // guna2Panel2
+            // 
+            this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.guna2Panel2.Location = new System.Drawing.Point(10, 20);
+            this.guna2Panel2.Name = "guna2Panel2";
+            this.guna2Panel2.Size = new System.Drawing.Size(10, 466);
+            this.guna2Panel2.TabIndex = 2;
+            // 
             // FrmReportesVendedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -389,8 +389,8 @@
             this.panelTituloSec.ResumeLayout(false);
             this.guna2CustomGradientPanel1.ResumeLayout(false);
             this.guna2CustomGradientPanel1.PerformLayout();
-            this.panelPrincipalSec.ResumeLayout(false);
             this.guna2CustomGradientPanel5.ResumeLayout(false);
+            this.panelPrincipalSec.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView1)).EndInit();
             this.ResumeLayout(false);
 

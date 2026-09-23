@@ -31,11 +31,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.TBTituloSec = new Guna.UI2.WinForms.Guna2TextBox();
             this.PaneContenidoSec = new Guna.UI2.WinForms.Guna2Panel();
             this.PanelDerechoVenta = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.PanelDerechoMID = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.guna2DataGridView1 = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.columnaProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.coolumnaPrecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnaCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnaSubtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnaEliminar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label11 = new System.Windows.Forms.Label();
             this.guna2CustomGradientPanel3 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.iconButton5 = new FontAwesome.Sharp.IconButton();
@@ -78,11 +82,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.LDatosVenta = new System.Windows.Forms.Label();
             this.panelTituloSec = new Guna.UI2.WinForms.Guna2Panel();
-            this.columnaProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.coolumnaPrecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnaCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnaSubtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnaEliminar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TBTituloSec = new System.Windows.Forms.Label();
             this.PaneContenidoSec.SuspendLayout();
             this.PanelDerechoVenta.SuspendLayout();
             this.PanelDerechoMID.SuspendLayout();
@@ -100,31 +100,6 @@
             this.panelTituloSec.SuspendLayout();
             this.SuspendLayout();
             // 
-            // TBTituloSec
-            // 
-            this.TBTituloSec.BackColor = System.Drawing.Color.Transparent;
-            this.TBTituloSec.BorderColor = System.Drawing.Color.Transparent;
-            this.TBTituloSec.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TBTituloSec.DefaultText = "Registro Compra";
-            this.TBTituloSec.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.TBTituloSec.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.TBTituloSec.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.TBTituloSec.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.TBTituloSec.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.TBTituloSec.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TBTituloSec.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TBTituloSec.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            this.TBTituloSec.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TBTituloSec.Location = new System.Drawing.Point(24, 5);
-            this.TBTituloSec.Margin = new System.Windows.Forms.Padding(5);
-            this.TBTituloSec.Name = "TBTituloSec";
-            this.TBTituloSec.PasswordChar = '\0';
-            this.TBTituloSec.PlaceholderForeColor = System.Drawing.Color.Transparent;
-            this.TBTituloSec.PlaceholderText = "";
-            this.TBTituloSec.SelectedText = "";
-            this.TBTituloSec.Size = new System.Drawing.Size(231, 38);
-            this.TBTituloSec.TabIndex = 0;
-            // 
             // PaneContenidoSec
             // 
             this.PaneContenidoSec.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
@@ -133,10 +108,10 @@
             this.PaneContenidoSec.Controls.Add(this.panelIzquierdoVenta);
             this.PaneContenidoSec.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PaneContenidoSec.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.PaneContenidoSec.Location = new System.Drawing.Point(0, 48);
+            this.PaneContenidoSec.Location = new System.Drawing.Point(0, 36);
             this.PaneContenidoSec.Name = "PaneContenidoSec";
             this.PaneContenidoSec.Padding = new System.Windows.Forms.Padding(10, 10, 15, 15);
-            this.PaneContenidoSec.Size = new System.Drawing.Size(1137, 565);
+            this.PaneContenidoSec.Size = new System.Drawing.Size(1137, 577);
             this.PaneContenidoSec.TabIndex = 5;
             this.PaneContenidoSec.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint_1);
             // 
@@ -151,7 +126,7 @@
             this.PanelDerechoVenta.Location = new System.Drawing.Point(325, 10);
             this.PanelDerechoVenta.Margin = new System.Windows.Forms.Padding(10);
             this.PanelDerechoVenta.Name = "PanelDerechoVenta";
-            this.PanelDerechoVenta.Size = new System.Drawing.Size(797, 540);
+            this.PanelDerechoVenta.Size = new System.Drawing.Size(797, 552);
             this.PanelDerechoVenta.TabIndex = 1;
             // 
             // PanelDerechoMID
@@ -167,7 +142,7 @@
             this.PanelDerechoMID.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.PanelDerechoMID.Location = new System.Drawing.Point(0, 100);
             this.PanelDerechoMID.Name = "PanelDerechoMID";
-            this.PanelDerechoMID.Size = new System.Drawing.Size(797, 385);
+            this.PanelDerechoMID.Size = new System.Drawing.Size(797, 397);
             this.PanelDerechoMID.TabIndex = 1;
             this.PanelDerechoMID.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelDerechoMID_Paint);
             // 
@@ -235,6 +210,36 @@
             this.guna2DataGridView1.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.guna2DataGridView1.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
+            // columnaProducto
+            // 
+            this.columnaProducto.HeaderText = "Producto";
+            this.columnaProducto.MinimumWidth = 6;
+            this.columnaProducto.Name = "columnaProducto";
+            // 
+            // coolumnaPrecio
+            // 
+            this.coolumnaPrecio.HeaderText = "Precio Unitario";
+            this.coolumnaPrecio.MinimumWidth = 6;
+            this.coolumnaPrecio.Name = "coolumnaPrecio";
+            // 
+            // columnaCantidad
+            // 
+            this.columnaCantidad.HeaderText = "Cantidad";
+            this.columnaCantidad.MinimumWidth = 6;
+            this.columnaCantidad.Name = "columnaCantidad";
+            // 
+            // columnaSubtotal
+            // 
+            this.columnaSubtotal.HeaderText = "Subtotal";
+            this.columnaSubtotal.MinimumWidth = 6;
+            this.columnaSubtotal.Name = "columnaSubtotal";
+            // 
+            // columnaEliminar
+            // 
+            this.columnaEliminar.HeaderText = "Eliminar";
+            this.columnaEliminar.MinimumWidth = 6;
+            this.columnaEliminar.Name = "columnaEliminar";
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -287,7 +292,7 @@
             // guna2Panel2
             // 
             this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.guna2Panel2.Location = new System.Drawing.Point(0, 485);
+            this.guna2Panel2.Location = new System.Drawing.Point(0, 497);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(797, 5);
             this.guna2Panel2.TabIndex = 4;
@@ -309,7 +314,7 @@
             this.PanelDerechoBOT.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.PanelDerechoBOT.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.PanelDerechoBOT.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.PanelDerechoBOT.Location = new System.Drawing.Point(0, 490);
+            this.PanelDerechoBOT.Location = new System.Drawing.Point(0, 502);
             this.PanelDerechoBOT.Name = "PanelDerechoBOT";
             this.PanelDerechoBOT.Size = new System.Drawing.Size(797, 50);
             this.PanelDerechoBOT.TabIndex = 2;
@@ -531,7 +536,7 @@
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.guna2Panel1.Location = new System.Drawing.Point(310, 10);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(15, 540);
+            this.guna2Panel1.Size = new System.Drawing.Size(15, 552);
             this.guna2Panel1.TabIndex = 2;
             // 
             // panelIzquierdoVenta
@@ -560,7 +565,7 @@
             this.panelIzquierdoVenta.Location = new System.Drawing.Point(10, 10);
             this.panelIzquierdoVenta.Margin = new System.Windows.Forms.Padding(10, 3, 3, 10);
             this.panelIzquierdoVenta.Name = "panelIzquierdoVenta";
-            this.panelIzquierdoVenta.Size = new System.Drawing.Size(300, 540);
+            this.panelIzquierdoVenta.Size = new System.Drawing.Size(300, 552);
             this.panelIzquierdoVenta.TabIndex = 0;
             // 
             // guna2CustomGradientPanel1
@@ -908,38 +913,18 @@
             this.panelTituloSec.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTituloSec.Location = new System.Drawing.Point(0, 0);
             this.panelTituloSec.Name = "panelTituloSec";
-            this.panelTituloSec.Size = new System.Drawing.Size(1137, 48);
+            this.panelTituloSec.Size = new System.Drawing.Size(1137, 36);
             this.panelTituloSec.TabIndex = 4;
             // 
-            // columnaProducto
+            // TBTituloSec
             // 
-            this.columnaProducto.HeaderText = "Producto";
-            this.columnaProducto.MinimumWidth = 6;
-            this.columnaProducto.Name = "columnaProducto";
-            // 
-            // coolumnaPrecio
-            // 
-            this.coolumnaPrecio.HeaderText = "Precio Unitario";
-            this.coolumnaPrecio.MinimumWidth = 6;
-            this.coolumnaPrecio.Name = "coolumnaPrecio";
-            // 
-            // columnaCantidad
-            // 
-            this.columnaCantidad.HeaderText = "Cantidad";
-            this.columnaCantidad.MinimumWidth = 6;
-            this.columnaCantidad.Name = "columnaCantidad";
-            // 
-            // columnaSubtotal
-            // 
-            this.columnaSubtotal.HeaderText = "Subtotal";
-            this.columnaSubtotal.MinimumWidth = 6;
-            this.columnaSubtotal.Name = "columnaSubtotal";
-            // 
-            // columnaEliminar
-            // 
-            this.columnaEliminar.HeaderText = "Eliminar";
-            this.columnaEliminar.MinimumWidth = 6;
-            this.columnaEliminar.Name = "columnaEliminar";
+            this.TBTituloSec.AutoSize = true;
+            this.TBTituloSec.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TBTituloSec.Location = new System.Drawing.Point(12, 4);
+            this.TBTituloSec.Name = "TBTituloSec";
+            this.TBTituloSec.Size = new System.Drawing.Size(242, 32);
+            this.TBTituloSec.TabIndex = 4;
+            this.TBTituloSec.Text = "Registro Compra";
             // 
             // FrmCompras
             // 
@@ -973,13 +958,13 @@
             this.guna2CustomGradientPanel2.ResumeLayout(false);
             this.guna2CustomGradientPanel2.PerformLayout();
             this.panelTituloSec.ResumeLayout(false);
+            this.panelTituloSec.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private Guna.UI2.WinForms.Guna2TextBox TBTituloSec;
         private Guna.UI2.WinForms.Guna2Panel PaneContenidoSec;
         private Guna.UI2.WinForms.Guna2Panel panelTituloSec;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel PanelDerechoVenta;
@@ -1031,5 +1016,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnaCantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnaSubtotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnaEliminar;
+        private System.Windows.Forms.Label TBTituloSec;
     }
 }

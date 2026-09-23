@@ -17,6 +17,7 @@ namespace PetShopDelLitoral
         {
             InitializeComponent();
             CargarFuentePoppins();
+            MostrarDatosUsuario();
         }
 
         private void CargarFuentePoppins()
@@ -33,9 +34,9 @@ namespace PetShopDelLitoral
                 Font fuentePoppins = new Font(pfc.Families[0], 12f, FontStyle.Regular);
                 panelMenu.Font = fuentePoppins;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                
+
             }
         }
 
@@ -48,16 +49,16 @@ namespace PetShopDelLitoral
 
         private void ConfigurarEsteticaMenu()
         {
-           
+
             this.BackColor = Color.FromArgb(254, 249, 231);
 
-            
+
             if (panelSuperior != null)
             {
                 panelSuperior.BackColor = Color.FromArgb(34, 24, 21);
             }
 
-            
+
             if (panelMenu != null)
             {
                 panelMenu.BackColor = Color.FromArgb(34, 24, 21);
@@ -68,10 +69,10 @@ namespace PetShopDelLitoral
         {
             if (Sesion.UsuarioActual != null)
             {
-                
+
                 string rol = Sesion.UsuarioActual.idRol != null ? Sesion.UsuarioActual.idRol.descripcion_rol.Trim() : "";
 
-                
+
                 MessageBox.Show($"Rol detectado en sesión: '{rol}'", "Verificación de Permisos");
 
                 if (rol.Equals("Administrador", StringComparison.OrdinalIgnoreCase) ||
@@ -102,9 +103,9 @@ namespace PetShopDelLitoral
                     SetVisible(botonProductos, true);
                     SetVisible(botonPersonas, true);
 
-                    SetVisible(botonCompras, false);   
-                    SetVisible(botonReportes, false);  
-                    SetVisible(btnBackup, false);      
+                    SetVisible(botonCompras, false);
+                    SetVisible(botonReportes, true);
+                    SetVisible(btnBackup, false);
                 }
                 else
                 {
@@ -132,11 +133,6 @@ namespace PetShopDelLitoral
             }
         }
 
-        private void btnBackup_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario(new FrmBackup());
-        }
-
         private void botonVentas_Click_1(object sender, EventArgs e)
         {
             AbrirFormulario(new FrmVentas());
@@ -154,7 +150,22 @@ namespace PetShopDelLitoral
 
         private void botonReportes_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new FrmReportesSupervisor());
+            if (Sesion.UsuarioActual != null && Sesion.UsuarioActual.idRol != null)
+            {
+                // Traemos el rol de la sesión actual
+                string rol = Sesion.UsuarioActual.idRol.descripcion_rol.Trim();
+
+                // Derivamos según el perfil
+                if (rol.Equals("Administrador", StringComparison.OrdinalIgnoreCase) ||
+                    rol.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+                {
+                    AbrirFormulario(new FrmReportesAdministrador());
+                }
+                else if (rol.Equals("Vendedor", StringComparison.OrdinalIgnoreCase))
+                {
+                    AbrirFormulario(new FrmReportesVendedor());
+                }
+            }
         }
 
         private void btnPersonas_click(object sender, EventArgs e)
@@ -194,14 +205,64 @@ namespace PetShopDelLitoral
             frmLogin.Show();
         }
 
-        private void iconButton1_Click(object sender, EventArgs e) { }
+
         private void panelSuperior_Paint(object sender, PaintEventArgs e) { }
         private void PanelControl_Paint(object sender, PaintEventArgs e) { }
         private void panelMenu_Paint(object sender, PaintEventArgs e) { }
 
-        private void btnBackup_Click_1(object sender, EventArgs e)
+       
+        private void PanelContenedor_Paint(object sender, PaintEventArgs e) { }
+        private void panelCentral_Paint(object sender, PaintEventArgs e) { }
+        private void logo_Click(object sender, EventArgs e) { }
+        private void botonInicio_Click_1(object sender, EventArgs e)
+        {
+            AbrirFormulario(new FrmDashboard());
+        }
+
+        private void btnBackup_Click_2(object sender, EventArgs e)
         {
             AbrirFormulario(new FrmBackup());
         }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MostrarDatosUsuario()
+        {
+            if (Sesion.UsuarioActual != null)
+            {
+                // Verifica si la propiedad de la persona tiene datos
+                if (Sesion.UsuarioActual.idPersona != null)
+                {
+                    string nombre = Sesion.UsuarioActual.idPersona.nombre_persona;
+                    string apellido = Sesion.UsuarioActual.idPersona.apellido_persona;
+
+                    // Asigna el nombre a tu Label del encabezado (asegúrate de que el Name en el diseñador coincida)
+                    if (lblBienvenida != null)
+                    {
+                        lblBienvenida.Text = $"Bienvenido/a, {nombre} {apellido}";
+                    }
+                }
+                else
+                {
+                    if (lblBienvenida != null)
+                    {
+                        lblBienvenida.Text = "Bienvenido/a al Sistema";
+                    }
+                }
+            }
+        }
+
+        private void ActualizarFechaHora()
+        {
+            if (lblFecha != null)
+            {
+
+                lblFecha.Text = DateTime.Now.ToString("dddd, d 'de' MMMM 'de' yyyy, hh:mm tt");
+            }
+        }
+
     }
 }

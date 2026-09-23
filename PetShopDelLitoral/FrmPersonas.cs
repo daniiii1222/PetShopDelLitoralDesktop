@@ -329,7 +329,8 @@ namespace PetShopDelLitoral
                     TBTelefono.Text = fila.Cells["Telefono"].Value?.ToString();
                     TBDireccion.Text = fila.Cells["Direccion"].Value?.ToString();
                     TBDni.Text = fila.Cells["Dni"].Value?.ToString();
-
+                    string estadoTexto = fila.Cells["Estado"].Value?.ToString();
+                    chkActivo.Checked = (estadoTexto == "Activo");
                     // 1. EL ROL: Se selecciona automáticamente usando la columna oculta "IdRol"
                     if (fila.Cells["IdRol"].Value != null)
                     {
@@ -561,6 +562,7 @@ namespace PetShopDelLitoral
             }
 
             idSeleccionado = 0;
+            chkActivo.Checked = true;
         }
 
 
@@ -568,37 +570,45 @@ namespace PetShopDelLitoral
         {
             if (tipoSeleccionado == "Usuario")
             {
-
+                // 1. Validaciones de campos vacíos
                 if (string.IsNullOrWhiteSpace(TBNombre.Text) ||
-                string.IsNullOrWhiteSpace(TBApellido.Text) ||
-                string.IsNullOrWhiteSpace(TBDni.Text) ||
-                CBRol.SelectedIndex == -1) // -1 significa que no eligió nada en el combo
+                    string.IsNullOrWhiteSpace(TBApellido.Text) ||
+                    string.IsNullOrWhiteSpace(TBDni.Text) ||
+                    CBRol.SelectedIndex == -1)
                 {
                     MessageBox.Show("Por favor, complete todos los campos obligatorios (Nombre, Apellido, DNI y Rol).", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return; // Corta la ejecución, no va a la base de datos
+                    return;
                 }
 
-                // Valida que el DNI sea numérico
+                // 2. Valida que el DNI sea numérico
                 if (!long.TryParse(TBDni.Text.Trim(), out _))
                 {
                     MessageBox.Show("El campo DNI solo puede contener números válidos.", "Error de formato", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Valida la contraseña (Solo obligatoria si es un usuario NUEVO)
+                // 3. Validación de DNI duplicado (ANTES de hacer nada)
+                CN_Usuario objValidacionDni = new CN_Usuario();
+                string mensajeDuplicado;
+                if (objValidacionDni.ExisteUsuarioConDni(TBDni.Text.Trim(), idSeleccionado, out mensajeDuplicado))
+                {
+                    MessageBox.Show(mensajeDuplicado, "DNI duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 4. Valida la contraseña (Solo obligatoria si es un usuario NUEVO)
                 if (idSeleccionado == 0 && string.IsNullOrWhiteSpace(TBContraseniaUsuario.Text))
                 {
                     MessageBox.Show("Debe ingresar una contraseña para registrar un nuevo usuario.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-
+                // 5. Proceso a la Base de Datos
                 try
                 {
                     Persona objPersona = new Persona()
                     {
-                        // Si estás editando, asignale el idPersona que capturaste de la celda oculta de la grilla
-                        idPersona = idPersonaSeleccionada, // variable global 
+                        idPersona = idPersonaSeleccionada,
                         nombre_persona = TBNombre.Text.Trim(),
                         apellido_persona = TBApellido.Text.Trim(),
                         dni_persona = TBDni.Text.Trim(),
@@ -618,23 +628,19 @@ namespace PetShopDelLitoral
                         idUsuario = idSeleccionado,
                         contrasenia_usuario = TBContraseniaUsuario.Text.Trim(),
                         idRol = objRol,
-                        estado_usuario = true
+                        estado_usuario = chkActivo.Checked
                     };
 
                     CN_Usuario objNegocio = new CN_Usuario();
                     string mensaje = string.Empty;
                     bool resultado = false;
 
-                    // SEMÁFORO: Si idSeleccionado es 0, registra. Si tiene valor, modifica.
                     if (idSeleccionado == 0)
                     {
-                        // Al registrar, la contraseña es obligatoria
                         resultado = objNegocio.RegistrarUsuario(objPersona, objUsuario, out mensaje);
                     }
                     else
                     {
-                        // Al modificar: si la caja de contraseña está vacía, podés enviarla vacía 
-                        // para que tu Capa de Datos/SP se encargue de mantener la contraseña actual.
                         resultado = objNegocio.ModificarUsuario(objPersona, objUsuario, out mensaje);
                     }
 
@@ -647,8 +653,9 @@ namespace PetShopDelLitoral
                         CargarUsuarios();
                         LimpiarCampos();
 
-                        // Reseteamos el idSeleccionado por las dudas para volver al modo inserción
+                        // Reseteamos ambas variables para evitar conflictos futuros
                         idSeleccionado = 0;
+                        idPersonaSeleccionada = 0;
                     }
                     else
                     {
@@ -837,6 +844,20 @@ namespace PetShopDelLitoral
         private void btnCliente_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            if (idSeleccionado != 0)
+            {
+                
+                ModificarPersona(idSeleccionado);
+            }
+            else
+            {
+                // Si estaba creando un usuario nuevo desde cero, Cancelar simplemente vacía las cajas.
+                LimpiarCampos();
+            }
         }
     }
         

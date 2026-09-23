@@ -81,5 +81,10 @@ namespace PetShopDelLitoral
         {
 
         }
+
+        private void panelTituloSec_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

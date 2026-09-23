@@ -43,14 +43,19 @@ namespace PetShopDelLitoral
             this.botonProductos = new FontAwesome.Sharp.IconButton();
             this.botonPersonas = new FontAwesome.Sharp.IconButton();
             this.botonReportes = new FontAwesome.Sharp.IconButton();
-            this.BotonMantenedor = new FontAwesome.Sharp.IconButton();
+            this.btnBackup = new FontAwesome.Sharp.IconButton();
             this.panelVentas = new System.Windows.Forms.Panel();
             this.panelCompra = new System.Windows.Forms.Panel();
+            this.PanelGeneral = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            this.lblFecha = new System.Windows.Forms.Label();
+            this.lblBienvenida = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.PanelContenedor.SuspendLayout();
             this.panelCentral.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
+            this.PanelGeneral.SuspendLayout();
             this.SuspendLayout();
             // 
             // PanelContenedor
@@ -93,6 +98,7 @@ namespace PetShopDelLitoral
             // panelSuperior
             // 
             this.panelSuperior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.panelSuperior.Controls.Add(this.PanelGeneral);
             this.panelSuperior.Controls.Add(this.panel1);
             this.panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSuperior.Location = new System.Drawing.Point(267, 0);
@@ -119,7 +125,7 @@ namespace PetShopDelLitoral
             this.panelMenu.Controls.Add(this.botonProductos);
             this.panelMenu.Controls.Add(this.botonPersonas);
             this.panelMenu.Controls.Add(this.botonReportes);
-            this.panelMenu.Controls.Add(this.BotonMantenedor);
+            this.panelMenu.Controls.Add(this.btnBackup);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMenu.Margin = new System.Windows.Forms.Padding(4);
@@ -262,25 +268,25 @@ namespace PetShopDelLitoral
             this.botonReportes.UseVisualStyleBackColor = true;
             this.botonReportes.Click += new System.EventHandler(this.botonReportes_Click);
             // 
-            // BotonMantenedor
+            // btnBackup
             // 
-            this.BotonMantenedor.FlatAppearance.BorderSize = 0;
-            this.BotonMantenedor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BotonMantenedor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            this.BotonMantenedor.IconChar = FontAwesome.Sharp.IconChar.Database;
-            this.BotonMantenedor.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            this.BotonMantenedor.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.BotonMantenedor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BotonMantenedor.Location = new System.Drawing.Point(4, 509);
-            this.BotonMantenedor.Margin = new System.Windows.Forms.Padding(4);
-            this.BotonMantenedor.Name = "BotonMantenedor";
-            this.BotonMantenedor.Size = new System.Drawing.Size(253, 55);
-            this.BotonMantenedor.TabIndex = 6;
-            this.BotonMantenedor.Text = "Backup";
-            this.BotonMantenedor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BotonMantenedor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.BotonMantenedor.UseVisualStyleBackColor = true;
-            this.BotonMantenedor.Click += new System.EventHandler(this.iconButton1_Click);
+            this.btnBackup.FlatAppearance.BorderSize = 0;
+            this.btnBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBackup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.btnBackup.IconChar = FontAwesome.Sharp.IconChar.Database;
+            this.btnBackup.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.btnBackup.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnBackup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBackup.Location = new System.Drawing.Point(4, 509);
+            this.btnBackup.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBackup.Name = "btnBackup";
+            this.btnBackup.Size = new System.Drawing.Size(253, 55);
+            this.btnBackup.TabIndex = 6;
+            this.btnBackup.Text = "Backup";
+            this.btnBackup.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBackup.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBackup.UseVisualStyleBackColor = true;
+            this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click_2);
             // 
             // panelVentas
             // 
@@ -300,6 +306,59 @@ namespace PetShopDelLitoral
             this.panelCompra.TabIndex = 11;
             this.panelCompra.Visible = false;
             // 
+            // PanelGeneral
+            // 
+            this.PanelGeneral.Controls.Add(this.lblFecha);
+            this.PanelGeneral.Controls.Add(this.lblBienvenida);
+            this.PanelGeneral.Controls.Add(this.label6);
+            this.PanelGeneral.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelGeneral.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.PanelGeneral.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.PanelGeneral.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.PanelGeneral.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.PanelGeneral.Location = new System.Drawing.Point(0, 0);
+            this.PanelGeneral.Name = "PanelGeneral";
+            this.PanelGeneral.Size = new System.Drawing.Size(1440, 123);
+            this.PanelGeneral.TabIndex = 19;
+            // 
+            // lblFecha
+            // 
+            this.lblFecha.AutoSize = true;
+            this.lblFecha.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
+            this.lblFecha.Location = new System.Drawing.Point(817, 66);
+            this.lblFecha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFecha.Name = "lblFecha";
+            this.lblFecha.Size = new System.Drawing.Size(0, 16);
+            this.lblFecha.TabIndex = 1;
+            // 
+            // lblBienvenida
+            // 
+            this.lblBienvenida.AutoSize = true;
+            this.lblBienvenida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.lblBienvenida.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBienvenida.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
+            this.lblBienvenida.Location = new System.Drawing.Point(30, 24);
+            this.lblBienvenida.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblBienvenida.Name = "lblBienvenida";
+            this.lblBienvenida.Size = new System.Drawing.Size(78, 32);
+            this.lblBienvenida.TabIndex = 0;
+            this.lblBienvenida.Text = "Inicio";
+            this.lblBienvenida.UseMnemonic = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
+            this.label6.Location = new System.Drawing.Point(31, 56);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(156, 28);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Tablero Principal";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -318,6 +377,8 @@ namespace PetShopDelLitoral
             this.panelSuperior.ResumeLayout(false);
             this.panelMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
+            this.PanelGeneral.ResumeLayout(false);
+            this.PanelGeneral.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -343,9 +404,13 @@ namespace PetShopDelLitoral
         private FontAwesome.Sharp.IconButton botonPersonas;
         private FontAwesome.Sharp.IconButton botonReportes;
         private FontAwesome.Sharp.IconButton botonInicio;
-        private FontAwesome.Sharp.IconButton BotonMantenedor;
+        private FontAwesome.Sharp.IconButton btnBackup;
         private System.Windows.Forms.Panel panel1;
         private Guna.UI2.WinForms.Guna2Panel PanelControl;
+        private Guna.UI2.WinForms.Guna2CustomGradientPanel PanelGeneral;
+        private System.Windows.Forms.Label lblFecha;
+        private System.Windows.Forms.Label lblBienvenida;
+        private System.Windows.Forms.Label label6;
     }
 }
 

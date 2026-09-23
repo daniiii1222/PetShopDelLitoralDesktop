@@ -71,5 +71,13 @@ namespace PetShopDelLitoral
         {
 
         }
+
+        private void Login_FormClosed(object sender, FormClosedEventArgs e)
+        {
+          
+            
+            Application.Exit();
+        
+        }
     }
 }

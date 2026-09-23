@@ -1,6 +1,6 @@
 ﻿namespace PetShopDelLitoral
 {
-    partial class FrmReportesSupervisor
+    partial class FrmReportesAdministrador
     {
         /// <summary>
         /// Required designer variable.

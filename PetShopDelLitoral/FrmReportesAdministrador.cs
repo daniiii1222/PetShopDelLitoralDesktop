@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PetShopDelLitoral
 {
-    public partial class FrmReportesSupervisor : Form
+    public partial class FrmReportesAdministrador : Form
     {
-        public FrmReportesSupervisor()
+        public FrmReportesAdministrador()
         {
             InitializeComponent();
         }

@@ -173,6 +173,35 @@ namespace Capa_Negocio
             CD_Usuario objCapaDato = new CD_Usuario(); 
             return objCapaDato.ObtenerPersonaPorDni(dni);
         }
+
+        public bool ExisteUsuarioConDni(string dni, int idUsuarioActual, out string mensaje)
+        {
+            mensaje = string.Empty;
+
+            try
+            {
+                DataSet ds = objUsuarioDatos.ValidarUsuario(dni);
+
+                if (ds != null && ds.Tables["TablaLogin"].Rows.Count > 0)
+                {
+                    int idUsuarioEncontrado = Convert.ToInt32(ds.Tables["TablaLogin"].Rows[0]["idUsuario"]);
+
+                    // Si es el mismo usuario que estoy editando, no es un duplicado real
+                    if (idUsuarioEncontrado != idUsuarioActual)
+                    {
+                        mensaje = "Ya existe un usuario registrado con ese DNI.";
+                        return true; // Hay duplicado
+                    }
+                }
+
+                return false; // No hay duplicado
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Error al validar el DNI: " + ex.Message;
+                return false;
+            }
+        }
     }
 
 }
