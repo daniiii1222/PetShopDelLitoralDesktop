@@ -17,69 +17,83 @@ namespace PetShopDelLitoral
             InitializeComponent();
         }
 
-        private void panelTituloSec_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void botonInicio_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void panelTituloSec_Paint(object sender, PaintEventArgs e) { }
+        private void guna2TextBox1_TextChanged(object sender, EventArgs e) { }
+        private void botonInicio_Click(object sender, EventArgs e) { }
 
         private void ConfigurarGrilla(string tipoReporte)
         {
             dataGridReportes.Columns.Clear();
+            DataTable dt = new DataTable();
 
             switch (tipoReporte)
             {
                 case "productos":
+                    dt.Columns.Add("Codigo");
+                    dt.Columns.Add("Descripcion");
+                    dt.Columns.Add("Categoria");
+                    dt.Columns.Add("Stock");
+                    dt.Columns.Add("StockMinimo");
+                    dt.Columns.Add("Precio");
+                    dt.Columns.Add("Estado");
 
-                    dataGridReportes.Columns.Add("Codigo", "Código");
-                    dataGridReportes.Columns.Add("Descripcion", "Descripción");
-                    dataGridReportes.Columns.Add("Categoria", "Categoría");
-                    dataGridReportes.Columns.Add("Stock", "Stock Actual");
-                    dataGridReportes.Columns.Add("StockMinimo", "Stock Mínimo");
-                    dataGridReportes.Columns.Add("Precio", "Precio Venta");
-                    dataGridReportes.Columns.Add("Estado", "Estado");
-
+                    // Filas estáticas de prueba
+                    dt.Rows.Add("P001", "Alimento Balanceado 15kg", "Alimentos", "12", "5", "$ 25.000", "Activo");
+                    dt.Rows.Add("P002", "Rascador para Gatos", "Accesorios", "4", "3", "$ 14.500", "Activo");
+                    dt.Rows.Add("P003", "Antipulgas Pipeta", "Farmacia", "25", "10", "$ 6.200", "Activo");
                     break;
 
                 case "stock":
+                    dt.Columns.Add("Codigo");
+                    dt.Columns.Add("Descripcion");
+                    dt.Columns.Add("Categoria");
+                    dt.Columns.Add("Stock");
+                    dt.Columns.Add("StockMinimo");
 
-                    dataGridReportes.Columns.Add("Codigo", "Código");
-                    dataGridReportes.Columns.Add("Descripcion", "Descripción");
-                    dataGridReportes.Columns.Add("Categoria", "Categoría");
-                    dataGridReportes.Columns.Add("Stock", "Stock Actual");
-                    dataGridReportes.Columns.Add("StockMinimo", "Stock Mínimo");
-
+                    // Filas estáticas de prueba
+                    dt.Rows.Add("P002", "Rascador para Gatos", "Accesorios", "4", "3");
+                    dt.Rows.Add("P008", "Collar Antiparasitario", "Accesorios", "1", "4");
                     break;
 
                 case "ventas":
+                    dt.Columns.Add("Codigo");
+                    dt.Columns.Add("Fecha");
+                    dt.Columns.Add("Vendedor");
+                    dt.Columns.Add("Cliente");
+                    dt.Columns.Add("MetodoPago");
+                    dt.Columns.Add("Total");
+                    dt.Columns.Add("Detalle");
 
-                    dataGridReportes.Columns.Add("Codigo", "Código");
-                    dataGridReportes.Columns.Add("Fecha", "Fecha");
-                    dataGridReportes.Columns.Add("Vendedor", "Vendedor");
-                    dataGridReportes.Columns.Add("Cliente", "Cliente");
-                    dataGridReportes.Columns.Add("MetodoPago", "Método de pago");
-                    dataGridReportes.Columns.Add("Total", "Total");
-                    dataGridReportes.Columns.Add("Detalle", "Detalle");
-
+                    // Filas estáticas de prueba
+                    dt.Rows.Add("V-101", "2026-09-21", "Carlos Gomez", "Ada Lovelace", "Efectivo", "$ 25.000", "Ver detalle");
+                    dt.Rows.Add("V-102", "2026-09-22", "Carlos Gomez", "Virginia Romero", "Transferencia", "$ 14.500", "Ver detalle");
                     break;
 
                 case "vendedores":
+                    dt.Columns.Add("Vendedor");
+                    dt.Columns.Add("CantidadVentas");
+                    dt.Columns.Add("TotalVendido");
 
-                    dataGridReportes.Columns.Add("Vendedor", "Vendedor");
-                    dataGridReportes.Columns.Add("CantidadVentas", "Cantidad de ventas");
-                    dataGridReportes.Columns.Add("TotalVendido", "Total vendido");
-
+                    // Filas estáticas de prueba
+                    dt.Rows.Add("Carlos Gomez", "15", "$ 245.000");
+                    dt.Rows.Add("Mariana Perez", "12", "$ 198.000");
                     break;
             }
+
+
+            // Asignamos la tabla armada a la grilla
+            dataGridReportes.DataSource = dt;
+
+            // Asignamos la tabla armada a la grilla
+            dataGridReportes.DataSource = dt;
+            dataGridReportes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // Bloqueo y colores estéticos para el admin
+            dataGridReportes.ReadOnly = true;
+            dataGridReportes.AllowUserToAddRows = false;
+            dataGridReportes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridReportes.DefaultCellStyle.SelectionBackColor = Color.FromArgb(225, 185, 110);
+            dataGridReportes.DefaultCellStyle.SelectionForeColor = Color.Black;
         }
 
         private void botonProductos_Click(object sender, EventArgs e)

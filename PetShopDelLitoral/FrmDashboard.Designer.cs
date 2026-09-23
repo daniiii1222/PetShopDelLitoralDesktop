@@ -168,7 +168,7 @@
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(570, 261);
+            this.dataGridView1.Size = new System.Drawing.Size(493, 261);
             this.dataGridView1.TabIndex = 9;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -181,10 +181,10 @@
             this.panel3.Controls.Add(this.panel6);
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Controls.Add(this.panel4);
-            this.panel3.Location = new System.Drawing.Point(641, 259);
+            this.panel3.Location = new System.Drawing.Point(578, 258);
             this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(430, 260);
+            this.panel3.Size = new System.Drawing.Size(447, 260);
             this.panel3.TabIndex = 13;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
@@ -204,7 +204,7 @@
             // 
             this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.panel7.Controls.Add(this.btnNuevaCompra);
-            this.panel7.Location = new System.Drawing.Point(227, 145);
+            this.panel7.Location = new System.Drawing.Point(240, 145);
             this.panel7.Margin = new System.Windows.Forms.Padding(4);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(183, 79);
@@ -215,19 +215,20 @@
             this.btnNuevaCompra.IconChar = FontAwesome.Sharp.IconChar.None;
             this.btnNuevaCompra.IconColor = System.Drawing.Color.Black;
             this.btnNuevaCompra.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnNuevaCompra.Location = new System.Drawing.Point(13, 25);
+            this.btnNuevaCompra.Location = new System.Drawing.Point(13, 14);
             this.btnNuevaCompra.Margin = new System.Windows.Forms.Padding(4);
             this.btnNuevaCompra.Name = "btnNuevaCompra";
-            this.btnNuevaCompra.Size = new System.Drawing.Size(159, 28);
+            this.btnNuevaCompra.Size = new System.Drawing.Size(159, 54);
             this.btnNuevaCompra.TabIndex = 10;
             this.btnNuevaCompra.Text = "📦 Nueva Compra";
             this.btnNuevaCompra.UseVisualStyleBackColor = true;
+            this.btnNuevaCompra.Click += new System.EventHandler(this.btnNuevaCompra_Click);
             // 
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.panel6.Controls.Add(this.btnNuevoProducto);
-            this.panel6.Location = new System.Drawing.Point(227, 48);
+            this.panel6.Location = new System.Drawing.Point(240, 48);
             this.panel6.Margin = new System.Windows.Forms.Padding(4);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(183, 79);
@@ -238,13 +239,14 @@
             this.btnNuevoProducto.IconChar = FontAwesome.Sharp.IconChar.None;
             this.btnNuevoProducto.IconColor = System.Drawing.Color.Black;
             this.btnNuevoProducto.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnNuevoProducto.Location = new System.Drawing.Point(13, 30);
+            this.btnNuevoProducto.Location = new System.Drawing.Point(4, 12);
             this.btnNuevoProducto.Margin = new System.Windows.Forms.Padding(4);
             this.btnNuevoProducto.Name = "btnNuevoProducto";
-            this.btnNuevoProducto.Size = new System.Drawing.Size(159, 28);
+            this.btnNuevoProducto.Size = new System.Drawing.Size(175, 55);
             this.btnNuevoProducto.TabIndex = 6;
             this.btnNuevoProducto.Text = "➕ Nuevo Producto";
             this.btnNuevoProducto.UseVisualStyleBackColor = true;
+            this.btnNuevoProducto.Click += new System.EventHandler(this.btnNuevoProducto_Click);
             // 
             // panel5
             // 
@@ -261,13 +263,14 @@
             this.btnNuevoCliente.IconChar = FontAwesome.Sharp.IconChar.None;
             this.btnNuevoCliente.IconColor = System.Drawing.Color.Black;
             this.btnNuevoCliente.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnNuevoCliente.Location = new System.Drawing.Point(4, 25);
+            this.btnNuevoCliente.Location = new System.Drawing.Point(6, 14);
             this.btnNuevoCliente.Margin = new System.Windows.Forms.Padding(4);
             this.btnNuevoCliente.Name = "btnNuevoCliente";
-            this.btnNuevoCliente.Size = new System.Drawing.Size(168, 28);
+            this.btnNuevoCliente.Size = new System.Drawing.Size(157, 54);
             this.btnNuevoCliente.TabIndex = 7;
             this.btnNuevoCliente.Text = "👤 Nuevo Cliente";
             this.btnNuevoCliente.UseVisualStyleBackColor = true;
+            this.btnNuevoCliente.Click += new System.EventHandler(this.btnNuevoCliente_Click);
             // 
             // panel4
             // 
@@ -285,13 +288,14 @@
             this.btnNuevaVenta.IconChar = FontAwesome.Sharp.IconChar.None;
             this.btnNuevaVenta.IconColor = System.Drawing.Color.Black;
             this.btnNuevaVenta.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnNuevaVenta.Location = new System.Drawing.Point(19, 30);
+            this.btnNuevaVenta.Location = new System.Drawing.Point(6, 12);
             this.btnNuevaVenta.Margin = new System.Windows.Forms.Padding(4);
             this.btnNuevaVenta.Name = "btnNuevaVenta";
-            this.btnNuevaVenta.Size = new System.Drawing.Size(141, 28);
+            this.btnNuevaVenta.Size = new System.Drawing.Size(157, 55);
             this.btnNuevaVenta.TabIndex = 5;
             this.btnNuevaVenta.Text = "➕ Nueva Venta";
             this.btnNuevaVenta.UseVisualStyleBackColor = true;
+            this.btnNuevaVenta.Click += new System.EventHandler(this.btnNuevaVenta_Click);
             // 
             // label8
             // 

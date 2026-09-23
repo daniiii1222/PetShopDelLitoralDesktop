@@ -752,6 +752,7 @@
             this.btntipoProveedor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btntipoProveedor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btntipoProveedor.UseVisualStyleBackColor = true;
+            this.btntipoProveedor.Click += new System.EventHandler(this.btntipoProveedor_Click_1);
             // 
             // guna2CustomGradientPanel5
             // 

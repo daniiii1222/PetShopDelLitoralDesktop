@@ -167,12 +167,14 @@ namespace PetShopDelLitoral
                 }
             }
         }
-
         private void btnPersonas_click(object sender, EventArgs e)
         {
-            AbrirFormulario(new FrmPersonas());
-        }
+            string rol = (Sesion.UsuarioActual != null && Sesion.UsuarioActual.idRol != null)
+                ? Sesion.UsuarioActual.idRol.descripcion_rol.Trim()
+                : "";
 
+            AbrirFormulario(new FrmPersonas(rol));
+        }
         private void botonInicio_Click(object sender, EventArgs e)
         {
             AbrirFormulario(new FrmDashboard());
@@ -253,6 +255,10 @@ namespace PetShopDelLitoral
                     }
                 }
             }
+        }
+        public void NavegarAFormulario(Form formulario)
+        {
+            AbrirFormulario(formulario);
         }
 
         private void ActualizarFechaHora()

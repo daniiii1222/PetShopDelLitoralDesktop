@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelSup = new System.Windows.Forms.Panel();
             this.LBGestionProductos = new System.Windows.Forms.Label();
+            this.PanelContenedor = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel6 = new Guna.UI2.WinForms.Guna2Panel();
             this.DataGridViewProductos = new Guna.UI2.WinForms.Guna2DataGridView();
             this.ColumnCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,8 +45,8 @@
             this.ColumnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.ColumnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             this.CBFiltroCateg = new Guna.UI2.WinForms.Guna2ComboBox();
             this.LBFiltrarcategoria = new System.Windows.Forms.Label();
             this.TxtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
@@ -55,7 +56,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.guna2CustomGradientPanel6 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.btnCargarproducto = new FontAwesome.Sharp.IconButton();
-            this.PanelContenedor = new Guna.UI2.WinForms.Guna2Panel();
             this.panelSup.SuspendLayout();
             this.guna2Panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewProductos)).BeginInit();
@@ -85,6 +85,14 @@
             this.LBGestionProductos.Size = new System.Drawing.Size(253, 27);
             this.LBGestionProductos.TabIndex = 0;
             this.LBGestionProductos.Text = "Gestión de Productos";
+            // 
+            // PanelContenedor
+            // 
+            this.PanelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelContenedor.Location = new System.Drawing.Point(0, 0);
+            this.PanelContenedor.Name = "PanelContenedor";
+            this.PanelContenedor.Size = new System.Drawing.Size(1072, 91);
+            this.PanelContenedor.TabIndex = 15;
             // 
             // guna2Panel6
             // 
@@ -233,14 +241,6 @@
             this.guna2Panel4.Size = new System.Drawing.Size(1032, 20);
             this.guna2Panel4.TabIndex = 14;
             // 
-            // guna2Panel3
-            // 
-            this.guna2Panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.guna2Panel3.Location = new System.Drawing.Point(1052, 0);
-            this.guna2Panel3.Name = "guna2Panel3";
-            this.guna2Panel3.Size = new System.Drawing.Size(20, 387);
-            this.guna2Panel3.TabIndex = 13;
-            // 
             // guna2Panel2
             // 
             this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Left;
@@ -248,6 +248,14 @@
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(20, 387);
             this.guna2Panel2.TabIndex = 12;
+            // 
+            // guna2Panel3
+            // 
+            this.guna2Panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.guna2Panel3.Location = new System.Drawing.Point(1052, 0);
+            this.guna2Panel3.Name = "guna2Panel3";
+            this.guna2Panel3.Size = new System.Drawing.Size(20, 387);
+            this.guna2Panel3.TabIndex = 13;
             // 
             // CBFiltroCateg
             // 
@@ -270,7 +278,7 @@
             this.LBFiltrarcategoria.AutoSize = true;
             this.LBFiltrarcategoria.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBFiltrarcategoria.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.LBFiltrarcategoria.Location = new System.Drawing.Point(476, 3);
+            this.LBFiltrarcategoria.Location = new System.Drawing.Point(474, 7);
             this.LBFiltrarcategoria.Name = "LBFiltrarcategoria";
             this.LBFiltrarcategoria.Size = new System.Drawing.Size(177, 20);
             this.LBFiltrarcategoria.TabIndex = 4;
@@ -386,14 +394,6 @@
             this.btnCargarproducto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCargarproducto.UseVisualStyleBackColor = false;
             this.btnCargarproducto.Click += new System.EventHandler(this.BTCargarproducto_Click);
-            // 
-            // PanelContenedor
-            // 
-            this.PanelContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelContenedor.Location = new System.Drawing.Point(0, 0);
-            this.PanelContenedor.Name = "PanelContenedor";
-            this.PanelContenedor.Size = new System.Drawing.Size(1072, 91);
-            this.PanelContenedor.TabIndex = 15;
             // 
             // FrmProductos
             // 

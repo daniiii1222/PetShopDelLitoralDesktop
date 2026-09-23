@@ -21,27 +21,23 @@ namespace PetShopDelLitoral
         private int idSeleccionado = 0;
         private int idPersonaSeleccionada = 0;
         private string tipoSeleccionado = "";
-      
+
         private string rolUsuarioActual = "";
-        public FrmPersonas(string rolLogueado)
-        {
-            InitializeComponent();
-        }
 
-        // 1. El que necesita el sistema ahora mismo para no tirar error al compilar
-        public FrmPersonas()
-        {
-            InitializeComponent();
-            rolUsuarioActual = "Administrador"; // Forzamos un rol para que puedas ver tu diseño al probar
-        }
-
-        /* 2. El que vas a usar oficialmente cuando unas tu código con el de tu compañera
+        // Constructor oficial: recibe el rol del usuario logueado y lo asigna correctamente.
         public FrmPersonas(string rolLogueado)
         {
             InitializeComponent();
             rolUsuarioActual = rolLogueado;
         }
-        */
+
+        // Constructor de compatibilidad (por si algo en el sistema todavía instancia sin rol).
+        // Reenvía al constructor oficial usando "Administrador" como valor por defecto,
+        // así el diseño se puede seguir probando sin duplicar lógica.
+        public FrmPersonas() : this("Administrador")
+        {
+        }
+
         private void PanelPrincipal_TextChanged(object sender, EventArgs e)
         {
 
@@ -201,15 +197,16 @@ namespace PetShopDelLitoral
 
             dgvPersonas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
 
-            // Asignamos anchos fijos a las columnas pequeñas
-            dgvPersonas.Columns["Id"].Width = 30;
-            dgvPersonas.Columns["Estado"].Width = 60;
-            dgvPersonas.Columns["Telefono"].Width = 80;
-            dgvPersonas.Columns["Rol"].Width = 80;
+            // Asignamos anchos fijos solo si la columna existe
+            if (dgvPersonas.Columns["Id"] != null) dgvPersonas.Columns["Id"].Width = 30;
+            if (dgvPersonas.Columns["Estado"] != null) dgvPersonas.Columns["Estado"].Width = 60;
+            if (dgvPersonas.Columns["Telefono"] != null) dgvPersonas.Columns["Telefono"].Width = 80;
+            if (dgvPersonas.Columns["Rol"] != null) dgvPersonas.Columns["Rol"].Width = 80;
 
-            // Los botones también van fijos
-            dgvPersonas.Columns["Modificar"].Width = 40;
-            dgvPersonas.Columns["Eliminar"].Width = 40;
+            // Los botones también
+            if (dgvPersonas.Columns["Modificar"] != null) dgvPersonas.Columns["Modificar"].Width = 40;
+            if (dgvPersonas.Columns["Eliminar"] != null) dgvPersonas.Columns["Eliminar"].Width = 40;
+
 
             // Dejamos que las columnas de texto largo se expandan
             dgvPersonas.Columns["Nombre"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -501,13 +498,16 @@ namespace PetShopDelLitoral
 
         private void FrmPersonas_Load(object sender, EventArgs e)
         {
-            // 1. Ocultamos los botones por defecto 
+            
+            // 1. Ocultamos los botones por defecto
             btnUsuario.Visible = false;
             btntipoProveedor.Visible = false;
             btnCliente.Visible = false;
 
-            // 2. Evaluamos qué mostrar según el rol
-            if (rolUsuarioActual == "Administrador")
+            string rol = (rolUsuarioActual ?? "").Trim();
+
+            // 2. Evaluamos qué mostrar según el rol (mutuamente excluyente con else if)
+            if (rol.Equals("Administrador", StringComparison.OrdinalIgnoreCase))
             {
                 btnUsuario.Visible = true;
                 btntipoProveedor.Visible = true;
@@ -518,7 +518,7 @@ namespace PetShopDelLitoral
                 ConfigurarGridUsuarios();
                 CargarUsuarios();
             }
-            else if (rolUsuarioActual == "Supervisor")
+            else if (rol.Equals("Supervisor", StringComparison.OrdinalIgnoreCase))
             {
                 btntipoProveedor.Visible = true;
                 btnCliente.Visible = true;
@@ -528,11 +528,17 @@ namespace PetShopDelLitoral
                 ConfigurarGridClientes();
                 CargarClientes();
             }
-            else if (rolUsuarioActual == "Vendedor")
+            else if (rol.Equals("Vendedor", StringComparison.OrdinalIgnoreCase))
             {
+                btnUsuario.Visible = false;
+                btntipoProveedor.Visible = false;
                 btnCliente.Visible = true;
 
-                // El Vendedor arranca viendo la grilla de Clientes
+                // Forzamos que los de la derecha (filtros) también se oculten
+                btnTProveedores.Visible = false;
+                btnTUsuarios.Visible = false;
+                btnTClientes.Visible = true; // O el que corresponda para dejar fijo en clientes
+
                 tipoSeleccionado = "Cliente";
                 ConfigurarGridClientes();
                 CargarClientes();
@@ -698,10 +704,29 @@ namespace PetShopDelLitoral
             }
         }
 
-        private void btntipoProveedor_Click(object sender, EventArgs e)
+
+
+        private void CargarProveedores()
         {
-            tipoSeleccionado = "Proveedor";
-            ConfigurarGridProveedores();
+            dgvPersonas.Rows.Clear();
+
+            dgvPersonas.Rows.Add(
+                1,
+                "Distribuidora",
+                "PetFood S.A.",
+                "ventas@petfood.com",
+                "3794112233",
+                "Av. Maipú 1500"
+            );
+
+            dgvPersonas.Rows.Add(
+                2,
+                "Accesorios",
+                "del Litoral",
+                "contacto@accesorioslitoral.com",
+                "3794445566",
+                "Ruta 12 Km 5"
+            );
         }
 
         private void guna2Panel6_Paint(object sender, PaintEventArgs e)
@@ -802,9 +827,9 @@ namespace PetShopDelLitoral
             {
                 MessageBox.Show("Error al buscar el DNI: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        
 
-    }
+
+        }
 
         private void TBNombre_TextChanged(object sender, EventArgs e)
         {
@@ -850,7 +875,7 @@ namespace PetShopDelLitoral
         {
             if (idSeleccionado != 0)
             {
-                
+
                 ModificarPersona(idSeleccionado);
             }
             else
@@ -859,9 +884,13 @@ namespace PetShopDelLitoral
                 LimpiarCampos();
             }
         }
-    }
-        
-    }
-    
 
+        private void btntipoProveedor_Click_1(object sender, EventArgs e)
+        {
+            tipoSeleccionado = "Proveedor";
+            ConfigurarGridProveedores();
+            CargarProveedores();
+        }
+    }
 
+}

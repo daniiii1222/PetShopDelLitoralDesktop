@@ -19,7 +19,20 @@ namespace PetShopDelLitoral
 
         private void Productos_Load(object sender, EventArgs e)
         {
-            DataGridViewProductos.Rows.Add("001", "Producto Test", "Categoria A", "100", "10");
+            
+            DataGridViewProductos.Rows.Clear();
+
+            
+            DataGridViewProductos.Rows.Add("001", "Alimento Balanceado 15kg", "Alimentos", "12", "5");
+            DataGridViewProductos.Rows.Add("002", "Rascador para Gatos", "Accesorios", "4", "3");
+            DataGridViewProductos.Rows.Add("003", "Antipulgas Pipeta", "Farmacia", "25", "10");
+
+            
+            DataGridViewProductos.ReadOnly = true;
+            DataGridViewProductos.AllowUserToAddRows = false;
+            DataGridViewProductos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DataGridViewProductos.DefaultCellStyle.SelectionBackColor = Color.FromArgb(225, 185, 110);
+            DataGridViewProductos.DefaultCellStyle.SelectionForeColor = Color.Black;
         }
 
         private void label1_Click(object sender, EventArgs e)
