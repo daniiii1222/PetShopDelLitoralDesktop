@@ -1,5 +1,6 @@
-﻿using CapaDatos;
-using Capa_Entidad;
+﻿using Capa_Entidad;
+using Capa_Negocio;
+using CapaDatos;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -13,10 +14,12 @@ namespace PetShopDelLitoral
         public FrmDashboard()
         {
             InitializeComponent();
+            this.Resize += (s, e) => AcomodarLayout();
         }
 
         private void FrmDashboard_Load(object sender, EventArgs e)
         {
+            AcomodarLayout();
             //MostrarDatosUsuario();
             //ActualizarFechaHora();
             //IniciarTimer();
@@ -126,6 +129,69 @@ namespace PetShopDelLitoral
             }
         }
 
+        private static readonly Font fuenteBotonRapido = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
+
+        // Acomoda los bloques según el tamaño real de la ventana. El Designer los dejó fijos para 1103 px
+        // de ancho, por eso en pantallas más grandes quedaban pegados a la izquierda.
+        private void AcomodarLayout()
+        {
+            if (ClientSize.Width < 400 || ClientSize.Height < 300) return; // minimizado o sin tamaño todavía
+
+            const int margen = 50;          // borde de la ventana
+            const int separacion = 30;      // entre bloques
+            const int alturaTarjetas = 123;
+            const int arriba = 40;
+
+            int anchoCol = (ClientSize.Width - 2 * margen - separacion) / 2;
+            int xDer = margen + anchoCol + separacion;
+            int yFila2 = arriba + alturaTarjetas + separacion;
+            int altoFila2 = Math.Min(Math.Max(220, ClientSize.Height - yFila2 - margen), 450);
+
+            // Fila 1: tarjetas de resumen
+            panel1.SetBounds(margen, arriba, anchoCol, alturaTarjetas);
+            panel2.SetBounds(xDer, arriba, anchoCol, alturaTarjetas);
+            CentrarTarjeta(panel1, iconPictureBox2, label1, lblVentasHoy);
+            CentrarTarjeta(panel2, iconPictureBox1, label2, label5);
+
+            // Fila 2 izquierda: actividad reciente (la grilla hace de fondo, los labels van encima)
+            dataGridView1.SetBounds(margen, yFila2, anchoCol, altoFila2);
+            label9.Location = new Point(margen + 15, yFila2 + 12);
+            label8.Location = new Point(margen + 15, yFila2 + 52);
+
+            // Fila 2 derecha: acciones rápidas, 4 botones parejos en cuadrícula de 2x2
+            panel3.SetBounds(xDer, yFila2, anchoCol, altoFila2);
+            label4.Location = new Point(18, 14);
+
+            const int pad = 20;
+            const int altoTitulo = 50;
+            int bw = (anchoCol - 3 * pad) / 2;
+            int bh = Math.Min(130, (altoFila2 - altoTitulo - 3 * pad) / 2);
+            int yInicio = altoTitulo + (altoFila2 - altoTitulo - (2 * bh + pad)) / 2; // centrado en el espacio libre
+
+            ColocarBoton(panel4, btnNuevaVenta, pad, yInicio, bw, bh);
+            ColocarBoton(panel6, btnNuevoProducto, 2 * pad + bw, yInicio, bw, bh);
+            ColocarBoton(panel5, btnNuevoCliente, pad, yInicio + bh + pad, bw, bh);
+            ColocarBoton(panel7, btnNuevaCompra, 2 * pad + bw, yInicio + bh + pad, bw, bh);
+        }
+
+        // Icono a la izquierda; título y número centrados en el resto de la tarjeta
+        private void CentrarTarjeta(Control tarjeta, Control icono, Label titulo, Label valor)
+        {
+            icono.Location = new Point(40, (tarjeta.Height - icono.Height) / 2);
+
+            int zonaIzq = 40 + icono.Width + 10;
+            int zonaAncho = tarjeta.Width - zonaIzq - 30;
+
+            titulo.Location = new Point(zonaIzq + (zonaAncho - titulo.Width) / 2, 18);
+            valor.Location = new Point(zonaIzq + (zonaAncho - valor.Width) / 2, 65);
+        }
+
+        private void ColocarBoton(Control panel, Control boton, int x, int y, int ancho, int alto)
+        {
+            panel.SetBounds(x, y, ancho, alto);
+            boton.SetBounds(6, 6, ancho - 12, alto - 12);
+            boton.Font = fuenteBotonRapido;
+        }
         private void lblBienvenida_Click(object sender, EventArgs e) { }
         private void label4_Click(object sender, EventArgs e) { }
         private void panel4_Paint(object sender, PaintEventArgs e) { }
@@ -140,9 +206,7 @@ namespace PetShopDelLitoral
         // NOTA: Revisá en el Designer (rayo de eventos del botón "Nueva Venta")
         // que el Click esté apuntando a btnNuevaVenta_Click y NO a este método vacío.
         // Si está apuntando acá, el botón compila pero no hace nada.
-        private void btnNuevaVenta_Click_1(object sender, EventArgs e)
-        {
-
-        }
+        
+         
     }
 }
