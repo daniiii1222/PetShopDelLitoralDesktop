@@ -310,6 +310,48 @@ namespace PetShopDelLitoral
                         sb.AppendLine();
                     }
 
+                    // --- Backup de Stored Procedures ---
+                    // Sin esto, el .sql generado solo tiene tablas y datos:
+                    // los sp_ListarUsuarios, sp_RegistrarUsuarioCompleto, etc. no se respaldan.
+                    sb.AppendLine();
+                    sb.AppendLine("-- ================================");
+                    sb.AppendLine("-- STORED PROCEDURES");
+                    sb.AppendLine("-- ================================");
+                    sb.AppendLine("DELIMITER $$");
+                    sb.AppendLine();
+
+                    DataTable dtProcedures = new DataTable();
+                    using (MySqlCommand cmdProcs = new MySqlCommand("SHOW PROCEDURE STATUS WHERE Db = @db", conn))
+                    {
+                        cmdProcs.Parameters.AddWithValue("@db", conn.Database);
+                        using (MySqlDataAdapter da = new MySqlDataAdapter(cmdProcs))
+                        {
+                            da.Fill(dtProcedures);
+                        }
+                    }
+
+                    foreach (DataRow procRow in dtProcedures.Rows)
+                    {
+                        string nombreProc = procRow["Name"].ToString();
+
+                        DataTable dtCreateProc = new DataTable();
+                        using (MySqlDataAdapter da = new MySqlDataAdapter($"SHOW CREATE PROCEDURE `{nombreProc}`", conn))
+                        {
+                            da.Fill(dtCreateProc);
+                        }
+
+                        if (dtCreateProc.Rows.Count > 0)
+                        {
+                            string createStatement = dtCreateProc.Rows[0]["Create Procedure"].ToString();
+
+                            sb.AppendLine($"DROP PROCEDURE IF EXISTS `{nombreProc}`$$");
+                            sb.AppendLine(createStatement + "$$");
+                            sb.AppendLine();
+                        }
+                    }
+
+                    sb.AppendLine("DELIMITER ;");
+
                     File.WriteAllText(rutaDestino, sb.ToString(), Encoding.UTF8);
                 }
 

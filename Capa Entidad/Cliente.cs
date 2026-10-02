@@ -10,6 +10,6 @@ namespace Capa_Entidad
         public DateTime FechaCreacion_cliente { get; set; }
         public bool Estado_cliente { get; set; }
         public Persona IdPersona { get; set; }
-        public string Correo_cliente { get; set; }
+       
     }
 }

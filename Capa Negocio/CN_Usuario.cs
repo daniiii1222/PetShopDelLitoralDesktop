@@ -132,6 +132,7 @@ namespace Capa_Negocio
             }
         }
 
+
         public bool ModificarUsuario(Persona objPersona, Usuario objUsuario, out string mensaje)
         {
             mensaje = string.Empty;

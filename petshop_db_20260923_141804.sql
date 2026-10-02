@@ -1,4 +1,4 @@
-﻿-- Backup 23/9/2026 14:18:04
+﻿-- Backup 27/9/2026 09:35:44
 DROP TABLE IF EXISTS `categoria`;
 CREATE TABLE `categoria` (
   `idCategoria` int(11) NOT NULL AUTO_INCREMENT,
@@ -15,7 +15,6 @@ CREATE TABLE `cliente` (
   `fechaCreacion_cliente` datetime DEFAULT current_timestamp(),
   `estado_cliente` bit(1) DEFAULT NULL,
   `idPersona` int(11) DEFAULT NULL,
-  `correo_cliente` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idCliente`),
   KEY `fk_cliente_persona` (`idPersona`),
   CONSTRAINT `fk_cliente_persona` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`)
@@ -95,14 +94,12 @@ CREATE TABLE `persona` (
   `estado_persona` bit(1) DEFAULT NULL,
   `dni_persona` varchar(30) NOT NULL,
   PRIMARY KEY (`idPersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
-INSERT INTO `persona` VALUES ('1', 'Test', 'Admin', 'test@test.com', '123456789', 'Corrientes', '10/9/2026 21:30:08', '1', '12345678');
-INSERT INTO `persona` VALUES ('2', 'Test', 'Admin', 'test@test.com', '123456789', 'Corrientes', '14/9/2026 08:39:54', '1', '908078');
-INSERT INTO `persona` VALUES ('3', 'Virginia', 'Romero', 'vir@gmail.com', '6789', 'Buenos Aires 1200', '14/9/2026 08:53:11', '1', '45678');
-INSERT INTO `persona` VALUES ('4', 'Ada', 'Lovelace', 'ada@gmail.com', '121314', 'Catamarca 1200', '14/9/2026 11:34:21', '1', '676869');
-INSERT INTO `persona` VALUES ('5', 'Daniela', 'Recalde', 'danielaa@gmail.com', '98374934', 'Madariaga 1000', '14/9/2026 17:42:34', '1', '8374583');
-INSERT INTO `persona` VALUES ('6', 'dani', 'rec', 'dani@gmail.com', '123456', 'Junin 1000', '14/9/2026 17:57:08', '1', '123456');
+INSERT INTO `persona` VALUES ('1', 'Carlos', 'Gomez', 'carlos@mail.com', '3794111111', 'Junin 100', '23/9/2026 14:39:07', '1', '11111111');
+INSERT INTO `persona` VALUES ('2', 'Maria', 'Perez', 'maria@mail.com', '3794222222', 'Catamarca 200', '23/9/2026 14:39:07', '1', '22222222');
+INSERT INTO `persona` VALUES ('3', 'Juan', 'Lopez', 'juan@mail.com', '3794333333', 'San Juan 300', '23/9/2026 14:39:07', '1', '33333333');
+INSERT INTO `persona` VALUES ('4', 'Ana', 'Gomez', 'ana@gmail.com', '12345', '9 de Julio 1900', '23/9/2026 18:10:15', '1', '101010');
 
 DROP TABLE IF EXISTS `producto`;
 CREATE TABLE `producto` (
@@ -159,14 +156,12 @@ CREATE TABLE `usuario` (
   KEY `fk_usuario_persona` (`idPersona`),
   CONSTRAINT `1` FOREIGN KEY (`idRol`) REFERENCES `rol` (`idRol`),
   CONSTRAINT `fk_usuario_persona` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
-INSERT INTO `usuario` VALUES ('2', '1234', '1', '3', '10/9/2026 21:33:48', '1');
-INSERT INTO `usuario` VALUES ('3', '12345', '1', '2', '14/9/2026 08:39:54', '2');
-INSERT INTO `usuario` VALUES ('4', '1010', '1', '3', '14/9/2026 08:53:11', '3');
-INSERT INTO `usuario` VALUES ('5', 'lovelace', '1', '3', '14/9/2026 11:34:21', '4');
-INSERT INTO `usuario` VALUES ('6', '1212', '1', '1', '14/9/2026 17:42:34', '5');
-INSERT INTO `usuario` VALUES ('7', '1212', '0', '2', '14/9/2026 17:57:08', '6');
+INSERT INTO `usuario` VALUES ('1', '1234', '1', '1', '23/9/2026 14:39:07', '1');
+INSERT INTO `usuario` VALUES ('2', '12345', '1', '2', '23/9/2026 14:39:07', '2');
+INSERT INTO `usuario` VALUES ('3', '123456', '1', '3', '23/9/2026 14:39:07', '3');
+INSERT INTO `usuario` VALUES ('4', '191919', '1', '1', '23/9/2026 18:10:15', '4');
 
 DROP TABLE IF EXISTS `venta`;
 CREATE TABLE `venta` (
@@ -188,3 +183,147 @@ CREATE TABLE `venta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 
+
+-- ================================
+-- STORED PROCEDURES
+-- ================================
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_EliminarUsuario`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_EliminarUsuario`(
+    IN p_idUsuario INT
+)
+BEGIN
+    UPDATE usuario 
+    SET estado_usuario = 0 
+    WHERE idUsuario = p_idUsuario;
+END$$
+
+DROP PROCEDURE IF EXISTS `sp_ListarRoles`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ListarRoles`()
+BEGIN
+    SELECT idRol, descripcion_rol FROM rol;
+END$$
+
+DROP PROCEDURE IF EXISTS `sp_ListarUsuarios`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ListarUsuarios`()
+BEGIN
+    SELECT 
+        u.idUsuario AS idUsuario,
+        p.idPersona AS idPersona,
+        p.nombre_persona AS nombre_persona,
+        p.apellido_persona AS apellido_persona,
+        p.dni_persona AS dni_persona,
+        p.correo_persona AS correo_persona,
+        p.telefono_persona AS telefono_persona,
+        p.direccion_persona AS direccion_persona,
+        r.idRol AS idRol,
+        r.descripcion_rol AS descripcion_rol,
+        u.estado_usuario AS estado_usuario
+    FROM usuario u
+    INNER JOIN persona p ON u.idPersona = p.idPersona
+    INNER JOIN rol r ON u.idRol = r.idRol;
+END$$
+
+DROP PROCEDURE IF EXISTS `sp_LoginUsuario`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_LoginUsuario`(
+    IN p_dni VARCHAR(20)
+)
+BEGIN
+    SELECT u.idUsuario, u.contrasenia_usuario, u.estado_usuario,
+           p.idPersona, p.nombre_persona, p.apellido_persona,
+           r.idRol, r.descripcion_rol
+    FROM usuario u
+    INNER JOIN persona p ON u.idPersona = p.idPersona
+    INNER JOIN rol r ON u.idRol = r.idRol
+    WHERE p.dni_persona = p_dni;
+END$$
+
+DROP PROCEDURE IF EXISTS `sp_ModificarUsuarioCompleto`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ModificarUsuarioCompleto`(
+    IN p_idUsuario INT,
+    IN p_nombre VARCHAR(100),
+    IN p_apellido VARCHAR(100),
+    IN p_dni VARCHAR(20),
+    IN p_correo VARCHAR(100),
+    IN p_telefono VARCHAR(20),
+    IN p_direccion VARCHAR(200),
+    IN p_idRol INT,
+    IN p_contrasena VARCHAR(100),
+    IN p_estado TINYINT(1) 
+)
+BEGIN
+    DECLARE v_idPersona INT;
+
+    -- Buscamos cuál es el idPersona
+    SELECT idPersona INTO v_idPersona FROM usuario WHERE idUsuario = p_idUsuario;
+
+    -- Actualizamos tabla persona
+    UPDATE persona 
+    SET 
+        nombre_persona = p_nombre,
+        apellido_persona = p_apellido,
+        dni_persona = p_dni,
+        correo_persona = p_correo,
+        telefono_persona = p_telefono,
+        direccion_persona = p_direccion
+    WHERE idPersona = v_idPersona;
+
+    -- Actualizamos tabla usuario
+    IF p_contrasena IS NULL OR p_contrasena = '' THEN
+        UPDATE usuario 
+        SET 
+            idRol = p_idRol,
+            estado_usuario = p_estado
+        WHERE idUsuario = p_idUsuario;
+    ELSE
+        UPDATE usuario 
+        SET 
+            idRol = p_idRol,
+            estado_usuario = p_estado,
+            contrasenia_usuario = p_contrasena
+        WHERE idUsuario = p_idUsuario;
+    END IF;
+
+END$$
+
+DROP PROCEDURE IF EXISTS `sp_ObtenerPersonaPorDni`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ObtenerPersonaPorDni`(IN _dni_persona VARCHAR(20))
+BEGIN
+    SELECT 
+        idPersona, 
+        nombre_persona, 
+        apellido_persona, 
+        dni_persona, 
+        correo_persona, 
+        telefono_persona, 
+        direccion_persona, 
+        estado_persona
+    FROM persona
+    WHERE dni_persona = _dni_persona;
+END$$
+
+DROP PROCEDURE IF EXISTS `sp_RegistrarUsuarioCompleto`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_RegistrarUsuarioCompleto`(
+    IN p_nombre VARCHAR(100),
+    IN p_apellido VARCHAR(100),
+    IN p_dni VARCHAR(20),
+    IN p_correo VARCHAR(100),
+    IN p_telefono VARCHAR(50),
+    IN p_direccion VARCHAR(255),
+    IN p_contrasena VARCHAR(100),
+    IN p_idRol INT
+)
+BEGIN
+    DECLARE v_idPersona INT;
+
+    INSERT INTO persona (nombre_persona, apellido_persona, dni_persona, correo_persona, telefono_persona, direccion_persona, estado_persona)
+    VALUES (p_nombre, p_apellido, p_dni, p_correo, p_telefono, p_direccion, 1);
+
+    SET v_idPersona = LAST_INSERT_ID();
+
+    INSERT INTO usuario (contrasenia_usuario, estado_usuario, idRol, idPersona)
+    VALUES (p_contrasena, 1, p_idRol, v_idPersona);
+END$$
+
+DELIMITER ;
