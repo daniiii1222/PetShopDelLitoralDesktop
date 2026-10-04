@@ -13,5 +13,6 @@ namespace Capa_Entidad
         public Venta IdVenta { get; set; }
         public DateTime FechaCreacion_detalleV { get; set; }
         public decimal Subtotal_venta { get; set; }
+        public decimal Descuento_detalle { get; set; } // porcentaje sobre este producto (0-100)
     }
 }

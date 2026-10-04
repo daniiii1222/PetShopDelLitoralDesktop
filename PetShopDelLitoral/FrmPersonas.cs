@@ -159,27 +159,38 @@ namespace PetShopDelLitoral
         private void btnClientes_Click(object sender, EventArgs e)
         {
             tipoSeleccionado = "Cliente";
+            chkActivo.Checked = true;
+
+            CBRol.Visible = false;
+            TBContraseniaUsuario.Visible = false;
+            lbPanelUsuarios.Visible = false;  
 
             ConfigurarGridClientes();
             CargarClientes();
         }
 
-        private void btnProveedores_Click(object sender, EventArgs e)
-        {
-            tipoSeleccionado = "Proveedor";
-
-            ConfigurarGridProveedores();
-            // CargarProveedores();
-        }
-
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
             tipoSeleccionado = "Usuario";
+            chkActivo.Checked = true;
+
+            CBRol.Visible = true;
+            TBContraseniaUsuario.Visible = true;
+            lbPanelUsuarios.Visible = true;  
 
             ConfigurarGridUsuarios();
             CargarUsuarios();
         }
 
+        private void btnProveedores_Click(object sender, EventArgs e)
+        {
+            tipoSeleccionado = "Proveedor";
+            chkActivo.Checked = true;
+            ConfigurarGridProveedores();
+            // CargarProveedores();
+        }
+
+      
         private void ConfigurarGridClientes()
         {
             dgvPersonas.Columns.Clear();
@@ -193,26 +204,35 @@ namespace PetShopDelLitoral
             dgvPersonas.Columns.Add("Telefono", "Teléfono");
             dgvPersonas.Columns.Add("Direccion", "Dirección");
 
+            // Columnas ocultas: no se ven, pero ModificarPersona/EliminarPersona/FiltrarGrilla las necesitan
+            dgvPersonas.Columns.Add("Estado", "Estado");
+            dgvPersonas.Columns["Estado"].Visible = false;
+
+            dgvPersonas.Columns.Add("IdPersona", "IdPersona");
+            dgvPersonas.Columns["IdPersona"].Visible = false;
+
+            dgvPersonas.Columns.Add("Dni", "DNI");
+            dgvPersonas.Columns["Dni"].Visible = false;
+
             AgregarColumnasAcciones();
 
             dgvPersonas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
 
             // Asignamos anchos fijos solo si la columna existe
             if (dgvPersonas.Columns["Id"] != null) dgvPersonas.Columns["Id"].Width = 30;
-            if (dgvPersonas.Columns["Estado"] != null) dgvPersonas.Columns["Estado"].Width = 60;
             if (dgvPersonas.Columns["Telefono"] != null) dgvPersonas.Columns["Telefono"].Width = 80;
-            if (dgvPersonas.Columns["Rol"] != null) dgvPersonas.Columns["Rol"].Width = 80;
 
             // Los botones también
             if (dgvPersonas.Columns["Modificar"] != null) dgvPersonas.Columns["Modificar"].Width = 40;
             if (dgvPersonas.Columns["Eliminar"] != null) dgvPersonas.Columns["Eliminar"].Width = 40;
-
 
             // Dejamos que las columnas de texto largo se expandan
             dgvPersonas.Columns["Nombre"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvPersonas.Columns["Apellido"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvPersonas.Columns["Correo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
+
+
 
         private void ConfigurarGridProveedores()
         {
@@ -328,13 +348,19 @@ namespace PetShopDelLitoral
                     TBDni.Text = fila.Cells["Dni"].Value?.ToString();
                     string estadoTexto = fila.Cells["Estado"].Value?.ToString();
                     chkActivo.Checked = (estadoTexto == "Activo");
-                    // 1. EL ROL: Se selecciona automáticamente usando la columna oculta "IdRol"
-                    if (fila.Cells["IdRol"].Value != null)
+
+                    // El Rol solo existe en la grilla de Usuarios; Cliente no tiene esa columna.
+                    // Sin este chequeo, editar un cliente tira una excepción acá.
+                    if (dgvPersonas.Columns.Contains("IdRol") && fila.Cells["IdRol"].Value != null)
                     {
                         CBRol.SelectedValue = Convert.ToInt32(fila.Cells["IdRol"].Value);
                     }
+                    else if (CBRol != null)
+                    {
+                        CBRol.SelectedIndex = -1;
+                    }
 
-                    // 2. LA CONTRASEÑA: Siempre se limpia a propósito por seguridad
+                    // La contraseña siempre se limpia a propósito por seguridad
                     TBContraseniaUsuario.Clear();
 
                     break;
@@ -344,66 +370,93 @@ namespace PetShopDelLitoral
 
         private void EliminarPersona(int id)
         {
+            string entidad = tipoSeleccionado == "Cliente" ? "cliente" : "usuario";
+
             DialogResult resultado = MessageBox.Show(
-                "¿Está seguro de que desea dar de baja a este usuario?",
+                "¿Está seguro de que desea dar de baja a este " + entidad + "?",
                 "Confirmar eliminación",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question
             );
 
-            if (resultado == DialogResult.Yes)
+            if (resultado != DialogResult.Yes) return;
+
+            string mensaje = string.Empty;
+            bool exito;
+
+            if (tipoSeleccionado == "Cliente")
+            {
+                CN_Cliente objNegocio = new CN_Cliente();
+                exito = objNegocio.EliminarCliente(id, out mensaje);
+            }
+            else
             {
                 CN_Usuario objNegocio = new CN_Usuario();
-                string mensaje = string.Empty;
+                exito = objNegocio.EliminarUsuario(id, out mensaje);
+            }
 
-                bool exito = objNegocio.EliminarUsuario(id, out mensaje);
+            if (exito)
+            {
+                MessageBox.Show(char.ToUpper(entidad[0]) + entidad.Substring(1) + " eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                if (exito)
+                // Recargamos la grilla para que desaparezca visualmente al instante
+                if (tipoSeleccionado == "Cliente")
                 {
-                    MessageBox.Show("Usuario eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Recargamos la grilla para que desaparezca visualmente al instante
-                    ConfigurarGridUsuarios();
-                    CargarUsuarios();
+                    ConfigurarGridClientes();
+                    CargarClientes();
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo eliminar: " + mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ConfigurarGridUsuarios();
+                    CargarUsuarios();
                 }
+            }
+            else
+            {
+                MessageBox.Show("No se pudo eliminar: " + mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+
         private void CargarClientes()
         {
-            dgvPersonas.Rows.Clear();
+            try
+            {
+                dgvPersonas.Rows.Clear();
 
-            dgvPersonas.Rows.Add(
-                1,
-                "Juan",
-                "Pérez",
-                "juan@gmail.com",
-                "3791234567",
-                "Corrientes"
-            );
+                CN_Cliente objNegocio = new CN_Cliente();
+                DataSet ds = objNegocio.ListarClientes();
 
-            dgvPersonas.Rows.Add(
-                2,
-                "María",
-                "Gómez",
-                "maria@gmail.com",
-                "3794567890",
-                "Corrientes"
-            );
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    DataTable dt = ds.Tables["TablaClientes"];
 
-            dgvPersonas.Rows.Add(
-                3,
-                "Carlos",
-                "López",
-                "carlos@gmail.com",
-                "3795678912",
-                "Resistencia"
-            );
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        int idCliente = Convert.ToInt32(row["idCliente"]);
+                        int idPersona = Convert.ToInt32(row["idPersona"]);
+                        string nombre = row["nombre_persona"].ToString();
+                        string apellido = row["apellido_persona"].ToString();
+                        string correo = row["correo_persona"].ToString();
+                        string telefono = row["telefono_persona"].ToString();
+                        string direccion = row["direccion_persona"].ToString();
+                        string dni = row["dni_persona"].ToString();
+
+                        bool estadoBool = Convert.ToBoolean(row["estado_cliente"]);
+                        string estado = estadoBool ? "Activo" : "Inactivo";
+
+                        // Mismo orden de columnas que arma ConfigurarGridClientes
+                        dgvPersonas.Rows.Add(idCliente, nombre, apellido, correo, telefono, direccion, estado, idPersona, dni);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los clientes: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+
         private void CargarUsuarios()
         {
             try
@@ -439,6 +492,7 @@ namespace PetShopDelLitoral
                         dgvPersonas.Rows.Add(id, nombre, apellido, correo, telefono, rol, estado, idPersona, direccion, dni, idRol);
                     }
                 }
+
             }
             catch (Exception ex)
             {
@@ -673,7 +727,78 @@ namespace PetShopDelLitoral
                     MessageBox.Show("Ocurrió un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            else if (tipoSeleccionado == "Cliente")
+            {
+                if (string.IsNullOrWhiteSpace(TBNombre.Text) ||
+                    string.IsNullOrWhiteSpace(TBApellido.Text) ||
+                    string.IsNullOrWhiteSpace(TBDni.Text))
+                {
+                    MessageBox.Show("Por favor, complete todos los campos obligatorios (Nombre, Apellido y DNI).", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!long.TryParse(TBDni.Text.Trim(), out _))
+                {
+                    MessageBox.Show("El campo DNI solo puede contener números válidos.", "Error de formato", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                try
+                {
+                    Persona objPersona = new Persona()
+                    {
+                        idPersona = idPersonaSeleccionada,
+                        nombre_persona = TBNombre.Text.Trim(),
+                        apellido_persona = TBApellido.Text.Trim(),
+                        dni_persona = TBDni.Text.Trim(),
+                        correo_persona = TBCorreo.Text.Trim(),
+                        telefono_persona = TBTelefono.Text.Trim(),
+                        direccion_persona = TBDireccion.Text.Trim(),
+                        estado_persona = true
+                    };
+
+                    CN_Cliente objNegocio = new CN_Cliente();
+                    string mensaje = string.Empty;
+                    bool resultado;
+
+                    if (idSeleccionado == 0)
+                    {
+                        resultado = objNegocio.RegistrarCliente(objPersona, out mensaje);
+                    }
+                    else
+                    {
+                        Cliente objCliente = new Cliente()
+                        {
+                            IdCliente = idSeleccionado,
+                            Estado_cliente = chkActivo.Checked
+                        };
+                        resultado = objNegocio.ModificarCliente(objPersona, objCliente, out mensaje);
+                    }
+
+                    if (resultado)
+                    {
+                        string mensajeExito = idSeleccionado == 0 ? "¡Cliente registrado exitosamente!" : "¡Cliente modificado exitosamente!";
+                        MessageBox.Show(mensajeExito, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        ConfigurarGridClientes();
+                        CargarClientes();
+                        LimpiarCampos();
+
+                        idSeleccionado = 0;
+                        idPersonaSeleccionada = 0;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error en la operación: " + mensaje, "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocurrió un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
+        
 
         private void btnLimpiarCampos_Click(object sender, EventArgs e)
         {

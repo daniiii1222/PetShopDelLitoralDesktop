@@ -14,5 +14,6 @@ namespace Capa_Entidad
         public MetodoPago IdMetodoPago { get; set; }
         public DateTime FechaCreacion_venta { get; set; }
         public bool Estado_venta { get; set; }
+        public decimal Descuento_venta { get; set; } 
     }
 }
