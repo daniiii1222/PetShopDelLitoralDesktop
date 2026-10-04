@@ -150,8 +150,8 @@ namespace PetShopDelLitoral
             // Fila 1: tarjetas de resumen
             panel1.SetBounds(margen, arriba, anchoCol, alturaTarjetas);
             panel2.SetBounds(xDer, arriba, anchoCol, alturaTarjetas);
-            CentrarTarjeta(panel1, iconPictureBox2, label1, lblVentasHoy);
-            CentrarTarjeta(panel2, iconPictureBox1, label2, label5);
+            //CentrarTarjeta(panel1, iconPictureBox2, label1, lblVentasHoy);
+            //CentrarTarjeta(panel2, iconPictureBox1, label2, label5);
 
             // Fila 2 izquierda: actividad reciente (la grilla hace de fondo, los labels van encima)
             dataGridView1.SetBounds(margen, yFila2, anchoCol, altoFila2);
