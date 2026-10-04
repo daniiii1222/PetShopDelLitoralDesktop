@@ -67,9 +67,9 @@
             this.LBNumDocumento.Location = new System.Drawing.Point(502, 48);
             this.LBNumDocumento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LBNumDocumento.Name = "LBNumDocumento";
-            this.LBNumDocumento.Size = new System.Drawing.Size(104, 16);
+            this.LBNumDocumento.Size = new System.Drawing.Size(30, 16);
             this.LBNumDocumento.TabIndex = 1;
-            this.LBNumDocumento.Text = "Nro Documento:";
+            this.LBNumDocumento.Text = "Dni:";
             this.LBNumDocumento.Click += new System.EventHandler(this.label1_Click);
             // 
             // LBContraseña
