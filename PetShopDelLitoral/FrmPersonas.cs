@@ -163,7 +163,7 @@ namespace PetShopDelLitoral
 
             CBRol.Visible = false;
             TBContraseniaUsuario.Visible = false;
-            lbPanelUsuarios.Visible = false;  
+            //lbPanelUsuarios.Visible = false;  
 
             ConfigurarGridClientes();
             CargarClientes();
@@ -176,7 +176,7 @@ namespace PetShopDelLitoral
 
             CBRol.Visible = true;
             TBContraseniaUsuario.Visible = true;
-            lbPanelUsuarios.Visible = true;  
+            //lbPanelUsuarios.Visible = true;  
 
             ConfigurarGridUsuarios();
             CargarUsuarios();
