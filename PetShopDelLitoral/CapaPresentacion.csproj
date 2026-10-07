@@ -114,9 +114,7 @@
     <Compile Include="CargaProductos.Designer.cs">
       <DependentUpon>CargaProductos.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmBackup.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FrmBackup.cs" />
     <Compile Include="FrmBackup.Designer.cs">
       <DependentUpon>FrmBackup.cs</DependentUpon>
     </Compile>
@@ -132,9 +130,7 @@
     <Compile Include="FrmPersonas.Designer.cs">
       <DependentUpon>FrmPersonas.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmReportesAdministrador.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="FrmReportesAdministrador.cs" />
     <Compile Include="FrmReportesAdministrador.Designer.cs">
       <DependentUpon>FrmReportesAdministrador.cs</DependentUpon>
     </Compile>
