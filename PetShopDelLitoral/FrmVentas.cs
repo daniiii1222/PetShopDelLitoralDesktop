@@ -1,15 +1,19 @@
 ﻿using Capa_Entidad;
 using Capa_Negocio;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace PetShopDelLitoral
 {
@@ -39,7 +43,7 @@ namespace PetShopDelLitoral
             dgvVentas.CellClick += DgvVentas_CellClick;     // columna "Eliminar"
 
             // Si se edita el DNI después de buscar, el cliente elegido deja de ser válido
-            guna2TextBox4.TextChanged += (s, ev) => ActualizarTotales();   // % de descuento de la compra
+            txtDescuento.TextChanged += (s, ev) => ActualizarTotales();   // % de descuento de la compra
             dgvVentas.CellEndEdit += DgvVentas_CellEndEdit;                 // % de descuento por producto
 
             guna2TextBox1.TextChanged += (s, ev) => { if (!cargandoCliente) idClienteSeleccionado = 0; };
@@ -77,13 +81,14 @@ namespace PetShopDelLitoral
 
             guna2TextBox1.PlaceholderText = "DNI del cliente...";
             CargarSugerenciasDni();
+           
             guna2DateTimePicker1.Value = DateTime.Today;
-
+            
             // Los importes se calculan solos
-            guna2TextBox5.ReadOnly = true; // Subtotal
-            guna2TextBox4.ReadOnly = false; // Descuento % sobre la compra completa
-            guna2TextBox4.PlaceholderText = "0";
-            guna2TextBox4.Text = "0";
+            txtSubtotal.ReadOnly = true; // Subtotal
+            txtDescuento.ReadOnly = false; // Descuento % sobre la compra completa
+            txtDescuento.PlaceholderText = "0";
+            txtDescuento.Text = "0";
             label7.Text = "Descuento (%)";
             guna2TextBox6.ReadOnly = true; // Total
             guna2TextBox6.ForeColor = Color.White; // sobre la barra oscura del Total el texto no se leía
@@ -295,12 +300,13 @@ namespace PetShopDelLitoral
                     d.IdProducto.Nombre_producto,
                     d.Precio.ToString("N2", cultura),
                     d.Cantidad,
-                    d.Descuento_detalle.ToString("0.##", cultura),
+                    d.Descuento_detalle.ToString("0.##", cultura), // Muestra el % de descuento por producto
                     d.Subtotal_venta.ToString("N2", cultura),
-                    "Quitar");
+                    "Eliminar"
+                );
             }
 
-            ActualizarTotales();
+            ActualizarTotales(); // Deja que esta función se encargue de calcular el subtotal y el total con el descuento de la compra
         }
 
         // ---------- DESCUENTOS ----------
@@ -382,12 +388,12 @@ namespace PetShopDelLitoral
         private void ActualizarTotales()
         {
             decimal descuentoCompra;
-            if (!TryParsePorcentaje(guna2TextBox4.Text, out descuentoCompra)) descuentoCompra = 0m;
+            if (!TryParsePorcentaje(txtDescuento.Text, out descuentoCompra)) descuentoCompra = 0m;
 
             decimal subtotal = detalles.Sum(d => d.Subtotal_venta);
             decimal total = Math.Round(subtotal * (1 - descuentoCompra / 100m), 2, MidpointRounding.AwayFromZero);
 
-            guna2TextBox5.Text = "$ " + subtotal.ToString("N2", cultura);
+            txtSubtotal.Text = "$ " + subtotal.ToString("N2", cultura);
             guna2TextBox6.Text = "$ " + total.ToString("N2", cultura);
         }
 
@@ -397,7 +403,7 @@ namespace PetShopDelLitoral
             dgvVentas.EndEdit(); // confirma un descuento que haya quedado a medio escribir
 
             decimal descuentoCompra;
-            if (!TryParsePorcentaje(guna2TextBox4.Text, out descuentoCompra))
+            if (!TryParsePorcentaje(txtDescuento.Text, out descuentoCompra))
             {
                 MessageBox.Show("El descuento de la compra debe ser un número entre 0 y 100.", "Descuento",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -421,8 +427,12 @@ namespace PetShopDelLitoral
 
             if (cnVenta.RegistrarVenta(venta, detalles, out idVenta, out mensaje))
             {
-                MessageBox.Show("Venta N° " + idVenta + " registrada con éxito.", "Venta", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LimpiarFormulario();
+                
+                    // Genera y descarga el PDF automáticamente
+                    GenerarPdfComprobante(idVenta, venta, detalles);
+
+                    LimpiarFormulario();
+                
             }
             else
             {
@@ -443,14 +453,120 @@ namespace PetShopDelLitoral
             guna2TextBox1.Clear();
             guna2TextBox3.Clear();
             guna2TextBox7.Clear();
-            guna2TextBox4.Text = "0";
+            txtDescuento.Text = "0";
             guna2ComboBox1.SelectedIndex = -1;
             guna2DateTimePicker1.Value = DateTime.Today;
             guna2NumericUpDown1.Value = 1;
             RefrescarGrilla();
         }
 
-        private void guna2Panel1_Paint(object sender, PaintEventArgs e) { }
+
+        private void GenerarPdfComprobante(int idVenta, Venta venta, List<DetalleVenta> detalles)
+        {
+            // 1. Crear el cuadro de diálogo para guardar el archivo PDF
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "Archivo PDF (*.pdf)|*.pdf";
+                saveFileDialog.FileName = "Comprobante_Venta_" + idVenta.ToString("D8") + ".pdf";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        // 2. Definir el documento PDF (Tamaño A4 con márgenes)
+                        Document doc = new Document(PageSize.A4, 40, 40, 40, 40);
+                        PdfWriter.GetInstance(doc, new FileStream(saveFileDialog.FileName, FileMode.Create));
+                        doc.Open();
+
+                        // 3. Estilos y Fuentes
+                        var fuenteTitulo = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18, BaseColor.DARK_GRAY);
+                        var fuenteSub = FontFactory.GetFont(FontFactory.HELVETICA, 10, BaseColor.GRAY);
+                        var fuenteNegrita = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10, BaseColor.BLACK);
+                        var fuenteNormal = FontFactory.GetFont(FontFactory.HELVETICA, 10, BaseColor.BLACK);
+
+                        // 4. Encabezado del Ticket / Factura
+                        doc.Add(new Paragraph("PET SHOP DEL LITORAL", fuenteTitulo));
+                        doc.Add(new Paragraph("Sistema de Gestión Integral", fuenteSub));
+                        doc.Add(new Paragraph("------------------------------------------------------------------------------------------------------------------", fuenteSub));
+                        doc.Add(new Paragraph("Comprobante de Venta N°: " + idVenta.ToString("D8"), fuenteNegrita));
+                        doc.Add(new Paragraph("Fecha: " + venta.Fecha_venta.ToShortDateString(), fuenteNormal));
+                        doc.Add(new Paragraph("------------------------------------------------------------------------------------------------------------------", fuenteSub));
+                        doc.Add(new Chunk(Chunk.NEWLINE));
+
+                        // 5. Tabla de Productos (5 columnas: Cantidad, Producto, Precio U., Desc %, Subtotal)
+                        PdfPTable tabla = new PdfPTable(5);
+                        tabla.WidthPercentage = 100;
+                        tabla.SetWidths(new float[] { 12f, 38f, 18f, 14f, 18f });
+
+                        // Cabeceras de tabla
+                        tabla.AddCell(new PdfPCell(new Phrase("Cant", fuenteNegrita)) { BackgroundColor = BaseColor.LIGHT_GRAY });
+                        tabla.AddCell(new PdfPCell(new Phrase("Producto", fuenteNegrita)) { BackgroundColor = BaseColor.LIGHT_GRAY });
+                        tabla.AddCell(new PdfPCell(new Phrase("Precio U.", fuenteNegrita)) { BackgroundColor = BaseColor.LIGHT_GRAY });
+                        tabla.AddCell(new PdfPCell(new Phrase("Desc %", fuenteNegrita)) { BackgroundColor = BaseColor.LIGHT_GRAY });
+                        tabla.AddCell(new PdfPCell(new Phrase("Subtotal", fuenteNegrita)) { BackgroundColor = BaseColor.LIGHT_GRAY });
+
+                        // Renglones de productos
+                        foreach (var d in detalles)
+                        {
+                            tabla.AddCell(new PdfPCell(new Phrase(d.Cantidad.ToString(), fuenteNormal)));
+                            tabla.AddCell(new PdfPCell(new Phrase(d.IdProducto.Nombre_producto, fuenteNormal)));
+                            tabla.AddCell(new PdfPCell(new Phrase("$ " + d.Precio.ToString("N2", cultura), fuenteNormal)));
+                            tabla.AddCell(new PdfPCell(new Phrase(d.Descuento_detalle.ToString("0.##") + "%", fuenteNormal)));
+                            tabla.AddCell(new PdfPCell(new Phrase("$ " + d.Subtotal_venta.ToString("N2", cultura), fuenteNormal)));
+                        }
+
+                        doc.Add(tabla);
+
+                        // 6. Totales
+                        doc.Add(new Chunk(Chunk.NEWLINE));
+                        decimal totalGeneral = detalles.Sum(d => d.Subtotal_venta);
+
+                        Paragraph pTotal = new Paragraph("TOTAL GENERAL: $ " + totalGeneral.ToString("N2", cultura), fuenteTitulo);
+                        pTotal.Alignment = Element.ALIGN_RIGHT;
+                        doc.Add(pTotal);
+
+                        doc.Add(new Chunk(Chunk.NEWLINE));
+                        Paragraph pPie = new Paragraph("¡Gracias por confiar en Pet Shop del Litoral!", fuenteSub);
+                        pPie.Alignment = Element.ALIGN_CENTER;
+                        doc.Add(pPie);
+
+                        doc.Close();
+
+                        MessageBox.Show("¡Comprobante PDF generado con éxito!", "PDF Creado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Opcional: Abrir el PDF automáticamente luego de crearlo
+                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(saveFileDialog.FileName) { UseShellExecute = true });
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error al generar el PDF: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
+
+            }
+        }
+
+        private void CargarHistorialVentasVendedor()
+        {
+            try
+            {
+                if (Sesion.UsuarioActual != null)
+                {
+                    int idUsuarioLogueado = Sesion.UsuarioActual.idUsuario;
+                    DataTable dt = cnVenta.ObtenerVentasPorVendedor(idUsuarioLogueado);
+
+                    // Si tenés otra grilla en FrmVentas destinada a esto (por ejemplo dgvHistorialVentas):
+                    // dgvHistorialVentas.DataSource = dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar historial: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+    
+    private void guna2Panel1_Paint(object sender, PaintEventArgs e) { }
         private void PanelDatosVenta_Paint(object sender, PaintEventArgs e) { }
         private void guna2Panel1_Paint_1(object sender, PaintEventArgs e) { }
         private void guna2Panel1_Paint_2(object sender, PaintEventArgs e) { }

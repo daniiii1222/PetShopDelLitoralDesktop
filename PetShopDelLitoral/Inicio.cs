@@ -89,11 +89,11 @@ namespace PetShopDelLitoral
                 else if (rol.Equals("Supervisor", StringComparison.OrdinalIgnoreCase))
                 {
                     SetVisible(botonInicio, true);
-                    SetVisible(botonVentas, true);
+                    SetVisible(botonVentas, false);
                     SetVisible(botonCompras, true);
                     SetVisible(botonProductos, true);
-                    SetVisible(botonPersonas, true);
-                    SetVisible(botonReportes, false);
+                    SetVisible(botonPersonas, false);
+                    SetVisible(botonReportes, true);
                     SetVisible(btnBackup, false);
                 }
                 else if (rol.Equals("Vendedor", StringComparison.OrdinalIgnoreCase))
@@ -157,12 +157,15 @@ namespace PetShopDelLitoral
 
                 // Derivamos según el perfil
                 if (rol.Equals("Administrador", StringComparison.OrdinalIgnoreCase) ||
-                    rol.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+                    rol.Equals("Admin", StringComparison.OrdinalIgnoreCase) ||
+                    rol.Equals("Supervisor", StringComparison.OrdinalIgnoreCase)) // <-- Agregamos al Supervisor acá
                 {
+                    // Ambos perfiles usan la vista avanzada con filtros y buscador de vendedores
                     AbrirFormulario(new FrmReportesAdministrador());
                 }
                 else if (rol.Equals("Vendedor", StringComparison.OrdinalIgnoreCase))
                 {
+                    // El vendedor común mantiene su vista restringida y personal
                     AbrirFormulario(new FrmReportesVendedor());
                 }
             }
