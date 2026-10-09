@@ -3,17 +3,13 @@ using Capa_Entidad;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Capa_Negocio
 {
     public class CN_Venta
     {
-
         private CD_Venta objVentaDatos = new CD_Venta();
-
+        private CD_Reporte objReporteDatos = new CD_Reporte();
         public DataSet ListarMetodosPago()
         {
             try { return objVentaDatos.ListarMetodosPago(); }
@@ -38,6 +34,7 @@ namespace Capa_Negocio
             idVenta = 0;
             mensaje = string.Empty;
 
+            // Validaciones básicas antes de ir a la base
             if (objVenta == null || objVenta.IdUsuario == null || objVenta.IdUsuario.idUsuario <= 0)
             {
                 mensaje = "No hay un vendedor con sesión iniciada.";
@@ -83,7 +80,54 @@ namespace Capa_Negocio
                 }
             }
 
-            return objVentaDatos.RegistrarVenta(objVenta, detalles, out idVenta, out mensaje);
+            // La validación de stock/precio, el cálculo de descuentos y el guardado transaccional
+            // quedan todos dentro de CD_Venta.RegistrarVentaTransaccional
+            try
+            {
+                idVenta = objVentaDatos.RegistrarVentaTransaccional(objVenta, detalles);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                mensaje = ex.Message;
+                return false;
+            }
+        }
+       /* public DataTable ObtenerVentasRecientes()
+        {
+            try
+            {
+                return objVentaDatos.ObtenerVentasRecientes();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener ventas recientes: " + ex.Message);
+            }
+        }
+        */
+        public DataTable ObtenerVentasPorVendedor(int idUsuario)
+        {
+            try
+            {
+                return objVentaDatos.ObtenerVentasPorVendedor(idUsuario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener las ventas del vendedor: " + ex.Message);
+            }
+        }
+
+        public DataTable ObtenerReporteVentas(DateTime fechaInicio, DateTime fechaFin, int idVendedor)
+        {
+            try
+            {
+                // Acá cambiamos objVentaDatos por objReporteDatos
+                return objReporteDatos.ObtenerReporteVentas(fechaInicio, fechaFin, idVendedor);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al generar el reporte de ventas: " + ex.Message);
+            }
         }
     }
 }
