@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PaneContenidoSec = new Guna.UI2.WinForms.Guna2Panel();
             this.PanelDerechoVenta = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.PanelDerechoMID = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
@@ -51,6 +51,8 @@
             this.guna2CustomGradientPanel6 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.botonGuardarCompra = new FontAwesome.Sharp.IconButton();
             this.PanelDerechoSUP = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.guna2CustomGradientPanel5 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.iconButton6 = new FontAwesome.Sharp.IconButton();
             this.label10 = new System.Windows.Forms.Label();
@@ -60,6 +62,10 @@
             this.label9 = new System.Windows.Forms.Label();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.panelIzquierdoVenta = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.guna2TextBox5 = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
@@ -72,6 +78,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.guna2DateTimePicker1 = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
@@ -82,13 +89,6 @@
             this.LDatosVenta = new System.Windows.Forms.Label();
             this.panelTituloSec = new Guna.UI2.WinForms.Guna2Panel();
             this.TBTituloSec = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.PaneContenidoSec.SuspendLayout();
             this.PanelDerechoVenta.SuspendLayout();
             this.PanelDerechoMID.SuspendLayout();
@@ -108,16 +108,17 @@
             // 
             // PaneContenidoSec
             // 
+            this.PaneContenidoSec.AutoSize = true;
             this.PaneContenidoSec.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.PaneContenidoSec.Controls.Add(this.PanelDerechoVenta);
             this.PaneContenidoSec.Controls.Add(this.guna2Panel1);
             this.PaneContenidoSec.Controls.Add(this.panelIzquierdoVenta);
             this.PaneContenidoSec.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PaneContenidoSec.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.PaneContenidoSec.Location = new System.Drawing.Point(0, 30);
+            this.PaneContenidoSec.Location = new System.Drawing.Point(0, 0);
             this.PaneContenidoSec.Name = "PaneContenidoSec";
             this.PaneContenidoSec.Padding = new System.Windows.Forms.Padding(10, 10, 15, 15);
-            this.PaneContenidoSec.Size = new System.Drawing.Size(1137, 583);
+            this.PaneContenidoSec.Size = new System.Drawing.Size(1139, 621);
             this.PaneContenidoSec.TabIndex = 5;
             this.PaneContenidoSec.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint_1);
             // 
@@ -132,7 +133,7 @@
             this.PanelDerechoVenta.Location = new System.Drawing.Point(325, 10);
             this.PanelDerechoVenta.Margin = new System.Windows.Forms.Padding(10);
             this.PanelDerechoVenta.Name = "PanelDerechoVenta";
-            this.PanelDerechoVenta.Size = new System.Drawing.Size(797, 558);
+            this.PanelDerechoVenta.Size = new System.Drawing.Size(799, 596);
             this.PanelDerechoVenta.TabIndex = 1;
             // 
             // PanelDerechoMID
@@ -148,27 +149,27 @@
             this.PanelDerechoMID.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.PanelDerechoMID.Location = new System.Drawing.Point(0, 100);
             this.PanelDerechoMID.Name = "PanelDerechoMID";
-            this.PanelDerechoMID.Size = new System.Drawing.Size(797, 403);
+            this.PanelDerechoMID.Size = new System.Drawing.Size(799, 441);
             this.PanelDerechoMID.TabIndex = 1;
             this.PanelDerechoMID.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelDerechoMID_Paint);
             // 
             // dgvCompras
             // 
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.White;
-            this.dgvCompras.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.dgvCompras.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCompras.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCompras.BackgroundColor = System.Drawing.Color.White;
             this.dgvCompras.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvCompras.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvCompras.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCompras.ColumnHeadersHeight = 27;
             this.dgvCompras.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnaProducto,
@@ -176,14 +177,14 @@
             this.columnaCantidad,
             this.columnaSubtotal,
             this.columnaEliminar});
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCompras.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCompras.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCompras.EnableHeadersVisualStyles = false;
             this.dgvCompras.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvCompras.Location = new System.Drawing.Point(6, 43);
@@ -298,9 +299,9 @@
             // guna2Panel2
             // 
             this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.guna2Panel2.Location = new System.Drawing.Point(0, 503);
+            this.guna2Panel2.Location = new System.Drawing.Point(0, 541);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(797, 5);
+            this.guna2Panel2.Size = new System.Drawing.Size(799, 5);
             this.guna2Panel2.TabIndex = 4;
             // 
             // panel1
@@ -308,7 +309,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 95);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(797, 5);
+            this.panel1.Size = new System.Drawing.Size(799, 5);
             this.panel1.TabIndex = 3;
             // 
             // PanelDerechoBOT
@@ -320,9 +321,9 @@
             this.PanelDerechoBOT.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.PanelDerechoBOT.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.PanelDerechoBOT.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.PanelDerechoBOT.Location = new System.Drawing.Point(0, 508);
+            this.PanelDerechoBOT.Location = new System.Drawing.Point(0, 546);
             this.PanelDerechoBOT.Name = "PanelDerechoBOT";
-            this.PanelDerechoBOT.Size = new System.Drawing.Size(797, 50);
+            this.PanelDerechoBOT.Size = new System.Drawing.Size(799, 50);
             this.PanelDerechoBOT.TabIndex = 2;
             // 
             // guna2CustomGradientPanel4
@@ -401,6 +402,7 @@
             // 
             // PanelDerechoSUP
             // 
+            this.PanelDerechoSUP.AutoScroll = true;
             this.PanelDerechoSUP.BorderRadius = 15;
             this.PanelDerechoSUP.Controls.Add(this.label14);
             this.PanelDerechoSUP.Controls.Add(this.textBox2);
@@ -419,9 +421,28 @@
             this.PanelDerechoSUP.Margin = new System.Windows.Forms.Padding(25, 25, 3, 3);
             this.PanelDerechoSUP.Name = "PanelDerechoSUP";
             this.PanelDerechoSUP.Padding = new System.Windows.Forms.Padding(25, 25, 0, 0);
-            this.PanelDerechoSUP.Size = new System.Drawing.Size(797, 95);
+            this.PanelDerechoSUP.Size = new System.Drawing.Size(799, 95);
             this.PanelDerechoSUP.TabIndex = 0;
             this.PanelDerechoSUP.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelDerechoSUP_Paint);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.label14.Location = new System.Drawing.Point(398, 11);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(102, 15);
+            this.label14.TabIndex = 16;
+            this.label14.Text = "Precio Compra";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(401, 53);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(108, 20);
+            this.textBox2.TabIndex = 15;
             // 
             // guna2CustomGradientPanel5
             // 
@@ -545,7 +566,7 @@
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.guna2Panel1.Location = new System.Drawing.Point(310, 10);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(15, 558);
+            this.guna2Panel1.Size = new System.Drawing.Size(15, 596);
             this.guna2Panel1.TabIndex = 2;
             // 
             // panelIzquierdoVenta
@@ -578,8 +599,47 @@
             this.panelIzquierdoVenta.Location = new System.Drawing.Point(10, 10);
             this.panelIzquierdoVenta.Margin = new System.Windows.Forms.Padding(10, 3, 3, 10);
             this.panelIzquierdoVenta.Name = "panelIzquierdoVenta";
-            this.panelIzquierdoVenta.Size = new System.Drawing.Size(300, 558);
+            this.panelIzquierdoVenta.Size = new System.Drawing.Size(300, 596);
             this.panelIzquierdoVenta.TabIndex = 0;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.label13.Location = new System.Drawing.Point(12, 216);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(142, 16);
+            this.label13.TabIndex = 25;
+            this.label13.Text = "N° de Comprobante";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.label12.Location = new System.Drawing.Point(12, 164);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(158, 16);
+            this.label12.TabIndex = 24;
+            this.label12.Text = "Tipo de Comprobante";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(15, 235);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(266, 20);
+            this.textBox1.TabIndex = 23;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(15, 183);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(268, 21);
+            this.comboBox1.TabIndex = 22;
             // 
             // guna2CustomGradientPanel1
             // 
@@ -779,6 +839,23 @@
             this.label4.TabIndex = 17;
             this.label4.Text = "Encargado de la Compra";
             // 
+            // guna2ComboBox1
+            // 
+            this.guna2ComboBox1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2ComboBox1.BorderRadius = 4;
+            this.guna2ComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.guna2ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.guna2ComboBox1.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.guna2ComboBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.guna2ComboBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2ComboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.guna2ComboBox1.ItemHeight = 30;
+            this.guna2ComboBox1.Location = new System.Drawing.Point(15, 284);
+            this.guna2ComboBox1.Name = "guna2ComboBox1";
+            this.guna2ComboBox1.Size = new System.Drawing.Size(266, 36);
+            this.guna2ComboBox1.TabIndex = 16;
+            this.guna2ComboBox1.SelectedIndexChanged += new System.EventHandler(this.guna2ComboBox1_SelectedIndexChanged);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -904,13 +981,14 @@
             // 
             // panelTituloSec
             // 
+            this.panelTituloSec.AutoScroll = true;
             this.panelTituloSec.AutoSize = true;
             this.panelTituloSec.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.panelTituloSec.Controls.Add(this.TBTituloSec);
-            this.panelTituloSec.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTituloSec.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelTituloSec.Location = new System.Drawing.Point(0, 0);
             this.panelTituloSec.Name = "panelTituloSec";
-            this.panelTituloSec.Size = new System.Drawing.Size(1137, 30);
+            this.panelTituloSec.Size = new System.Drawing.Size(1139, 621);
             this.panelTituloSec.TabIndex = 4;
             // 
             // TBTituloSec
@@ -923,86 +1001,12 @@
             this.TBTituloSec.TabIndex = 4;
             this.TBTituloSec.Text = "Registro Compra";
             // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(15, 183);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(268, 21);
-            this.comboBox1.TabIndex = 22;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(15, 235);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(266, 20);
-            this.textBox1.TabIndex = 23;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.BackColor = System.Drawing.Color.Transparent;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.label12.Location = new System.Drawing.Point(12, 164);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(158, 16);
-            this.label12.TabIndex = 24;
-            this.label12.Text = "Tipo de Comprobante";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.Color.Transparent;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.label13.Location = new System.Drawing.Point(12, 216);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(142, 16);
-            this.label13.TabIndex = 25;
-            this.label13.Text = "N° de Comprobante";
-            // 
-            // guna2ComboBox1
-            // 
-            this.guna2ComboBox1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2ComboBox1.BorderRadius = 4;
-            this.guna2ComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.guna2ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.guna2ComboBox1.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2ComboBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2ComboBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2ComboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.guna2ComboBox1.ItemHeight = 30;
-            this.guna2ComboBox1.Location = new System.Drawing.Point(15, 284);
-            this.guna2ComboBox1.Name = "guna2ComboBox1";
-            this.guna2ComboBox1.Size = new System.Drawing.Size(266, 36);
-            this.guna2ComboBox1.TabIndex = 16;
-            this.guna2ComboBox1.SelectedIndexChanged += new System.EventHandler(this.guna2ComboBox1_SelectedIndexChanged);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(401, 53);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(108, 20);
-            this.textBox2.TabIndex = 15;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.BackColor = System.Drawing.Color.Transparent;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.label14.Location = new System.Drawing.Point(398, 11);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(102, 15);
-            this.label14.TabIndex = 16;
-            this.label14.Text = "Precio Compra";
-            // 
             // FrmCompras
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
-            this.ClientSize = new System.Drawing.Size(1137, 613);
+            this.ClientSize = new System.Drawing.Size(1139, 621);
             this.Controls.Add(this.PaneContenidoSec);
             this.Controls.Add(this.panelTituloSec);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));

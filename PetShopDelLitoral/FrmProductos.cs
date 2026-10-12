@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Capa_Entidad;
+using CapaNegocio;
 
 namespace PetShopDelLitoral
 {
@@ -19,20 +21,34 @@ namespace PetShopDelLitoral
 
         private void Productos_Load(object sender, EventArgs e)
         {
-            
-            DataGridViewProductos.Rows.Clear();
+            // Reemplazamos los datos estáticos por la carga real desde la BD
+            CargarProductos();
 
-            
-            DataGridViewProductos.Rows.Add("001", "Alimento Balanceado 15kg", "Alimentos", "12", "5");
-            DataGridViewProductos.Rows.Add("002", "Rascador para Gatos", "Accesorios", "4", "3");
-            DataGridViewProductos.Rows.Add("003", "Antipulgas Pipeta", "Farmacia", "25", "10");
-
-            
+            // Tus configuraciones de diseño de la grilla que ya tenías:
             DataGridViewProductos.ReadOnly = true;
             DataGridViewProductos.AllowUserToAddRows = false;
             DataGridViewProductos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DataGridViewProductos.DefaultCellStyle.SelectionBackColor = Color.FromArgb(225, 185, 110);
             DataGridViewProductos.DefaultCellStyle.SelectionForeColor = Color.Black;
+        }
+
+        private void CargarProductos()
+        {
+            DataGridViewProductos.Rows.Clear();
+
+            // Llamamos a la capa de negocio para traer los productos reales
+            List<Producto> lista = new CN_Producto().Listar();
+
+            foreach (Producto item in lista)
+            {
+                DataGridViewProductos.Rows.Add(new object[] {
+            item.IdProducto,
+            item.Nombre_producto,
+            item.IdCategoria != null ? item.IdCategoria.Nombre_categoria : "Sin categoría", // O como se llame la propiedad de descripción en Categoria
+            item.Stock_producto,
+            item.Precio_producto
+        });
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -116,6 +132,11 @@ namespace PetShopDelLitoral
         }
 
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void PanelContenedor_Paint(object sender, PaintEventArgs e)
         {
 
         }
