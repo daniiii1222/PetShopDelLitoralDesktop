@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using MySql.Data.MySqlClient;
@@ -18,7 +18,7 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = "SELECT id_categoria, descripcion, estado FROM categoria";
+                    string query = "SELECT idCategoria, nombre_categoria, estado_categoria FROM categoria";
                     MySqlCommand cmd = new MySqlCommand(query, oconexion);
                     cmd.CommandType = CommandType.Text;
 
@@ -30,16 +30,16 @@ namespace CapaDatos
                         {
                             lista.Add(new Categoria()
                             {
-                                IdCategoria = Convert.ToInt32(dr["id_categoria"]),
-                                Nombre_categoria = dr["descripcion"].ToString(),
-                                Estado_categoria = Convert.ToBoolean(dr["estado"])
+                                IdCategoria = Convert.ToInt32(dr["idCategoria"]),
+                                Nombre_categoria = dr["nombre_categoria"].ToString(),
+                                Estado_categoria = Convert.ToBoolean(dr["estado_categoria"])
                             });
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    lista = new List<Categoria>();
+                    throw new Exception("Error al listar categorías: " + ex.Message, ex);
                 }
             }
 
@@ -55,10 +55,10 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = "INSERT INTO categoria(descripcion, estado) VALUES(@descripcion, @estado); SELECT LAST_INSERT_ID();";
+                    string query = "INSERT INTO categoria(nombre_categoria, estado_categoria) VALUES(@nombre, @estado); SELECT LAST_INSERT_ID();";
 
                     MySqlCommand cmd = new MySqlCommand(query, oconexion);
-                    cmd.Parameters.AddWithValue("@descripcion", obj.Nombre_categoria);
+                    cmd.Parameters.AddWithValue("@nombre", obj.Nombre_categoria);
                     cmd.Parameters.AddWithValue("@estado", obj.Estado_categoria);
 
                     oconexion.Open();
@@ -83,11 +83,11 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = "UPDATE categoria SET descripcion = @descripcion, estado = @estado WHERE id_categoria = @id";
+                    string query = "UPDATE categoria SET nombre_categoria = @nombre, estado_categoria = @estado WHERE idCategoria = @id";
 
                     MySqlCommand cmd = new MySqlCommand(query, oconexion);
                     cmd.Parameters.AddWithValue("@id", obj.IdCategoria);
-                    cmd.Parameters.AddWithValue("@descripcion", obj.Nombre_categoria);
+                    cmd.Parameters.AddWithValue("@nombre", obj.Nombre_categoria);
                     cmd.Parameters.AddWithValue("@estado", obj.Estado_categoria);
 
                     oconexion.Open();

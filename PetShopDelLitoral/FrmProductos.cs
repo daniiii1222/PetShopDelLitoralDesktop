@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -42,12 +42,12 @@ namespace PetShopDelLitoral
             foreach (Producto item in lista)
             {
                 DataGridViewProductos.Rows.Add(new object[] {
-            item.IdProducto,
-            item.Nombre_producto,
-            item.IdCategoria != null ? item.IdCategoria.Nombre_categoria : "Sin categoría", // O como se llame la propiedad de descripción en Categoria
-            item.Stock_producto,
-            item.Precio_producto
-        });
+                    item.IdProducto,
+                    item.Nombre_producto,
+                    item.IdCategoria != null ? item.IdCategoria.Nombre_categoria : "Sin categoría",
+                    item.Precio_producto,
+                    item.Stock_producto
+                });
             }
         }
 
@@ -73,37 +73,47 @@ namespace PetShopDelLitoral
 
         private void guna2DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
-            // Verificamos que el usuario haya hecho clic en una fila válida (y no en el encabezado)
             if (e.RowIndex >= 0)
             {
-                // Obtenemos el nombre de la columna en la que hicieron clic
                 string nombreColumna = DataGridViewProductos.Columns[e.ColumnIndex].Name;
 
-                // Si hicieron clic en la columna de Editar
-                if (nombreColumna == "ColumnaEditar")
+                if (nombreColumna == "ColumnEditar")
                 {
-                    // Aquí pones la lógica para editar
-                    MessageBox.Show("Editar producto de la fila: " + e.RowIndex);
+                    int idProducto = Convert.ToInt32(DataGridViewProductos.Rows[e.RowIndex].Cells["ColumnCodigo"].Value);
+                    List<Producto> lista = new CN_Producto().Listar();
+                    Producto productoSeleccionado = lista.FirstOrDefault(p => p.IdProducto == idProducto);
 
-                    // Ejemplo de lo que harás después:
-                    // var idProducto = guna2DataGridView1.Rows[e.RowIndex].Cells["Id"].Value;
-                    // FormEditar frm = new FormEditar(Convert.ToInt32(idProducto));
-                    // frm.ShowDialog();
+                    if (productoSeleccionado != null)
+                    {
+                        CargaProductos frm = new CargaProductos(productoSeleccionado);
+                        frm.ShowDialog();
+                        CargarProductos();
+                    }
                 }
-
-                // Si hicieron clic en la columna de Eliminar
-                else if (nombreColumna == "ColumnaEliminar")
+                else if (nombreColumna == "ColumnEliminar")
                 {
-                    DialogResult resultado = MessageBox.Show("¿Estás seguro de eliminar este producto?",
-                                                            "Confirmar",
+                    int idProducto = Convert.ToInt32(DataGridViewProductos.Rows[e.RowIndex].Cells["ColumnCodigo"].Value);
+                    string nombreProducto = DataGridViewProductos.Rows[e.RowIndex].Cells["ColumnNombre"].Value.ToString();
+
+                    DialogResult resultado = MessageBox.Show($"¿Estás seguro de eliminar el producto '{nombreProducto}'?",
+                                                            "Confirmar Eliminación",
                                                             MessageBoxButtons.YesNo,
                                                             MessageBoxIcon.Warning);
 
                     if (resultado == DialogResult.Yes)
                     {
-                        // Aquí ejecutas tu borrado de la base de datos y luego remueves la fila visualmente:
-                        DataGridViewProductos.Rows.RemoveAt(e.RowIndex);
+                        string mensaje = string.Empty;
+                        bool respuesta = new CN_Producto().Eliminar(idProducto, out mensaje);
+
+                        if (respuesta)
+                        {
+                            MessageBox.Show("¡Producto eliminado exitosamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            CargarProductos();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo eliminar el producto: " + mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
             }
@@ -117,8 +127,8 @@ namespace PetShopDelLitoral
         private void BTCargarproducto_Click(object sender, EventArgs e)
         { 
             CargaProductos frm = new CargaProductos();
-
-            frm.Show();
+            frm.ShowDialog();
+            CargarProductos();
         }
 
         private void TxtBuscar_TextChanged(object sender, EventArgs e)

@@ -1,4 +1,4 @@
-﻿namespace PetShopDelLitoral
+namespace PetShopDelLitoral
 {
     partial class CargaProductos
     {
@@ -43,8 +43,8 @@
             this.BTNGuardar = new Guna.UI2.WinForms.Guna2Button();
             this.BTNCancelar = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.LBprecioVenta = new System.Windows.Forms.Label();
             this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            this.LBprecioVenta = new System.Windows.Forms.Label();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
             this.SuspendLayout();
@@ -55,28 +55,29 @@
             this.guna2Panel1.Controls.Add(this.LBABMProductos);
             this.guna2Panel1.Controls.Add(this.guna2HtmlLabel1);
             this.guna2Panel1.Location = new System.Drawing.Point(0, -2);
+            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(1072, 69);
+            this.guna2Panel1.Size = new System.Drawing.Size(804, 56);
             this.guna2Panel1.TabIndex = 0;
-            this.guna2Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint);
             // 
             // LBABMProductos
             // 
             this.LBABMProductos.AutoSize = true;
             this.LBABMProductos.Font = new System.Drawing.Font("Arial Rounded MT Bold", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBABMProductos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.LBABMProductos.Location = new System.Drawing.Point(12, 28);
+            this.LBABMProductos.Location = new System.Drawing.Point(9, 23);
+            this.LBABMProductos.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LBABMProductos.Name = "LBABMProductos";
-            this.LBABMProductos.Size = new System.Drawing.Size(343, 27);
+            this.LBABMProductos.Size = new System.Drawing.Size(280, 22);
             this.LBABMProductos.TabIndex = 3;
             this.LBABMProductos.Text = "Registrar/ Modificar Producto";
-            this.LBABMProductos.Click += new System.EventHandler(this.LBGestionProductos_Click);
             // 
             // guna2HtmlLabel1
             // 
             this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(25, 28);
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(19, 23);
+            this.guna2HtmlLabel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             this.guna2HtmlLabel1.Size = new System.Drawing.Size(3, 2);
             this.guna2HtmlLabel1.TabIndex = 2;
@@ -86,9 +87,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(386, 153);
+            this.label1.Location = new System.Drawing.Point(290, 124);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 16);
+            this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 1;
             // 
             // lbNombreProd
@@ -96,9 +98,10 @@
             this.lbNombreProd.AutoSize = true;
             this.lbNombreProd.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbNombreProd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.lbNombreProd.Location = new System.Drawing.Point(37, 49);
+            this.lbNombreProd.Location = new System.Drawing.Point(28, 40);
+            this.lbNombreProd.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbNombreProd.Name = "lbNombreProd";
-            this.lbNombreProd.Size = new System.Drawing.Size(225, 23);
+            this.lbNombreProd.Size = new System.Drawing.Size(181, 18);
             this.lbNombreProd.TabIndex = 4;
             this.lbNombreProd.Text = "Nombre del producto:";
             this.lbNombreProd.Click += new System.EventHandler(this.LBNombreProducto_Click);
@@ -108,9 +111,10 @@
             this.lbCategoria.AutoSize = true;
             this.lbCategoria.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCategoria.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.lbCategoria.Location = new System.Drawing.Point(431, 49);
+            this.lbCategoria.Location = new System.Drawing.Point(323, 40);
+            this.lbCategoria.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbCategoria.Name = "lbCategoria";
-            this.lbCategoria.Size = new System.Drawing.Size(113, 23);
+            this.lbCategoria.Size = new System.Drawing.Size(92, 18);
             this.lbCategoria.TabIndex = 5;
             this.lbCategoria.Text = "Categoría:";
             // 
@@ -119,9 +123,10 @@
             this.lbPrecio.AutoSize = true;
             this.lbPrecio.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbPrecio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.lbPrecio.Location = new System.Drawing.Point(37, 167);
+            this.lbPrecio.Location = new System.Drawing.Point(28, 136);
+            this.lbPrecio.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbPrecio.Name = "lbPrecio";
-            this.lbPrecio.Size = new System.Drawing.Size(158, 23);
+            this.lbPrecio.Size = new System.Drawing.Size(130, 18);
             this.lbPrecio.TabIndex = 6;
             this.lbPrecio.Text = "Precio unitario:";
             // 
@@ -130,9 +135,10 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.label2.Location = new System.Drawing.Point(156, 270);
+            this.label2.Location = new System.Drawing.Point(117, 219);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 23);
+            this.label2.Size = new System.Drawing.Size(59, 18);
             this.label2.TabIndex = 7;
             this.label2.Text = "Stock:";
             // 
@@ -147,10 +153,12 @@
             this.cmbCategoria.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cmbCategoria.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.cmbCategoria.ItemHeight = 30;
-            this.cmbCategoria.Location = new System.Drawing.Point(435, 89);
+            this.cmbCategoria.Location = new System.Drawing.Point(326, 72);
+            this.cmbCategoria.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbCategoria.Name = "cmbCategoria";
-            this.cmbCategoria.Size = new System.Drawing.Size(257, 36);
+            this.cmbCategoria.Size = new System.Drawing.Size(194, 36);
             this.cmbCategoria.TabIndex = 8;
+            this.cmbCategoria.SelectedIndexChanged += new System.EventHandler(this.cmbCategoria_SelectedIndexChanged);
             // 
             // txtNombre
             // 
@@ -164,12 +172,13 @@
             this.txtNombre.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtNombre.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtNombre.Location = new System.Drawing.Point(41, 89);
+            this.txtNombre.Location = new System.Drawing.Point(31, 72);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.PasswordChar = '\0';
             this.txtNombre.PlaceholderText = "";
             this.txtNombre.SelectedText = "";
-            this.txtNombre.Size = new System.Drawing.Size(257, 36);
+            this.txtNombre.Size = new System.Drawing.Size(193, 29);
             this.txtNombre.TabIndex = 9;
             // 
             // txtPrecio
@@ -184,12 +193,13 @@
             this.txtPrecio.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtPrecio.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtPrecio.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtPrecio.Location = new System.Drawing.Point(245, 270);
+            this.txtPrecio.Location = new System.Drawing.Point(184, 219);
+            this.txtPrecio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.PasswordChar = '\0';
             this.txtPrecio.PlaceholderText = "";
             this.txtPrecio.SelectedText = "";
-            this.txtPrecio.Size = new System.Drawing.Size(257, 36);
+            this.txtPrecio.Size = new System.Drawing.Size(193, 29);
             this.txtPrecio.TabIndex = 10;
             // 
             // txtStock
@@ -204,12 +214,13 @@
             this.txtStock.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtStock.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtStock.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtStock.Location = new System.Drawing.Point(41, 203);
+            this.txtStock.Location = new System.Drawing.Point(31, 165);
+            this.txtStock.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtStock.Name = "txtStock";
             this.txtStock.PasswordChar = '\0';
             this.txtStock.PlaceholderText = "";
             this.txtStock.SelectedText = "";
-            this.txtStock.Size = new System.Drawing.Size(257, 36);
+            this.txtStock.Size = new System.Drawing.Size(193, 29);
             this.txtStock.TabIndex = 11;
             // 
             // BTNGuardar
@@ -222,11 +233,13 @@
             this.BTNGuardar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(44)))), ((int)(((byte)(34)))));
             this.BTNGuardar.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNGuardar.ForeColor = System.Drawing.Color.White;
-            this.BTNGuardar.Location = new System.Drawing.Point(325, 489);
+            this.BTNGuardar.Location = new System.Drawing.Point(244, 397);
+            this.BTNGuardar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BTNGuardar.Name = "BTNGuardar";
-            this.BTNGuardar.Size = new System.Drawing.Size(138, 37);
+            this.BTNGuardar.Size = new System.Drawing.Size(104, 30);
             this.BTNGuardar.TabIndex = 12;
             this.BTNGuardar.Text = "Guardar";
+            this.BTNGuardar.Click += new System.EventHandler(this.BTNGuardar_Click);
             // 
             // BTNCancelar
             // 
@@ -238,11 +251,13 @@
             this.BTNCancelar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(44)))), ((int)(((byte)(34)))));
             this.BTNCancelar.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNCancelar.ForeColor = System.Drawing.Color.White;
-            this.BTNCancelar.Location = new System.Drawing.Point(600, 488);
+            this.BTNCancelar.Location = new System.Drawing.Point(450, 396);
+            this.BTNCancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BTNCancelar.Name = "BTNCancelar";
-            this.BTNCancelar.Size = new System.Drawing.Size(138, 38);
+            this.BTNCancelar.Size = new System.Drawing.Size(104, 31);
             this.BTNCancelar.TabIndex = 13;
             this.BTNCancelar.Text = "Cancelar";
+            this.BTNCancelar.Click += new System.EventHandler(this.BTNCancelar_Click);
             // 
             // guna2Panel2
             // 
@@ -259,21 +274,11 @@
             this.guna2Panel2.Controls.Add(this.lbNombreProd);
             this.guna2Panel2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.guna2Panel2.ForeColor = System.Drawing.SystemColors.Control;
-            this.guna2Panel2.Location = new System.Drawing.Point(165, 108);
+            this.guna2Panel2.Location = new System.Drawing.Point(124, 88);
+            this.guna2Panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(752, 333);
+            this.guna2Panel2.Size = new System.Drawing.Size(564, 271);
             this.guna2Panel2.TabIndex = 14;
-            // 
-            // LBprecioVenta
-            // 
-            this.LBprecioVenta.AutoSize = true;
-            this.LBprecioVenta.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBprecioVenta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.LBprecioVenta.Location = new System.Drawing.Point(431, 167);
-            this.LBprecioVenta.Name = "LBprecioVenta";
-            this.LBprecioVenta.Size = new System.Drawing.Size(168, 23);
-            this.LBprecioVenta.TabIndex = 12;
-            this.LBprecioVenta.Text = "Precio de venta:";
             // 
             // guna2TextBox1
             // 
@@ -287,25 +292,39 @@
             this.guna2TextBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2TextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2TextBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox1.Location = new System.Drawing.Point(435, 206);
+            this.guna2TextBox1.Location = new System.Drawing.Point(326, 167);
+            this.guna2TextBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2TextBox1.Name = "guna2TextBox1";
             this.guna2TextBox1.PasswordChar = '\0';
             this.guna2TextBox1.PlaceholderText = "";
             this.guna2TextBox1.SelectedText = "";
-            this.guna2TextBox1.Size = new System.Drawing.Size(257, 36);
+            this.guna2TextBox1.Size = new System.Drawing.Size(193, 29);
             this.guna2TextBox1.TabIndex = 13;
+            // 
+            // LBprecioVenta
+            // 
+            this.LBprecioVenta.AutoSize = true;
+            this.LBprecioVenta.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBprecioVenta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
+            this.LBprecioVenta.Location = new System.Drawing.Point(323, 136);
+            this.LBprecioVenta.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LBprecioVenta.Name = "LBprecioVenta";
+            this.LBprecioVenta.Size = new System.Drawing.Size(138, 18);
+            this.LBprecioVenta.TabIndex = 12;
+            this.LBprecioVenta.Text = "Precio de venta:";
             // 
             // CargaProductos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.ClientSize = new System.Drawing.Size(1072, 570);
+            this.ClientSize = new System.Drawing.Size(804, 463);
             this.Controls.Add(this.guna2Panel2);
             this.Controls.Add(this.BTNCancelar);
             this.Controls.Add(this.BTNGuardar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.guna2Panel1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "CargaProductos";
             this.Text = "ABMProductos";
             this.Load += new System.EventHandler(this.ABMProductos_Load);

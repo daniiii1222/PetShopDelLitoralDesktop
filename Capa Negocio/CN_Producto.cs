@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Capa_Entidad;
 using CapaDatos;
@@ -50,6 +50,19 @@ namespace CapaNegocio
             {
                 return false;
             }
+        }
+
+        public bool Eliminar(int idProducto, out string Mensaje)
+        {
+            Mensaje = string.Empty;
+
+            if (idProducto <= 0)
+            {
+                Mensaje = "Identificador de producto no válido.";
+                return false;
+            }
+
+            return objcd_producto.Eliminar(idProducto, out Mensaje);
         }
     }
 }
