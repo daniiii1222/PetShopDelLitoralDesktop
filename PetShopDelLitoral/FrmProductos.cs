@@ -14,6 +14,8 @@ namespace PetShopDelLitoral
 {
     public partial class FrmProductos : Form
     {
+        private List<Producto> _listaProductos = new List<Producto>();
+
         public FrmProductos ()
         {
             InitializeComponent();
@@ -21,7 +23,7 @@ namespace PetShopDelLitoral
 
         private void Productos_Load(object sender, EventArgs e)
         {
-            // Reemplazamos los datos estáticos por la carga real desde la BD
+            CargarCategoriasFiltro();
             CargarProductos();
 
             // Tus configuraciones de diseño de la grilla que ya tenías:
@@ -32,14 +34,56 @@ namespace PetShopDelLitoral
             DataGridViewProductos.DefaultCellStyle.SelectionForeColor = Color.Black;
         }
 
+        private void CargarCategoriasFiltro()
+        {
+            try
+            {
+                List<Categoria> lista = new CN_Categoria().Listar();
+                List<Categoria> comboLista = new List<Categoria>();
+                comboLista.Add(new Categoria() { IdCategoria = 0, Nombre_categoria = "Todas las categorías" });
+                comboLista.AddRange(lista);
+
+                CBFiltroCateg.DisplayMember = "Nombre_categoria";
+                CBFiltroCateg.ValueMember = "IdCategoria";
+                CBFiltroCateg.DataSource = comboLista;
+                CBFiltroCateg.SelectedIndex = 0;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
         private void CargarProductos()
+        {
+            _listaProductos = new CN_Producto().Listar();
+            AplicarFiltros();
+        }
+
+        private void AplicarFiltros()
         {
             DataGridViewProductos.Rows.Clear();
 
-            // Llamamos a la capa de negocio para traer los productos reales
-            List<Producto> lista = new CN_Producto().Listar();
+            string textoBusqueda = TxtBuscar.Text.Trim().ToLower();
+            int idCategoriaFiltro = 0;
 
-            foreach (Producto item in lista)
+            if (CBFiltroCateg.SelectedValue != null && int.TryParse(CBFiltroCateg.SelectedValue.ToString(), out int idCat))
+            {
+                idCategoriaFiltro = idCat;
+            }
+
+            var listaFiltrada = _listaProductos.Where(p =>
+            {
+                bool coincideEstado = p.Estado_producto;
+                bool coincideTexto = string.IsNullOrEmpty(textoBusqueda) ||
+                                     (p.Nombre_producto != null && p.Nombre_producto.ToLower().Contains(textoBusqueda));
+
+                bool coincideCategoria = idCategoriaFiltro == 0 ||
+                                         (p.IdCategoria != null && p.IdCategoria.IdCategoria == idCategoriaFiltro);
+
+                return coincideEstado && coincideTexto && coincideCategoria;
+            });
+
+            foreach (Producto item in listaFiltrada)
             {
                 DataGridViewProductos.Rows.Add(new object[] {
                     item.IdProducto,
@@ -133,7 +177,12 @@ namespace PetShopDelLitoral
 
         private void TxtBuscar_TextChanged(object sender, EventArgs e)
         {
+            AplicarFiltros();
+        }
 
+        private void CBFiltroCateg_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AplicarFiltros();
         }
 
         private void guna2Panel5_Paint(object sender, PaintEventArgs e)

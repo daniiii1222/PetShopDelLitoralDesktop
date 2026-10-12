@@ -22,7 +22,8 @@ namespace CapaDatos
                                             p.descripcion_producto, p.precio_producto, p.stock_producto, 
                                             p.stock_minimo, p.idCategoria, c.nombre_categoria, p.estado_producto, p.precioUnitario_producto
                                      FROM producto p
-                                     INNER JOIN categoria c ON p.idCategoria = c.idCategoria";
+                                     INNER JOIN categoria c ON p.idCategoria = c.idCategoria
+                                     WHERE p.estado_producto = 1";
 
                     MySqlCommand cmd = new MySqlCommand(query, oconexion);
                     cmd.CommandType = CommandType.Text;
@@ -150,7 +151,7 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = "DELETE FROM producto WHERE idProducto = @id;";
+                    string query = "UPDATE producto SET estado_producto = 0 WHERE idProducto = @id;";
                     MySqlCommand cmd = new MySqlCommand(query, oconexion);
                     cmd.Parameters.AddWithValue("@id", idProducto);
 

@@ -1,4 +1,4 @@
-﻿using CapaDatos;
+using CapaDatos;
 using Capa_Entidad;
 using FontAwesome.Sharp;
 using System;
@@ -42,6 +42,18 @@ namespace PetShopDelLitoral
 
         private void Inicio_Load(object sender, EventArgs e)
         {
+            try
+            {
+                // Ajustar la ventana principal al tamaño exacto de la pantalla actual sin desbordar
+                Rectangle area = Screen.PrimaryScreen.WorkingArea;
+                this.StartPosition = FormStartPosition.Manual;
+                this.Location = area.Location;
+                this.Size = area.Size;
+            }
+            catch (Exception)
+            {
+            }
+
             AplicarPermisosPorRol();
             ConfigurarEsteticaMenu();
             AbrirFormulario(new FrmDashboard());

@@ -1,4 +1,4 @@
-﻿namespace PetShopDelLitoral
+namespace PetShopDelLitoral
 {
     partial class FrmProductos
     {
@@ -282,6 +282,7 @@
             this.CBFiltroCateg.Name = "CBFiltroCateg";
             this.CBFiltroCateg.Size = new System.Drawing.Size(282, 36);
             this.CBFiltroCateg.TabIndex = 10;
+            this.CBFiltroCateg.SelectedIndexChanged += new System.EventHandler(this.CBFiltroCateg_SelectedIndexChanged);
             // 
             // LBFiltrarcategoria
             // 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using MySql.Data.MySqlClient;
@@ -18,7 +18,7 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = @"SELECT p.id_proveedor, p.estado_proveedor, 
+                    string query = @"SELECT p.idProveedor, p.estado_proveedor, 
                                             per.idPersona, per.dni_persona, per.nombre_persona, per.apellido_persona, 
                                             per.correo_persona, per.telefono_persona, per.direccion_persona
                                      FROM proveedor p
@@ -35,7 +35,7 @@ namespace CapaDatos
                         {
                             lista.Add(new Proveedor()
                             {
-                                Id_proveedor = Convert.ToInt32(dr["id_proveedor"]),
+                                Id_proveedor = Convert.ToInt32(dr["idProveedor"]),
                                 Estado_proveedor = Convert.ToBoolean(dr["estado_proveedor"]),
                                 Id_persona = new Persona()
                                 {
@@ -97,7 +97,7 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = "UPDATE proveedor SET id_persona = @id_persona, estado_proveedor = @estado_proveedor WHERE id_proveedor = @id_proveedor";
+                    string query = "UPDATE proveedor SET id_persona = @id_persona, estado_proveedor = @estado_proveedor WHERE idProveedor = @id_proveedor";
 
                     MySqlCommand cmd = new MySqlCommand(query, oconexion);
                     cmd.Parameters.AddWithValue("@id_proveedor", obj.Id_proveedor);
