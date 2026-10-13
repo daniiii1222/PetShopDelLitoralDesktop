@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,11 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Capa_Entidad;
+using CapaNegocio;
 
 namespace PetShopDelLitoral
 {
     public partial class FrmProductos : Form
     {
+        private List<Producto> _listaProductos = new List<Producto>();
+
         public FrmProductos ()
         {
             InitializeComponent();
@@ -19,20 +23,76 @@ namespace PetShopDelLitoral
 
         private void Productos_Load(object sender, EventArgs e)
         {
-            
-            DataGridViewProductos.Rows.Clear();
+            CargarCategoriasFiltro();
+            CargarProductos();
 
-            
-            DataGridViewProductos.Rows.Add("001", "Alimento Balanceado 15kg", "Alimentos", "12", "5");
-            DataGridViewProductos.Rows.Add("002", "Rascador para Gatos", "Accesorios", "4", "3");
-            DataGridViewProductos.Rows.Add("003", "Antipulgas Pipeta", "Farmacia", "25", "10");
-
-            
+            // Tus configuraciones de diseño de la grilla que ya tenías:
             DataGridViewProductos.ReadOnly = true;
             DataGridViewProductos.AllowUserToAddRows = false;
             DataGridViewProductos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DataGridViewProductos.DefaultCellStyle.SelectionBackColor = Color.FromArgb(225, 185, 110);
             DataGridViewProductos.DefaultCellStyle.SelectionForeColor = Color.Black;
+        }
+
+        private void CargarCategoriasFiltro()
+        {
+            try
+            {
+                List<Categoria> lista = new CN_Categoria().Listar();
+                List<Categoria> comboLista = new List<Categoria>();
+                comboLista.Add(new Categoria() { IdCategoria = 0, Nombre_categoria = "Todas las categorías" });
+                comboLista.AddRange(lista);
+
+                CBFiltroCateg.DisplayMember = "Nombre_categoria";
+                CBFiltroCateg.ValueMember = "IdCategoria";
+                CBFiltroCateg.DataSource = comboLista;
+                CBFiltroCateg.SelectedIndex = 0;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void CargarProductos()
+        {
+            _listaProductos = new CN_Producto().Listar();
+            AplicarFiltros();
+        }
+
+        private void AplicarFiltros()
+        {
+            DataGridViewProductos.Rows.Clear();
+
+            string textoBusqueda = TxtBuscar.Text.Trim().ToLower();
+            int idCategoriaFiltro = 0;
+
+            if (CBFiltroCateg.SelectedValue != null && int.TryParse(CBFiltroCateg.SelectedValue.ToString(), out int idCat))
+            {
+                idCategoriaFiltro = idCat;
+            }
+
+            var listaFiltrada = _listaProductos.Where(p =>
+            {
+                bool coincideEstado = p.Estado_producto;
+                bool coincideTexto = string.IsNullOrEmpty(textoBusqueda) ||
+                                     (p.Nombre_producto != null && p.Nombre_producto.ToLower().Contains(textoBusqueda));
+
+                bool coincideCategoria = idCategoriaFiltro == 0 ||
+                                         (p.IdCategoria != null && p.IdCategoria.IdCategoria == idCategoriaFiltro);
+
+                return coincideEstado && coincideTexto && coincideCategoria;
+            });
+
+            foreach (Producto item in listaFiltrada)
+            {
+                DataGridViewProductos.Rows.Add(new object[] {
+                    item.IdProducto,
+                    item.Nombre_producto,
+                    item.IdCategoria != null ? item.IdCategoria.Nombre_categoria : "Sin categoría",
+                    item.Precio_producto,
+                    item.Stock_producto
+                });
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -57,37 +117,47 @@ namespace PetShopDelLitoral
 
         private void guna2DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
-            // Verificamos que el usuario haya hecho clic en una fila válida (y no en el encabezado)
             if (e.RowIndex >= 0)
             {
-                // Obtenemos el nombre de la columna en la que hicieron clic
                 string nombreColumna = DataGridViewProductos.Columns[e.ColumnIndex].Name;
 
-                // Si hicieron clic en la columna de Editar
-                if (nombreColumna == "ColumnaEditar")
+                if (nombreColumna == "ColumnEditar")
                 {
-                    // Aquí pones la lógica para editar
-                    MessageBox.Show("Editar producto de la fila: " + e.RowIndex);
+                    int idProducto = Convert.ToInt32(DataGridViewProductos.Rows[e.RowIndex].Cells["ColumnCodigo"].Value);
+                    List<Producto> lista = new CN_Producto().Listar();
+                    Producto productoSeleccionado = lista.FirstOrDefault(p => p.IdProducto == idProducto);
 
-                    // Ejemplo de lo que harás después:
-                    // var idProducto = guna2DataGridView1.Rows[e.RowIndex].Cells["Id"].Value;
-                    // FormEditar frm = new FormEditar(Convert.ToInt32(idProducto));
-                    // frm.ShowDialog();
+                    if (productoSeleccionado != null)
+                    {
+                        CargaProductos frm = new CargaProductos(productoSeleccionado);
+                        frm.ShowDialog();
+                        CargarProductos();
+                    }
                 }
-
-                // Si hicieron clic en la columna de Eliminar
-                else if (nombreColumna == "ColumnaEliminar")
+                else if (nombreColumna == "ColumnEliminar")
                 {
-                    DialogResult resultado = MessageBox.Show("¿Estás seguro de eliminar este producto?",
-                                                            "Confirmar",
+                    int idProducto = Convert.ToInt32(DataGridViewProductos.Rows[e.RowIndex].Cells["ColumnCodigo"].Value);
+                    string nombreProducto = DataGridViewProductos.Rows[e.RowIndex].Cells["ColumnNombre"].Value.ToString();
+
+                    DialogResult resultado = MessageBox.Show($"¿Estás seguro de eliminar el producto '{nombreProducto}'?",
+                                                            "Confirmar Eliminación",
                                                             MessageBoxButtons.YesNo,
                                                             MessageBoxIcon.Warning);
 
                     if (resultado == DialogResult.Yes)
                     {
-                        // Aquí ejecutas tu borrado de la base de datos y luego remueves la fila visualmente:
-                        DataGridViewProductos.Rows.RemoveAt(e.RowIndex);
+                        string mensaje = string.Empty;
+                        bool respuesta = new CN_Producto().Eliminar(idProducto, out mensaje);
+
+                        if (respuesta)
+                        {
+                            MessageBox.Show("¡Producto eliminado exitosamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            CargarProductos();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo eliminar el producto: " + mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
             }
@@ -101,13 +171,18 @@ namespace PetShopDelLitoral
         private void BTCargarproducto_Click(object sender, EventArgs e)
         { 
             CargaProductos frm = new CargaProductos();
-
-            frm.Show();
+            frm.ShowDialog();
+            CargarProductos();
         }
 
         private void TxtBuscar_TextChanged(object sender, EventArgs e)
         {
+            AplicarFiltros();
+        }
 
+        private void CBFiltroCateg_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AplicarFiltros();
         }
 
         private void guna2Panel5_Paint(object sender, PaintEventArgs e)
@@ -116,6 +191,11 @@ namespace PetShopDelLitoral
         }
 
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void PanelContenedor_Paint(object sender, PaintEventArgs e)
         {
 
         }

@@ -1,8 +1,4 @@
-﻿using Capa_Datos;
-using Capa_Entidad;
-using Capa_Negocio;
-using CapaDatos;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +8,11 @@ using System.Runtime.Remoting;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Capa_Datos;
+using Capa_Entidad;
+using Capa_Negocio;
+using CapaDatos;
+using CapaNegocio;
 namespace PetShopDelLitoral
 {
 
@@ -187,7 +188,7 @@ namespace PetShopDelLitoral
             tipoSeleccionado = "Proveedor";
             chkActivo.Checked = true;
             ConfigurarGridProveedores();
-            // CargarProveedores();
+            CargarProveedores(); // <-- Llamamos al método real que acabamos de armar
         }
 
 
@@ -832,27 +833,37 @@ namespace PetShopDelLitoral
 
         private void CargarProveedores()
         {
-            dgvPersonas.Rows.Clear();
+            try
+            {
+                dgvPersonas.Rows.Clear();
 
-            dgvPersonas.Rows.Add(
-                1,
-                "Distribuidora",
-                "PetFood S.A.",
-                "ventas@petfood.com",
-                "3794112233",
-                "Av. Maipú 1500"
-            );
+                CN_Proveedor objNegocio = new CN_Proveedor();
+                List<Proveedor> lista = objNegocio.Listar();
 
-            dgvPersonas.Rows.Add(
-                2,
-                "Accesorios",
-                "del Litoral",
-                "contacto@accesorioslitoral.com",
-                "3794445566",
-                "Ruta 12 Km 5"
-            );
+                foreach (Proveedor item in lista)
+                {
+                    int idProveedor = item.Id_proveedor;
+                    string nombre = item.Id_persona != null ? item.Id_persona.nombre_persona : "";
+                    string apellido = item.Id_persona != null ? item.Id_persona.apellido_persona : "";
+                    string correo = item.Id_persona != null ? item.Id_persona.correo_persona : "";
+                    string telefono = item.Id_persona != null ? item.Id_persona.telefono_persona : "";
+                    string direccion = item.Id_persona != null ? item.Id_persona.direccion_persona : "";
+                    string dni = item.Id_persona != null ? item.Id_persona.dni_persona : "";
+
+                    bool estadoBool = item.Estado_proveedor;
+                    string estado = estadoBool ? "Activo" : "Inactivo";
+
+                    int idPersona = item.Id_persona != null ? item.Id_persona.idPersona : 0;
+
+                    // Agregamos la fila respetando las columnas configuradas en ConfigurarGridProveedores
+                    dgvPersonas.Rows.Add(idProveedor, nombre, apellido, correo, telefono, direccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los proveedores: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-
         private void guna2Panel6_Paint(object sender, PaintEventArgs e)
         {
 
