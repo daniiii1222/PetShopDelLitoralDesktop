@@ -93,7 +93,9 @@ namespace Capa_Negocio
                 return false;
             }
         }
-       /* public DataTable ObtenerVentasRecientes()
+
+        // Últimas ventas para la "Actividad reciente" del dashboard
+        public DataTable ObtenerVentasRecientes()
         {
             try
             {
@@ -104,7 +106,20 @@ namespace Capa_Negocio
                 throw new Exception("Error al obtener ventas recientes: " + ex.Message);
             }
         }
-        */
+
+        // Datos de las tarjetas del dashboard: ventas_hoy, total_hoy, clientes, stock_bajo
+        public DataTable ObtenerResumenDashboard()
+        {
+            try
+            {
+                return objVentaDatos.ObtenerResumenDashboard();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el resumen del dashboard: " + ex.Message);
+            }
+        }
+
         public DataTable ObtenerVentasPorVendedor(int idUsuario)
         {
             try

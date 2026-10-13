@@ -6,9 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Capa_Datos; // Asegurate de que este using coincida con el nombre de tu capa
-using System;
-using System.Data;
+
 
 namespace Capa_Negocio
     {

@@ -81,9 +81,9 @@ namespace PetShopDelLitoral
 
             guna2TextBox1.PlaceholderText = "DNI del cliente...";
             CargarSugerenciasDni();
-           
+
             guna2DateTimePicker1.Value = DateTime.Today;
-            
+
             // Los importes se calculan solos
             txtSubtotal.ReadOnly = true; // Subtotal
             txtDescuento.ReadOnly = false; // Descuento % sobre la compra completa
@@ -243,7 +243,7 @@ namespace PetShopDelLitoral
 
             if (yaAgregado + cantidad > stock)
             {
-                MessageBox.Show("Stock insuficiente. Disponible: " + stock ,
+                MessageBox.Show("Stock insuficiente. Disponible: " + stock,
                                 "Stock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -427,12 +427,12 @@ namespace PetShopDelLitoral
 
             if (cnVenta.RegistrarVenta(venta, detalles, out idVenta, out mensaje))
             {
-                
-                    // Genera y descarga el PDF automáticamente
-                    GenerarPdfComprobante(idVenta, venta, detalles);
 
-                    LimpiarFormulario();
-                
+                // Genera y descarga el PDF automáticamente
+                GenerarPdfComprobante(idVenta, venta, detalles);
+
+                LimpiarFormulario();
+
             }
             else
             {
@@ -517,9 +517,23 @@ namespace PetShopDelLitoral
 
                         doc.Add(tabla);
 
-                        // 6. Totales
+                        // 6. Totales (misma cuenta que la pantalla y que CD_Venta)
                         doc.Add(new Chunk(Chunk.NEWLINE));
-                        decimal totalGeneral = detalles.Sum(d => d.Subtotal_venta);
+                        decimal subtotal = detalles.Sum(d => d.Subtotal_venta);
+                        decimal totalGeneral = Math.Round(subtotal * (1 - venta.Descuento_venta / 100m), 2, MidpointRounding.AwayFromZero);
+                        decimal montoDescuento = subtotal - totalGeneral;
+
+                        Paragraph pSubtotal = new Paragraph("Subtotal: $ " + subtotal.ToString("N2", cultura), fuenteNormal);
+                        pSubtotal.Alignment = Element.ALIGN_RIGHT;
+                        doc.Add(pSubtotal);
+
+                        // El descuento general solo se muestra si se aplicó uno
+                        if (venta.Descuento_venta > 0)
+                        {
+                            Paragraph pDescuento = new Paragraph("Descuento (" + venta.Descuento_venta.ToString("0.##") + "%): - $ " + montoDescuento.ToString("N2", cultura), fuenteNormal);
+                            pDescuento.Alignment = Element.ALIGN_RIGHT;
+                            doc.Add(pDescuento);
+                        }
 
                         Paragraph pTotal = new Paragraph("TOTAL GENERAL: $ " + totalGeneral.ToString("N2", cultura), fuenteTitulo);
                         pTotal.Alignment = Element.ALIGN_RIGHT;
@@ -565,8 +579,8 @@ namespace PetShopDelLitoral
                 MessageBox.Show("Error al cargar historial: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-    
-    private void guna2Panel1_Paint(object sender, PaintEventArgs e) { }
+
+        private void guna2Panel1_Paint(object sender, PaintEventArgs e) { }
         private void PanelDatosVenta_Paint(object sender, PaintEventArgs e) { }
         private void guna2Panel1_Paint_1(object sender, PaintEventArgs e) { }
         private void guna2Panel1_Paint_2(object sender, PaintEventArgs e) { }

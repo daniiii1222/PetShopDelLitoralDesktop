@@ -190,7 +190,21 @@ namespace PetShopDelLitoral
             // CargarProveedores();
         }
 
-      
+
+        // ==========================================
+        // CONFIGURACIÓN DE LA GRILLA
+        // ==========================================
+
+        // Ajuste de anchos común a las tres grillas:
+        // cada columna toma el ancho justo de su contenido y de su título (no se corta ni se superpone),
+        // y "Correo" se estira para ocupar el espacio que sobra.
+        private void AjustarAnchosGrid()
+        {
+            dgvPersonas.AllowUserToAddRows = false;   // saca la fila vacía del final
+            dgvPersonas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvPersonas.Columns["Correo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
         private void ConfigurarGridClientes()
         {
             dgvPersonas.Columns.Clear();
@@ -215,21 +229,7 @@ namespace PetShopDelLitoral
             dgvPersonas.Columns["Dni"].Visible = false;
 
             AgregarColumnasAcciones();
-
-            dgvPersonas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-
-            // Asignamos anchos fijos solo si la columna existe
-            if (dgvPersonas.Columns["Id"] != null) dgvPersonas.Columns["Id"].Width = 30;
-            if (dgvPersonas.Columns["Telefono"] != null) dgvPersonas.Columns["Telefono"].Width = 80;
-
-            // Los botones también
-            if (dgvPersonas.Columns["Modificar"] != null) dgvPersonas.Columns["Modificar"].Width = 40;
-            if (dgvPersonas.Columns["Eliminar"] != null) dgvPersonas.Columns["Eliminar"].Width = 40;
-
-            // Dejamos que las columnas de texto largo se expandan
-            dgvPersonas.Columns["Nombre"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvPersonas.Columns["Apellido"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvPersonas.Columns["Correo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            AjustarAnchosGrid();
         }
 
 
@@ -248,8 +248,7 @@ namespace PetShopDelLitoral
             dgvPersonas.Columns.Add("Direccion", "Dirección");
 
             AgregarColumnasAcciones();
-
-            dgvPersonas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            AjustarAnchosGrid();
         }
 
         private void ConfigurarGridUsuarios()
@@ -280,7 +279,7 @@ namespace PetShopDelLitoral
             dgvPersonas.Columns["IdRol"].Visible = false;
 
             AgregarColumnasAcciones();
-            dgvPersonas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            AjustarAnchosGrid();
         }
 
         private void AgregarColumnasAcciones()
@@ -288,7 +287,7 @@ namespace PetShopDelLitoral
             DataGridViewButtonColumn btnModificar = new DataGridViewButtonColumn();
 
             btnModificar.Name = "Modificar";
-            btnModificar.HeaderText = "Modificar";
+            btnModificar.HeaderText = "";   // sin título: la columna queda angosta, solo con el icono
             btnModificar.Text = "✏";
             btnModificar.UseColumnTextForButtonValue = true;
 
@@ -298,7 +297,7 @@ namespace PetShopDelLitoral
             DataGridViewButtonColumn btnEliminar = new DataGridViewButtonColumn();
 
             btnEliminar.Name = "Eliminar";
-            btnEliminar.HeaderText = "Eliminar";
+            btnEliminar.HeaderText = "";
             btnEliminar.Text = "🗑";
             btnEliminar.UseColumnTextForButtonValue = true;
 
@@ -552,7 +551,7 @@ namespace PetShopDelLitoral
 
         private void FrmPersonas_Load(object sender, EventArgs e)
         {
-            
+
             // 1. Ocultamos los botones por defecto
             btnUsuario.Visible = false;
             btntipoProveedor.Visible = false;
@@ -798,7 +797,7 @@ namespace PetShopDelLitoral
                 }
             }
         }
-        
+
 
         private void btnLimpiarCampos_Click(object sender, EventArgs e)
         {

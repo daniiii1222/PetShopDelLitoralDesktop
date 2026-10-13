@@ -6,13 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using CapaDatos;
 
 namespace PetShopDelLitoral
 {
     public partial class FrmBackup : Form
     {
-        private readonly string connectionString = "Server=localhost;Database=petshopdellitoral;Uid=root;Pwd=;";
-
         public FrmBackup()
         {
             InitializeComponent();
@@ -257,7 +256,7 @@ namespace PetShopDelLitoral
                 string nombreArchivo = $"petshop_db_{DateTime.Now:yyyyMMdd_HHmmss}.sql";
                 string rutaDestino = Path.Combine(carpeta, nombreArchivo);
 
-                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                using (MySqlConnection conn = ClsDataBase.CrearConexion())
                 {
                     conn.Open();
                     StringBuilder sb = new StringBuilder();

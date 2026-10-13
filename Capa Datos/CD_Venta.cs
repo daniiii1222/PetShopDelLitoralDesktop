@@ -9,11 +9,6 @@ namespace Capa_Datos
 {
     public class CD_Venta
     {
-        // Misma cadena de conexión que usa ClsDataBase. Acá la repetimos porque
-        // este método necesita manejar la conexión él mismo (para poder abrir
-        // una transacción), en vez de dejar que ClsDataBase abra una por llamada.
-        private const string cadenaConexion = "Server=localhost; Database=petshopdellitoral; Uid=root; Pwd=;";
-
         public DataSet ListarMetodosPago()
         {
             ClsDataBase database = new ClsDataBase();
@@ -50,8 +45,8 @@ namespace Capa_Datos
 
         public int RegistrarVentaTransaccional(Venta objVenta, List<DetalleVenta> detalles)
         {
-            // 1) Una sola conexión para TODO el proceso
-            using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))
+            // 1) Una sola conexión para TODO el proceso (la cadena vive en ClsDataBase)
+            using (MySqlConnection conexion = ClsDataBase.CrearConexion())
             {
                 conexion.Open();
 
@@ -165,39 +160,27 @@ namespace Capa_Datos
             }
 
         }
-
-       /* private void CargarVentasRecientes()
+        // Últimas ventas para la "Actividad reciente" del dashboard
+        public DataTable ObtenerVentasRecientes()
         {
-            try
-            {
-                CN_Venta cnVenta = new CN_Venta();
-                DataTable dt = cnVenta.ObtenerVentasRecientes();
+            ClsDataBase database = new ClsDataBase();
+            database.NameSP = "sp_ObtenerVentasRecientes";
+            database.TableName = "TablaVentasRecientes";
+            database.EjecutarSelect();
+            if (!string.IsNullOrEmpty(database.ErrorDB)) throw new Exception(database.ErrorDB);
+            return database.DsResults.Tables["TablaVentasRecientes"];
+        }
 
-                // Si tu DataGridView del dashboard se llama dataGridView1:
-                dataGridView1.DataSource = dt;
-
-                // Opcional: Personalizar los nombres de las columnas para que se vean prolijas
-                if (dataGridView1.Columns.Contains("idVenta")) dataGridView1.Columns["idVenta"].HeaderText = "N° Venta";
-                if (dataGridView1.Columns.Contains("fecha_venta")) dataGridView1.Columns["fecha_venta"].HeaderText = "Fecha";
-                if (dataGridView1.Columns.Contains("total_venta")) dataGridView1.Columns["total_venta"].HeaderText = "Total ($)";
-                if (dataGridView1.Columns.Contains("cliente")) dataGridView1.Columns["cliente"].HeaderText = "Cliente";
-
-                // Mostrar la actividad más reciente en el label de texto si hay registros
-                if (dt.Rows.Count > 0)
-                {
-                    DataRow ultima = dt.Rows[0];
-                    label8.Text = $"Venta #{ultima["idVenta"]} Completada ($ {Convert.ToDecimal(ultima["total_venta"]).ToString("N2")})";
-                }
-                else
-                {
-                    label8.Text = "No hay ventas registradas aún.";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar la actividad reciente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }*/
+        // Una fila con: ventas_hoy, total_hoy, clientes, stock_bajo
+        public DataTable ObtenerResumenDashboard()
+        {
+            ClsDataBase database = new ClsDataBase();
+            database.NameSP = "sp_ObtenerResumenDashboard";
+            database.TableName = "TablaResumenDashboard";
+            database.EjecutarSelect();
+            if (!string.IsNullOrEmpty(database.ErrorDB)) throw new Exception(database.ErrorDB);
+            return database.DsResults.Tables["TablaResumenDashboard"];
+        }
 
         public DataTable ObtenerVentasPorVendedor(int idUsuario)
         {

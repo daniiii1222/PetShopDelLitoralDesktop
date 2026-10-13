@@ -8,6 +8,14 @@ namespace CapaDatos
 {
     public class ClsDataBase
     {
+        private const string NombreBD = "petshopdellitoral";
+        private const string CadenaConexion = "Server=localhost; Database=" + NombreBD + "; Uid=root; Pwd=;";
+
+        // Única definición de cómo se conecta la app a la base
+        public static MySqlConnection CrearConexion()
+        {
+            return new MySqlConnection(CadenaConexion);
+        }
         #region Variables privadas
 
         private MySqlConnection _objMySqlConnection;
@@ -57,10 +65,8 @@ namespace CapaDatos
 
         private void CrearConexionBaseDatos(ref ClsDataBase ObjDataBase)
         {
-            ObjDataBase.NameDB = "petshopdellitoral";
-            string cadenaConexion = "Server=localhost; Database=petshopdellitoral; Uid=root; Pwd=;";
-            ObjDataBase.ObjMySqlConnection = new MySqlConnection(cadenaConexion);
-
+            ObjDataBase.NameDB = NombreBD;
+            ObjDataBase.ObjMySqlConnection = CrearConexion();
         }
 
 
