@@ -247,7 +247,14 @@ namespace PetShopDelLitoral
             dgvPersonas.Columns.Add("Correo", "Correo");
             dgvPersonas.Columns.Add("Telefono", "Teléfono");
             dgvPersonas.Columns.Add("Direccion", "Dirección");
+            dgvPersonas.Columns.Add("Estado", "Estado");
+            dgvPersonas.Columns["Estado"].Visible = false;
 
+            dgvPersonas.Columns.Add("IdPersona", "IdPersona");
+            dgvPersonas.Columns["IdPersona"].Visible = false;
+
+            dgvPersonas.Columns.Add("Dni", "DNI");
+            dgvPersonas.Columns["Dni"].Visible = false;
             AgregarColumnasAcciones();
             AjustarAnchosGrid();
         }
@@ -370,6 +377,11 @@ namespace PetShopDelLitoral
 
         private void EliminarPersona(int id)
         {
+            if (tipoSeleccionado == "Proveedor")
+            {
+                MessageBox.Show("La baja de proveedores todavía no está implementada en esta pantalla.", "Atención");
+                return;
+            }
             string entidad = tipoSeleccionado == "Cliente" ? "cliente" : "usuario";
 
             DialogResult resultado = MessageBox.Show(
@@ -389,6 +401,7 @@ namespace PetShopDelLitoral
                 CN_Cliente objNegocio = new CN_Cliente();
                 exito = objNegocio.EliminarCliente(id, out mensaje);
             }
+
             else
             {
                 CN_Usuario objNegocio = new CN_Usuario();
@@ -856,7 +869,7 @@ namespace PetShopDelLitoral
                     int idPersona = item.Id_persona != null ? item.Id_persona.idPersona : 0;
 
                     // Agregamos la fila respetando las columnas configuradas en ConfigurarGridProveedores
-                    dgvPersonas.Rows.Add(idProveedor, nombre, apellido, correo, telefono, direccion);
+                    dgvPersonas.Rows.Add(idProveedor, nombre, apellido, correo, telefono, direccion, estado, idPersona, dni);
                 }
             }
             catch (Exception ex)
