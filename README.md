@@ -194,7 +194,7 @@ El menú lateral cambia según el rol del usuario logueado.
 
 Dentro de **Personas**, cada rol ve distintos tipos de registro: el administrador gestiona usuarios, clientes y proveedores; el vendedor, solo clientes.
 
-> La matriz sale de `Inicio.cs` (método `AplicarPermisosPorRol`). Si se modifican los permisos, hay que actualizar esta tabla.
+
 
 ---
 
@@ -227,7 +227,7 @@ Un detalle de diseño que conviene conocer antes de tocar las pantallas:
 - **`Inicio`** es la ventana principal. Tiene el menú lateral y un panel central donde se muestran las demás pantallas: cada formulario se incrusta ahí con `Dock = Fill`.
 - Por eso, el **tamaño real** de cada pantalla lo decide el panel central y no el tamaño que tiene en el diseñador. Las pantallas deben adaptarse con `Dock`, `Anchor` o `TableLayoutPanel` y no con posiciones fijas en píxeles.
 - El **Dashboard** usa un `TableLayoutPanel` (dos tarjetas arriba y la actividad reciente abajo) justamente para evitar superposiciones.
-- **Regla práctica:** lo visual y estático (colores, columnas, tamaños) va en el archivo `.Designer.cs`; lo dinámico (datos y eventos) va en el `.cs`. Cuidado con el código que redefine el diseño al cargar, porque pisa lo que se configuró en el diseñador.
+- **Regla práctica:** lo visual y estático (colores, columnas, tamaños) va en el archivo `.Designer.cs`; lo dinámico (datos y eventos) va en el `.cs`. 
 
 ---
 
