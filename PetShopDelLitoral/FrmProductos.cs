@@ -32,6 +32,11 @@ namespace PetShopDelLitoral
             DataGridViewProductos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DataGridViewProductos.DefaultCellStyle.SelectionBackColor = Color.FromArgb(225, 185, 110);
             DataGridViewProductos.DefaultCellStyle.SelectionForeColor = Color.Black;
+            DataGridViewProductos.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(61, 44, 34);
+            DataGridViewProductos.ColumnHeadersDefaultCellStyle.ForeColor = Color.WhiteSmoke;
+            DataGridViewProductos.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(61, 44, 34);
+            DataGridViewProductos.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.WhiteSmoke;
+            DataGridViewProductos.EnableHeadersVisualStyles = false;
         }
 
         private void CargarCategoriasFiltro()

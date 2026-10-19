@@ -48,6 +48,11 @@ namespace PetShopDelLitoral
             dgvCompras.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCompras.DefaultCellStyle.SelectionBackColor = Color.FromArgb(225, 185, 110);
             dgvCompras.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvCompras.EnableHeadersVisualStyles = false;
+            dgvCompras.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(33, 24, 21);
+            dgvCompras.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCompras.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(33, 24, 21);
+            dgvCompras.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
         }
 
         private void InicializarCampos()

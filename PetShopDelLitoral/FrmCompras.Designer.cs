@@ -52,7 +52,7 @@ namespace PetShopDelLitoral
             this.botonGuardarCompra = new FontAwesome.Sharp.IconButton();
             this.PanelDerechoSUP = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.label14 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2CustomGradientPanel5 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.iconButton6 = new FontAwesome.Sharp.IconButton();
             this.label10 = new System.Windows.Forms.Label();
@@ -64,8 +64,8 @@ namespace PetShopDelLitoral
             this.panelIzquierdoVenta = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            this.comboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
             this.guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.guna2TextBox5 = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
@@ -117,7 +117,7 @@ namespace PetShopDelLitoral
             this.PaneContenidoSec.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.PaneContenidoSec.Location = new System.Drawing.Point(0, 0);
             this.PaneContenidoSec.Name = "PaneContenidoSec";
-            this.PaneContenidoSec.Padding = new System.Windows.Forms.Padding(10, 10, 15, 15);
+            this.PaneContenidoSec.Padding = new System.Windows.Forms.Padding(12);
             this.PaneContenidoSec.Size = new System.Drawing.Size(1139, 621);
             this.PaneContenidoSec.TabIndex = 5;
             this.PaneContenidoSec.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint_1);
@@ -130,26 +130,25 @@ namespace PetShopDelLitoral
             this.PanelDerechoVenta.Controls.Add(this.PanelDerechoBOT);
             this.PanelDerechoVenta.Controls.Add(this.PanelDerechoSUP);
             this.PanelDerechoVenta.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelDerechoVenta.Location = new System.Drawing.Point(325, 10);
-            this.PanelDerechoVenta.Margin = new System.Windows.Forms.Padding(10);
+            this.PanelDerechoVenta.Location = new System.Drawing.Point(309, 12);
+            this.PanelDerechoVenta.Margin = new System.Windows.Forms.Padding(0);
             this.PanelDerechoVenta.Name = "PanelDerechoVenta";
-            this.PanelDerechoVenta.Size = new System.Drawing.Size(799, 596);
+            this.PanelDerechoVenta.Size = new System.Drawing.Size(818, 597);
             this.PanelDerechoVenta.TabIndex = 1;
             // 
             // PanelDerechoMID
             // 
-            this.PanelDerechoMID.BorderRadius = 10;
+            this.PanelDerechoMID.BorderRadius = 15;
             this.PanelDerechoMID.Controls.Add(this.dgvCompras);
             this.PanelDerechoMID.Controls.Add(this.label11);
-            this.PanelDerechoMID.Controls.Add(this.guna2CustomGradientPanel3);
             this.PanelDerechoMID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelDerechoMID.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.PanelDerechoMID.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.PanelDerechoMID.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.PanelDerechoMID.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.PanelDerechoMID.Location = new System.Drawing.Point(0, 100);
+            this.PanelDerechoMID.Location = new System.Drawing.Point(0, 90);
             this.PanelDerechoMID.Name = "PanelDerechoMID";
-            this.PanelDerechoMID.Size = new System.Drawing.Size(799, 441);
+            this.PanelDerechoMID.Size = new System.Drawing.Size(818, 449);
             this.PanelDerechoMID.TabIndex = 1;
             this.PanelDerechoMID.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelDerechoMID_Paint);
             // 
@@ -166,8 +165,8 @@ namespace PetShopDelLitoral
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCompras.ColumnHeadersHeight = 27;
@@ -180,9 +179,9 @@ namespace PetShopDelLitoral
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(185)))), ((int)(((byte)(110)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvCompras.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCompras.EnableHeadersVisualStyles = false;
@@ -190,13 +189,13 @@ namespace PetShopDelLitoral
             this.dgvCompras.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvCompras.Location = new System.Drawing.Point(12, 38);
+            this.dgvCompras.Location = new System.Drawing.Point(14, 38);
             this.dgvCompras.Name = "dgvCompras";
             this.dgvCompras.RowHeadersVisible = false;
             this.dgvCompras.RowHeadersWidth = 51;
             this.dgvCompras.RowTemplate.Height = 24;
             this.dgvCompras.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCompras.Size = new System.Drawing.Size(775, 335);
+            this.dgvCompras.Size = new System.Drawing.Size(790, 395);
             this.dgvCompras.TabIndex = 16;
             this.dgvCompras.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvCompras.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -205,7 +204,7 @@ namespace PetShopDelLitoral
             this.dgvCompras.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
             this.dgvCompras.ThemeStyle.BackColor = System.Drawing.Color.White;
             this.dgvCompras.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvCompras.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.dgvCompras.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.dgvCompras.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvCompras.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.dgvCompras.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
@@ -215,10 +214,10 @@ namespace PetShopDelLitoral
             this.dgvCompras.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvCompras.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvCompras.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.dgvCompras.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.dgvCompras.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.Black;
             this.dgvCompras.ThemeStyle.RowsStyle.Height = 24;
-            this.dgvCompras.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvCompras.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.dgvCompras.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(185)))), ((int)(((byte)(110)))));
+            this.dgvCompras.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
             // 
             // columnaProducto
             // 
@@ -262,8 +261,40 @@ namespace PetShopDelLitoral
             this.label11.TabIndex = 15;
             this.label11.Text = "Detalle de Compra";
             // 
+            // guna2Panel2
+            // 
+            this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.guna2Panel2.Location = new System.Drawing.Point(0, 539);
+            this.guna2Panel2.Name = "guna2Panel2";
+            this.guna2Panel2.Size = new System.Drawing.Size(818, 10);
+            this.guna2Panel2.TabIndex = 4;
+            // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 82);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(818, 8);
+            this.panel1.TabIndex = 3;
+            // 
+            // PanelDerechoBOT
+            // 
+            this.PanelDerechoBOT.Controls.Add(this.guna2CustomGradientPanel3);
+            this.PanelDerechoBOT.Controls.Add(this.guna2CustomGradientPanel4);
+            this.PanelDerechoBOT.Controls.Add(this.guna2CustomGradientPanel6);
+            this.PanelDerechoBOT.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.PanelDerechoBOT.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
+            this.PanelDerechoBOT.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
+            this.PanelDerechoBOT.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
+            this.PanelDerechoBOT.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
+            this.PanelDerechoBOT.Location = new System.Drawing.Point(0, 549);
+            this.PanelDerechoBOT.Name = "PanelDerechoBOT";
+            this.PanelDerechoBOT.Size = new System.Drawing.Size(818, 48);
+            this.PanelDerechoBOT.TabIndex = 2;
+            // 
             // guna2CustomGradientPanel3
             // 
+            this.guna2CustomGradientPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.guna2CustomGradientPanel3.BackColor = System.Drawing.Color.Transparent;
             this.guna2CustomGradientPanel3.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.guna2CustomGradientPanel3.BorderRadius = 10;
@@ -272,10 +303,9 @@ namespace PetShopDelLitoral
             this.guna2CustomGradientPanel3.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.guna2CustomGradientPanel3.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.guna2CustomGradientPanel3.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.guna2CustomGradientPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.guna2CustomGradientPanel3.Location = new System.Drawing.Point(12, 385);
+            this.guna2CustomGradientPanel3.Location = new System.Drawing.Point(0, 4);
             this.guna2CustomGradientPanel3.Name = "guna2CustomGradientPanel3";
-            this.guna2CustomGradientPanel3.Size = new System.Drawing.Size(150, 40);
+            this.guna2CustomGradientPanel3.Size = new System.Drawing.Size(140, 40);
             this.guna2CustomGradientPanel3.TabIndex = 15;
             // 
             // iconButton5
@@ -293,45 +323,16 @@ namespace PetShopDelLitoral
             this.iconButton5.IconSize = 25;
             this.iconButton5.Location = new System.Drawing.Point(0, 0);
             this.iconButton5.Name = "iconButton5";
-            this.iconButton5.Size = new System.Drawing.Size(150, 40);
+            this.iconButton5.Size = new System.Drawing.Size(140, 40);
             this.iconButton5.TabIndex = 1;
             this.iconButton5.Text = "Vaciar Lista";
             this.iconButton5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.iconButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.iconButton5.UseVisualStyleBackColor = true;
             // 
-            // guna2Panel2
-            // 
-            this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.guna2Panel2.Location = new System.Drawing.Point(0, 541);
-            this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(799, 5);
-            this.guna2Panel2.TabIndex = 4;
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 95);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(799, 5);
-            this.panel1.TabIndex = 3;
-            // 
-            // PanelDerechoBOT
-            // 
-            this.PanelDerechoBOT.Controls.Add(this.guna2CustomGradientPanel4);
-            this.PanelDerechoBOT.Controls.Add(this.guna2CustomGradientPanel6);
-            this.PanelDerechoBOT.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PanelDerechoBOT.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.PanelDerechoBOT.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.PanelDerechoBOT.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.PanelDerechoBOT.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.PanelDerechoBOT.Location = new System.Drawing.Point(0, 546);
-            this.PanelDerechoBOT.Name = "PanelDerechoBOT";
-            this.PanelDerechoBOT.Size = new System.Drawing.Size(799, 50);
-            this.PanelDerechoBOT.TabIndex = 2;
-            // 
             // guna2CustomGradientPanel4
             // 
+            this.guna2CustomGradientPanel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2CustomGradientPanel4.BackColor = System.Drawing.Color.Transparent;
             this.guna2CustomGradientPanel4.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.guna2CustomGradientPanel4.BorderRadius = 15;
@@ -340,10 +341,9 @@ namespace PetShopDelLitoral
             this.guna2CustomGradientPanel4.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.guna2CustomGradientPanel4.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.guna2CustomGradientPanel4.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.guna2CustomGradientPanel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.guna2CustomGradientPanel4.Location = new System.Drawing.Point(475, 4);
+            this.guna2CustomGradientPanel4.Location = new System.Drawing.Point(495, 4);
             this.guna2CustomGradientPanel4.Name = "guna2CustomGradientPanel4";
-            this.guna2CustomGradientPanel4.Size = new System.Drawing.Size(131, 40);
+            this.guna2CustomGradientPanel4.Size = new System.Drawing.Size(140, 40);
             this.guna2CustomGradientPanel4.TabIndex = 3;
             // 
             // iconButton2
@@ -360,7 +360,7 @@ namespace PetShopDelLitoral
             this.iconButton2.IconSize = 25;
             this.iconButton2.Location = new System.Drawing.Point(0, 0);
             this.iconButton2.Name = "iconButton2";
-            this.iconButton2.Size = new System.Drawing.Size(131, 40);
+            this.iconButton2.Size = new System.Drawing.Size(140, 40);
             this.iconButton2.TabIndex = 0;
             this.iconButton2.Text = "Cancelar";
             this.iconButton2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -378,9 +378,9 @@ namespace PetShopDelLitoral
             this.guna2CustomGradientPanel6.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.guna2CustomGradientPanel6.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.guna2CustomGradientPanel6.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2CustomGradientPanel6.Location = new System.Drawing.Point(620, 4);
+            this.guna2CustomGradientPanel6.Location = new System.Drawing.Point(653, 4);
             this.guna2CustomGradientPanel6.Name = "guna2CustomGradientPanel6";
-            this.guna2CustomGradientPanel6.Size = new System.Drawing.Size(166, 40);
+            this.guna2CustomGradientPanel6.Size = new System.Drawing.Size(165, 40);
             this.guna2CustomGradientPanel6.TabIndex = 16;
             // 
             // botonGuardarCompra
@@ -399,7 +399,7 @@ namespace PetShopDelLitoral
             this.botonGuardarCompra.IconSize = 25;
             this.botonGuardarCompra.Location = new System.Drawing.Point(0, 0);
             this.botonGuardarCompra.Name = "botonGuardarCompra";
-            this.botonGuardarCompra.Size = new System.Drawing.Size(181, 40);
+            this.botonGuardarCompra.Size = new System.Drawing.Size(165, 40);
             this.botonGuardarCompra.TabIndex = 1;
             this.botonGuardarCompra.Text = "Guardar Compra";
             this.botonGuardarCompra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -427,7 +427,7 @@ namespace PetShopDelLitoral
             this.PanelDerechoSUP.Margin = new System.Windows.Forms.Padding(0);
             this.PanelDerechoSUP.Name = "PanelDerechoSUP";
             this.PanelDerechoSUP.Padding = new System.Windows.Forms.Padding(0);
-            this.PanelDerechoSUP.Size = new System.Drawing.Size(799, 78);
+            this.PanelDerechoSUP.Size = new System.Drawing.Size(818, 82);
             this.PanelDerechoSUP.TabIndex = 0;
             this.PanelDerechoSUP.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelDerechoSUP_Paint);
             // 
@@ -437,7 +437,7 @@ namespace PetShopDelLitoral
             this.label14.BackColor = System.Drawing.Color.Transparent;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.label14.Location = new System.Drawing.Point(240, 11);
+            this.label14.Location = new System.Drawing.Point(324, 14);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(102, 15);
             this.label14.TabIndex = 16;
@@ -445,9 +445,22 @@ namespace PetShopDelLitoral
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(240, 36);
+            this.textBox2.BorderRadius = 5;
+            this.textBox2.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.textBox2.DefaultText = "";
+            this.textBox2.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.textBox2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.textBox2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.textBox2.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.textBox2.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.textBox2.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.textBox2.Location = new System.Drawing.Point(324, 34);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(85, 24);
+            this.textBox2.PasswordChar = '\0';
+            this.textBox2.PlaceholderText = "$ 0,00";
+            this.textBox2.SelectedText = "";
+            this.textBox2.Size = new System.Drawing.Size(95, 36);
             this.textBox2.TabIndex = 15;
             // 
             // guna2CustomGradientPanel5
@@ -460,9 +473,9 @@ namespace PetShopDelLitoral
             this.guna2CustomGradientPanel5.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.guna2CustomGradientPanel5.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.guna2CustomGradientPanel5.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.guna2CustomGradientPanel5.Location = new System.Drawing.Point(435, 30);
+            this.guna2CustomGradientPanel5.Location = new System.Drawing.Point(530, 33);
             this.guna2CustomGradientPanel5.Name = "guna2CustomGradientPanel5";
-            this.guna2CustomGradientPanel5.Size = new System.Drawing.Size(115, 38);
+            this.guna2CustomGradientPanel5.Size = new System.Drawing.Size(125, 38);
             this.guna2CustomGradientPanel5.TabIndex = 14;
             // 
             // iconButton6
@@ -480,7 +493,7 @@ namespace PetShopDelLitoral
             this.iconButton6.IconSize = 25;
             this.iconButton6.Location = new System.Drawing.Point(0, 0);
             this.iconButton6.Name = "iconButton6";
-            this.iconButton6.Size = new System.Drawing.Size(115, 38);
+            this.iconButton6.Size = new System.Drawing.Size(125, 38);
             this.iconButton6.TabIndex = 1;
             this.iconButton6.Text = "Agregar";
             this.iconButton6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -493,7 +506,7 @@ namespace PetShopDelLitoral
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.label10.Location = new System.Drawing.Point(345, 11);
+            this.label10.Location = new System.Drawing.Point(434, 14);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(64, 15);
             this.label10.TabIndex = 13;
@@ -506,9 +519,9 @@ namespace PetShopDelLitoral
             this.guna2NumericUpDown1.BorderRadius = 5;
             this.guna2NumericUpDown1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.guna2NumericUpDown1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2NumericUpDown1.Location = new System.Drawing.Point(345, 30);
+            this.guna2NumericUpDown1.Location = new System.Drawing.Point(434, 34);
             this.guna2NumericUpDown1.Name = "guna2NumericUpDown1";
-            this.guna2NumericUpDown1.Size = new System.Drawing.Size(70, 38);
+            this.guna2NumericUpDown1.Size = new System.Drawing.Size(80, 36);
             this.guna2NumericUpDown1.TabIndex = 0;
             this.guna2NumericUpDown1.UpDownButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             // 
@@ -525,10 +538,10 @@ namespace PetShopDelLitoral
             this.iconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton4.IconSize = 25;
             this.iconButton4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton4.Location = new System.Drawing.Point(214, 30);
+            this.iconButton4.Location = new System.Drawing.Point(268, 34);
             this.iconButton4.Margin = new System.Windows.Forms.Padding(2);
             this.iconButton4.Name = "iconButton4";
-            this.iconButton4.Size = new System.Drawing.Size(36, 38);
+            this.iconButton4.Size = new System.Drawing.Size(36, 36);
             this.iconButton4.TabIndex = 12;
             this.iconButton4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.iconButton4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -546,12 +559,12 @@ namespace PetShopDelLitoral
             this.guna2TextBox7.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2TextBox7.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2TextBox7.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox7.Location = new System.Drawing.Point(12, 30);
+            this.guna2TextBox7.Location = new System.Drawing.Point(14, 34);
             this.guna2TextBox7.Name = "guna2TextBox7";
             this.guna2TextBox7.PasswordChar = '\0';
             this.guna2TextBox7.PlaceholderText = "Buscar producto por nombre";
             this.guna2TextBox7.SelectedText = "";
-            this.guna2TextBox7.Size = new System.Drawing.Size(198, 38);
+            this.guna2TextBox7.Size = new System.Drawing.Size(250, 36);
             this.guna2TextBox7.TabIndex = 11;
             // 
             // label9
@@ -560,7 +573,7 @@ namespace PetShopDelLitoral
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.label9.Location = new System.Drawing.Point(12, 6);
+            this.label9.Location = new System.Drawing.Point(14, 8);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(159, 20);
             this.label9.TabIndex = 1;
@@ -570,9 +583,9 @@ namespace PetShopDelLitoral
             // guna2Panel1
             // 
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.guna2Panel1.Location = new System.Drawing.Point(310, 10);
+            this.guna2Panel1.Location = new System.Drawing.Point(302, 12);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(15, 596);
+            this.guna2Panel1.Size = new System.Drawing.Size(12, 597);
             this.guna2Panel1.TabIndex = 2;
             // 
             // panelIzquierdoVenta
@@ -602,10 +615,10 @@ namespace PetShopDelLitoral
             this.panelIzquierdoVenta.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.panelIzquierdoVenta.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.panelIzquierdoVenta.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.panelIzquierdoVenta.Location = new System.Drawing.Point(10, 10);
-            this.panelIzquierdoVenta.Margin = new System.Windows.Forms.Padding(10, 3, 3, 10);
+            this.panelIzquierdoVenta.Location = new System.Drawing.Point(12, 12);
+            this.panelIzquierdoVenta.Margin = new System.Windows.Forms.Padding(0);
             this.panelIzquierdoVenta.Name = "panelIzquierdoVenta";
-            this.panelIzquierdoVenta.Size = new System.Drawing.Size(290, 580);
+            this.panelIzquierdoVenta.Size = new System.Drawing.Size(290, 597);
             this.panelIzquierdoVenta.TabIndex = 0;
             // 
             // label13
@@ -614,7 +627,7 @@ namespace PetShopDelLitoral
             this.label13.BackColor = System.Drawing.Color.Transparent;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.label13.Location = new System.Drawing.Point(11, 196);
+            this.label13.Location = new System.Drawing.Point(12, 206);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(142, 16);
             this.label13.TabIndex = 25;
@@ -626,7 +639,7 @@ namespace PetShopDelLitoral
             this.label12.BackColor = System.Drawing.Color.Transparent;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.label12.Location = new System.Drawing.Point(11, 148);
+            this.label12.Location = new System.Drawing.Point(12, 148);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(158, 16);
             this.label12.TabIndex = 24;
@@ -634,21 +647,43 @@ namespace PetShopDelLitoral
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(13, 216);
+            this.textBox1.BorderRadius = 5;
+            this.textBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.textBox1.DefaultText = "";
+            this.textBox1.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.textBox1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.textBox1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.textBox1.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.textBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.textBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.textBox1.Location = new System.Drawing.Point(12, 226);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(262, 20);
+            this.textBox1.PasswordChar = '\0';
+            this.textBox1.PlaceholderText = "Ej: 0001-00000001";
+            this.textBox1.SelectedText = "";
+            this.textBox1.Size = new System.Drawing.Size(266, 32);
             this.textBox1.TabIndex = 23;
             // 
             // comboBox1
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(13, 168);
+            this.comboBox1.BackColor = System.Drawing.Color.Transparent;
+            this.comboBox1.BorderRadius = 4;
+            this.comboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.comboBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.comboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.comboBox1.ItemHeight = 26;
+            this.comboBox1.Location = new System.Drawing.Point(12, 168);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(262, 21);
+            this.comboBox1.Size = new System.Drawing.Size(266, 32);
             this.comboBox1.TabIndex = 22;
             // 
             // guna2CustomGradientPanel1
             // 
+            this.guna2CustomGradientPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.guna2CustomGradientPanel1.BorderRadius = 15;
             this.guna2CustomGradientPanel1.Controls.Add(this.guna2TextBox5);
             this.guna2CustomGradientPanel1.Controls.Add(this.guna2CustomGradientPanel2);
@@ -660,9 +695,9 @@ namespace PetShopDelLitoral
             this.guna2CustomGradientPanel1.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(220)))), ((int)(((byte)(167)))));
             this.guna2CustomGradientPanel1.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(220)))), ((int)(((byte)(167)))));
             this.guna2CustomGradientPanel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2CustomGradientPanel1.Location = new System.Drawing.Point(12, 365);
+            this.guna2CustomGradientPanel1.Location = new System.Drawing.Point(12, 460);
             this.guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
-            this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(264, 115);
+            this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(266, 122);
             this.guna2CustomGradientPanel1.TabIndex = 21;
             this.guna2CustomGradientPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2CustomGradientPanel1_Paint);
             // 
@@ -686,7 +721,7 @@ namespace PetShopDelLitoral
             this.guna2TextBox5.PasswordChar = '\0';
             this.guna2TextBox5.PlaceholderText = "$   0,00";
             this.guna2TextBox5.SelectedText = "";
-            this.guna2TextBox5.Size = new System.Drawing.Size(95, 24);
+            this.guna2TextBox5.Size = new System.Drawing.Size(98, 26);
             this.guna2TextBox5.TabIndex = 5;
             // 
             // guna2CustomGradientPanel2
@@ -699,9 +734,9 @@ namespace PetShopDelLitoral
             this.guna2CustomGradientPanel2.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.guna2CustomGradientPanel2.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.guna2CustomGradientPanel2.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2CustomGradientPanel2.Location = new System.Drawing.Point(0, 80);
+            this.guna2CustomGradientPanel2.Location = new System.Drawing.Point(0, 82);
             this.guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
-            this.guna2CustomGradientPanel2.Size = new System.Drawing.Size(264, 35);
+            this.guna2CustomGradientPanel2.Size = new System.Drawing.Size(266, 40);
             this.guna2CustomGradientPanel2.TabIndex = 4;
             // 
             // guna2TextBox6
@@ -719,13 +754,13 @@ namespace PetShopDelLitoral
             this.guna2TextBox6.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2TextBox6.ForeColor = System.Drawing.Color.Black;
             this.guna2TextBox6.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox6.Location = new System.Drawing.Point(150, 2);
+            this.guna2TextBox6.Location = new System.Drawing.Point(140, 5);
             this.guna2TextBox6.Margin = new System.Windows.Forms.Padding(4);
             this.guna2TextBox6.Name = "guna2TextBox6";
             this.guna2TextBox6.PasswordChar = '\0';
             this.guna2TextBox6.PlaceholderText = "$   0,00";
             this.guna2TextBox6.SelectedText = "";
-            this.guna2TextBox6.Size = new System.Drawing.Size(100, 28);
+            this.guna2TextBox6.Size = new System.Drawing.Size(115, 30);
             this.guna2TextBox6.TabIndex = 6;
             // 
             // label8
@@ -733,7 +768,7 @@ namespace PetShopDelLitoral
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            this.label8.Location = new System.Drawing.Point(10, 5);
+            this.label8.Location = new System.Drawing.Point(12, 8);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(56, 24);
             this.label8.TabIndex = 2;
@@ -751,19 +786,19 @@ namespace PetShopDelLitoral
             this.guna2TextBox4.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2TextBox4.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2TextBox4.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox4.Location = new System.Drawing.Point(155, 38);
+            this.guna2TextBox4.Location = new System.Drawing.Point(155, 40);
             this.guna2TextBox4.Name = "guna2TextBox4";
             this.guna2TextBox4.PasswordChar = '\0';
             this.guna2TextBox4.PlaceholderText = "$   0,00";
             this.guna2TextBox4.SelectedText = "";
-            this.guna2TextBox4.Size = new System.Drawing.Size(95, 24);
+            this.guna2TextBox4.Size = new System.Drawing.Size(98, 26);
             this.guna2TextBox4.TabIndex = 3;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(15, 42);
+            this.label7.Location = new System.Drawing.Point(14, 44);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(72, 16);
             this.label7.TabIndex = 1;
@@ -773,7 +808,7 @@ namespace PetShopDelLitoral
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(15, 12);
+            this.label6.Location = new System.Drawing.Point(14, 12);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(56, 16);
             this.label6.TabIndex = 0;
@@ -781,7 +816,7 @@ namespace PetShopDelLitoral
             // 
             // guna2TextBox3
             // 
-            this.guna2TextBox3.BorderRadius = 10;
+            this.guna2TextBox3.BorderRadius = 8;
             this.guna2TextBox3.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.guna2TextBox3.DefaultText = "";
             this.guna2TextBox3.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -791,22 +826,13 @@ namespace PetShopDelLitoral
             this.guna2TextBox3.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2TextBox3.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2TextBox3.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox3.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.guna2TextBox3.DefaultText = "";
-            this.guna2TextBox3.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.guna2TextBox3.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.guna2TextBox3.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox3.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox3.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2TextBox3.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox3.Location = new System.Drawing.Point(13, 308);
+            this.guna2TextBox3.Location = new System.Drawing.Point(12, 342);
             this.guna2TextBox3.Multiline = true;
             this.guna2TextBox3.Name = "guna2TextBox3";
             this.guna2TextBox3.PasswordChar = '\0';
             this.guna2TextBox3.PlaceholderText = "ingrese observaciones (opcional)";
             this.guna2TextBox3.SelectedText = "";
-            this.guna2TextBox3.Size = new System.Drawing.Size(262, 45);
+            this.guna2TextBox3.Size = new System.Drawing.Size(266, 44);
             this.guna2TextBox3.TabIndex = 20;
             // 
             // label5
@@ -815,7 +841,7 @@ namespace PetShopDelLitoral
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.label5.Location = new System.Drawing.Point(11, 288);
+            this.label5.Location = new System.Drawing.Point(12, 322);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(112, 16);
             this.label5.TabIndex = 19;
@@ -834,12 +860,12 @@ namespace PetShopDelLitoral
             this.guna2TextBox2.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2TextBox2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2TextBox2.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox2.Location = new System.Drawing.Point(13, 260);
+            this.guna2TextBox2.Location = new System.Drawing.Point(12, 284);
             this.guna2TextBox2.Name = "guna2TextBox2";
             this.guna2TextBox2.PasswordChar = '\0';
             this.guna2TextBox2.PlaceholderText = "";
             this.guna2TextBox2.SelectedText = "";
-            this.guna2TextBox2.Size = new System.Drawing.Size(262, 24);
+            this.guna2TextBox2.Size = new System.Drawing.Size(266, 32);
             this.guna2TextBox2.TabIndex = 18;
             // 
             // label4
@@ -848,7 +874,7 @@ namespace PetShopDelLitoral
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.label4.Location = new System.Drawing.Point(11, 242);
+            this.label4.Location = new System.Drawing.Point(12, 264);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(180, 16);
             this.label4.TabIndex = 17;
@@ -865,9 +891,9 @@ namespace PetShopDelLitoral
             this.guna2ComboBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2ComboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.guna2ComboBox1.ItemHeight = 28;
-            this.guna2ComboBox1.Location = new System.Drawing.Point(13, 62);
+            this.guna2ComboBox1.Location = new System.Drawing.Point(12, 56);
             this.guna2ComboBox1.Name = "guna2ComboBox1";
-            this.guna2ComboBox1.Size = new System.Drawing.Size(262, 34);
+            this.guna2ComboBox1.Size = new System.Drawing.Size(266, 34);
             this.guna2ComboBox1.TabIndex = 16;
             this.guna2ComboBox1.SelectedIndexChanged += new System.EventHandler(this.guna2ComboBox1_SelectedIndexChanged);
             // 
@@ -891,11 +917,11 @@ namespace PetShopDelLitoral
             this.guna2DateTimePicker1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.guna2DateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.guna2DateTimePicker1.Location = new System.Drawing.Point(13, 120);
+            this.guna2DateTimePicker1.Location = new System.Drawing.Point(12, 114);
             this.guna2DateTimePicker1.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.guna2DateTimePicker1.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.guna2DateTimePicker1.Name = "guna2DateTimePicker1";
-            this.guna2DateTimePicker1.Size = new System.Drawing.Size(262, 25);
+            this.guna2DateTimePicker1.Size = new System.Drawing.Size(266, 30);
             this.guna2DateTimePicker1.TabIndex = 14;
             this.guna2DateTimePicker1.Value = new System.DateTime(2026, 8, 28, 21, 35, 18, 468);
             // 
@@ -905,7 +931,7 @@ namespace PetShopDelLitoral
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.label2.Location = new System.Drawing.Point(11, 102);
+            this.label2.Location = new System.Drawing.Point(12, 94);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 16);
             this.label2.TabIndex = 12;
@@ -979,7 +1005,7 @@ namespace PetShopDelLitoral
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.label1.Location = new System.Drawing.Point(11, 42);
+            this.label1.Location = new System.Drawing.Point(12, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(86, 16);
             this.label1.TabIndex = 1;
@@ -992,7 +1018,7 @@ namespace PetShopDelLitoral
             this.LDatosVenta.BackColor = System.Drawing.Color.Transparent;
             this.LDatosVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LDatosVenta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.LDatosVenta.Location = new System.Drawing.Point(11, 12);
+            this.LDatosVenta.Location = new System.Drawing.Point(12, 10);
             this.LDatosVenta.Name = "LDatosVenta";
             this.LDatosVenta.Size = new System.Drawing.Size(168, 20);
             this.LDatosVenta.TabIndex = 0;
@@ -1112,11 +1138,11 @@ namespace PetShopDelLitoral
         private System.Windows.Forms.DataGridViewTextBoxColumn columnaEliminar;
         private System.Windows.Forms.Label TBTituloSec;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private Guna.UI2.WinForms.Guna2TextBox textBox1;
+        private Guna.UI2.WinForms.Guna2ComboBox comboBox1;
         private System.Windows.Forms.Label label13;
         private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox1;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox2;
+        private Guna.UI2.WinForms.Guna2TextBox textBox2;
     }
 }
