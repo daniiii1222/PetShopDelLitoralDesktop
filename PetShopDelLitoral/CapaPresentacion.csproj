@@ -120,6 +120,7 @@
     <Compile Include="CargaProductos.Designer.cs">
       <DependentUpon>CargaProductos.cs</DependentUpon>
     </Compile>
+    <Compile Include="ComprobanteVenta.cs" />
     <Compile Include="FrmBackup.cs">
       <SubType>Form</SubType>
     </Compile>

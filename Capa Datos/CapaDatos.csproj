@@ -5,6 +5,8 @@
     <RootNamespace>Capa_Datos</RootNamespace>
   </PropertyGroup>
 
+
+
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="26.7.0" />
   </ItemGroup>

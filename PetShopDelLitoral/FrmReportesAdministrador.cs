@@ -231,7 +231,8 @@ namespace PetShopDelLitoral
             if (!dataGridReportes.Columns.Contains(columnaDetalle))
                 dataGridReportes.Columns.Add(columnaDetalle);
             columnaDetalle.DisplayIndex = dataGridReportes.Columns.Count - 1;
-
+            // Botón para (re)generar el comprobante de la venta de esa fila
+            ComprobanteVenta.AsegurarColumna(dataGridReportes);
             AjustarColumnas(dataGridReportes);
         }
 
@@ -267,6 +268,12 @@ namespace PetShopDelLitoral
         {
             // Clic en los encabezados: no hacemos nada
             if (e.RowIndex < 0) return;
+
+            if (ComprobanteVenta.EsColumnaComprobante(dataGridReportes, e.ColumnIndex))
+            {
+                ComprobanteVenta.Generar(this, dataGridReportes, e.RowIndex);
+                return;
+            }
 
             if (dataGridReportes.Columns[e.ColumnIndex].HeaderText != "Detalle" &&
                 dataGridReportes.Columns[e.ColumnIndex].Name != "columnaDetalle") return;

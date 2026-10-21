@@ -72,6 +72,8 @@ namespace PetShopDelLitoral
                 DataTable dt = cnReporte.ObtenerReporteVentas(inicio, fin, miId);
 
                 dgvReportes.DataSource = dt;
+                // Botón para (re)generar el comprobante de la venta de esa fila
+                ComprobanteVenta.AsegurarColumna(dgvReportes);
 
                 if (dt.Rows.Count == 0)
                     MessageBox.Show("No tenés ventas en este rango de fechas.", "Reportes", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -88,6 +90,11 @@ namespace PetShopDelLitoral
             // Si hace clic en los encabezados de las columnas, no hacemos nada
             if (e.RowIndex < 0) return;
 
+            if (ComprobanteVenta.EsColumnaComprobante(dgvReportes, e.ColumnIndex))
+            {
+                ComprobanteVenta.Generar(this, dgvReportes, e.RowIndex);
+                return;
+            }
             // Verificamos si hizo clic en la columna de Detalle
             if (dgvReportes.Columns[e.ColumnIndex].HeaderText == "Detalle" || dgvReportes.Columns[e.ColumnIndex].Name == "columnaDetalle")
             {
