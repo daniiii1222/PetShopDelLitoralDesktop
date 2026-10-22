@@ -39,6 +39,11 @@ namespace Capa_Negocio
                     throw new Exception("Error al cargar el detalle: " + ex.Message);
                 }
             }
+
+        public DataTable ObtenerProductosMasVendidos(DateTime desde, DateTime hasta, int limite)
+        {
+            return objReporteDatos.ObtenerProductosMasVendidos(desde, hasta, limite);
         }
+    }
  }
   

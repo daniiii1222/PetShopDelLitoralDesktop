@@ -57,6 +57,8 @@ namespace PetShopDelLitoral
             AplicarPermisosPorRol();
             ConfigurarEsteticaMenu();
             AbrirFormulario(new FrmDashboard());
+            CrearBotonEstadisticas();   
+            AplicarPermisosPorRol();
         }
 
         private void ConfigurarEsteticaMenu()
@@ -135,6 +137,8 @@ namespace PetShopDelLitoral
             {
                 MessageBox.Show("Sesion.UsuarioActual es NULL", "Error de Sesión");
             }
+
+            SetVisible(botonEstadisticas, PuedeVerEstadisticas());
         }
 
         private void SetVisible(Control control, bool visible)
@@ -143,6 +147,55 @@ namespace PetShopDelLitoral
             {
                 control.Visible = visible;
             }
+        }
+
+        // ---- Botón Estadísticas (mismo estilo que Reportes) ----
+        private IconButton botonEstadisticas;
+
+        private void CrearBotonEstadisticas()
+        {
+            botonEstadisticas = new IconButton();
+            botonEstadisticas.Name = "botonEstadisticas";
+            botonEstadisticas.Text = "Estadísticas";
+            botonEstadisticas.Font = botonReportes.Font;
+            botonEstadisticas.FlatStyle = FlatStyle.Flat;
+            botonEstadisticas.FlatAppearance.BorderSize = 0;
+            botonEstadisticas.ForeColor = botonReportes.ForeColor;
+            botonEstadisticas.IconChar = IconChar.ChartPie;
+            botonEstadisticas.IconColor = botonReportes.IconColor;
+            botonEstadisticas.IconFont = IconFont.Auto;
+            botonEstadisticas.ImageAlign = ContentAlignment.MiddleLeft;
+            botonEstadisticas.TextAlign = ContentAlignment.MiddleLeft;
+            botonEstadisticas.TextImageRelation = TextImageRelation.ImageBeforeText;
+            botonEstadisticas.Margin = botonReportes.Margin;
+            botonEstadisticas.Size = botonReportes.Size;
+            botonEstadisticas.UseVisualStyleBackColor = true;
+            botonEstadisticas.Click += botonEstadisticas_Click;
+
+            panelMenu.Controls.Add(botonEstadisticas);
+            // lo dejamos justo debajo de "Reportes"
+            panelMenu.Controls.SetChildIndex(botonEstadisticas, panelMenu.Controls.GetChildIndex(botonReportes) + 1);
+        }
+
+        private bool PuedeVerEstadisticas()
+        {
+            if (Sesion.UsuarioActual == null || Sesion.UsuarioActual.idRol == null) return false;
+            string rol = Sesion.UsuarioActual.idRol.descripcion_rol.Trim();
+            return rol.Equals("Administrador", StringComparison.OrdinalIgnoreCase) ||
+                   rol.Equals("Admin", StringComparison.OrdinalIgnoreCase) ||
+                   rol.Equals("Supervisor", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private void botonEstadisticas_Click(object sender, EventArgs e)
+        {
+            // Se vuelve a validar el rol acá: ocultar el botón no alcanza como seguridad
+            if (!PuedeVerEstadisticas())
+            {
+                MessageBox.Show("No tenés permiso para ver las estadísticas.", "Acceso denegado",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            AbrirFormulario(new FrmEstadisticas());
         }
 
         private void botonVentas_Click_1(object sender, EventArgs e)
