@@ -26,6 +26,17 @@ namespace PetShopDelLitoral
             CargarCategoriasFiltro();
             CargarProductos();
 
+            TxtBuscar.PlaceholderText = "Buscar por nombre o código...";
+            iBSearch.Click += (s, ev) => AplicarFiltros();
+            TxtBuscar.KeyDown += (s, ev) =>
+            {
+                if (ev.KeyCode == Keys.Enter)
+                {
+                    ev.SuppressKeyPress = true;
+                    AplicarFiltros();
+                }
+            };
+
             // Tus configuraciones de diseño de la grilla que ya tenías:
             DataGridViewProductos.ReadOnly = true;
             DataGridViewProductos.AllowUserToAddRows = false;
@@ -69,6 +80,8 @@ namespace PetShopDelLitoral
             DataGridViewProductos.Rows.Clear();
 
             string textoBusqueda = TxtBuscar.Text.Trim().ToLower();
+            string textoLimpio = textoBusqueda.TrimStart('#');
+            bool esNumero = int.TryParse(textoLimpio, out int codigoBuscado);
             int idCategoriaFiltro = 0;
 
             if (CBFiltroCateg.SelectedValue != null && int.TryParse(CBFiltroCateg.SelectedValue.ToString(), out int idCat))
@@ -80,7 +93,9 @@ namespace PetShopDelLitoral
             {
                 bool coincideEstado = p.Estado_producto;
                 bool coincideTexto = string.IsNullOrEmpty(textoBusqueda) ||
-                                     (p.Nombre_producto != null && p.Nombre_producto.ToLower().Contains(textoBusqueda));
+                                     (p.Nombre_producto != null && p.Nombre_producto.ToLower().Contains(textoBusqueda)) ||
+                                     p.IdProducto.ToString().Contains(textoLimpio) ||
+                                     (esNumero && p.IdProducto == codigoBuscado);
 
                 bool coincideCategoria = idCategoriaFiltro == 0 ||
                                          (p.IdCategoria != null && p.IdCategoria.IdCategoria == idCategoriaFiltro);
@@ -206,4 +221,3 @@ namespace PetShopDelLitoral
         }
     }
 }
-

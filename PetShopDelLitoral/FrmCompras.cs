@@ -38,6 +38,16 @@ namespace PetShopDelLitoral
             CargarTiposComprobante();
             CargarProductosAutocompletado();
             InicializarCampos();
+
+            guna2TextBox7.PlaceholderText = "Buscar por nombre o código...";
+            guna2TextBox7.KeyDown += (s, ev) =>
+            {
+                if (ev.KeyCode == Keys.Enter)
+                {
+                    ev.SuppressKeyPress = true;
+                    btnBuscarProducto_Click(s, ev);
+                }
+            };
         }
 
         private void ConfigurarGrilla()
@@ -167,12 +177,14 @@ namespace PetShopDelLitoral
                     if (!string.IsNullOrEmpty(prod.Nombre_producto))
                     {
                         coleccion.Add(prod.Nombre_producto);
+                        coleccion.Add(prod.IdProducto.ToString());
                     }
                 }
 
                 guna2TextBox7.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 guna2TextBox7.AutoCompleteSource = AutoCompleteSource.CustomSource;
                 guna2TextBox7.AutoCompleteCustomSource = coleccion;
+                guna2TextBox7.PlaceholderText = "Buscar por nombre o código...";
             }
             catch (Exception)
             {
@@ -190,11 +202,16 @@ namespace PetShopDelLitoral
 
             if (string.IsNullOrEmpty(texto))
             {
-                MessageBox.Show("Ingrese el nombre de un producto para buscar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Ingrese el nombre o código de un producto para buscar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            string textoLimpio = texto.TrimStart('#');
+            bool esNumero = int.TryParse(textoLimpio, out int codBuscado);
+
             _productoSeleccionado = _listaProductos.FirstOrDefault(p =>
+                (esNumero && p.IdProducto == codBuscado) ||
+                p.IdProducto.ToString() == textoLimpio ||
                 p.Nombre_producto.Equals(texto, StringComparison.OrdinalIgnoreCase) ||
                 p.Nombre_producto.ToLower().Contains(texto.ToLower()));
 
@@ -212,7 +229,7 @@ namespace PetShopDelLitoral
             }
             else
             {
-                MessageBox.Show("No se encontró ningún producto con ese nombre.", "No encontrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("No se encontró ningún producto con ese nombre o código.", "No encontrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -222,7 +239,12 @@ namespace PetShopDelLitoral
             if (_productoSeleccionado == null)
             {
                 string texto = guna2TextBox7.Text.Trim();
+                string textoLimpio = texto.TrimStart('#');
+                bool esNumero = int.TryParse(textoLimpio, out int codBuscado);
+
                 _productoSeleccionado = _listaProductos.FirstOrDefault(p =>
+                    (esNumero && p.IdProducto == codBuscado) ||
+                    p.IdProducto.ToString() == textoLimpio ||
                     p.Nombre_producto.Equals(texto, StringComparison.OrdinalIgnoreCase));
             }
 
