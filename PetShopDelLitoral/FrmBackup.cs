@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -174,6 +174,9 @@ namespace PetShopDelLitoral
             dgvHistorial.Dock = DockStyle.Top;
             dgvHistorial.Height = 220;
             dgvHistorial.Margin = new Padding(0);
+            dgvHistorial.AllowUserToAddRows = false;
+            dgvHistorial.AllowUserToDeleteRows = false;
+            dgvHistorial.ReadOnly = true;
 
             // --- Fila Inferior: Estadísticas (50% / 50%) ---
             TableLayoutPanel tlpTarjetasInferiores = new TableLayoutPanel();
@@ -338,6 +341,10 @@ namespace PetShopDelLitoral
                     tabla.RowHeadersVisible = false;
                     tabla.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                     tabla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    tabla.AllowUserToAddRows = false;
+                    tabla.AllowUserToDeleteRows = false;
+                    tabla.AllowUserToResizeRows = false;
+                    tabla.ReadOnly = true;
 
                     DataTable dt = new DataTable();
                     dt.Columns.Add("FECHA");
@@ -412,6 +419,8 @@ namespace PetShopDelLitoral
                     tabla.Columns.Add(colEliminar);
 
                     tabla.CellClick += Tabla_CellClick;
+                    tabla.CellFormatting -= Tabla_CellFormatting;
+                    tabla.CellFormatting += Tabla_CellFormatting;
 
                     ActualizarResumen(totalArchivos, pesoTotalBytes, ultimaFecha);
                 }
@@ -500,6 +509,32 @@ namespace PetShopDelLitoral
                     {
                         MessageBox.Show("Error al eliminar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                }
+            }
+        }
+
+        private void Tabla_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            DataGridView tabla = sender as DataGridView;
+            if (tabla == null) return;
+
+            if (e.ColumnIndex >= 0 && e.ColumnIndex < tabla.Columns.Count)
+            {
+                string colName = tabla.Columns[e.ColumnIndex].Name;
+                if (colName == "colDescargar")
+                {
+                    e.CellStyle.BackColor = Color.FromArgb(232, 157, 66);
+                    e.CellStyle.ForeColor = Color.White;
+                    e.CellStyle.SelectionBackColor = Color.FromArgb(215, 140, 50);
+                    e.CellStyle.SelectionForeColor = Color.White;
+                }
+                else if (colName == "colEliminar")
+                {
+                    e.CellStyle.BackColor = Color.FromArgb(215, 85, 65);
+                    e.CellStyle.ForeColor = Color.White;
+                    e.CellStyle.SelectionBackColor = Color.FromArgb(190, 70, 50);
+                    e.CellStyle.SelectionForeColor = Color.White;
                 }
             }
         }

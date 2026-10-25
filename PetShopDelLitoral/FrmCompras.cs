@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -48,6 +48,111 @@ namespace PetShopDelLitoral
                     btnBuscarProducto_Click(s, ev);
                 }
             };
+
+            AlinearControlesCompras();
+            this.Shown += (s, ev) => AlinearControlesCompras();
+            this.Resize += (s, ev) => AlinearControlesCompras();
+            this.SizeChanged += (s, ev) => AlinearControlesCompras();
+            if (PanelDerechoSUP != null) PanelDerechoSUP.Resize += (s, ev) => AlinearControlesCompras();
+            if (PanelDerechoBOT != null) PanelDerechoBOT.Resize += (s, ev) => AlinearControlesCompras();
+            if (panelIzquierdoVenta != null) panelIzquierdoVenta.Resize += (s, ev) => AlinearControlesCompras();
+            if (PaneContenidoSec != null) PaneContenidoSec.Resize += (s, ev) => AlinearControlesCompras();
+        }
+
+        private void AlinearControlesCompras()
+        {
+            try
+            {
+                if (panelTituloSec != null) panelTituloSec.Visible = false;
+                if (PaneContenidoSec != null)
+                {
+                    PaneContenidoSec.AutoSize = false;
+                    PaneContenidoSec.Dock = DockStyle.Fill;
+                }
+
+                // 1. Alinear y expandir controles de "Agregar Productos" para que alcancen ambos bordes
+                if (PanelDerechoSUP != null)
+                {
+                    int supWidth = PanelDerechoSUP.ClientSize.Width;
+
+                    // Botón + Agregar alineado a la derecha (exacto margen de 14px como la grilla)
+                    if (guna2CustomGradientPanel5 != null)
+                    {
+                        int btnAgregarX = supWidth - 14 - guna2CustomGradientPanel5.Width;
+                        guna2CustomGradientPanel5.Location = new Point(btnAgregarX, 34);
+
+                        // Cantidad (16px a la izquierda de Agregar)
+                        if (guna2NumericUpDown1 != null)
+                        {
+                            int cantX = btnAgregarX - 16 - guna2NumericUpDown1.Width;
+                            guna2NumericUpDown1.Location = new Point(cantX, 34);
+                            if (label10 != null) label10.Location = new Point(cantX, 12);
+
+                            // Precio Compra (16px a la izquierda de Cantidad)
+                            if (textBox2 != null)
+                            {
+                                int precioX = cantX - 16 - textBox2.Width;
+                                textBox2.Location = new Point(precioX, 34);
+                                if (label14 != null) label14.Location = new Point(precioX, 12);
+
+                                // Botón Lupa (16px a la izquierda de Precio)
+                                if (iconButton4 != null)
+                                {
+                                    int lupaX = precioX - 16 - iconButton4.Width;
+                                    iconButton4.Location = new Point(lupaX, 34);
+
+                                    // Buscador de productos: se expande desde X=14 hasta la Lupa
+                                    if (guna2TextBox7 != null)
+                                    {
+                                        int boxX = 14;
+                                        int boxW = Math.Max(180, (lupaX - 4) - boxX);
+                                        guna2TextBox7.Location = new Point(boxX, 34);
+                                        guna2TextBox7.Size = new Size(boxW, 36);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // 2. Alinear barra de botones inferiores en PanelDerechoBOT
+                if (PanelDerechoBOT != null)
+                {
+                    int botWidth = PanelDerechoBOT.ClientSize.Width;
+                    int botHeight = PanelDerechoBOT.ClientSize.Height;
+                    int yPos = Math.Max(0, (botHeight - 40) / 2);
+
+                    // Vaciar Lista alineado a 14px a la izquierda (exacto margen de la grilla)
+                    if (guna2CustomGradientPanel3 != null)
+                    {
+                        guna2CustomGradientPanel3.Location = new Point(14, yPos);
+                    }
+
+                    // Guardar Compra alineado a 14px a la derecha (exacto margen de la grilla)
+                    if (guna2CustomGradientPanel6 != null)
+                    {
+                        int btnGuardarX = botWidth - 14 - guna2CustomGradientPanel6.Width;
+                        guna2CustomGradientPanel6.Location = new Point(btnGuardarX, yPos);
+
+                        // Cancelar separado 12px a la izquierda de Guardar Compra
+                        if (guna2CustomGradientPanel4 != null)
+                        {
+                            int btnCancelarX = btnGuardarX - 12 - guna2CustomGradientPanel4.Width;
+                            guna2CustomGradientPanel4.Location = new Point(btnCancelarX, yPos);
+                        }
+                    }
+                }
+
+                // 3. Alinear caja de totales en panelIzquierdoVenta
+                if (panelIzquierdoVenta != null && guna2CustomGradientPanel1 != null)
+                {
+                    int panelW = panelIzquierdoVenta.ClientSize.Width;
+                    int panelH = panelIzquierdoVenta.ClientSize.Height;
+                    guna2CustomGradientPanel1.Location = new Point(12, panelH - guna2CustomGradientPanel1.Height - 12);
+                    guna2CustomGradientPanel1.Width = panelW - 24;
+                }
+            }
+            catch { }
         }
 
         private void ConfigurarGrilla()
