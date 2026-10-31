@@ -33,7 +33,7 @@ namespace PetShopDelLitoral
         public FrmVentas()
         {
             InitializeComponent();
-
+            PrepararLayoutResponsivo();
             botonInicio.Click += BuscarCliente_Click;       // lupa junto al cliente
             iconButton4.Click += BuscarProducto_Click;      // lupa junto al buscador de productos
             iconButton6.Click += AgregarProducto_Click;     // "Agregar"

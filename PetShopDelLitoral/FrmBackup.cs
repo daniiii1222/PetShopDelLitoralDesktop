@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Data;
+using System.Globalization;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using CapaDatos;
+using Capa_Entidad;
+using Capa_Negocio;
 
 namespace PetShopDelLitoral
 {
@@ -295,7 +298,7 @@ namespace PetShopDelLitoral
 
         private DataGridView ObtenerTablaBackups()
         {
-            return dgvHistorial 
+            return dgvHistorial
                 ?? this.Controls.OfType<DataGridView>().FirstOrDefault()
                 ?? this.Controls.OfType<Control>().SelectMany(c => c.Controls.OfType<DataGridView>()).FirstOrDefault();
         }
@@ -404,6 +407,23 @@ namespace PetShopDelLitoral
                     colDescargar.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     tabla.Columns.Add(colDescargar);
 
+                    // Columna Restaurar: solo la ve el administrador
+                    if (EsAdministrador())
+                    {
+                        DataGridViewButtonColumn colRestaurar = new DataGridViewButtonColumn();
+                        colRestaurar.Name = "colRestaurar";
+                        colRestaurar.HeaderText = "";
+                        colRestaurar.Text = "Restaurar";
+                        colRestaurar.UseColumnTextForButtonValue = true;
+                        colRestaurar.FlatStyle = FlatStyle.Flat;
+                        colRestaurar.DefaultCellStyle.BackColor = Color.FromArgb(70, 140, 90);
+                        colRestaurar.DefaultCellStyle.ForeColor = Color.White;
+                        colRestaurar.DefaultCellStyle.SelectionBackColor = Color.FromArgb(55, 120, 75);
+                        colRestaurar.DefaultCellStyle.SelectionForeColor = Color.White;
+                        colRestaurar.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                        tabla.Columns.Add(colRestaurar);
+                    }
+
                     // Columna Eliminar
                     DataGridViewButtonColumn colEliminar = new DataGridViewButtonColumn();
                     colEliminar.Name = "colEliminar";
@@ -491,6 +511,10 @@ namespace PetShopDelLitoral
                     }
                 }
             }
+            else if (colName == "colRestaurar")
+            {
+                RestaurarBackup(nombreArchivo, rutaOrigen);
+            }
             else if (colName == "colEliminar")
             {
                 DialogResult res = MessageBox.Show($"¿Desea eliminar '{nombreArchivo}'?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -529,6 +553,13 @@ namespace PetShopDelLitoral
                     e.CellStyle.SelectionBackColor = Color.FromArgb(215, 140, 50);
                     e.CellStyle.SelectionForeColor = Color.White;
                 }
+                else if (colName == "colRestaurar")
+                {
+                    e.CellStyle.BackColor = Color.FromArgb(70, 140, 90);
+                    e.CellStyle.ForeColor = Color.White;
+                    e.CellStyle.SelectionBackColor = Color.FromArgb(55, 120, 75);
+                    e.CellStyle.SelectionForeColor = Color.White;
+                }
                 else if (colName == "colEliminar")
                 {
                     e.CellStyle.BackColor = Color.FromArgb(215, 85, 65);
@@ -539,7 +570,7 @@ namespace PetShopDelLitoral
             }
         }
 
-        private void EjecutarRespaldoReal()
+        private string EjecutarRespaldoReal(bool mostrarMensajes = true)
         {
             try
             {
@@ -583,16 +614,7 @@ namespace PetShopDelLitoral
                             sb.Append($"INSERT INTO `{tableName}` VALUES (");
                             for (int i = 0; i < dtData.Columns.Count; i++)
                             {
-                                object val = dataRow[i];
-                                if (val == DBNull.Value)
-                                {
-                                    sb.Append("NULL");
-                                }
-                                else
-                                {
-                                    string valStr = val.ToString().Replace("\\", "\\\\").Replace("'", "\\'");
-                                    sb.Append($"'{valStr}'");
-                                }
+                                sb.Append(FormatearValorSql(dataRow[i]));
                                 if (i < dtData.Columns.Count - 1) sb.Append(", ");
                             }
                             sb.AppendLine(");");
@@ -643,13 +665,183 @@ namespace PetShopDelLitoral
                     File.WriteAllText(rutaDestino, sb.ToString(), Encoding.UTF8);
                 }
 
-                MessageBox.Show("Copia realizada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                CargarHistorialBackups();
+                if (mostrarMensajes)
+                {
+                    MessageBox.Show("Copia realizada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CargarHistorialBackups();
+                }
+                return rutaDestino;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al respaldar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (mostrarMensajes)
+                    MessageBox.Show("Error al respaldar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
             }
+        }
+
+        // Convierte un valor a SQL sin depender de la configuración regional de la PC
+        // (antes un decimal salía como '3200,00' y una fecha como '25/10/2026', que MySQL no entiende al restaurar).
+        private static string FormatearValorSql(object val)
+        {
+            if (val == null || val == DBNull.Value) return "NULL";
+            if (val is bool) return ((bool)val) ? "1" : "0";
+            if (val is DateTime) return "'" + ((DateTime)val).ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture) + "'";
+            if (val is byte[])
+            {
+                byte[] bytes = (byte[])val;
+                return bytes.Length == 0 ? "''" : "0x" + BitConverter.ToString(bytes).Replace("-", "");
+            }
+            if (val is IFormattable) return "'" + ((IFormattable)val).ToString(null, CultureInfo.InvariantCulture) + "'";
+
+            string texto = val.ToString().Replace("\\", "\\\\").Replace("'", "\\'");
+            return "'" + texto + "'";
+        }
+
+        // =====================================================================
+        // RESTAURAR: solo el administrador, con doble autorización
+        //   1) confirma el propio administrador (DNI + contraseña)
+        //   2) autoriza un supervisor (DNI + contraseña)
+        // =====================================================================
+        // La regla de qué rol es administrador está en la capa de negocio (CN_Usuario)
+        private bool EsAdministrador()
+        {
+            return CN_Usuario.EsAdministrador(Sesion.UsuarioActual);
+        }
+
+        private static string NombreDe(Usuario u)
+        {
+            if (u == null || u.idPersona == null) return "?";
+            return (u.idPersona.nombre_persona + " " + u.idPersona.apellido_persona).Trim() + " (id " + u.idUsuario + ")";
+        }
+
+        // Firma de los métodos de CN_Usuario que validan una autorización
+        private delegate bool ValidadorAutorizacion(string dni, string clave, out Usuario usuario, out string mensaje);
+
+        // Pide DNI y contraseña (hasta 3 intentos). Las reglas las valida la capa de negocio.
+        private Usuario PedirCredenciales(string titulo, string detalle, ValidadorAutorizacion validar)
+        {
+            for (int intento = 1; intento <= 3; intento++)
+            {
+                using (FrmAutorizacion f = new FrmAutorizacion(titulo, detalle))
+                {
+                    if (f.ShowDialog(this) != DialogResult.OK) return null;
+
+                    Usuario u;
+                    string mensaje;
+                    if (validar(f.Dni, f.Clave, out u, out mensaje)) return u;
+
+                    MessageBox.Show(mensaje + "\nIntento " + intento + " de 3.", titulo,
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+
+            MessageBox.Show("Se superó el máximo de intentos. La restauración fue cancelada.", titulo,
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return null;
+        }
+
+        private void RestaurarBackup(string nombreArchivo, string rutaArchivo)
+        {
+            // 1) Solo el administrador (se valida acá también: ocultar el botón no alcanza)
+            if (!EsAdministrador())
+            {
+                MessageBox.Show("Solo el administrador puede restaurar la base de datos.", "Acceso denegado",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!File.Exists(rutaArchivo))
+            {
+                MessageBox.Show("No se encontró el archivo de la copia.", "Restaurar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 2) Control básico del archivo antes de pedir nada
+            string sql = File.ReadAllText(rutaArchivo, Encoding.UTF8);
+            if (!sql.StartsWith("-- Backup") || sql.IndexOf("CREATE TABLE", StringComparison.OrdinalIgnoreCase) < 0)
+            {
+                MessageBox.Show("El archivo no parece una copia de seguridad válida de esta aplicación.", "Restaurar",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 3) Advertencia
+            DialogResult conf = MessageBox.Show(
+                "Restaurar '" + nombreArchivo + "' REEMPLAZA todos los datos actuales de la base por los de esa copia.\n\n" +
+                "Antes se guardará automáticamente una copia de la base actual.\n\n¿Desea continuar?",
+                "Restaurar base de datos", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (conf != DialogResult.Yes) return;
+
+            CN_Usuario negocio = new CN_Usuario();
+
+            // 4) Primera autorización: el propio administrador
+            Usuario admin = PedirCredenciales("Confirmación del administrador",
+                "Ingresá tu DNI y tu contraseña para continuar.",
+                (string dni, string clave, out Usuario u, out string msg) =>
+                    negocio.AutorizarComoAdministrador(Sesion.UsuarioActual, dni, clave, out u, out msg));
+            if (admin == null) return;
+
+            // 5) Segunda autorización: un supervisor
+            Usuario supervisor = PedirCredenciales("Autorización de un supervisor",
+                "Un supervisor debe ingresar su DNI y su contraseña para autorizar la restauración.",
+                (string dni, string clave, out Usuario u, out string msg) =>
+                    negocio.AutorizarComoSupervisor(Sesion.UsuarioActual, dni, clave, out u, out msg));
+            if (supervisor == null) return;
+
+            // 6) Copia de seguridad de la base actual, por si algo sale mal
+            string copiaPrevia = EjecutarRespaldoReal(false);
+            if (copiaPrevia == null)
+            {
+                MessageBox.Show("No se pudo crear la copia previa de la base actual. Se cancela la restauración.",
+                                "Restaurar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // 7) Restauración
+            try
+            {
+                using (MySqlConnection conn = ClsDataBase.CrearConexion())
+                {
+                    conn.Open();
+                    using (MySqlCommand cmd = new MySqlCommand("SET FOREIGN_KEY_CHECKS=0;", conn)) cmd.ExecuteNonQuery();
+                    try
+                    {
+                        MySqlScript script = new MySqlScript(conn, sql);   // entiende el DELIMITER de los procedimientos
+                        script.Execute();
+                    }
+                    finally
+                    {
+                        using (MySqlCommand cmd = new MySqlCommand("SET FOREIGN_KEY_CHECKS=1;", conn)) cmd.ExecuteNonQuery();
+                    }
+                }
+
+                RegistrarRestauracion(nombreArchivo, admin, supervisor, copiaPrevia);
+                CargarHistorialBackups();
+                MessageBox.Show("La base de datos fue restaurada correctamente.\n\nSe recomienda cerrar sesión y volver a ingresar.",
+                                "Restaurar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al restaurar: " + ex.Message + "\n\nLa copia previa a la restauración quedó guardada como: " +
+                                Path.GetFileName(copiaPrevia), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Deja constancia de quién restauró y quién autorizó
+        private void RegistrarRestauracion(string archivo, Usuario admin, Usuario supervisor, string copiaPrevia)
+        {
+            try
+            {
+                string linea = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") +
+                               " | archivo=" + archivo +
+                               " | administrador=" + NombreDe(admin) +
+                               " | supervisor=" + NombreDe(supervisor) +
+                               " | copia previa=" + Path.GetFileName(copiaPrevia);
+                File.AppendAllText(Path.Combine(ObtenerCarpetaBackups(), "restauraciones.log"),
+                                   linea + Environment.NewLine, Encoding.UTF8);
+            }
+            catch { }
         }
 
         private void btnGenerarBackup_Click(object sender, EventArgs e) => EjecutarRespaldoReal();

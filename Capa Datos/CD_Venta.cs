@@ -4,6 +4,8 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
+using System.Text;
 
 namespace Capa_Datos
 {
@@ -41,125 +43,46 @@ namespace Capa_Datos
             return database.DsResults.Tables["TablaClienteDni"];
         }
 
-        // proceso de venta en UNA transacción
-
+        // Registra la venta COMPLETA en UNA transacción que vive en la base de datos:
+        // el procedimiento sp_RegistrarVentaCompleta (Scripts/Ventas.sql) valida el stock, toma el precio real
+        // de cada producto, calcula descuentos y total, guarda cabecera + detalle, descuenta el stock y hace
+        // COMMIT. Si algo falla hace ROLLBACK, y el error vuelve acá como excepción.
         public int RegistrarVentaTransaccional(Venta objVenta, List<DetalleVenta> detalles)
         {
-            // 1) Una sola conexión para TODO el proceso (la cadena vive en ClsDataBase)
+            // El detalle viaja como JSON: [{"idProducto":1,"cantidad":2,"descuento":10},...]
+            // (con punto decimal, sin depender de la configuración regional de la PC)
+            StringBuilder json = new StringBuilder("[");
+            for (int i = 0; i < detalles.Count; i++)
+            {
+                DetalleVenta d = detalles[i];
+                if (i > 0) json.Append(",");
+                json.Append("{\"idProducto\":").Append(d.IdProducto.IdProducto.ToString(CultureInfo.InvariantCulture))
+                    .Append(",\"cantidad\":").Append(d.Cantidad.ToString(CultureInfo.InvariantCulture))
+                    .Append(",\"descuento\":").Append(d.Descuento_detalle.ToString(CultureInfo.InvariantCulture))
+                    .Append("}");
+            }
+            json.Append("]");
+
             using (MySqlConnection conexion = ClsDataBase.CrearConexion())
             {
                 conexion.Open();
 
-                // 2) Se abre la transacción sobre esa conexión
-                MySqlTransaction transaccion = conexion.BeginTransaction();
-
-                try
+                using (MySqlCommand cmd = new MySqlCommand("sp_RegistrarVentaCompleta", conexion))
                 {
-                    decimal subtotalLineas = 0;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("p_idUsuario", objVenta.IdUsuario.idUsuario);
+                    cmd.Parameters.AddWithValue("p_idCliente", objVenta.IdCliente.IdCliente);
+                    cmd.Parameters.AddWithValue("p_idMetodoPago", objVenta.IdMetodoPago.IdMetodoPago);
+                    cmd.Parameters.AddWithValue("p_fecha", objVenta.Fecha_venta.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("p_descuento", objVenta.Descuento_venta);
+                    cmd.Parameters.AddWithValue("p_detalle", json.ToString());
 
-                    // 3) Validar stock y precio real de cada producto, usando la MISMA conexión/transacción
-                    foreach (DetalleVenta d in detalles)
-                    {
-                        using (MySqlCommand cmd = new MySqlCommand("sp_ObtenerStockProducto", conexion, transaccion))
-                        {
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("p_idProducto", d.IdProducto.IdProducto);
-
-                            using (MySqlDataReader reader = cmd.ExecuteReader())
-                            {
-                                if (!reader.Read())
-                                {
-                                    throw new Exception("El producto '" + d.IdProducto.Nombre_producto + "' ya no está disponible.");
-                                }
-
-                                int stockActual = Convert.ToInt32(reader["stock_producto"]);
-                                decimal precioReal = Convert.ToDecimal(reader["precio_producto"]);
-
-                                if (stockActual < d.Cantidad)
-                                {
-                                    throw new Exception("Stock insuficiente para '" + d.IdProducto.Nombre_producto +
-                                                         "'. Disponible: " + stockActual + ".");
-                                }
-
-                                // El precio sale de la base (no del formulario). Subtotal de la línea con su descuento (%),
-                                // redondeado a 2 decimales como lo hace la pantalla.
-                                d.Precio = precioReal;
-                                d.Subtotal_venta = Math.Round(precioReal * d.Cantidad * (1 - d.Descuento_detalle / 100m),
-                                                              2, MidpointRounding.AwayFromZero);
-                                subtotalLineas += d.Subtotal_venta;
-                            }
-                        }
-                    }
-
-                    // Total = suma de líneas menos el descuento (%) sobre la compra completa
-                    decimal total = Math.Round(subtotalLineas * (1 - objVenta.Descuento_venta / 100m),
-                                               2, MidpointRounding.AwayFromZero);
-
-                    // 4) Insertar la cabecera de la venta
-                    int idVenta;
-                    using (MySqlCommand cmd = new MySqlCommand("sp_InsertarCabeceraVenta", conexion, transaccion))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("p_idUsuario", objVenta.IdUsuario.idUsuario);
-                        cmd.Parameters.AddWithValue("p_idCliente", objVenta.IdCliente.IdCliente);
-                        cmd.Parameters.AddWithValue("p_idMetodoPago", objVenta.IdMetodoPago.IdMetodoPago);
-                        cmd.Parameters.AddWithValue("p_fecha", objVenta.Fecha_venta.ToString("yyyy-MM-dd"));
-                        cmd.Parameters.AddWithValue("p_total", total);
-                        cmd.Parameters.AddWithValue("p_descuento", objVenta.Descuento_venta);
-
-                        // El SP hace INSERT y después un SELECT LAST_INSERT_ID() AS idVenta;
-                        // ExecuteScalar trae ese único valor.
-                        idVenta = Convert.ToInt32(cmd.ExecuteScalar());
-                    }
-
-                    // 5) Insertar cada línea de detalle y descontar su stock
-                    foreach (DetalleVenta d in detalles)
-                    {
-                        using (MySqlCommand cmd = new MySqlCommand("sp_InsertarDetalleVenta", conexion, transaccion))
-                        {
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("p_idVenta", idVenta);
-                            cmd.Parameters.AddWithValue("p_idProducto", d.IdProducto.IdProducto);
-                            cmd.Parameters.AddWithValue("p_cantidad", d.Cantidad);
-                            cmd.Parameters.AddWithValue("p_precio", d.Precio);
-                            cmd.Parameters.AddWithValue("p_subtotal", d.Subtotal_venta);
-                            cmd.Parameters.AddWithValue("p_descuento", d.Descuento_detalle);
-                            cmd.ExecuteNonQuery();
-                        }
-
-                        using (MySqlCommand cmd = new MySqlCommand("sp_DescontarStock", conexion, transaccion))
-                        {
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("p_idProducto", d.IdProducto.IdProducto);
-                            cmd.Parameters.AddWithValue("p_cantidad", d.Cantidad);
-
-                            // El SP hace UPDATE y después SELECT ROW_COUNT() AS filasActualizadas;
-                            int filas = Convert.ToInt32(cmd.ExecuteScalar());
-
-                            if (filas == 0)
-                            {
-                                // El stock cambió justo en este instante (otra venta se adelantó).
-                                // Se corta todo acá, y el catch de abajo hace el Rollback.
-                                throw new Exception("El stock de '" + d.IdProducto.Nombre_producto +
-                                                     "' cambió mientras se procesaba la venta. Intentá de nuevo.");
-                            }
-                        }
-                    }
-
-                    // 6) Si se llegó hasta acá, TODO salió bien: se confirma de una
-                    transaccion.Commit();
-                    return idVenta;
-                }
-                catch (Exception)
-                {
-                    // 7) Si CUALQUIER paso de arriba falló, se deshace TODO:
-                    // ni la venta, ni los detalles, ni el descuento de stock quedan guardados.
-                    transaccion.Rollback();
-                    throw;
+                    // El procedimiento termina con SELECT v_idVenta AS idVenta
+                    return Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
-
         }
+
         // Últimas ventas para la "Actividad reciente" del dashboard
         public DataTable ObtenerVentasRecientes()
         {
