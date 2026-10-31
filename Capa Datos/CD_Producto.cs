@@ -18,7 +18,7 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = @"SELECT p.idProducto, p.nombre_producto, 
+                    string query = @"SELECT p.idProducto, p.codigo_producto, p.nombre_producto, 
                                             p.descripcion_producto, p.precio_producto, p.stock_producto, 
                                             p.stock_minimo, p.idCategoria, c.nombre_categoria, p.estado_producto, p.precioUnitario_producto
                                      FROM producto p
@@ -37,6 +37,7 @@ namespace CapaDatos
                             lista.Add(new Producto()
                             {
                                 IdProducto = Convert.ToInt32(dr["idProducto"]),
+                                Codigo_producto = dr["codigo_producto"] != DBNull.Value ? dr["codigo_producto"].ToString() : "",
                                 Nombre_producto = dr["nombre_producto"].ToString(),
                                 Descripcion_producto = dr["descripcion_producto"] != DBNull.Value ? dr["descripcion_producto"].ToString() : "",
                                 Precio_producto = Convert.ToDecimal(dr["precio_producto"]),
@@ -62,6 +63,30 @@ namespace CapaDatos
             return lista;
         }
 
+        public bool ExisteCodigo(string codigo, int idProductoExcluir)
+        {
+            if (string.IsNullOrWhiteSpace(codigo)) return false;
+
+            using (MySqlConnection oconexion = new MySqlConnection(cadenaConexion))
+            {
+                try
+                {
+                    string query = "SELECT COUNT(*) FROM producto WHERE estado_producto = 1 AND LOWER(codigo_producto) = LOWER(@codigo) AND idProducto != @idExcluir;";
+                    MySqlCommand cmd = new MySqlCommand(query, oconexion);
+                    cmd.Parameters.AddWithValue("@codigo", codigo.Trim());
+                    cmd.Parameters.AddWithValue("@idExcluir", idProductoExcluir);
+
+                    oconexion.Open();
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    return count > 0;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+
         public int Registrar(Producto obj, out string Mensaje)
         {
             int idGenerado = 0;
@@ -71,11 +96,12 @@ namespace CapaDatos
             {
                 try
                 {
-                    string query = @"INSERT INTO producto(nombre_producto, descripcion_producto, estado_producto, precio_producto, stock_producto, idCategoria, precioUnitario_producto, stock_minimo) 
-                                     VALUES(@nombre, @descripcion, @estado, @precio, @stock, @idCategoria, @precioUnitario, @stock_min);
+                    string query = @"INSERT INTO producto(codigo_producto, nombre_producto, descripcion_producto, estado_producto, precio_producto, stock_producto, idCategoria, precioUnitario_producto, stock_minimo) 
+                                     VALUES(@codigo, @nombre, @descripcion, @estado, @precio, @stock, @idCategoria, @precioUnitario, @stock_min);
                                      SELECT LAST_INSERT_ID();";
 
                     MySqlCommand cmd = new MySqlCommand(query, oconexion);
+                    cmd.Parameters.AddWithValue("@codigo", string.IsNullOrWhiteSpace(obj.Codigo_producto) ? (object)DBNull.Value : obj.Codigo_producto.Trim().ToUpper());
                     cmd.Parameters.AddWithValue("@nombre", obj.Nombre_producto);
                     cmd.Parameters.AddWithValue("@descripcion", string.IsNullOrEmpty(obj.Descripcion_producto) ? obj.Nombre_producto : obj.Descripcion_producto);
                     cmd.Parameters.AddWithValue("@estado", obj.Estado_producto);
@@ -108,6 +134,7 @@ namespace CapaDatos
                 try
                 {
                     string query = @"UPDATE producto SET 
+                                     codigo_producto = @codigo,
                                      nombre_producto = @nombre,
                                      descripcion_producto = @descripcion,
                                      precio_producto = @precio,
@@ -120,6 +147,7 @@ namespace CapaDatos
 
                     MySqlCommand cmd = new MySqlCommand(query, oconexion);
                     cmd.Parameters.AddWithValue("@id", obj.IdProducto);
+                    cmd.Parameters.AddWithValue("@codigo", string.IsNullOrWhiteSpace(obj.Codigo_producto) ? (object)DBNull.Value : obj.Codigo_producto.Trim().ToUpper());
                     cmd.Parameters.AddWithValue("@nombre", obj.Nombre_producto);
                     cmd.Parameters.AddWithValue("@descripcion", string.IsNullOrEmpty(obj.Descripcion_producto) ? obj.Nombre_producto : obj.Descripcion_producto);
                     cmd.Parameters.AddWithValue("@precio", obj.Precio_producto);

@@ -18,38 +18,50 @@ namespace CapaNegocio
         {
             Mensaje = string.Empty;
 
-            if (string.IsNullOrEmpty(obj.Nombre_producto) || string.IsNullOrWhiteSpace(obj.Nombre_producto))
+            if (string.IsNullOrWhiteSpace(obj.Codigo_producto))
             {
-                Mensaje = "El nombre del producto no puede estar vacío.";
-            }
-
-            if (string.IsNullOrEmpty(Mensaje))
-            {
-                return objcd_producto.Registrar(obj, out Mensaje);
-            }
-            else
-            {
+                Mensaje = "El código del producto no puede estar vacío.";
                 return 0;
             }
+
+            if (string.IsNullOrWhiteSpace(obj.Nombre_producto))
+            {
+                Mensaje = "El nombre del producto no puede estar vacío.";
+                return 0;
+            }
+
+            if (objcd_producto.ExisteCodigo(obj.Codigo_producto, 0))
+            {
+                Mensaje = $"Ya existe un producto registrado con el código '{obj.Codigo_producto.Trim().ToUpper()}'.";
+                return 0;
+            }
+
+            return objcd_producto.Registrar(obj, out Mensaje);
         }
 
         public bool Editar(Producto obj, out string Mensaje)
         {
             Mensaje = string.Empty;
 
-            if (string.IsNullOrEmpty(obj.Nombre_producto) || string.IsNullOrWhiteSpace(obj.Nombre_producto))
+            if (string.IsNullOrWhiteSpace(obj.Codigo_producto))
             {
-                Mensaje = "El nombre del producto no puede estar vacío.";
-            }
-
-            if (string.IsNullOrEmpty(Mensaje))
-            {
-                return objcd_producto.Editar(obj, out Mensaje);
-            }
-            else
-            {
+                Mensaje = "El código del producto no puede estar vacío.";
                 return false;
             }
+
+            if (string.IsNullOrWhiteSpace(obj.Nombre_producto))
+            {
+                Mensaje = "El nombre del producto no puede estar vacío.";
+                return false;
+            }
+
+            if (objcd_producto.ExisteCodigo(obj.Codigo_producto, obj.IdProducto))
+            {
+                Mensaje = $"Ya existe otro producto registrado con el código '{obj.Codigo_producto.Trim().ToUpper()}'.";
+                return false;
+            }
+
+            return objcd_producto.Editar(obj, out Mensaje);
         }
 
         public bool Eliminar(int idProducto, out string Mensaje)

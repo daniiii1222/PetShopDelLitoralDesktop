@@ -16,7 +16,7 @@ namespace PetShopDelLitoral
     {
         private List<Producto> _listaProductos = new List<Producto>();
 
-        public FrmProductos ()
+        public FrmProductos()
         {
             InitializeComponent();
         }
@@ -26,7 +26,7 @@ namespace PetShopDelLitoral
             CargarCategoriasFiltro();
             CargarProductos();
 
-            TxtBuscar.PlaceholderText = "Buscar por nombre o código...";
+            TxtBuscar.PlaceholderText = "Buscar por código o nombre...";
             iBSearch.Click += (s, ev) => AplicarFiltros();
             TxtBuscar.KeyDown += (s, ev) =>
             {
@@ -37,7 +37,6 @@ namespace PetShopDelLitoral
                 }
             };
 
-            // Tus configuraciones de diseño de la grilla que ya tenías:
             DataGridViewProductos.ReadOnly = true;
             DataGridViewProductos.AllowUserToAddRows = false;
             DataGridViewProductos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -94,6 +93,7 @@ namespace PetShopDelLitoral
                 bool coincideEstado = p.Estado_producto;
                 bool coincideTexto = string.IsNullOrEmpty(textoBusqueda) ||
                                      (p.Nombre_producto != null && p.Nombre_producto.ToLower().Contains(textoBusqueda)) ||
+                                     (!string.IsNullOrEmpty(p.Codigo_producto) && p.Codigo_producto.ToLower().Contains(textoBusqueda)) ||
                                      p.IdProducto.ToString().Contains(textoLimpio) ||
                                      (esNumero && p.IdProducto == codigoBuscado);
 
@@ -105,69 +105,83 @@ namespace PetShopDelLitoral
 
             foreach (Producto item in listaFiltrada)
             {
-                DataGridViewProductos.Rows.Add(new object[] {
+                int index = DataGridViewProductos.Rows.Add(new object[] {
                     item.IdProducto,
+                    item.Codigo_producto,
                     item.Nombre_producto,
                     item.IdCategoria != null ? item.IdCategoria.Nombre_categoria : "Sin categoría",
                     item.Precio_producto,
                     item.Stock_producto
                 });
+                DataGridViewProductos.Rows[index].Tag = item;
             }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void guna2Button1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void guna2DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
+
+            try
             {
                 string nombreColumna = DataGridViewProductos.Columns[e.ColumnIndex].Name;
 
+                // Solo responder si se hizo clic en las columnas de acción Editar o Eliminar
+                if (nombreColumna != "ColumnEditar" && nombreColumna != "ColumnEliminar")
+                    return;
+
+                // Obtener el producto de la fila (a través del Tag o por Id)
+                Producto productoSeleccionado = DataGridViewProductos.Rows[e.RowIndex].Tag as Producto;
+
+                if (productoSeleccionado == null)
+                {
+                    int idProducto = 0;
+                    if (DataGridViewProductos.Columns.Contains("ColumnId") &&
+                        DataGridViewProductos.Rows[e.RowIndex].Cells["ColumnId"].Value != null)
+                    {
+                        int.TryParse(DataGridViewProductos.Rows[e.RowIndex].Cells["ColumnId"].Value.ToString(), out idProducto);
+                    }
+                    else if (DataGridViewProductos.Rows[e.RowIndex].Cells.Count > 0 &&
+                             DataGridViewProductos.Rows[e.RowIndex].Cells[0].Value != null)
+                    {
+                        int.TryParse(DataGridViewProductos.Rows[e.RowIndex].Cells[0].Value.ToString(), out idProducto);
+                    }
+
+                    if (idProducto > 0)
+                    {
+                        productoSeleccionado = _listaProductos?.FirstOrDefault(p => p.IdProducto == idProducto)
+                            ?? new CN_Producto().Listar().FirstOrDefault(p => p.IdProducto == idProducto);
+                    }
+                }
+
+                if (productoSeleccionado == null)
+                {
+                    MessageBox.Show("No se pudo obtener la información del producto seleccionado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 if (nombreColumna == "ColumnEditar")
                 {
-                    int idProducto = Convert.ToInt32(DataGridViewProductos.Rows[e.RowIndex].Cells["ColumnCodigo"].Value);
-                    List<Producto> lista = new CN_Producto().Listar();
-                    Producto productoSeleccionado = lista.FirstOrDefault(p => p.IdProducto == idProducto);
-
-                    if (productoSeleccionado != null)
-                    {
-                        CargaProductos frm = new CargaProductos(productoSeleccionado);
-                        frm.ShowDialog();
-                        CargarProductos();
-                    }
+                    CargaProductos frm = new CargaProductos(productoSeleccionado);
+                    frm.ShowDialog();
+                    CargarProductos();
                 }
                 else if (nombreColumna == "ColumnEliminar")
                 {
-                    int idProducto = Convert.ToInt32(DataGridViewProductos.Rows[e.RowIndex].Cells["ColumnCodigo"].Value);
-                    string nombreProducto = DataGridViewProductos.Rows[e.RowIndex].Cells["ColumnNombre"].Value.ToString();
+                    string infoProd = string.IsNullOrWhiteSpace(productoSeleccionado.Codigo_producto)
+                        ? productoSeleccionado.Nombre_producto
+                        : $"{productoSeleccionado.Nombre_producto} (Código: {productoSeleccionado.Codigo_producto})";
 
-                    DialogResult resultado = MessageBox.Show($"¿Estás seguro de eliminar el producto '{nombreProducto}'?",
-                                                            "Confirmar Eliminación",
-                                                            MessageBoxButtons.YesNo,
-                                                            MessageBoxIcon.Warning);
+                    DialogResult resultado = MessageBox.Show(
+                        $"¿Estás seguro de que deseas eliminar el producto '{infoProd}'?",
+                        "Confirmar Eliminación",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning);
 
                     if (resultado == DialogResult.Yes)
                     {
                         string mensaje = string.Empty;
-                        bool respuesta = new CN_Producto().Eliminar(idProducto, out mensaje);
+                        bool respuesta = new CN_Producto().Eliminar(productoSeleccionado.IdProducto, out mensaje);
 
                         if (respuesta)
                         {
@@ -181,11 +195,10 @@ namespace PetShopDelLitoral
                     }
                 }
             }
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error inesperado al procesar la acción: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void BTCargarproducto_Click(object sender, EventArgs e)
@@ -205,19 +218,13 @@ namespace PetShopDelLitoral
             AplicarFiltros();
         }
 
-        private void guna2Panel5_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void guna2Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void PanelContenedor_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        private void label1_Click(object sender, EventArgs e) { }
+        private void label1_Click_1(object sender, EventArgs e) { }
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+        private void guna2Button1_Click(object sender, EventArgs e) { }
+        private void panel2_Paint(object sender, PaintEventArgs e) { }
+        private void guna2Panel5_Paint(object sender, PaintEventArgs e) { }
+        private void guna2Panel1_Paint(object sender, PaintEventArgs e) { }
+        private void PanelContenedor_Paint(object sender, PaintEventArgs e) { }
     }
 }

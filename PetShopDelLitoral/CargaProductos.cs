@@ -30,9 +30,10 @@ namespace PetShopDelLitoral
             if (_productoEditar != null)
             {
                 LBABMProductos.Text = "Modificar Producto";
+                txtCodigo.Text = _productoEditar.Codigo_producto;
                 txtNombre.Text = _productoEditar.Nombre_producto;
-                txtStock.Text = _productoEditar.PrecioUnitario_producto.ToString();
-                guna2TextBox1.Text = _productoEditar.Precio_producto.ToString();
+                txtStock.Text = _productoEditar.PrecioUnitario_producto.ToString("0.00");
+                guna2TextBox1.Text = _productoEditar.Precio_producto.ToString("0.00");
                 txtPrecio.Text = _productoEditar.Stock_producto.ToString();
 
                 if (_productoEditar.IdCategoria != null)
@@ -62,7 +63,6 @@ namespace PetShopDelLitoral
                         }, out msg);
                     }
 
-                    // Volvemos a listar las categorías recién creadas
                     lista = objNegocioCategoria.Listar();
                 }
 
@@ -79,13 +79,14 @@ namespace PetShopDelLitoral
 
         private void BTNGuardar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
+            if (string.IsNullOrWhiteSpace(txtCodigo.Text) ||
+                string.IsNullOrWhiteSpace(txtNombre.Text) ||
                 string.IsNullOrWhiteSpace(txtPrecio.Text) ||
                 string.IsNullOrWhiteSpace(guna2TextBox1.Text) ||
                 string.IsNullOrWhiteSpace(txtStock.Text) ||
                 cmbCategoria.SelectedIndex == -1)
             {
-                MessageBox.Show("Por favor, complete todos los campos y seleccione una categoría.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Por favor, complete todos los campos (incluido el código de producto) y seleccione una categoría.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -97,6 +98,7 @@ namespace PetShopDelLitoral
 
                 Producto objProducto = new Producto()
                 {
+                    Codigo_producto = txtCodigo.Text.Trim().ToUpper(),
                     Nombre_producto = txtNombre.Text.Trim(),
                     Descripcion_producto = txtNombre.Text.Trim(),
                     PrecioUnitario_producto = precioUnitario,
@@ -132,7 +134,7 @@ namespace PetShopDelLitoral
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo guardar el producto: " + mensaje, "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(mensaje, "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
@@ -146,18 +148,8 @@ namespace PetShopDelLitoral
             this.Close();
         }
 
-        private void guna2HtmlLabel1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void LBNombreProducto_Click(object sender, EventArgs e)
-        {
-        }
-
-
-        private void cmbCategoria_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        private void guna2HtmlLabel1_Click(object sender, EventArgs e) { }
+        private void LBNombreProducto_Click(object sender, EventArgs e) { }
+        private void cmbCategoria_SelectedIndexChanged(object sender, EventArgs e) { }
     }
 }

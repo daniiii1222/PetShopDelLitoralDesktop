@@ -328,7 +328,7 @@ namespace PetShopDelLitoral
 
         private void panelTituloSec_Paint(object sender, PaintEventArgs e) { }
         private void guna2TextBox1_TextChanged(object sender, EventArgs e) { }
-        private void botonInicio_Click(object sender, EventArgs e) { }
+        private void botonInicio_Click(object sender, EventArgs e) { btnBuscar_Click(sender, e); }
 
         // Stock a partir del cual un producto entra en el reporte "Stock Mínimo".
         // Poné el mismo número que usa el Dashboard para "stock bajo".
@@ -341,7 +341,8 @@ namespace PetShopDelLitoral
             {
                 case "productos":
                 case "stock":
-                    dt.Columns.Add("Código", typeof(int));
+                    dt.Columns.Add("ID", typeof(int));
+                    dt.Columns.Add("C\u00f3digo", typeof(string));
                     dt.Columns.Add("Producto", typeof(string));
                     dt.Columns.Add("Categoría", typeof(string));
                     dt.Columns.Add("Precio ($)", typeof(decimal));
@@ -359,6 +360,7 @@ namespace PetShopDelLitoral
 
                             dt.Rows.Add(
                                 p.IdProducto,
+                                string.IsNullOrWhiteSpace(p.Codigo_producto) ? "-" : p.Codigo_producto,
                                 p.Nombre_producto,
                                 p.IdCategoria != null ? p.IdCategoria.Nombre_categoria : "Sin categoría",
                                 p.Precio_producto,

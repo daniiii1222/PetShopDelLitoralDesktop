@@ -1,4 +1,4 @@
-namespace PetShopDelLitoral
+﻿namespace PetShopDelLitoral
 {
     partial class FrmProductos
     {
@@ -37,6 +37,7 @@ namespace PetShopDelLitoral
             this.PanelContenedor = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel6 = new Guna.UI2.WinForms.Guna2Panel();
             this.DataGridViewProductos = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -133,6 +134,7 @@ namespace PetShopDelLitoral
             this.DataGridViewProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.DataGridViewProductos.ColumnHeadersHeight = 22;
             this.DataGridViewProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnId,
             this.ColumnCodigo,
             this.ColumnNombre,
             this.ColumnCategoria,
@@ -192,13 +194,21 @@ namespace PetShopDelLitoral
             this.DataGridViewProductos.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DataGridViewProductos.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.DataGridViewProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.guna2DataGridView1_CellContentClick);
+            // ColumnId
+            // 
+            // ColumnId
+            // 
+            this.ColumnId.FillWeight = 45F;
+            this.ColumnId.HeaderText = "ID";
+            this.ColumnId.MinimumWidth = 6;
+            this.ColumnId.Name = "ColumnId";
+            this.ColumnId.ReadOnly = true;
             // 
             // ColumnCodigo
             // 
             this.ColumnCodigo.HeaderText = "Codigo";
             this.ColumnCodigo.MinimumWidth = 6;
             this.ColumnCodigo.Name = "ColumnCodigo";
-            // 
             // ColumnNombre
             // 
             this.ColumnNombre.HeaderText = "Nombre";
@@ -275,7 +285,7 @@ namespace PetShopDelLitoral
             this.CBFiltroCateg.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CBFiltroCateg.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.CBFiltroCateg.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CBFiltroCateg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.CBFiltroCateg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.CBFiltroCateg.ItemHeight = 30;
             this.CBFiltroCateg.Location = new System.Drawing.Point(375, 24);
             this.CBFiltroCateg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -311,6 +321,8 @@ namespace PetShopDelLitoral
             this.TxtBuscar.Location = new System.Drawing.Point(23, 24);
             this.TxtBuscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TxtBuscar.Name = "TxtBuscar";
+            this.TxtBuscar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.TxtBuscar.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(115)))), ((int)(((byte)(120)))), ((int)(((byte)(130)))));
             this.TxtBuscar.PasswordChar = '\0';
             this.TxtBuscar.PlaceholderText = "Buscar Producto";
             this.TxtBuscar.SelectedText = "";
@@ -397,10 +409,10 @@ namespace PetShopDelLitoral
             this.btnCargarproducto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
             this.btnCargarproducto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
             this.btnCargarproducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCargarproducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnCargarproducto.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
+            this.btnCargarproducto.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCargarproducto.ForeColor = System.Drawing.Color.White;
             this.btnCargarproducto.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.btnCargarproducto.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
+            this.btnCargarproducto.IconColor = System.Drawing.Color.White;
             this.btnCargarproducto.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnCargarproducto.IconSize = 25;
             this.btnCargarproducto.Location = new System.Drawing.Point(0, 0);
@@ -409,7 +421,7 @@ namespace PetShopDelLitoral
             this.btnCargarproducto.Size = new System.Drawing.Size(144, 32);
             this.btnCargarproducto.TabIndex = 1;
             this.btnCargarproducto.Text = "Cargar Producto";
-            this.btnCargarproducto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCargarproducto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnCargarproducto.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCargarproducto.UseVisualStyleBackColor = false;
             this.btnCargarproducto.Click += new System.EventHandler(this.BTCargarproducto_Click);
@@ -449,6 +461,7 @@ namespace PetShopDelLitoral
         private FontAwesome.Sharp.IconButton btnCargarproducto;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel7;
         private Guna.UI2.WinForms.Guna2DataGridView DataGridViewProductos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnId;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCodigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCategoria;

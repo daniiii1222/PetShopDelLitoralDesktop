@@ -194,6 +194,7 @@ namespace PetShopDelLitoral
 
             guna2TextBox6.Text = "$ 0,00"; // Total
             guna2TextBox6.ReadOnly = true;
+            guna2TextBox6.ForeColor = System.Drawing.Color.FromArgb(253, 204, 111);
 
             guna2NumericUpDown1.Value = 1;
             guna2NumericUpDown1.Minimum = 1;
@@ -279,11 +280,15 @@ namespace PetShopDelLitoral
                 AutoCompleteStringCollection coleccion = new AutoCompleteStringCollection();
                 foreach (Producto prod in _listaProductos)
                 {
+                    if (!string.IsNullOrEmpty(prod.Codigo_producto))
+                    {
+                        coleccion.Add(prod.Codigo_producto);
+                    }
                     if (!string.IsNullOrEmpty(prod.Nombre_producto))
                     {
                         coleccion.Add(prod.Nombre_producto);
-                        coleccion.Add(prod.IdProducto.ToString());
                     }
+                    coleccion.Add(prod.IdProducto.ToString());
                 }
 
                 guna2TextBox7.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -315,6 +320,8 @@ namespace PetShopDelLitoral
             bool esNumero = int.TryParse(textoLimpio, out int codBuscado);
 
             _productoSeleccionado = _listaProductos.FirstOrDefault(p =>
+                (!string.IsNullOrEmpty(p.Codigo_producto) && p.Codigo_producto.Equals(texto, StringComparison.OrdinalIgnoreCase)) ||
+                (!string.IsNullOrEmpty(p.Codigo_producto) && p.Codigo_producto.ToLower().Contains(texto.ToLower())) ||
                 (esNumero && p.IdProducto == codBuscado) ||
                 p.IdProducto.ToString() == textoLimpio ||
                 p.Nombre_producto.Equals(texto, StringComparison.OrdinalIgnoreCase) ||
@@ -348,6 +355,7 @@ namespace PetShopDelLitoral
                 bool esNumero = int.TryParse(textoLimpio, out int codBuscado);
 
                 _productoSeleccionado = _listaProductos.FirstOrDefault(p =>
+                    (!string.IsNullOrEmpty(p.Codigo_producto) && p.Codigo_producto.Equals(texto, StringComparison.OrdinalIgnoreCase)) ||
                     (esNumero && p.IdProducto == codBuscado) ||
                     p.IdProducto.ToString() == textoLimpio ||
                     p.Nombre_producto.Equals(texto, StringComparison.OrdinalIgnoreCase));
