@@ -10,11 +10,11 @@ namespace PetShopDelLitoral
     {
         // ---------- Panel izquierdo (Datos de la venta) ----------
         private const int ALTURA_DISENO_IZQ = 547;   // alto de panelIzquierdoVenta en el Designer
-        private const int MARGEN_IZQ = 14;           // de los campos al borde izquierdo
-        private const int MARGEN_DER = 18;           // de los campos al borde derecho
-        private const int X_ETIQUETAS = 11;          // las etiquetas van un poco más a la izquierda que los campos
+        private const int MARGEN_IZQ = LayoutPantalla.MARGEN_IZQ;
+        private const int MARGEN_DER = LayoutPantalla.MARGEN_DER;
+        private const int X_ETIQUETAS = LayoutPantalla.X_ETIQUETAS;
         private const int Y_PRIMER_GRUPO = 50;       // debajo del título "Datos de la venta"
-        private const int ALTO_ETIQUETA = 22;        // lo que ocupa una etiqueta hasta el campo
+        private const int ALTO_ETIQUETA = LayoutPantalla.ALTO_ETIQUETA;
         private const int GAP_MIN = 26;              // aire entre un grupo (etiqueta + campo) y el siguiente
         private const int GAP_MAX = 34;
         private const int ALTO_OBS_MIN = 65;         // Observaciones: es el que absorbe la altura que sobra
@@ -48,11 +48,10 @@ namespace PetShopDelLitoral
             AcomodarBotonesInferiores();
         }
 
-        // El panel de datos ocupa ~20% del ancho (entre 300 y 360 px): en pantalla grande los campos respiran más
+        // El ancho del panel de datos lo define LayoutPantalla (igual que en Compras)
         private void AjustarAnchoPanelIzquierdo()
         {
-            int deseado = (int)Math.Round(PaneContenidoSec.ClientSize.Width * 0.20);
-            panelIzquierdoVenta.Width = Math.Max(300, Math.Min(360, deseado));
+            panelIzquierdoVenta.Width = LayoutPantalla.AnchoPanelIzquierdo(PaneContenidoSec.ClientSize.Width);
         }
 
         // ------------------------------------------------------------------
@@ -107,9 +106,7 @@ namespace PetShopDelLitoral
         // Pone la etiqueta en 'y' y su campo justo debajo; devuelve dónde termina el campo
         private int ColocarGrupo(Label etiqueta, Control campo, int y, int ancho)
         {
-            etiqueta.Location = new Point(X_ETIQUETAS, y);
-            campo.SetBounds(MARGEN_IZQ, y + ALTO_ETIQUETA, ancho, campo.Height);
-            return campo.Bottom;
+            return LayoutPantalla.ColocarGrupo(etiqueta, campo, y, ancho);
         }
 
         // ------------------------------------------------------------------

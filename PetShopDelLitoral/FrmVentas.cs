@@ -368,6 +368,14 @@ namespace PetShopDelLitoral
             ActualizarTotales(); // Deja que esta función se encargue de calcular el subtotal y el total con el descuento de la compra
         }
 
+        private void dgvCompras_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+
+        private void LDatosVenta_Click(object sender, EventArgs e)
+        {
+        }
+
         // ---------- DESCUENTOS ----------
         // Columna "Desc. %" editable: se agrega por código para no tocar el Designer.
         // Orden resultante: Producto | Precio | Cantidad | Desc. % | Subtotal | Eliminar

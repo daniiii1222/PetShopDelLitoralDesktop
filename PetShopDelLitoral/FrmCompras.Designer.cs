@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PaneContenidoSec = new Guna.UI2.WinForms.Guna2Panel();
             this.PanelDerechoVenta = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.PanelDerechoMID = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
@@ -41,11 +41,11 @@
             this.columnaSubtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnaEliminar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label11 = new System.Windows.Forms.Label();
-            this.guna2CustomGradientPanel3 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            this.iconButton5 = new FontAwesome.Sharp.IconButton();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.PanelDerechoBOT = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            this.guna2CustomGradientPanel3 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            this.iconButton5 = new FontAwesome.Sharp.IconButton();
             this.guna2CustomGradientPanel4 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.iconButton2 = new FontAwesome.Sharp.IconButton();
             this.guna2CustomGradientPanel6 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
@@ -93,8 +93,8 @@
             this.PanelDerechoVenta.SuspendLayout();
             this.PanelDerechoMID.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompras)).BeginInit();
-            this.guna2CustomGradientPanel3.SuspendLayout();
             this.PanelDerechoBOT.SuspendLayout();
+            this.guna2CustomGradientPanel3.SuspendLayout();
             this.guna2CustomGradientPanel4.SuspendLayout();
             this.guna2CustomGradientPanel6.SuspendLayout();
             this.PanelDerechoSUP.SuspendLayout();
@@ -108,7 +108,6 @@
             // 
             // PaneContenidoSec
             // 
-            this.PaneContenidoSec.AutoSize = false;
             this.PaneContenidoSec.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.PaneContenidoSec.Controls.Add(this.PanelDerechoVenta);
             this.PaneContenidoSec.Controls.Add(this.guna2Panel1);
@@ -130,10 +129,10 @@
             this.PanelDerechoVenta.Controls.Add(this.PanelDerechoBOT);
             this.PanelDerechoVenta.Controls.Add(this.PanelDerechoSUP);
             this.PanelDerechoVenta.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelDerechoVenta.Location = new System.Drawing.Point(309, 12);
+            this.PanelDerechoVenta.Location = new System.Drawing.Point(314, 12);
             this.PanelDerechoVenta.Margin = new System.Windows.Forms.Padding(0);
             this.PanelDerechoVenta.Name = "PanelDerechoVenta";
-            this.PanelDerechoVenta.Size = new System.Drawing.Size(818, 597);
+            this.PanelDerechoVenta.Size = new System.Drawing.Size(813, 597);
             this.PanelDerechoVenta.TabIndex = 1;
             // 
             // PanelDerechoMID
@@ -146,29 +145,32 @@
             this.PanelDerechoMID.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.PanelDerechoMID.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.PanelDerechoMID.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.PanelDerechoMID.Location = new System.Drawing.Point(0, 90);
+            this.PanelDerechoMID.Location = new System.Drawing.Point(0, 92);
             this.PanelDerechoMID.Name = "PanelDerechoMID";
-            this.PanelDerechoMID.Size = new System.Drawing.Size(818, 449);
+            this.PanelDerechoMID.Size = new System.Drawing.Size(813, 443);
             this.PanelDerechoMID.TabIndex = 1;
             this.PanelDerechoMID.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelDerechoMID_Paint);
             // 
             // dgvCompras
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.dgvCompras.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.dgvCompras.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvCompras.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvCompras.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCompras.BackgroundColor = System.Drawing.Color.White;
             this.dgvCompras.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvCompras.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvCompras.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCompras.ColumnHeadersHeight = 27;
             this.dgvCompras.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnaProducto,
@@ -176,26 +178,23 @@
             this.columnaCantidad,
             this.columnaSubtotal,
             this.columnaEliminar});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(185)))), ((int)(((byte)(110)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCompras.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(185)))), ((int)(((byte)(110)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCompras.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvCompras.EnableHeadersVisualStyles = false;
             this.dgvCompras.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvCompras.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvCompras.Location = new System.Drawing.Point(14, 38);
             this.dgvCompras.Name = "dgvCompras";
             this.dgvCompras.RowHeadersVisible = false;
             this.dgvCompras.RowHeadersWidth = 51;
             this.dgvCompras.RowTemplate.Height = 24;
             this.dgvCompras.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCompras.Size = new System.Drawing.Size(790, 395);
+            this.dgvCompras.Size = new System.Drawing.Size(785, 389);
             this.dgvCompras.TabIndex = 16;
             this.dgvCompras.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvCompras.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -218,6 +217,7 @@
             this.dgvCompras.ThemeStyle.RowsStyle.Height = 24;
             this.dgvCompras.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(185)))), ((int)(((byte)(110)))));
             this.dgvCompras.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvCompras.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCompras_CellContentClick_1);
             // 
             // columnaProducto
             // 
@@ -257,16 +257,16 @@
             this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.label11.Location = new System.Drawing.Point(14, 10);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(158, 20);
+            this.label11.Size = new System.Drawing.Size(191, 25);
             this.label11.TabIndex = 15;
             this.label11.Text = "Detalle de Compra";
             // 
             // guna2Panel2
             // 
             this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.guna2Panel2.Location = new System.Drawing.Point(0, 539);
+            this.guna2Panel2.Location = new System.Drawing.Point(0, 535);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(818, 10);
+            this.guna2Panel2.Size = new System.Drawing.Size(813, 10);
             this.guna2Panel2.TabIndex = 4;
             // 
             // panel1
@@ -274,7 +274,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 82);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(818, 10);
+            this.panel1.Size = new System.Drawing.Size(813, 10);
             this.panel1.TabIndex = 3;
             // 
             // PanelDerechoBOT
@@ -287,9 +287,9 @@
             this.PanelDerechoBOT.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.PanelDerechoBOT.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.PanelDerechoBOT.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.PanelDerechoBOT.Location = new System.Drawing.Point(0, 549);
+            this.PanelDerechoBOT.Location = new System.Drawing.Point(0, 545);
             this.PanelDerechoBOT.Name = "PanelDerechoBOT";
-            this.PanelDerechoBOT.Size = new System.Drawing.Size(818, 52);
+            this.PanelDerechoBOT.Size = new System.Drawing.Size(813, 52);
             this.PanelDerechoBOT.TabIndex = 2;
             // 
             // guna2CustomGradientPanel3
@@ -303,7 +303,7 @@
             this.guna2CustomGradientPanel3.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.guna2CustomGradientPanel3.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.guna2CustomGradientPanel3.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.guna2CustomGradientPanel3.Location = new System.Drawing.Point(14, 6);
+            this.guna2CustomGradientPanel3.Location = new System.Drawing.Point(11, 6);
             this.guna2CustomGradientPanel3.Name = "guna2CustomGradientPanel3";
             this.guna2CustomGradientPanel3.Size = new System.Drawing.Size(140, 40);
             this.guna2CustomGradientPanel3.TabIndex = 15;
@@ -341,7 +341,7 @@
             this.guna2CustomGradientPanel4.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.guna2CustomGradientPanel4.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.guna2CustomGradientPanel4.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.guna2CustomGradientPanel4.Location = new System.Drawing.Point(487, 6);
+            this.guna2CustomGradientPanel4.Location = new System.Drawing.Point(484, 6);
             this.guna2CustomGradientPanel4.Name = "guna2CustomGradientPanel4";
             this.guna2CustomGradientPanel4.Size = new System.Drawing.Size(140, 40);
             this.guna2CustomGradientPanel4.TabIndex = 3;
@@ -378,7 +378,7 @@
             this.guna2CustomGradientPanel6.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.guna2CustomGradientPanel6.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.guna2CustomGradientPanel6.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2CustomGradientPanel6.Location = new System.Drawing.Point(639, 6);
+            this.guna2CustomGradientPanel6.Location = new System.Drawing.Point(636, 6);
             this.guna2CustomGradientPanel6.Name = "guna2CustomGradientPanel6";
             this.guna2CustomGradientPanel6.Size = new System.Drawing.Size(165, 40);
             this.guna2CustomGradientPanel6.TabIndex = 16;
@@ -408,7 +408,6 @@
             // 
             // PanelDerechoSUP
             // 
-            this.PanelDerechoSUP.AutoScroll = false;
             this.PanelDerechoSUP.BorderRadius = 15;
             this.PanelDerechoSUP.Controls.Add(this.label14);
             this.PanelDerechoSUP.Controls.Add(this.textBox2);
@@ -426,8 +425,7 @@
             this.PanelDerechoSUP.Location = new System.Drawing.Point(0, 0);
             this.PanelDerechoSUP.Margin = new System.Windows.Forms.Padding(0);
             this.PanelDerechoSUP.Name = "PanelDerechoSUP";
-            this.PanelDerechoSUP.Padding = new System.Windows.Forms.Padding(0);
-            this.PanelDerechoSUP.Size = new System.Drawing.Size(818, 82);
+            this.PanelDerechoSUP.Size = new System.Drawing.Size(813, 82);
             this.PanelDerechoSUP.TabIndex = 0;
             this.PanelDerechoSUP.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelDerechoSUP_Paint);
             // 
@@ -439,7 +437,7 @@
             this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.label14.Location = new System.Drawing.Point(330, 12);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(102, 15);
+            this.label14.Size = new System.Drawing.Size(122, 18);
             this.label14.TabIndex = 16;
             this.label14.Text = "Precio Compra";
             // 
@@ -508,7 +506,7 @@
             this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.label10.Location = new System.Drawing.Point(441, 12);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(64, 15);
+            this.label10.Size = new System.Drawing.Size(74, 18);
             this.label10.TabIndex = 13;
             this.label10.Text = "Cantidad";
             this.label10.Click += new System.EventHandler(this.label10_Click);
@@ -558,12 +556,12 @@
             this.guna2TextBox7.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.guna2TextBox7.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2TextBox7.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2TextBox7.ForeColor = System.Drawing.Color.Black;
             this.guna2TextBox7.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2TextBox7.Location = new System.Drawing.Point(14, 34);
             this.guna2TextBox7.Name = "guna2TextBox7";
-            this.guna2TextBox7.ForeColor = System.Drawing.Color.Black;
-            this.guna2TextBox7.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(115)))), ((int)(((byte)(120)))), ((int)(((byte)(130)))));
             this.guna2TextBox7.PasswordChar = '\0';
+            this.guna2TextBox7.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(115)))), ((int)(((byte)(120)))), ((int)(((byte)(130)))));
             this.guna2TextBox7.PlaceholderText = "Buscar producto por nombre";
             this.guna2TextBox7.SelectedText = "";
             this.guna2TextBox7.Size = new System.Drawing.Size(260, 36);
@@ -577,7 +575,7 @@
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.label9.Location = new System.Drawing.Point(14, 8);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(159, 20);
+            this.label9.Size = new System.Drawing.Size(192, 25);
             this.label9.TabIndex = 1;
             this.label9.Text = "Agregar Productos";
             this.label9.Click += new System.EventHandler(this.label9_Click);
@@ -631,7 +629,7 @@
             this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.label13.Location = new System.Drawing.Point(12, 246);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(142, 16);
+            this.label13.Size = new System.Drawing.Size(183, 21);
             this.label13.TabIndex = 25;
             this.label13.Text = "N° de Comprobante";
             // 
@@ -643,7 +641,7 @@
             this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.label12.Location = new System.Drawing.Point(12, 180);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(158, 16);
+            this.label12.Size = new System.Drawing.Size(200, 21);
             this.label12.TabIndex = 24;
             this.label12.Text = "Tipo de Comprobante";
             // 
@@ -757,7 +755,7 @@
             this.guna2TextBox6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.guna2TextBox6.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2TextBox6.Location = new System.Drawing.Point(100, 5);
-            this.guna2TextBox6.Margin = new System.Windows.Forms.Padding(4);
+            this.guna2TextBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2TextBox6.Name = "guna2TextBox6";
             this.guna2TextBox6.PasswordChar = '\0';
             this.guna2TextBox6.PlaceholderText = "$   0,00";
@@ -772,7 +770,7 @@
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.label8.Location = new System.Drawing.Point(12, 8);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(56, 24);
+            this.label8.Size = new System.Drawing.Size(73, 27);
             this.label8.TabIndex = 2;
             this.label8.Text = "Total";
             // 
@@ -802,7 +800,7 @@
             this.label7.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(14, 44);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(72, 16);
+            this.label7.Size = new System.Drawing.Size(97, 20);
             this.label7.TabIndex = 1;
             this.label7.Text = "Descuento";
             // 
@@ -812,7 +810,7 @@
             this.label6.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(14, 12);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 16);
+            this.label6.Size = new System.Drawing.Size(78, 20);
             this.label6.TabIndex = 0;
             this.label6.Text = "Subtotal";
             // 
@@ -845,7 +843,7 @@
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.label5.Location = new System.Drawing.Point(12, 378);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(112, 16);
+            this.label5.Size = new System.Drawing.Size(144, 21);
             this.label5.TabIndex = 19;
             this.label5.Text = "Observaciones";
             this.label5.Click += new System.EventHandler(this.label5_Click);
@@ -878,7 +876,7 @@
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.label4.Location = new System.Drawing.Point(12, 312);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(180, 16);
+            this.label4.Size = new System.Drawing.Size(230, 21);
             this.label4.TabIndex = 17;
             this.label4.Text = "Encargado de la Compra";
             // 
@@ -907,7 +905,7 @@
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.label3.Location = new System.Drawing.Point(12, 262);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(131, 16);
+            this.label3.Size = new System.Drawing.Size(155, 20);
             this.label3.TabIndex = 15;
             this.label3.Text = "Metodo de pago *";
             this.label3.Visible = false;
@@ -935,7 +933,7 @@
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.label2.Location = new System.Drawing.Point(12, 114);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 16);
+            this.label2.Size = new System.Drawing.Size(73, 21);
             this.label2.TabIndex = 12;
             this.label2.Text = "Fecha*";
             // 
@@ -1009,7 +1007,7 @@
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.label1.Location = new System.Drawing.Point(12, 48);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 16);
+            this.label1.Size = new System.Drawing.Size(111, 21);
             this.label1.TabIndex = 1;
             this.label1.Text = "Proveedor*";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -1022,9 +1020,10 @@
             this.LDatosVenta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.LDatosVenta.Location = new System.Drawing.Point(12, 12);
             this.LDatosVenta.Name = "LDatosVenta";
-            this.LDatosVenta.Size = new System.Drawing.Size(168, 20);
+            this.LDatosVenta.Size = new System.Drawing.Size(241, 26);
             this.LDatosVenta.TabIndex = 0;
             this.LDatosVenta.Text = "Datos de la Compra";
+            this.LDatosVenta.Click += new System.EventHandler(this.LDatosVenta_Click);
             // 
             // panelTituloSec
             // 
@@ -1044,7 +1043,7 @@
             this.TBTituloSec.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TBTituloSec.Location = new System.Drawing.Point(12, 4);
             this.TBTituloSec.Name = "TBTituloSec";
-            this.TBTituloSec.Size = new System.Drawing.Size(192, 26);
+            this.TBTituloSec.Size = new System.Drawing.Size(242, 32);
             this.TBTituloSec.TabIndex = 4;
             this.TBTituloSec.Text = "Registro Compra";
             // 
@@ -1055,7 +1054,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.ClientSize = new System.Drawing.Size(1139, 621);
             this.Controls.Add(this.PaneContenidoSec);
-            // this.Controls.Add(this.panelTituloSec);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmCompras";
@@ -1066,8 +1064,8 @@
             this.PanelDerechoMID.ResumeLayout(false);
             this.PanelDerechoMID.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompras)).EndInit();
-            this.guna2CustomGradientPanel3.ResumeLayout(false);
             this.PanelDerechoBOT.ResumeLayout(false);
+            this.guna2CustomGradientPanel3.ResumeLayout(false);
             this.guna2CustomGradientPanel4.ResumeLayout(false);
             this.guna2CustomGradientPanel6.ResumeLayout(false);
             this.PanelDerechoSUP.ResumeLayout(false);
@@ -1083,7 +1081,6 @@
             this.panelTituloSec.ResumeLayout(false);
             this.panelTituloSec.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

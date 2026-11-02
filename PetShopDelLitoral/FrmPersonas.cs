@@ -30,6 +30,8 @@ namespace PetShopDelLitoral
         {
             InitializeComponent();
             rolUsuarioActual = rolLogueado;
+
+            PrepararLayoutFormulario();
         }
 
         // Constructor de compatibilidad (por si algo en el sistema todavía instancia sin rol).
@@ -144,13 +146,13 @@ namespace PetShopDelLitoral
 
         }
 
-
-        private void botonUsuario_Click(object sender, EventArgs e)
+        private void botonUsuario_Click(object sender, EventArgs e) { btnUsuarios_Click(sender, e); }
+        /*private void botonUsuario_Click(object sender, EventArgs e)
         {
             tipoSeleccionado = "Usuario";
             panelUsuarios.Visible = true;
         }
-
+        */
 
         private void guna2CustomGradientPanel7_Paint(object sender, PaintEventArgs e)
         {
@@ -159,25 +161,24 @@ namespace PetShopDelLitoral
 
         private void btnClientes_Click(object sender, EventArgs e)
         {
+            MarcarFiltro(btnTClientes);
             tipoSeleccionado = "Cliente";
             chkActivo.Checked = true;
 
-            CBRol.Visible = false;
-            TBContraseniaUsuario.Visible = false;
-            //lbPanelUsuarios.Visible = false;  
+            panelUsuarios.Visible = false;
 
             ConfigurarGridClientes();
             CargarClientes();
+
         }
 
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
+            MarcarFiltro(btnTUsuarios);
             tipoSeleccionado = "Usuario";
             chkActivo.Checked = true;
 
-            CBRol.Visible = true;
-            TBContraseniaUsuario.Visible = true;
-            //lbPanelUsuarios.Visible = true;  
+            panelUsuarios.Visible = true;
 
             ConfigurarGridUsuarios();
             CargarUsuarios();
@@ -185,10 +186,12 @@ namespace PetShopDelLitoral
 
         private void btnProveedores_Click(object sender, EventArgs e)
         {
+            MarcarFiltro(btnTProveedores);
             tipoSeleccionado = "Proveedor";
             chkActivo.Checked = true;
             ConfigurarGridProveedores();
             CargarProveedores(); // <-- Llamamos al método real que acabamos de armar
+            panelUsuarios.Visible = false;
         }
 
 
@@ -201,9 +204,70 @@ namespace PetShopDelLitoral
         // y "Correo" se estira para ocupar el espacio que sobra.
         private void AjustarAnchosGrid()
         {
-            dgvPersonas.AllowUserToAddRows = false;   // saca la fila vacía del final
-            dgvPersonas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dgvPersonas.Columns["Correo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvPersonas.AllowUserToAddRows = false;      // saca la fila vacía del final
+            dgvPersonas.AllowUserToDeleteRows = false;
+            dgvPersonas.AllowUserToResizeColumns = false;
+            dgvPersonas.AllowUserToResizeRows = false;
+            dgvPersonas.AllowUserToOrderColumns = false;
+            dgvPersonas.ReadOnly = true;                 // la grilla solo muestra; los botones de editar/borrar siguen andando
+
+            // Datos y encabezados centrados, encabezado en una línea y sin color celeste al seleccionarlo
+            dgvPersonas.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvPersonas.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvPersonas.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
+            dgvPersonas.ColumnHeadersDefaultCellStyle.SelectionBackColor = dgvPersonas.ColumnHeadersDefaultCellStyle.BackColor;
+            dgvPersonas.ColumnHeadersDefaultCellStyle.SelectionForeColor = dgvPersonas.ColumnHeadersDefaultCellStyle.ForeColor;
+
+            Font fuenteCelda = dgvPersonas.DefaultCellStyle.Font ?? dgvPersonas.Font;
+            Font fuenteEncabezado = dgvPersonas.ColumnHeadersDefaultCellStyle.Font ?? dgvPersonas.Font;
+            int filas = Math.Min(dgvPersonas.Rows.Count, 500);
+
+            // 1) Se mide cuánto necesita cada columna visible (encabezado, celdas o texto del botón)
+            int[] anchos = new int[dgvPersonas.Columns.Count];
+            for (int i = 0; i < anchos.Length; i++)
+            {
+                DataGridViewColumn col = dgvPersonas.Columns[i];
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;   // clic en el encabezado no ordena
+                if (!col.Visible) continue;
+
+                int ancho = TextRenderer.MeasureText(col.HeaderText ?? "", fuenteEncabezado).Width + 30;
+
+                DataGridViewButtonColumn colBoton = col as DataGridViewButtonColumn;
+                if (colBoton != null)
+                {
+                    ancho = Math.Max(44, TextRenderer.MeasureText(colBoton.Text ?? "", fuenteCelda).Width + 30);
+                }
+                else
+                {
+                    for (int r = 0; r < filas; r++)
+                    {
+                        string texto = Convert.ToString(dgvPersonas.Rows[r].Cells[i].FormattedValue) ?? "";
+                        ancho = Math.Max(ancho, TextRenderer.MeasureText(texto, fuenteCelda).Width + 24);
+                    }
+                }
+
+                anchos[i] = ancho;
+            }
+
+            // 2) ID y botones de editar/borrar quedan con ancho justo; el resto reparte el espacio sobrante
+            //    en proporción a lo que ocupa su contenido (así ninguna columna se estira de más)
+            dgvPersonas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            for (int i = 0; i < anchos.Length; i++)
+            {
+                DataGridViewColumn col = dgvPersonas.Columns[i];
+                if (!col.Visible) continue;
+
+                col.MinimumWidth = anchos[i];
+                if (col is DataGridViewButtonColumn || col.Name == "Id")
+                {
+                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                    col.Width = anchos[i];
+                }
+                else
+                {
+                    col.FillWeight = anchos[i];
+                }
+            }
         }
 
         private void ConfigurarGridClientes()
@@ -339,7 +403,7 @@ namespace PetShopDelLitoral
             idSeleccionado = id;
 
             // Mostramos el panel de usuario porque estamos editando a un usuario
-            panelUsuarios.Visible = true;
+            panelUsuarios.Visible = (tipoSeleccionado == "Usuario");
 
             foreach (DataGridViewRow fila in dgvPersonas.Rows)
             {
@@ -373,6 +437,7 @@ namespace PetShopDelLitoral
                     break;
                 }
             }
+            ActualizarEstadoVisible();
         }
 
         private void EliminarPersona(int id)
@@ -462,6 +527,7 @@ namespace PetShopDelLitoral
                         dgvPersonas.Rows.Add(idCliente, nombre, apellido, correo, telefono, direccion, estado, idPersona, dni);
                     }
                 }
+                AjustarAnchosGrid();   // ahora que hay filas, se mide con los datos reales
             }
             catch (Exception ex)
             {
@@ -506,6 +572,7 @@ namespace PetShopDelLitoral
                     }
                 }
 
+                AjustarAnchosGrid();   // ahora que hay filas, se mide con los datos reales
             }
             catch (Exception ex)
             {
@@ -567,6 +634,7 @@ namespace PetShopDelLitoral
         {
 
             // 1. Ocultamos los botones por defecto
+            ActualizarEstadoVisible();
             btnUsuario.Visible = false;
             btntipoProveedor.Visible = false;
             btnCliente.Visible = false;
@@ -613,7 +681,53 @@ namespace PetShopDelLitoral
 
             CargarRoles();
             btVerInactivos.Text = "Ver Inactivos";
+            // Resaltado inicial: el administrador entra viendo "Todos"; los demás roles, "Clientes"
+            MarcarFiltro(rol.Equals("Administrador", StringComparison.OrdinalIgnoreCase) ? btnTodosLosRegistros : btnTClientes);
             FiltrarGrilla();
+        }
+
+       
+
+        // ==========================================
+        // COLORES DE LOS BOTONES DE FILTRO (Todos / Clientes / Proveedores / Usuarios)
+        // ==========================================
+        // Antes dependían del color por defecto del panel de Guna (que cambia de una PC a otra),
+        // por eso se veían claros con letras blancas. Ahora se definen a mano, con la paleta de la app.
+        private static readonly Color ColorOscuro = Color.FromArgb(33, 24, 21);
+        private static readonly Color ColorDorado = Color.FromArgb(253, 204, 110);
+        private static readonly Font FuenteFiltro = new Font("Microsoft Sans Serif", 10.2F);   // la fuente que usaba la app antes
+
+        // El botón activo queda oscuro con letras doradas; los demás, dorados con letras oscuras
+        private void MarcarFiltro(FontAwesome.Sharp.IconButton activo)
+        {
+            PintarFiltro(guna2CustomGradientPanel9, btnTodosLosRegistros, activo == btnTodosLosRegistros);
+            PintarFiltro(guna2CustomGradientPanel12, btnTClientes, activo == btnTClientes);
+            PintarFiltro(guna2CustomGradientPanel11, btnTProveedores, activo == btnTProveedores);
+            PintarFiltro(guna2CustomGradientPanel10, btnTUsuarios, activo == btnTUsuarios);
+        }
+
+        private void PintarFiltro(Guna.UI2.WinForms.Guna2CustomGradientPanel panel, FontAwesome.Sharp.IconButton boton, bool seleccionado)
+        {
+            Color fondo = seleccionado ? ColorOscuro : ColorDorado;
+            Color texto = seleccionado ? ColorDorado : ColorOscuro;
+
+            // El color de fondo lo pone el panel redondeado (tiene 4 colores de degradé: los 4 iguales = color liso)
+            panel.FillColor = fondo;
+            panel.FillColor2 = fondo;
+            panel.FillColor3 = fondo;
+            panel.FillColor4 = fondo;
+
+            // El botón ocupa todo el panel (así el texto no se corta) y usa la fuente de siempre
+            boton.Font = FuenteFiltro;
+            boton.Location = new Point(0, 0);
+            boton.Size = panel.ClientSize;
+
+            // El botón queda transparente encima del panel
+            boton.BackColor = Color.Transparent;
+            boton.ForeColor = texto;
+            boton.IconColor = texto;
+            boton.FlatAppearance.MouseOverBackColor = fondo;   // sin cambio de color al pasar el mouse
+            boton.FlatAppearance.MouseDownBackColor = fondo;
         }
 
         private void LimpiarCampos()
@@ -636,9 +750,17 @@ namespace PetShopDelLitoral
 
             idSeleccionado = 0;
             chkActivo.Checked = true;
+            ActualizarEstadoVisible();
         }
 
-
+        // El Estado (alta/baja) solo se muestra al editar; un registro nuevo siempre nace activo
+        private void ActualizarEstadoVisible()
+        {
+            bool editando = idSeleccionado != 0;
+            label12.Visible = editando;
+            chkActivo.Visible = editando;
+            DistribuirFormulario();   // si usaste el archivo Layout, el nombre es DistribuirFormulario
+        }
         private void botonGuardarRegistro_Click(object sender, EventArgs e)
         {
             if (tipoSeleccionado == "Usuario")
@@ -871,6 +993,7 @@ namespace PetShopDelLitoral
                     // Agregamos la fila respetando las columnas configuradas en ConfigurarGridProveedores
                     dgvPersonas.Rows.Add(idProveedor, nombre, apellido, correo, telefono, direccion, estado, idPersona, dni);
                 }
+                AjustarAnchosGrid();   // ahora que hay filas, se mide con los datos reales
             }
             catch (Exception ex)
             {
@@ -929,6 +1052,8 @@ namespace PetShopDelLitoral
 
         private void btnTodosLosRegistros_Click(object sender, EventArgs e)
         {
+            MarcarFiltro(btnTodosLosRegistros);
+
             // 1. Limpiamos el buscador
             txtBuscar.Text = "";
 
@@ -1014,10 +1139,7 @@ namespace PetShopDelLitoral
             }
         }
 
-        private void btnCliente_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void btnCliente_Click(object sender, EventArgs e) { btnClientes_Click(sender, e); }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -1035,9 +1157,8 @@ namespace PetShopDelLitoral
 
         private void btntipoProveedor_Click_1(object sender, EventArgs e)
         {
-            tipoSeleccionado = "Proveedor";
-            ConfigurarGridProveedores();
-            CargarProveedores();
+            
+            btnProveedores_Click(sender, e);
         }
     }
 

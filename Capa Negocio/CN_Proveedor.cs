@@ -38,5 +38,10 @@ namespace CapaNegocio
 
             return obj_cd_proveedor.Editar(obj, out Mensaje);
         }
+
+        public bool CrearProveedoresIniciales(out string Mensaje)
+        {
+            return obj_cd_proveedor.CrearProveedoresIniciales(out Mensaje);
+        }
     }
 }

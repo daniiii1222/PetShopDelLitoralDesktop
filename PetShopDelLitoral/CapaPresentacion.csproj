@@ -115,6 +115,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include=".vs\FrmCompras.Layout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include=".vs\LayoutPantalla.cs" />
     <Compile Include="CargaProductos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +150,9 @@
     </Compile>
     <Compile Include="FrmPersonas.Designer.cs">
       <DependentUpon>FrmPersonas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPersonas.Layout.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmReportesAdministrador.cs">
       <SubType>Form</SubType>
@@ -235,6 +242,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include=".vs\CapaPresentacion.csproj.dtbcache.json" />
     <None Include="fuentes\Poppins-Regular.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

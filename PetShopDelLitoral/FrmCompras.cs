@@ -21,6 +21,7 @@ namespace PetShopDelLitoral
         public FrmCompras()
         {
             InitializeComponent();
+            PrepararLayoutPanelIzquierdo();
 
             // Enlazar eventos de botones del diseñador
             this.iconButton6.Click += new EventHandler(this.btnAgregar_Click);
@@ -30,7 +31,13 @@ namespace PetShopDelLitoral
             this.iconButton4.Click += new EventHandler(this.btnBuscarProducto_Click);
             this.dgvCompras.CellContentClick += new DataGridViewCellEventHandler(this.dgvCompras_CellContentClick);
         }
+        private void dgvCompras_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+        }
 
+        private void LDatosVenta_Click(object sender, EventArgs e)
+        {
+        }
         private void FrmCompras_Load(object sender, EventArgs e)
         {
             ConfigurarGrilla();
@@ -57,102 +64,6 @@ namespace PetShopDelLitoral
             if (PanelDerechoBOT != null) PanelDerechoBOT.Resize += (s, ev) => AlinearControlesCompras();
             if (panelIzquierdoVenta != null) panelIzquierdoVenta.Resize += (s, ev) => AlinearControlesCompras();
             if (PaneContenidoSec != null) PaneContenidoSec.Resize += (s, ev) => AlinearControlesCompras();
-        }
-
-        private void AlinearControlesCompras()
-        {
-            try
-            {
-                if (panelTituloSec != null) panelTituloSec.Visible = false;
-                if (PaneContenidoSec != null)
-                {
-                    PaneContenidoSec.AutoSize = false;
-                    PaneContenidoSec.Dock = DockStyle.Fill;
-                }
-
-                // 1. Alinear y expandir controles de "Agregar Productos" para que alcancen ambos bordes
-                if (PanelDerechoSUP != null)
-                {
-                    int supWidth = PanelDerechoSUP.ClientSize.Width;
-
-                    // Botón + Agregar alineado a la derecha (exacto margen de 14px como la grilla)
-                    if (guna2CustomGradientPanel5 != null)
-                    {
-                        int btnAgregarX = supWidth - 14 - guna2CustomGradientPanel5.Width;
-                        guna2CustomGradientPanel5.Location = new Point(btnAgregarX, 34);
-
-                        // Cantidad (16px a la izquierda de Agregar)
-                        if (guna2NumericUpDown1 != null)
-                        {
-                            int cantX = btnAgregarX - 16 - guna2NumericUpDown1.Width;
-                            guna2NumericUpDown1.Location = new Point(cantX, 34);
-                            if (label10 != null) label10.Location = new Point(cantX, 12);
-
-                            // Precio Compra (16px a la izquierda de Cantidad)
-                            if (textBox2 != null)
-                            {
-                                int precioX = cantX - 16 - textBox2.Width;
-                                textBox2.Location = new Point(precioX, 34);
-                                if (label14 != null) label14.Location = new Point(precioX, 12);
-
-                                // Botón Lupa (16px a la izquierda de Precio)
-                                if (iconButton4 != null)
-                                {
-                                    int lupaX = precioX - 16 - iconButton4.Width;
-                                    iconButton4.Location = new Point(lupaX, 34);
-
-                                    // Buscador de productos: se expande desde X=14 hasta la Lupa
-                                    if (guna2TextBox7 != null)
-                                    {
-                                        int boxX = 14;
-                                        int boxW = Math.Max(180, (lupaX - 4) - boxX);
-                                        guna2TextBox7.Location = new Point(boxX, 34);
-                                        guna2TextBox7.Size = new Size(boxW, 36);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // 2. Alinear barra de botones inferiores en PanelDerechoBOT
-                if (PanelDerechoBOT != null)
-                {
-                    int botWidth = PanelDerechoBOT.ClientSize.Width;
-                    int botHeight = PanelDerechoBOT.ClientSize.Height;
-                    int yPos = Math.Max(0, (botHeight - 40) / 2);
-
-                    // Vaciar Lista alineado a 14px a la izquierda (exacto margen de la grilla)
-                    if (guna2CustomGradientPanel3 != null)
-                    {
-                        guna2CustomGradientPanel3.Location = new Point(14, yPos);
-                    }
-
-                    // Guardar Compra alineado a 14px a la derecha (exacto margen de la grilla)
-                    if (guna2CustomGradientPanel6 != null)
-                    {
-                        int btnGuardarX = botWidth - 14 - guna2CustomGradientPanel6.Width;
-                        guna2CustomGradientPanel6.Location = new Point(btnGuardarX, yPos);
-
-                        // Cancelar separado 12px a la izquierda de Guardar Compra
-                        if (guna2CustomGradientPanel4 != null)
-                        {
-                            int btnCancelarX = btnGuardarX - 12 - guna2CustomGradientPanel4.Width;
-                            guna2CustomGradientPanel4.Location = new Point(btnCancelarX, yPos);
-                        }
-                    }
-                }
-
-                // 3. Alinear caja de totales en panelIzquierdoVenta
-                if (panelIzquierdoVenta != null && guna2CustomGradientPanel1 != null)
-                {
-                    int panelW = panelIzquierdoVenta.ClientSize.Width;
-                    int panelH = panelIzquierdoVenta.ClientSize.Height;
-                    guna2CustomGradientPanel1.Location = new Point(12, panelH - guna2CustomGradientPanel1.Height - 12);
-                    guna2CustomGradientPanel1.Width = panelW - 24;
-                }
-            }
-            catch { }
         }
 
         private void ConfigurarGrilla()
@@ -218,15 +129,15 @@ namespace PetShopDelLitoral
                 // Si no hay proveedores en la base de datos, agregamos proveedores iniciales de ejemplo
                 if (lista == null || lista.Count == 0)
                 {
-                    CrearProveedoresIniciales();
+                    objNegocioProv.CrearProveedoresIniciales(out string mensajeCarga);
                     lista = objNegocioProv.Listar();
                 }
 
                 var itemsCombo = lista.Select(p => new
                 {
                     Id = p.Id_proveedor,
-                    Nombre = p.Id_persona != null 
-                        ? $"{p.Id_persona.nombre_persona} {p.Id_persona.apellido_persona} ({p.Id_persona.dni_persona})" 
+                    Nombre = p.Id_persona != null
+                        ? $"{p.Id_persona.nombre_persona} {p.Id_persona.apellido_persona} ({p.Id_persona.dni_persona})"
                         : $"Proveedor #{p.Id_proveedor}"
                 }).ToList();
 
@@ -240,34 +151,6 @@ namespace PetShopDelLitoral
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar proveedores: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void CrearProveedoresIniciales()
-        {
-            try
-            {
-                using (MySql.Data.MySqlClient.MySqlConnection conn = new MySql.Data.MySqlClient.MySqlConnection("Server=localhost; Database=petshopdellitoral; Uid=root; Pwd=;"))
-                {
-                    conn.Open();
-
-                    // Insertar personas para los proveedores
-                    string sql = @"
-                        INSERT INTO persona(nombre_persona, apellido_persona, dni_persona, correo_persona, telefono_persona, direccion_persona, estado_persona, fechaCreacion_persona)
-                        VALUES('Distribuidora PetFood', 'Litoral', '30-11223344-5', 'ventas@petfood.com', '3794112233', 'Av. Libertad 1234', 1, NOW()),
-                              ('Laboratorio VetSalud', 'Argentina', '30-55667788-9', 'contacto@vetsalud.com', '3794556677', 'Ruta 12 Km 5', 1, NOW());
-                        
-                        INSERT INTO proveedor(id_persona, estado_proveedor, fechaCreacion_proveedor)
-                        SELECT idPersona, 1, NOW() FROM persona WHERE dni_persona IN ('30-11223344-5', '30-55667788-9')
-                        AND idPersona NOT IN (SELECT id_persona FROM proveedor);
-                    ";
-
-                    MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(sql, conn);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception)
-            {
             }
         }
 
@@ -331,8 +214,8 @@ namespace PetShopDelLitoral
             {
                 guna2TextBox7.Text = _productoSeleccionado.Nombre_producto;
 
-                decimal costoSugerido = _productoSeleccionado.PrecioUnitario_producto > 0 
-                    ? _productoSeleccionado.PrecioUnitario_producto 
+                decimal costoSugerido = _productoSeleccionado.PrecioUnitario_producto > 0
+                    ? _productoSeleccionado.PrecioUnitario_producto
                     : _productoSeleccionado.Precio_producto;
 
                 textBox2.Text = costoSugerido.ToString("F2");
