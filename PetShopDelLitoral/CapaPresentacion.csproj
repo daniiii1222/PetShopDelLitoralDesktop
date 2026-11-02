@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -98,6 +98,7 @@
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -114,12 +115,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include=".vs\FrmCompras.Layout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include=".vs\LayoutPantalla.cs" />
     <Compile Include="CargaProductos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CargaProductos.Designer.cs">
       <DependentUpon>CargaProductos.cs</DependentUpon>
     </Compile>
+    <Compile Include="ComprobanteVenta.cs" />
+    <Compile Include="FrmAutorizacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAutorizacion.Designer.cs" />
     <Compile Include="FrmBackup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,11 +142,17 @@
     <Compile Include="FrmDashboard.Designer.cs">
       <DependentUpon>FrmDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmEstadisticas.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmPersonas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmPersonas.Designer.cs">
       <DependentUpon>FrmPersonas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPersonas.Layout.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmReportesAdministrador.cs">
       <SubType>Form</SubType>
@@ -161,6 +177,9 @@
     </Compile>
     <Compile Include="FrmVentas.Designer.cs">
       <DependentUpon>FrmVentas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmVentas.Layout.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Inicio.cs">
       <SubType>Form</SubType>
@@ -223,6 +242,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include=".vs\CapaPresentacion.csproj.dtbcache.json" />
     <None Include="fuentes\Poppins-Regular.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

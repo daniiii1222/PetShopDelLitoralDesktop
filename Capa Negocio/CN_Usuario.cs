@@ -133,6 +133,82 @@ namespace Capa_Negocio
         }
 
 
+        // =====================================================================
+        // AUTORIZACIÓN PARA RESTAURAR LA BASE DE DATOS (doble autorización)
+        // Las reglas viven acá, en la capa de negocio; la pantalla solo pide los datos y muestra el mensaje.
+        // =====================================================================
+
+        public static bool TieneRol(Usuario u, params string[] roles)
+        {
+            if (u == null || u.idRol == null) return false;
+            string rol = (u.idRol.descripcion_rol ?? "").Trim();
+            foreach (string r in roles)
+                if (rol.Equals(r, StringComparison.OrdinalIgnoreCase)) return true;
+            return false;
+        }
+
+        public static bool EsAdministrador(Usuario u)
+        {
+            return TieneRol(u, "Administrador", "Admin");
+        }
+
+        public static bool EsSupervisor(Usuario u)
+        {
+            return TieneRol(u, "Supervisor");
+        }
+
+        // Paso 1: el propio administrador que inició sesión confirma su identidad
+        public bool AutorizarComoAdministrador(Usuario adminLogueado, string dni, string contrasenia,
+                                               out Usuario administrador, out string mensaje)
+        {
+            administrador = null;
+
+            if (!EsAdministrador(adminLogueado))
+            {
+                mensaje = "Solo el administrador puede restaurar la base de datos.";
+                return false;
+            }
+
+            Usuario u;
+            if (!ValidarLogin(dni, contrasenia, out u, out mensaje)) return false;
+
+            if (u.idUsuario != adminLogueado.idUsuario)
+            {
+                mensaje = "Las credenciales no corresponden al administrador que inició sesión.";
+                return false;
+            }
+
+            administrador = u;
+            mensaje = string.Empty;
+            return true;
+        }
+
+        // Paso 2: un supervisor (otra persona, distinta del administrador) autoriza
+        public bool AutorizarComoSupervisor(Usuario adminLogueado, string dni, string contrasenia,
+                                            out Usuario supervisor, out string mensaje)
+        {
+            supervisor = null;
+
+            Usuario u;
+            if (!ValidarLogin(dni, contrasenia, out u, out mensaje)) return false;
+
+            if (adminLogueado != null && u.idUsuario == adminLogueado.idUsuario)
+            {
+                mensaje = "La autorización debe darla otra persona, no el administrador.";
+                return false;
+            }
+
+            if (!EsSupervisor(u))
+            {
+                mensaje = "El usuario ingresado no es supervisor.";
+                return false;
+            }
+
+            supervisor = u;
+            mensaje = string.Empty;
+            return true;
+        }
+
         public bool ModificarUsuario(Persona objPersona, Usuario objUsuario, out string mensaje)
         {
             mensaje = string.Empty;
@@ -171,7 +247,7 @@ namespace Capa_Negocio
 
         public DataTable ObtenerPersonaPorDni(string dni)
         {
-            CD_Usuario objCapaDato = new CD_Usuario(); 
+            CD_Usuario objCapaDato = new CD_Usuario();
             return objCapaDato.ObtenerPersonaPorDni(dni);
         }
 
@@ -206,5 +282,3 @@ namespace Capa_Negocio
     }
 
 }
-
-

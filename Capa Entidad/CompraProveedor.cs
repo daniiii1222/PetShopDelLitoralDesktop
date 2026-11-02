@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,5 +13,8 @@ namespace Capa_Entidad
         public Usuario IdUsuario { get; set; }
         public Proveedor IdProveedor { get; set; }
         public DateTime FechaCreacion_compra { get; set; }
+        public string Tipo_comprobante { get; set; }
+        public string Numero_comprobante { get; set; }
+        public string Observaciones { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Capa_Entidad;
 using Capa_Negocio;
+using CapaNegocio;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System;
@@ -33,7 +34,7 @@ namespace PetShopDelLitoral
         public FrmVentas()
         {
             InitializeComponent();
-
+            PrepararLayoutResponsivo();
             botonInicio.Click += BuscarCliente_Click;       // lupa junto al cliente
             iconButton4.Click += BuscarProducto_Click;      // lupa junto al buscador de productos
             iconButton6.Click += AgregarProducto_Click;     // "Agregar"
@@ -81,9 +82,9 @@ namespace PetShopDelLitoral
 
             guna2TextBox1.PlaceholderText = "DNI del cliente...";
             CargarSugerenciasDni();
-           
+
             guna2DateTimePicker1.Value = DateTime.Today;
-            
+
             // Los importes se calculan solos
             txtSubtotal.ReadOnly = true; // Subtotal
             txtDescuento.ReadOnly = false; // Descuento % sobre la compra completa
@@ -102,6 +103,7 @@ namespace PetShopDelLitoral
             dgvVentas.DefaultCellStyle.SelectionBackColor = Color.FromArgb(225, 185, 110);
             dgvVentas.DefaultCellStyle.SelectionForeColor = Color.Black;
 
+            CargarSugerenciasProductos();
             RefrescarGrilla();
         }
 
@@ -161,23 +163,73 @@ namespace PetShopDelLitoral
             catch { }
         }
 
+        private void CargarSugerenciasProductos()
+        {
+            try
+            {
+                List<Producto> lista = new CN_Producto().Listar();
+                AutoCompleteStringCollection coleccion = new AutoCompleteStringCollection();
+                foreach (Producto p in lista)
+                {
+                    if (p.Estado_producto && p.Stock_producto > 0)
+                    {
+                        if (!string.IsNullOrEmpty(p.Codigo_producto))
+                            coleccion.Add(p.Codigo_producto);
+                        if (!string.IsNullOrEmpty(p.Nombre_producto))
+                            coleccion.Add(p.Nombre_producto);
+                    }
+                }
+                guna2TextBox7.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                guna2TextBox7.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                guna2TextBox7.AutoCompleteCustomSource = coleccion;
+            }
+            catch { }
+        }
+
         // ---------- PRODUCTOS ----------
         private void BuscarProducto_Click(object sender, EventArgs e)
         {
             try
             {
-                DataTable dt = cnVenta.BuscarProductos(guna2TextBox7.Text);
-                if (dt.Rows.Count == 0)
+                string textoBuscado = (guna2TextBox7.Text ?? "").Trim();
+                if (string.IsNullOrEmpty(textoBuscado))
                 {
-                    productoSeleccionado = null;
-                    MessageBox.Show("No se encontraron productos con stock con ese nombre.", "Productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Ingresá un código o nombre de producto a buscar.", "Productos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                productoSeleccionado = dt.Rows.Count == 1 ? dt.Rows[0] : ElegirProducto(dt);
+                DataTable dt = cnVenta.BuscarProductos(textoBuscado);
+                if (dt.Rows.Count == 0)
+                {
+                    productoSeleccionado = null;
+                    MessageBox.Show("No se encontraron productos con stock con ese código o nombre.", "Productos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Coincidencia exacta por código de producto (ej: PROD2090)
+                DataRow coincidenciaExactaCodigo = dt.AsEnumerable().FirstOrDefault(r =>
+                    dt.Columns.Contains("codigo_producto") &&
+                    r["codigo_producto"] != DBNull.Value &&
+                    r["codigo_producto"].ToString().Equals(textoBuscado, StringComparison.OrdinalIgnoreCase));
+
+                if (coincidenciaExactaCodigo != null)
+                {
+                    productoSeleccionado = coincidenciaExactaCodigo;
+                }
+                else
+                {
+                    productoSeleccionado = dt.Rows.Count == 1 ? dt.Rows[0] : ElegirProducto(dt);
+                }
+
                 if (productoSeleccionado != null)
                 {
-                    guna2TextBox7.Text = productoSeleccionado["nombre_producto"].ToString();
+                    string cod = dt.Columns.Contains("codigo_producto") && productoSeleccionado["codigo_producto"] != DBNull.Value
+                        ? productoSeleccionado["codigo_producto"].ToString()
+                        : "";
+
+                    guna2TextBox7.Text = !string.IsNullOrEmpty(cod)
+                        ? cod + " - " + productoSeleccionado["nombre_producto"]
+                        : productoSeleccionado["nombre_producto"].ToString();
                 }
             }
             catch (Exception ex)
@@ -195,24 +247,29 @@ namespace PetShopDelLitoral
             {
                 f.Text = "Elegí un producto";
                 f.StartPosition = FormStartPosition.CenterParent;
-                f.ClientSize = new Size(360, 260);
+                f.ClientSize = new Size(420, 280);
                 f.FormBorderStyle = FormBorderStyle.FixedDialog;
                 f.MaximizeBox = false;
                 f.MinimizeBox = false;
 
                 lb.Dock = DockStyle.Top;
-                lb.Height = 210;
+                lb.Height = 220;
+                lb.Font = new System.Drawing.Font("Segoe UI", 9.5F);
                 foreach (DataRow r in dt.Rows)
                 {
-                    lb.Items.Add(r["nombre_producto"] + "  -  $" +
+                    string cod = dt.Columns.Contains("codigo_producto") && r["codigo_producto"] != DBNull.Value
+                        ? "[" + r["codigo_producto"] + "] "
+                        : "";
+                    lb.Items.Add(cod + r["nombre_producto"] + "  -  $" +
                                  Convert.ToDecimal(r["precio_producto"]).ToString("N2", cultura) +
-                                 "  (stock " + r["stock_producto"] + ")");
+                                 "  (stock: " + r["stock_producto"] + ")");
                 }
                 lb.SelectedIndex = 0;
                 lb.DoubleClick += (s, ev) => f.DialogResult = DialogResult.OK;
 
                 ok.Text = "Seleccionar";
                 ok.Dock = DockStyle.Bottom;
+                ok.Height = 35;
                 ok.DialogResult = DialogResult.OK;
 
                 f.Controls.Add(lb);
@@ -224,7 +281,6 @@ namespace PetShopDelLitoral
                     : null;
             }
         }
-
         private void AgregarProducto_Click(object sender, EventArgs e)
         {
             if (productoSeleccionado == null)
@@ -243,7 +299,7 @@ namespace PetShopDelLitoral
 
             if (yaAgregado + cantidad > stock)
             {
-                MessageBox.Show("Stock insuficiente. Disponible: " + stock ,
+                MessageBox.Show("Stock insuficiente. Disponible: " + stock,
                                 "Stock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -273,6 +329,7 @@ namespace PetShopDelLitoral
             productoSeleccionado = null;
             guna2TextBox7.Clear();
             guna2NumericUpDown1.Value = 1;
+            CargarSugerenciasProductos();
             RefrescarGrilla();
         }
 
@@ -282,12 +339,14 @@ namespace PetShopDelLitoral
             if (dgvVentas.Columns[e.ColumnIndex].Name != "columnaEliminar") return;
 
             detalles.RemoveAt(e.RowIndex);
+            CargarSugerenciasProductos();
             RefrescarGrilla();
         }
 
         private void VaciarLista_Click(object sender, EventArgs e)
         {
             detalles.Clear();
+            CargarSugerenciasProductos();
             RefrescarGrilla();
         }
 
@@ -307,6 +366,14 @@ namespace PetShopDelLitoral
             }
 
             ActualizarTotales(); // Deja que esta función se encargue de calcular el subtotal y el total con el descuento de la compra
+        }
+
+        private void dgvCompras_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+
+        private void LDatosVenta_Click(object sender, EventArgs e)
+        {
         }
 
         // ---------- DESCUENTOS ----------
@@ -427,12 +494,12 @@ namespace PetShopDelLitoral
 
             if (cnVenta.RegistrarVenta(venta, detalles, out idVenta, out mensaje))
             {
-                
-                    // Genera y descarga el PDF automáticamente
-                    GenerarPdfComprobante(idVenta, venta, detalles);
 
-                    LimpiarFormulario();
-                
+                // Genera y descarga el PDF automáticamente
+                GenerarPdfComprobante(idVenta, venta, detalles);
+
+                LimpiarFormulario();
+
             }
             else
             {
@@ -457,6 +524,7 @@ namespace PetShopDelLitoral
             guna2ComboBox1.SelectedIndex = -1;
             guna2DateTimePicker1.Value = DateTime.Today;
             guna2NumericUpDown1.Value = 1;
+            CargarSugerenciasProductos();
             RefrescarGrilla();
         }
 
@@ -517,9 +585,23 @@ namespace PetShopDelLitoral
 
                         doc.Add(tabla);
 
-                        // 6. Totales
+                        // 6. Totales (misma cuenta que la pantalla y que CD_Venta)
                         doc.Add(new Chunk(Chunk.NEWLINE));
-                        decimal totalGeneral = detalles.Sum(d => d.Subtotal_venta);
+                        decimal subtotal = detalles.Sum(d => d.Subtotal_venta);
+                        decimal totalGeneral = Math.Round(subtotal * (1 - venta.Descuento_venta / 100m), 2, MidpointRounding.AwayFromZero);
+                        decimal montoDescuento = subtotal - totalGeneral;
+
+                        Paragraph pSubtotal = new Paragraph("Subtotal: $ " + subtotal.ToString("N2", cultura), fuenteNormal);
+                        pSubtotal.Alignment = Element.ALIGN_RIGHT;
+                        doc.Add(pSubtotal);
+
+                        // El descuento general solo se muestra si se aplicó uno
+                        if (venta.Descuento_venta > 0)
+                        {
+                            Paragraph pDescuento = new Paragraph("Descuento (" + venta.Descuento_venta.ToString("0.##") + "%): - $ " + montoDescuento.ToString("N2", cultura), fuenteNormal);
+                            pDescuento.Alignment = Element.ALIGN_RIGHT;
+                            doc.Add(pDescuento);
+                        }
 
                         Paragraph pTotal = new Paragraph("TOTAL GENERAL: $ " + totalGeneral.ToString("N2", cultura), fuenteTitulo);
                         pTotal.Alignment = Element.ALIGN_RIGHT;
@@ -565,8 +647,8 @@ namespace PetShopDelLitoral
                 MessageBox.Show("Error al cargar historial: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-    
-    private void guna2Panel1_Paint(object sender, PaintEventArgs e) { }
+
+        private void guna2Panel1_Paint(object sender, PaintEventArgs e) { }
         private void PanelDatosVenta_Paint(object sender, PaintEventArgs e) { }
         private void guna2Panel1_Paint_1(object sender, PaintEventArgs e) { }
         private void guna2Panel1_Paint_2(object sender, PaintEventArgs e) { }

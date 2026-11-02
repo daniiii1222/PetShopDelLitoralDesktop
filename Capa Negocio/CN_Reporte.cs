@@ -6,9 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Capa_Datos; // Asegurate de que este using coincida con el nombre de tu capa
-using System;
-using System.Data;
+
 
 namespace Capa_Negocio
     {
@@ -41,6 +39,11 @@ namespace Capa_Negocio
                     throw new Exception("Error al cargar el detalle: " + ex.Message);
                 }
             }
+
+        public DataTable ObtenerProductosMasVendidos(DateTime desde, DateTime hasta, int limite)
+        {
+            return objReporteDatos.ObtenerProductosMasVendidos(desde, hasta, limite);
         }
+    }
  }
   

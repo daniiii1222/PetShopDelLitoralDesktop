@@ -1,4 +1,4 @@
-﻿using FontAwesome.Sharp;
+using FontAwesome.Sharp;
 
 namespace PetShopDelLitoral
 {
@@ -75,7 +75,7 @@ namespace PetShopDelLitoral
             // panelCentral
             // 
             this.panelCentral.Controls.Add(this.PanelControl);
-            this.panelCentral.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelCentral.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCentral.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.panelCentral.Location = new System.Drawing.Point(267, 123);
             this.panelCentral.Margin = new System.Windows.Forms.Padding(4);

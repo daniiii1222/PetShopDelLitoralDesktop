@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,6 +7,7 @@ namespace Capa_Entidad
     public class Producto
     {
         public int IdProducto { get; set; }
+        public string Codigo_producto { get; set; }
         public string Nombre_producto { get; set; }
         public string Descripcion_producto { get; set; }
         public bool Estado_producto { get; set; }

@@ -1,12 +1,5 @@
 -- ================================================
--- VENTAS - script unico y final (Persona B)
---   * Columnas de descuento (venta.descuento_venta, detalle_venta.descuento_detalle)
---   * SP de ventas: metodos de pago, buscar productos, cliente por DNI y registrar venta
---     (con descuento por producto y por compra, y descuento de stock en transaccion)
--- Es idempotente: se puede correr varias veces. Correr en CADA base local.
--- NO incluye datos de prueba (esos van aparte) ni los SP de cliente.
--- Requiere MariaDB >= 10.6 (JSON_TABLE y ADD COLUMN IF NOT EXISTS).
--- ================================================
+
 USE petshopdellitoral;
 
 ALTER TABLE detalle_venta

@@ -109,6 +109,8 @@
             this.tituloReportes.PlaceholderText = "";
             this.tituloReportes.SelectedText = "";
             this.tituloReportes.Size = new System.Drawing.Size(350, 56);
+            this.tituloReportes.ReadOnly = true;
+            this.tituloReportes.TabStop = false;
             this.tituloReportes.TabIndex = 0;
             // 
             // guna2Panel1
@@ -135,7 +137,7 @@
             this.guna2CustomGradientPanel1.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.guna2CustomGradientPanel1.Location = new System.Drawing.Point(20, 90);
             this.guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
-            this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(1022, 80);
+            this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(1022, 60);
             this.guna2CustomGradientPanel1.TabIndex = 1;
             // 
             // guna2CustomGradientPanel5
@@ -148,9 +150,9 @@
             this.guna2CustomGradientPanel5.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.guna2CustomGradientPanel5.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.guna2CustomGradientPanel5.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.guna2CustomGradientPanel5.Location = new System.Drawing.Point(832, 16);
+            this.guna2CustomGradientPanel5.Location = new System.Drawing.Point(852, 11);
             this.guna2CustomGradientPanel5.Name = "guna2CustomGradientPanel5";
-            this.guna2CustomGradientPanel5.Size = new System.Drawing.Size(125, 40);
+            this.guna2CustomGradientPanel5.Size = new System.Drawing.Size(145, 38);
             this.guna2CustomGradientPanel5.TabIndex = 18;
             // 
             // btnBuscar
@@ -165,10 +167,11 @@
             this.btnBuscar.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
             this.btnBuscar.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.btnBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnBuscar.IconSize = 25;
+            this.btnBuscar.IconSize = 22;
             this.btnBuscar.Location = new System.Drawing.Point(0, 0);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(125, 40);
+            this.btnBuscar.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.btnBuscar.Size = new System.Drawing.Size(145, 38);
             this.btnBuscar.TabIndex = 1;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -178,16 +181,17 @@
             // 
             // dtpHasta
             // 
-            this.dtpHasta.BorderRadius = 5;
+            this.dtpHasta.BorderRadius = 8;
             this.dtpHasta.Checked = true;
             this.dtpHasta.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.dtpHasta.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.dtpHasta.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.dtpHasta.ForeColor = System.Drawing.Color.White;
             this.dtpHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpHasta.Location = new System.Drawing.Point(522, 16);
+            this.dtpHasta.Location = new System.Drawing.Point(385, 11);
             this.dtpHasta.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpHasta.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpHasta.Name = "dtpHasta";
-            this.dtpHasta.Size = new System.Drawing.Size(235, 40);
+            this.dtpHasta.Size = new System.Drawing.Size(210, 38);
             this.dtpHasta.TabIndex = 17;
             this.dtpHasta.Value = new System.DateTime(2026, 8, 28, 21, 35, 18, 468);
             // 
@@ -195,26 +199,27 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.label2.Location = new System.Drawing.Point(446, 27);
+            this.label2.Location = new System.Drawing.Point(325, 21);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 18);
+            this.label2.Size = new System.Drawing.Size(49, 16);
             this.label2.TabIndex = 16;
             this.label2.Text = "Hasta";
             // 
             // dtpDesde
             // 
-            this.dtpDesde.BorderRadius = 5;
+            this.dtpDesde.BorderRadius = 8;
             this.dtpDesde.Checked = true;
             this.dtpDesde.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.dtpDesde.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.dtpDesde.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.dtpDesde.ForeColor = System.Drawing.Color.White;
             this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDesde.Location = new System.Drawing.Point(121, 16);
+            this.dtpDesde.Location = new System.Drawing.Point(78, 11);
             this.dtpDesde.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpDesde.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpDesde.Name = "dtpDesde";
-            this.dtpDesde.Size = new System.Drawing.Size(235, 40);
+            this.dtpDesde.Size = new System.Drawing.Size(210, 38);
             this.dtpDesde.TabIndex = 15;
             this.dtpDesde.Value = new System.DateTime(2026, 8, 28, 21, 35, 18, 468);
             // 
@@ -222,11 +227,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.label1.Location = new System.Drawing.Point(47, 27);
+            this.label1.Location = new System.Drawing.Point(20, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 18);
+            this.label1.Size = new System.Drawing.Size(54, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Desde";
             // 
@@ -243,7 +248,6 @@
             this.panelPrincipalSec.Controls.Add(this.guna2Panel2);
             this.panelPrincipalSec.Controls.Add(this.guna2Panel1);
             this.panelPrincipalSec.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelPrincipalSec.ForeColor = System.Drawing.Color.Cornsilk;
             this.panelPrincipalSec.Location = new System.Drawing.Point(0, 77);
             this.panelPrincipalSec.Margin = new System.Windows.Forms.Padding(10);
             this.panelPrincipalSec.Name = "panelPrincipalSec";
@@ -281,7 +285,7 @@
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Cornsilk;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
@@ -314,7 +318,7 @@
             this.dataGridReportes.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
             this.dataGridReportes.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dataGridReportes.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            this.dataGridReportes.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.Cornsilk;
+            this.dataGridReportes.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.dataGridReportes.ThemeStyle.RowsStyle.Height = 24;
             this.dataGridReportes.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dataGridReportes.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
@@ -412,39 +416,40 @@
             this.botonVendedor.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.botonVendedor.IconSize = 25;
             this.botonVendedor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonVendedor.Location = new System.Drawing.Point(950, 15);
+            this.botonVendedor.Location = new System.Drawing.Point(959, 11);
             this.botonVendedor.Margin = new System.Windows.Forms.Padding(2);
             this.botonVendedor.Name = "botonVendedor";
             this.botonVendedor.Size = new System.Drawing.Size(33, 35);
             this.botonVendedor.TabIndex = 24;
             this.botonVendedor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.botonVendedor.UseVisualStyleBackColor = false;
+            this.botonVendedor.Visible = false;
             this.botonVendedor.Click += new System.EventHandler(this.botonVendedor_Click);
             // 
             // botonInicio
             // 
             this.botonInicio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.botonInicio.Cursor = System.Windows.Forms.Cursors.Hand;
             this.botonInicio.FlatAppearance.BorderSize = 0;
             this.botonInicio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.botonInicio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.botonInicio.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
             this.botonInicio.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
             this.botonInicio.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.botonInicio.IconSize = 25;
-            this.botonInicio.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonInicio.Location = new System.Drawing.Point(913, 15);
+            this.botonInicio.IconSize = 22;
+            this.botonInicio.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.botonInicio.Location = new System.Drawing.Point(959, 11);
             this.botonInicio.Margin = new System.Windows.Forms.Padding(2);
             this.botonInicio.Name = "botonInicio";
-            this.botonInicio.Size = new System.Drawing.Size(33, 35);
+            this.botonInicio.Size = new System.Drawing.Size(38, 38);
             this.botonInicio.TabIndex = 23;
-            this.botonInicio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.botonInicio.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.botonInicio.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.botonInicio.UseVisualStyleBackColor = false;
             this.botonInicio.Click += new System.EventHandler(this.botonInicio_Click);
             // 
             // txtBuscarVendedor
             // 
-            this.txtBuscarVendedor.BorderRadius = 5;
+            this.txtBuscarVendedor.BorderRadius = 8;
             this.txtBuscarVendedor.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtBuscarVendedor.DefaultText = "";
             this.txtBuscarVendedor.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -452,14 +457,16 @@
             this.txtBuscarVendedor.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtBuscarVendedor.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtBuscarVendedor.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBuscarVendedor.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtBuscarVendedor.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.txtBuscarVendedor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.txtBuscarVendedor.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBuscarVendedor.Location = new System.Drawing.Point(688, 15);
+            this.txtBuscarVendedor.Location = new System.Drawing.Point(643, 11);
             this.txtBuscarVendedor.Name = "txtBuscarVendedor";
             this.txtBuscarVendedor.PasswordChar = '\0';
-            this.txtBuscarVendedor.PlaceholderText = "Seleccione un vendedor..";
+            this.txtBuscarVendedor.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
+            this.txtBuscarVendedor.PlaceholderText = "DNI del vendedor (vacÃ­o = todos)...";
             this.txtBuscarVendedor.SelectedText = "";
-            this.txtBuscarVendedor.Size = new System.Drawing.Size(246, 35);
+            this.txtBuscarVendedor.Size = new System.Drawing.Size(310, 38);
             this.txtBuscarVendedor.TabIndex = 22;
             this.txtBuscarVendedor.TextChanged += new System.EventHandler(this.guna2TextBox1_TextChanged);
             // 
@@ -473,9 +480,9 @@
             this.guna2CustomGradientPanel6.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.guna2CustomGradientPanel6.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.guna2CustomGradientPanel6.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.guna2CustomGradientPanel6.Location = new System.Drawing.Point(491, 10);
+            this.guna2CustomGradientPanel6.Location = new System.Drawing.Point(340, 11);
             this.guna2CustomGradientPanel6.Name = "guna2CustomGradientPanel6";
-            this.guna2CustomGradientPanel6.Size = new System.Drawing.Size(125, 40);
+            this.guna2CustomGradientPanel6.Size = new System.Drawing.Size(130, 38);
             this.guna2CustomGradientPanel6.TabIndex = 21;
             // 
             // botonVentas
@@ -490,10 +497,11 @@
             this.botonVentas.IconChar = FontAwesome.Sharp.IconChar.BagShopping;
             this.botonVentas.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.botonVentas.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.botonVentas.IconSize = 25;
+            this.botonVentas.IconSize = 22;
             this.botonVentas.Location = new System.Drawing.Point(0, 0);
             this.botonVentas.Name = "botonVentas";
-            this.botonVentas.Size = new System.Drawing.Size(125, 40);
+            this.botonVentas.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.botonVentas.Size = new System.Drawing.Size(130, 38);
             this.botonVentas.TabIndex = 1;
             this.botonVentas.Text = "Ventas";
             this.botonVentas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -511,9 +519,9 @@
             this.guna2CustomGradientPanel4.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.guna2CustomGradientPanel4.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.guna2CustomGradientPanel4.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.guna2CustomGradientPanel4.Location = new System.Drawing.Point(266, 10);
+            this.guna2CustomGradientPanel4.Location = new System.Drawing.Point(170, 11);
             this.guna2CustomGradientPanel4.Name = "guna2CustomGradientPanel4";
-            this.guna2CustomGradientPanel4.Size = new System.Drawing.Size(153, 40);
+            this.guna2CustomGradientPanel4.Size = new System.Drawing.Size(160, 38);
             this.guna2CustomGradientPanel4.TabIndex = 20;
             // 
             // botonStockMin
@@ -528,10 +536,11 @@
             this.botonStockMin.IconChar = FontAwesome.Sharp.IconChar.ExclamationTriangle;
             this.botonStockMin.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.botonStockMin.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.botonStockMin.IconSize = 25;
+            this.botonStockMin.IconSize = 22;
             this.botonStockMin.Location = new System.Drawing.Point(0, 0);
             this.botonStockMin.Name = "botonStockMin";
-            this.botonStockMin.Size = new System.Drawing.Size(156, 40);
+            this.botonStockMin.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.botonStockMin.Size = new System.Drawing.Size(160, 38);
             this.botonStockMin.TabIndex = 1;
             this.botonStockMin.Text = "Stock Minimo";
             this.botonStockMin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -549,9 +558,9 @@
             this.guna2CustomGradientPanel3.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.guna2CustomGradientPanel3.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
             this.guna2CustomGradientPanel3.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.guna2CustomGradientPanel3.Location = new System.Drawing.Point(64, 10);
+            this.guna2CustomGradientPanel3.Location = new System.Drawing.Point(20, 11);
             this.guna2CustomGradientPanel3.Name = "guna2CustomGradientPanel3";
-            this.guna2CustomGradientPanel3.Size = new System.Drawing.Size(125, 40);
+            this.guna2CustomGradientPanel3.Size = new System.Drawing.Size(140, 38);
             this.guna2CustomGradientPanel3.TabIndex = 19;
             // 
             // botonProductos
@@ -566,10 +575,11 @@
             this.botonProductos.IconChar = FontAwesome.Sharp.IconChar.Box;
             this.botonProductos.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.botonProductos.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.botonProductos.IconSize = 25;
+            this.botonProductos.IconSize = 22;
             this.botonProductos.Location = new System.Drawing.Point(0, 0);
             this.botonProductos.Name = "botonProductos";
-            this.botonProductos.Size = new System.Drawing.Size(125, 40);
+            this.botonProductos.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.botonProductos.Size = new System.Drawing.Size(140, 38);
             this.botonProductos.TabIndex = 1;
             this.botonProductos.Text = "Productos";
             this.botonProductos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
