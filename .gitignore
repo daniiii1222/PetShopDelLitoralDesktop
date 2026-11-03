@@ -363,3 +363,6 @@ MigrationBackup/
 FodyWeavers.xsd
 *.zip
 petshop_db_*.sql
+
+# Material de catedra (no versionar)
+proyecto_etapa_v_guia*.pdf

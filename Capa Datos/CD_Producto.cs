@@ -4,17 +4,16 @@ using System.Data;
 using MySql.Data.MySqlClient;
 using Capa_Entidad;
 
-namespace CapaDatos
+namespace Capa_Datos
 {
     public class CD_Producto
     {
-        private readonly string cadenaConexion = "Server=localhost; Database=petshopdellitoral; Uid=root; Pwd=;";
 
         public List<Producto> Listar()
         {
             List<Producto> lista = new List<Producto>();
 
-            using (MySqlConnection oconexion = new MySqlConnection(cadenaConexion))
+            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
             {
                 try
                 {
@@ -67,7 +66,7 @@ namespace CapaDatos
         {
             if (string.IsNullOrWhiteSpace(codigo)) return false;
 
-            using (MySqlConnection oconexion = new MySqlConnection(cadenaConexion))
+            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
             {
                 try
                 {
@@ -92,7 +91,7 @@ namespace CapaDatos
             int idGenerado = 0;
             Mensaje = string.Empty;
 
-            using (MySqlConnection oconexion = new MySqlConnection(cadenaConexion))
+            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
             {
                 try
                 {
@@ -129,7 +128,7 @@ namespace CapaDatos
             bool respuesta = false;
             Mensaje = string.Empty;
 
-            using (MySqlConnection oconexion = new MySqlConnection(cadenaConexion))
+            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
             {
                 try
                 {
@@ -175,7 +174,7 @@ namespace CapaDatos
             bool respuesta = false;
             Mensaje = string.Empty;
 
-            using (MySqlConnection oconexion = new MySqlConnection(cadenaConexion))
+            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
             {
                 try
                 {

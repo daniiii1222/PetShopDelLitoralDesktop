@@ -168,7 +168,7 @@ namespace PetShopDelLitoral
                     }
                 }
             }
-            catch { }
+            catch (Exception ex) { Bitacora.Registrar("Acomodar el layout de Compras", ex); }
         }
     }
 }

@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Capa_Entidad;
 using Capa_Negocio;
-using CapaNegocio;
 
 namespace PetShopDelLitoral
 {

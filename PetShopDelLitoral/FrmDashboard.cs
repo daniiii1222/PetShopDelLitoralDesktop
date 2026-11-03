@@ -1,6 +1,6 @@
 ﻿using Capa_Entidad;
 using Capa_Negocio;
-using CapaDatos;
+using Capa_Datos;
 using System;
 using System.Data;
 using System.Drawing;

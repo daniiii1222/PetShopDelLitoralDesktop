@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -11,6 +11,58 @@ namespace PetShopDelLitoral
         private const int GAP_MIN_FORM = 10;           // aire mínimo entre un bloque y el siguiente
         private const int GAP_MAX_FORM = 32;           // si sobra altura, se separan hasta este valor
         private const int MARGEN_INFERIOR_FORM = 14;   // aire que queda debajo de los botones
+
+        // Filtros de la derecha (Todos / Clientes / Proveedores / Usuarios):
+        // misma altura, mismo ancho, en la misma fila y con la misma separación.
+        private void AcomodarFiltros()
+        {
+            Control[] paneles = { guna2CustomGradientPanel9, guna2CustomGradientPanel12, guna2CustomGradientPanel11, guna2CustomGradientPanel10 };
+            Control[] botones = { btnTodosLosRegistros, btnTClientes, btnTProveedores, btnTUsuarios };
+
+            int x = guna2CustomGradientPanel9.Left;
+            int y = guna2CustomGradientPanel9.Top;
+            const int ANCHO_FILTRO = 130;
+            const int SEPARACION_FILTRO = 14;
+
+            for (int i = 0; i < paneles.Length; i++)
+            {
+                paneles[i].Visible = botones[i].Visible;
+                if (!paneles[i].Visible) continue;
+
+                paneles[i].SetBounds(x, y, ANCHO_FILTRO, 36);
+                botones[i].SetBounds(0, 0, ANCHO_FILTRO, 36);
+                x += ANCHO_FILTRO + SEPARACION_FILTRO;
+            }
+        }
+
+        // Reparte los botones visibles en una fila de ancho 'anchoTotal', todos iguales.
+        // Cada botón ocupa todo su panel redondeado; la fuente y el ícono se achican para que entren.
+        private void RepartirBotones(Control[] paneles, Control[] botones, int x, int y, int anchoTotal, int alto, float fuente, int icono)
+        {
+            const int SEPARACION = 8;
+
+            int cantidad = 0;
+            for (int i = 0; i < botones.Length; i++)
+                if (botones[i].Visible) cantidad++;
+            if (cantidad == 0) return;
+
+            int ancho = (anchoTotal - (cantidad - 1) * SEPARACION) / cantidad;
+
+            for (int i = 0; i < paneles.Length; i++)
+            {
+                paneles[i].Visible = botones[i].Visible;
+                if (!paneles[i].Visible) continue;
+
+                paneles[i].SetBounds(x, y, ancho, alto);
+                botones[i].SetBounds(0, 0, ancho, alto);
+                botones[i].Font = new Font(botones[i].Font.FontFamily, fuente, botones[i].Font.Style);
+
+                FontAwesome.Sharp.IconButton ib = botones[i] as FontAwesome.Sharp.IconButton;
+                if (ib != null) ib.IconSize = icono;
+
+                x += ancho + SEPARACION;
+            }
+        }
 
         // Se llama una sola vez desde el constructor
         private void PrepararLayoutFormulario()
@@ -31,6 +83,8 @@ namespace PetShopDelLitoral
         // ------------------------------------------------------------------
         private void DistribuirFormulario()
         {
+            AcomodarFiltros();   // botones de filtro de la derecha: misma fila, mismo tamaño
+
             int anchoPanel = PanelUsuario.ClientSize.Width;
             int altoPanel = PanelUsuario.ClientSize.Height;
             if (anchoPanel < 200 || altoPanel < 200) return;
@@ -108,10 +162,20 @@ namespace PetShopDelLitoral
             }
 
             // 4) Botones: Guardar a la izquierda, Cancelar a la derecha y Limpiar en el medio
-            guna2CustomGradientPanel8.Location = new Point(xCampo, y);                                        // Guardar
-            guna2CustomGradientPanel6.Location = new Point(xCampo + ancho - guna2CustomGradientPanel6.Width, y); // Cancelar
-            int xLimpiar = (guna2CustomGradientPanel8.Right + guna2CustomGradientPanel6.Left - guna2CustomGradientPanel4.Width) / 2;
-            guna2CustomGradientPanel4.Location = new Point(xLimpiar, y);                                       // Limpiar
+            label2.Left = xEtiqueta;   // el título "Tipo de persona" alineado con las demás etiquetas
+
+            // "Tipo de persona" y Guardar / Limpiar / Cancelar: botones del mismo ancho y alto,
+            // repartidos de borde a borde de los campos (así ningún texto queda cortado)
+            Control[] panelesTipo = { guna2CustomGradientPanel5, guna2CustomGradientPanel2, guna2CustomGradientPanel3 };
+            Control[] botonesTipo = { btnCliente, btntipoProveedor, btnUsuario };
+            RepartirBotones(panelesTipo, botonesTipo, xCampo, guna2CustomGradientPanel5.Top, ancho, 36, 8.5F, 18);
+
+            Control[] panelesAccion = { guna2CustomGradientPanel8, guna2CustomGradientPanel4, guna2CustomGradientPanel6 };
+            Control[] botonesAccion = { botonGuardarRegistro, btnLimpiarCampos, btnCancelar };
+            RepartirBotones(panelesAccion, botonesAccion, xCampo, y, ancho, 36, 9F, 20);                                        // Guardar
+            // (la posición de Cancelar la resuelve RepartirBotones) // Cancelar
+            
+                                                   // Limpiar
         }
     }
 }

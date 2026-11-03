@@ -1,5 +1,4 @@
-﻿using Capa_Negocio;
-using CapaNegocio;
+using Capa_Negocio;
 using System;
 using System.Data;
 using System.Drawing;
@@ -21,6 +20,7 @@ namespace PetShopDelLitoral
             InitializeComponent();
             dtpDesde.MaxDate = DateTime.Today;
             dtpHasta.MaxDate = DateTime.Today;
+            PrepararLayout();
 
             // El Designer no siempre conecta el Load: lo enganchamos acá (el -= evita que corra dos veces si ya estaba)
             this.Load -= FrmReportesAdministrador_Load;

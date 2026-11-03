@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -15,11 +15,12 @@ namespace PetShopDelLitoral
         private const int X_ETIQUETAS = LayoutPantalla.X_ETIQUETAS;
         private const int Y_PRIMER_GRUPO = 50;       // debajo del título "Datos de la venta"
         private const int ALTO_ETIQUETA = LayoutPantalla.ALTO_ETIQUETA;
+        private const int GAP_MIN_REAL = 6;          // aire mínimo entre grupos cuando la ventana es baja
         private const int GAP_MIN = 26;              // aire entre un grupo (etiqueta + campo) y el siguiente
         private const int GAP_MAX = 34;
-        private const int ALTO_OBS_MIN = 65;         // Observaciones: es el que absorbe la altura que sobra
+        private const int ALTO_OBS_MIN = 60;         // Observaciones: es el que absorbe la altura que sobra
         private const int ALTO_OBS_MAX = 220;
-        private const int AIRE_TOTALES = 18;         // entre Observaciones y el bloque Subtotal/Total
+        private const int AIRE_TOTALES = 12;         // entre Observaciones y el bloque Subtotal/Total
         private const int MARGEN_INFERIOR = 10;      // el bloque de totales queda pegado abajo
 
         // ---------- Barra "Agregar Productos" ----------
@@ -77,7 +78,17 @@ namespace PetShopDelLitoral
             guna2TextBox6.Left = ancho - 15 - guna2TextBox6.Width;
 
             // 2) Separación entre grupos: arranca en GAP_MIN y crece un poco si hay mucha altura
-            int gap = Math.Max(GAP_MIN, Math.Min(GAP_MAX, GAP_MIN + (alto - ALTURA_DISENO_IZQ) / 40));
+            // Altura que necesitan los bloques (sin separaciones) con Observaciones en su mínimo;
+            // lo que sobra se reparte en las 4 separaciones, que se achican si la ventana es baja (nada se pisa)
+            int fijo = Y_PRIMER_GRUPO
+                       + ALTO_ETIQUETA + guna2TextBox1.Height
+                       + ALTO_ETIQUETA + guna2DateTimePicker1.Height
+                       + ALTO_ETIQUETA + guna2ComboBox1.Height
+                       + ALTO_ETIQUETA + guna2TextBox2.Height
+                       + ALTO_ETIQUETA + ALTO_OBS_MIN
+                       + AIRE_TOTALES;
+            int libre = guna2CustomGradientPanel1.Top - fijo;
+            int gap = Math.Max(GAP_MIN_REAL, Math.Min(GAP_MAX, libre / 4));
 
             int y = Y_PRIMER_GRUPO;
 

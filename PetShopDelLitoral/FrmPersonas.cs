@@ -11,8 +11,6 @@ using System.Windows.Forms;
 using Capa_Datos;
 using Capa_Entidad;
 using Capa_Negocio;
-using CapaDatos;
-using CapaNegocio;
 namespace PetShopDelLitoral
 {
 
@@ -442,12 +440,7 @@ namespace PetShopDelLitoral
 
         private void EliminarPersona(int id)
         {
-            if (tipoSeleccionado == "Proveedor")
-            {
-                MessageBox.Show("La baja de proveedores todavía no está implementada en esta pantalla.", "Atención");
-                return;
-            }
-            string entidad = tipoSeleccionado == "Cliente" ? "cliente" : "usuario";
+            string entidad = tipoSeleccionado == "Cliente" ? "cliente" : tipoSeleccionado == "Proveedor" ? "proveedor" : "usuario";
 
             DialogResult resultado = MessageBox.Show(
                 "¿Está seguro de que desea dar de baja a este " + entidad + "?",
@@ -467,18 +460,27 @@ namespace PetShopDelLitoral
                 exito = objNegocio.EliminarCliente(id, out mensaje);
             }
 
+            else if (tipoSeleccionado == "Proveedor")
+            {
+                CN_Proveedor objNegocio = new CN_Proveedor();
+                exito = objNegocio.EliminarProveedor(id, out mensaje);
+            }
             else
             {
                 CN_Usuario objNegocio = new CN_Usuario();
                 exito = objNegocio.EliminarUsuario(id, out mensaje);
             }
-
             if (exito)
             {
                 MessageBox.Show(char.ToUpper(entidad[0]) + entidad.Substring(1) + " eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Recargamos la grilla para que desaparezca visualmente al instante
-                if (tipoSeleccionado == "Cliente")
+                if (tipoSeleccionado == "Proveedor")
+                {
+                    ConfigurarGridProveedores();
+                    CargarProveedores();
+                }
+                else if (tipoSeleccionado == "Cliente")
                 {
                     ConfigurarGridClientes();
                     CargarClientes();
@@ -932,7 +934,70 @@ namespace PetShopDelLitoral
                     MessageBox.Show("Ocurrió un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-        }
+            else if (tipoSeleccionado == "Proveedor")
+            {
+                if (string.IsNullOrWhiteSpace(TBNombre.Text) ||
+                    string.IsNullOrWhiteSpace(TBApellido.Text) ||
+                    string.IsNullOrWhiteSpace(TBDni.Text))
+                {
+                    MessageBox.Show("Por favor, complete todos los campos obligatorios (Nombre, Apellido y DNI).", "Atenci\u00f3n", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                try
+                {
+                    Persona objPersona = new Persona()
+                    {
+                        idPersona = idPersonaSeleccionada,
+                        nombre_persona = TBNombre.Text.Trim(),
+                        apellido_persona = TBApellido.Text.Trim(),
+                        dni_persona = TBDni.Text.Trim(),
+                        correo_persona = TBCorreo.Text.Trim(),
+                        telefono_persona = TBTelefono.Text.Trim(),
+                        direccion_persona = TBDireccion.Text.Trim(),
+                        estado_persona = true
+                    };
+
+                    CN_Proveedor objNegocio = new CN_Proveedor();
+                    string mensaje = string.Empty;
+                    bool resultado;
+
+                    if (idSeleccionado == 0)
+                    {
+                        resultado = objNegocio.RegistrarProveedor(objPersona, out mensaje);
+                    }
+                    else
+                    {
+                        Proveedor objProveedor = new Proveedor()
+                        {
+                            Id_proveedor = idSeleccionado,
+                            Estado_proveedor = chkActivo.Checked
+                        };
+                        resultado = objNegocio.ModificarProveedor(objPersona, objProveedor, out mensaje);
+                    }
+
+                    if (resultado)
+                    {
+                        string mensajeExito = idSeleccionado == 0 ? "\u00a1Proveedor registrado exitosamente!" : "\u00a1Proveedor modificado exitosamente!";
+                        MessageBox.Show(mensajeExito, "\u00c9xito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        ConfigurarGridProveedores();
+                        CargarProveedores();
+                        LimpiarCampos();
+
+                        idSeleccionado = 0;
+                        idPersonaSeleccionada = 0;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error en la operaci\u00f3n: " + mensaje, "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocurri\u00f3 un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }        }
 
 
         private void btnLimpiarCampos_Click(object sender, EventArgs e)

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Capa_Entidad;
-using CapaDatos;
+using Capa_Datos;
 
-namespace CapaNegocio
+namespace Capa_Negocio
 {
     public class CN_Categoria
     {

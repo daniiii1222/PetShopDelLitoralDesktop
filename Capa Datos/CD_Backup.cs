@@ -1,4 +1,4 @@
-﻿using CapaDatos;
+using Capa_Datos;
 using MySql.Data.MySqlClient;
 using System;
 using System.Data;
@@ -103,6 +103,26 @@ namespace Capa_Datos
                 File.WriteAllText(rutaDestino, sb.ToString(), Encoding.UTF8);
             }
 
+        }
+
+        // Ejecuta en la base el script de una copia de seguridad (reemplaza los datos actuales).
+        // Si algo falla, la excepción sube a la capa de negocio.
+        public void RestaurarRespaldo(string scriptSql)
+        {
+            using (MySqlConnection conn = ClsDataBase.CrearConexion())
+            {
+                conn.Open();
+                using (MySqlCommand cmd = new MySqlCommand("SET FOREIGN_KEY_CHECKS=0;", conn)) cmd.ExecuteNonQuery();
+                try
+                {
+                    MySqlScript script = new MySqlScript(conn, scriptSql);   // entiende el DELIMITER de los procedimientos
+                    script.Execute();
+                }
+                finally
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("SET FOREIGN_KEY_CHECKS=1;", conn)) cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         // Convierte un valor a SQL sin depender de la configuración regional de la PC

@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Capa_Entidad;
-using CapaNegocio;
-using CapaDatos;
+using Capa_Negocio;
+using Capa_Datos;
 
 namespace PetShopDelLitoral
 {
@@ -179,9 +179,7 @@ namespace PetShopDelLitoral
                 guna2TextBox7.AutoCompleteCustomSource = coleccion;
                 guna2TextBox7.PlaceholderText = "Buscar por nombre o código...";
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception ex) { Bitacora.Registrar("Cargar autocompletado de productos en Compras", ex); }
         }
 
         private void btnBuscarProducto_Click(object sender, EventArgs e)

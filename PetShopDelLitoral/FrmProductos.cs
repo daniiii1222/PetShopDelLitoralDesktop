@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Capa_Entidad;
-using CapaNegocio;
+using Capa_Negocio;
 
 namespace PetShopDelLitoral
 {
@@ -63,9 +63,7 @@ namespace PetShopDelLitoral
                 CBFiltroCateg.DataSource = comboLista;
                 CBFiltroCateg.SelectedIndex = 0;
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception ex) { Bitacora.Registrar("Cargar categor\u00edas del filtro de Productos", ex); MessageBox.Show("No se pudieron cargar las categor\u00edas: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void CargarProductos()

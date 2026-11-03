@@ -1,5 +1,5 @@
 ﻿using Capa_Entidad;
-using CapaDatos;
+using Capa_Datos;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;

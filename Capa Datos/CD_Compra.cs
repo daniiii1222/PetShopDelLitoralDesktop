@@ -4,18 +4,17 @@ using System.Data;
 using MySql.Data.MySqlClient;
 using Capa_Entidad;
 
-namespace CapaDatos
+namespace Capa_Datos
 {
     public class CD_Compra
     {
-        private readonly string cadenaConexion = "Server=localhost; Database=petshopdellitoral; Uid=root; Pwd=;";
 
         public bool Registrar(CompraProveedor objCompra, List<DetalleCompracs> listaDetalle, out string Mensaje)
         {
             bool respuesta = false;
             Mensaje = string.Empty;
 
-            using (MySqlConnection oconexion = new MySqlConnection(cadenaConexion))
+            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
             {
                 try
                 {

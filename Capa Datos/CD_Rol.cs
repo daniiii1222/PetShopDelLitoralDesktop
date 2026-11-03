@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Data;
-using CapaDatos;
+using Capa_Datos;
 
 namespace Capa_Datos
 {

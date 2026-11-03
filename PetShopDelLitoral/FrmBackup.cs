@@ -6,8 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
-using CapaDatos;
 using Capa_Entidad;
 using Capa_Negocio;
 
@@ -274,7 +272,7 @@ namespace PetShopDelLitoral
                     string c = ObtenerCarpetaBackups();
                     if (Directory.Exists(c)) System.Diagnostics.Process.Start("explorer.exe", c);
                 }
-                catch { }
+                catch (Exception ex) { Bitacora.Registrar("Abrir la carpeta de backups", ex); MessageBox.Show("No se pudo abrir la carpeta de copias: " + ex.Message, "Backups", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
             };
             panelRuta.Controls.Add(btnAbrirCarpeta);
 
@@ -642,18 +640,11 @@ namespace PetShopDelLitoral
                 return;
             }
 
-            if (!File.Exists(rutaArchivo))
+            string sql;
+            string mensajeArchivo;
+            if (!negocioBackup.LeerRespaldo(rutaArchivo, out sql, out mensajeArchivo))
             {
-                MessageBox.Show("No se encontró el archivo de la copia.", "Restaurar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // 2) Control básico del archivo antes de pedir nada
-            string sql = File.ReadAllText(rutaArchivo, Encoding.UTF8);
-            if (!sql.StartsWith("-- Backup") || sql.IndexOf("CREATE TABLE", StringComparison.OrdinalIgnoreCase) < 0)
-            {
-                MessageBox.Show("El archivo no parece una copia de seguridad válida de esta aplicación.", "Restaurar",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(mensajeArchivo, "Restaurar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -692,22 +683,11 @@ namespace PetShopDelLitoral
             // 7) Restauración
             try
             {
-                using (MySqlConnection conn = ClsDataBase.CrearConexion())
-                {
-                    conn.Open();
-                    using (MySqlCommand cmd = new MySqlCommand("SET FOREIGN_KEY_CHECKS=0;", conn)) cmd.ExecuteNonQuery();
-                    try
-                    {
-                        MySqlScript script = new MySqlScript(conn, sql);   // entiende el DELIMITER de los procedimientos
-                        script.Execute();
-                    }
-                    finally
-                    {
-                        using (MySqlCommand cmd = new MySqlCommand("SET FOREIGN_KEY_CHECKS=1;", conn)) cmd.ExecuteNonQuery();
-                    }
-                }
+                string mensajeRestauracion;
+                if (!negocioBackup.RestaurarRespaldo(sql, out mensajeRestauracion))
+                    throw new Exception(mensajeRestauracion);
 
-                RegistrarRestauracion(nombreArchivo, admin, supervisor, copiaPrevia);
+                negocioBackup.RegistrarRestauracion(nombreArchivo, NombreDe(admin), NombreDe(supervisor), copiaPrevia);
                 CargarHistorialBackups();
                 MessageBox.Show("La base de datos fue restaurada correctamente.\n\nSe recomienda cerrar sesión y volver a ingresar.",
                                 "Restaurar", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -717,22 +697,6 @@ namespace PetShopDelLitoral
                 MessageBox.Show("Error al restaurar: " + ex.Message + "\n\nLa copia previa a la restauración quedó guardada como: " +
                                 Path.GetFileName(copiaPrevia), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        // Deja constancia de quién restauró y quién autorizó
-        private void RegistrarRestauracion(string archivo, Usuario admin, Usuario supervisor, string copiaPrevia)
-        {
-            try
-            {
-                string linea = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") +
-                               " | archivo=" + archivo +
-                               " | administrador=" + NombreDe(admin) +
-                               " | supervisor=" + NombreDe(supervisor) +
-                               " | copia previa=" + Path.GetFileName(copiaPrevia);
-                File.AppendAllText(Path.Combine(ObtenerCarpetaBackups(), "restauraciones.log"),
-                                   linea + Environment.NewLine, Encoding.UTF8);
-            }
-            catch { }
         }
 
         private void btnGenerarBackup_Click(object sender, EventArgs e) => EjecutarRespaldoReal();

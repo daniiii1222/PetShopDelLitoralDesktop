@@ -4,17 +4,120 @@ using System.Data;
 using MySql.Data.MySqlClient;
 using Capa_Entidad;
 
-namespace CapaDatos
+namespace Capa_Datos
 {
     public class CD_Proveedor
     {
-        private readonly string cadenaConexion = "Server=localhost; Database=petshopdellitoral; Uid=root; Pwd=;";
+
+        // =====================================================================
+        // ALTA / MODIFICACIÓN / BAJA de proveedores (mismo esquema que CD_Cliente).
+        // Cada operación es UN procedimiento almacenado (Scripts/Proveedores.sql) que guarda
+        // Persona + Proveedor dentro de una sola transacción en la base de datos.
+        // =====================================================================
+
+        // Crea la persona (o reutiliza la que ya tenga ese DNI) y el proveedor, todo en una transacción
+        public bool RegistrarProveedor(Persona objPersona, out string mensajeError)
+        {
+            mensajeError = string.Empty;
+            ClsDataBase database = new ClsDataBase();
+
+            try
+            {
+                database.NameSP = "sp_RegistrarProveedorCompleto";
+
+                database.DtParameters.Rows.Add("@p_nombre", null, objPersona.nombre_persona);
+                database.DtParameters.Rows.Add("@p_apellido", null, objPersona.apellido_persona);
+                database.DtParameters.Rows.Add("@p_dni", null, objPersona.dni_persona);
+                database.DtParameters.Rows.Add("@p_correo", null, objPersona.correo_persona);
+                database.DtParameters.Rows.Add("@p_telefono", null, objPersona.telefono_persona);
+                database.DtParameters.Rows.Add("@p_direccion", null, objPersona.direccion_persona);
+
+                database.EjecutarAccion();
+
+                if (!string.IsNullOrEmpty(database.ErrorDB))
+                {
+                    mensajeError = database.ErrorDB;
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                mensajeError = ex.Message;
+                return false;
+            }
+        }
+
+        // Actualiza los datos de la persona y el estado del proveedor en una transacción
+        public bool ModificarProveedor(Persona objPersona, Proveedor objProveedor, out string mensajeError)
+        {
+            mensajeError = string.Empty;
+            ClsDataBase database = new ClsDataBase();
+
+            try
+            {
+                database.NameSP = "sp_ModificarProveedorCompleto";
+
+                database.DtParameters.Rows.Add("@p_idProveedor", null, objProveedor.Id_proveedor);
+                database.DtParameters.Rows.Add("@p_nombre", null, objPersona.nombre_persona);
+                database.DtParameters.Rows.Add("@p_apellido", null, objPersona.apellido_persona);
+                database.DtParameters.Rows.Add("@p_dni", null, objPersona.dni_persona);
+                database.DtParameters.Rows.Add("@p_correo", null, objPersona.correo_persona);
+                database.DtParameters.Rows.Add("@p_telefono", null, objPersona.telefono_persona);
+                database.DtParameters.Rows.Add("@p_direccion", null, objPersona.direccion_persona);
+                database.DtParameters.Rows.Add("@p_estado", null, objProveedor.Estado_proveedor ? 1 : 0);
+
+                database.EjecutarAccion();
+
+                if (!string.IsNullOrEmpty(database.ErrorDB))
+                {
+                    mensajeError = database.ErrorDB;
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                mensajeError = ex.Message;
+                return false;
+            }
+        }
+
+        // Baja lógica: el proveedor queda inactivo, no se borra (sus compras siguen existiendo)
+        public bool EliminarProveedor(int idProveedor, out string mensajeError)
+        {
+            mensajeError = string.Empty;
+            ClsDataBase database = new ClsDataBase();
+
+            try
+            {
+                database.NameSP = "sp_EliminarProveedor";
+                database.DtParameters.Rows.Add("@p_idProveedor", null, idProveedor);
+
+                database.EjecutarAccion();
+
+                if (!string.IsNullOrEmpty(database.ErrorDB))
+                {
+                    mensajeError = database.ErrorDB;
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                mensajeError = ex.Message;
+                return false;
+            }
+        }
 
         public List<Proveedor> Listar()
         {
             List<Proveedor> lista = new List<Proveedor>();
 
-            using (MySqlConnection oconexion = new MySqlConnection(cadenaConexion))
+            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
             {
                 try
                 {
@@ -65,7 +168,7 @@ namespace CapaDatos
             int idGenerado = 0;
             Mensaje = string.Empty;
 
-            using (MySqlConnection oconexion = new MySqlConnection(cadenaConexion))
+            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
             {
                 try
                 {
@@ -93,7 +196,7 @@ namespace CapaDatos
             bool respuesta = false;
             Mensaje = string.Empty;
 
-            using (MySqlConnection oconexion = new MySqlConnection(cadenaConexion))
+            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
             {
                 try
                 {
@@ -122,7 +225,7 @@ namespace CapaDatos
         {
             Mensaje = string.Empty;
 
-            using (MySqlConnection oconexion = new MySqlConnection(cadenaConexion))
+            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
             {
                 try
                 {

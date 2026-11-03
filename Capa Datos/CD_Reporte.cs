@@ -1,4 +1,4 @@
-﻿using CapaDatos;
+﻿using Capa_Datos;
 using System;
 using System.Data;
 
