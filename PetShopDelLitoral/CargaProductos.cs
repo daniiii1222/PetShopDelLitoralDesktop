@@ -91,19 +91,19 @@ namespace PetShopDelLitoral
 
             try
             {
-                decimal precioUnitario = Convert.ToDecimal(txtStock.Text.Trim().Replace('.', ','));
-                decimal precioVenta = Convert.ToDecimal(guna2TextBox1.Text.Trim().Replace('.', ','));
+                decimal precioUnitario = decimal.Parse(txtStock.Text.Trim().Replace(',', '.'), System.Globalization.CultureInfo.InvariantCulture);
+                decimal precioVenta = decimal.Parse(guna2TextBox1.Text.Trim().Replace(',', '.'), System.Globalization.CultureInfo.InvariantCulture);
                 int stock = Convert.ToInt32(txtPrecio.Text.Trim());
 
                 Producto objProducto = new Producto()
                 {
                     Codigo_producto = txtCodigo.Text.Trim().ToUpper(),
                     Nombre_producto = txtNombre.Text.Trim(),
-                    Descripcion_producto = txtNombre.Text.Trim(),
+                    Descripcion_producto = _productoEditar != null && !string.IsNullOrWhiteSpace(_productoEditar.Descripcion_producto) ? _productoEditar.Descripcion_producto : txtNombre.Text.Trim(),
                     PrecioUnitario_producto = precioUnitario,
                     Precio_producto = precioVenta,
                     Stock_producto = stock,
-                    Stock_minimo = 0,
+                    Stock_minimo = _productoEditar != null ? _productoEditar.Stock_minimo : 0,
                     IdCategoria = new Categoria()
                     {
                         IdCategoria = Convert.ToInt32(cmbCategoria.SelectedValue)
