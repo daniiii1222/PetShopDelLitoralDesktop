@@ -47,6 +47,7 @@ Los errores inesperados que la interfaz no muestra se anotan con `Bitacora.Regis
    | 5 | `SP_detalleVenta.sql` | Detalle de una venta (botón *Ver detalle* de Reportes). |
    | 6 | `SP_obtenerProductosMasVendidos.sql` | Productos más vendidos (Estadísticas). |
    | 7 | `Proveedores.sql` | Alta, modificación y baja lógica de proveedores (3 procedimientos, con transacción). |
+   | 8 | `Productos.sql` | Procedimientos del ABM de productos (`sp_ListarProductos`, `sp_RegistrarProducto`, `sp_ModificarProducto`, `sp_EliminarProducto`, `sp_ExisteCodigoProducto`). |
 
    `Venta.sql` es una versión anterior del registro de ventas (procedimientos sueltos) y no hace falta ejecutarla.
 

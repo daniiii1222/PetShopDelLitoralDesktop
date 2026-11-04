@@ -14,9 +14,20 @@ namespace Capa_Negocio
             return objcd_producto.Listar();
         }
 
+        public bool ExisteCodigo(string codigo, int idProductoExcluir)
+        {
+            return objcd_producto.ExisteCodigo(codigo, idProductoExcluir);
+        }
+
         public int Registrar(Producto obj, out string Mensaje)
         {
             Mensaje = string.Empty;
+
+            if (obj == null)
+            {
+                Mensaje = "El producto no puede ser nulo.";
+                return 0;
+            }
 
             if (string.IsNullOrWhiteSpace(obj.Codigo_producto))
             {
@@ -27,6 +38,30 @@ namespace Capa_Negocio
             if (string.IsNullOrWhiteSpace(obj.Nombre_producto))
             {
                 Mensaje = "El nombre del producto no puede estar vacío.";
+                return 0;
+            }
+
+            if (obj.Precio_producto < 0)
+            {
+                Mensaje = "El precio de venta no puede ser negativo.";
+                return 0;
+            }
+
+            if (obj.PrecioUnitario_producto < 0)
+            {
+                Mensaje = "El precio de costo no puede ser negativo.";
+                return 0;
+            }
+
+            if (obj.Stock_producto < 0)
+            {
+                Mensaje = "El stock no puede ser negativo.";
+                return 0;
+            }
+
+            if (obj.Stock_minimo < 0)
+            {
+                Mensaje = "El stock mínimo no puede ser negativo.";
                 return 0;
             }
 
@@ -43,6 +78,18 @@ namespace Capa_Negocio
         {
             Mensaje = string.Empty;
 
+            if (obj == null)
+            {
+                Mensaje = "El producto no puede ser nulo.";
+                return false;
+            }
+
+            if (obj.IdProducto <= 0)
+            {
+                Mensaje = "Identificador de producto no válido.";
+                return false;
+            }
+
             if (string.IsNullOrWhiteSpace(obj.Codigo_producto))
             {
                 Mensaje = "El código del producto no puede estar vacío.";
@@ -52,6 +99,30 @@ namespace Capa_Negocio
             if (string.IsNullOrWhiteSpace(obj.Nombre_producto))
             {
                 Mensaje = "El nombre del producto no puede estar vacío.";
+                return false;
+            }
+
+            if (obj.Precio_producto < 0)
+            {
+                Mensaje = "El precio de venta no puede ser negativo.";
+                return false;
+            }
+
+            if (obj.PrecioUnitario_producto < 0)
+            {
+                Mensaje = "El precio de costo no puede ser negativo.";
+                return false;
+            }
+
+            if (obj.Stock_producto < 0)
+            {
+                Mensaje = "El stock no puede ser negativo.";
+                return false;
+            }
+
+            if (obj.Stock_minimo < 0)
+            {
+                Mensaje = "El stock mínimo no puede ser negativo.";
                 return false;
             }
 

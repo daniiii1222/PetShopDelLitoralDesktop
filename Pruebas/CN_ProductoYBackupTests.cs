@@ -34,6 +34,42 @@ namespace Pruebas
         }
 
         [TestMethod]
+        public void Registrar_PrecioNegativo_SeRechaza()
+        {
+            string mensaje;
+            Producto p = new Producto { Codigo_producto = "PROD2090", Nombre_producto = "Alimento", Precio_producto = -10 };
+
+            int id = new CN_Producto().Registrar(p, out mensaje);
+
+            Assert.AreEqual(0, id);
+            StringAssert.Contains(mensaje, "precio de venta");
+        }
+
+        [TestMethod]
+        public void Registrar_CostoNegativo_SeRechaza()
+        {
+            string mensaje;
+            Producto p = new Producto { Codigo_producto = "PROD2090", Nombre_producto = "Alimento", Precio_producto = 100, PrecioUnitario_producto = -5 };
+
+            int id = new CN_Producto().Registrar(p, out mensaje);
+
+            Assert.AreEqual(0, id);
+            StringAssert.Contains(mensaje, "precio de costo");
+        }
+
+        [TestMethod]
+        public void Registrar_StockNegativo_SeRechaza()
+        {
+            string mensaje;
+            Producto p = new Producto { Codigo_producto = "PROD2090", Nombre_producto = "Alimento", Precio_producto = 100, Stock_producto = -1 };
+
+            int id = new CN_Producto().Registrar(p, out mensaje);
+
+            Assert.AreEqual(0, id);
+            StringAssert.Contains(mensaje, "stock");
+        }
+
+        [TestMethod]
         public void Editar_SinCodigo_SeRechaza()
         {
             string mensaje;
@@ -41,6 +77,16 @@ namespace Pruebas
 
             Assert.IsFalse(new CN_Producto().Editar(p, out mensaje));
             Assert.IsFalse(string.IsNullOrEmpty(mensaje));
+        }
+
+        [TestMethod]
+        public void Editar_IdInvalido_SeRechaza()
+        {
+            string mensaje;
+            Producto p = new Producto { IdProducto = 0, Codigo_producto = "PROD1", Nombre_producto = "Alimento" };
+
+            Assert.IsFalse(new CN_Producto().Editar(p, out mensaje));
+            StringAssert.Contains(mensaje, "no válido");
         }
 
         [TestMethod]

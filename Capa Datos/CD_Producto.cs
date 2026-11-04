@@ -1,198 +1,194 @@
+using Capa_Entidad;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using MySql.Data.MySqlClient;
-using Capa_Entidad;
 
 namespace Capa_Datos
 {
     public class CD_Producto
     {
+        // ── Listar ───────────────────────────────────────────────────────────
 
         public List<Producto> Listar()
         {
+            ClsDataBase database = new ClsDataBase();
+            database.NameSP    = "sp_ListarProductos";
+            database.TableName = "TablaProductos";
+
+            database.EjecutarSelect();
+
+            if (!string.IsNullOrEmpty(database.ErrorDB))
+                throw new Exception("Error al listar productos: " + database.ErrorDB);
+
             List<Producto> lista = new List<Producto>();
 
-            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
+            if (database.DsResults == null
+                || !database.DsResults.Tables.Contains("TablaProductos"))
+                return lista;
+
+            foreach (DataRow dr in database.DsResults.Tables["TablaProductos"].Rows)
             {
-                try
+                lista.Add(new Producto()
                 {
-                    string query = @"SELECT p.idProducto, p.codigo_producto, p.nombre_producto, 
-                                            p.descripcion_producto, p.precio_producto, p.stock_producto, 
-                                            p.stock_minimo, p.idCategoria, c.nombre_categoria, p.estado_producto, p.precioUnitario_producto
-                                     FROM producto p
-                                     INNER JOIN categoria c ON p.idCategoria = c.idCategoria
-                                     WHERE p.estado_producto = 1";
-
-                    MySqlCommand cmd = new MySqlCommand(query, oconexion);
-                    cmd.CommandType = CommandType.Text;
-
-                    oconexion.Open();
-
-                    using (MySqlDataReader dr = cmd.ExecuteReader())
+                    IdProducto              = Convert.ToInt32(dr["idProducto"]),
+                    Codigo_producto         = dr["codigo_producto"]         != DBNull.Value ? dr["codigo_producto"].ToString()         : string.Empty,
+                    Nombre_producto         = dr["nombre_producto"].ToString(),
+                    Descripcion_producto    = dr["descripcion_producto"]    != DBNull.Value ? dr["descripcion_producto"].ToString()    : string.Empty,
+                    Precio_producto         = Convert.ToDecimal(dr["precio_producto"]),
+                    PrecioUnitario_producto = dr["precioUnitario_producto"] != DBNull.Value ? Convert.ToDecimal(dr["precioUnitario_producto"]) : 0,
+                    Stock_producto          = Convert.ToInt32(dr["stock_producto"]),
+                    Stock_minimo            = dr["stock_minimo"]            != DBNull.Value ? Convert.ToInt32(dr["stock_minimo"])            : 0,
+                    Estado_producto         = Convert.ToBoolean(dr["estado_producto"]),
+                    FechaCreacion_producto  = dr["fechaCreacion_producto"]  != DBNull.Value ? Convert.ToDateTime(dr["fechaCreacion_producto"]) : DateTime.MinValue,
+                    IdCategoria = new Categoria()
                     {
-                        while (dr.Read())
-                        {
-                            lista.Add(new Producto()
-                            {
-                                IdProducto = Convert.ToInt32(dr["idProducto"]),
-                                Codigo_producto = dr["codigo_producto"] != DBNull.Value ? dr["codigo_producto"].ToString() : "",
-                                Nombre_producto = dr["nombre_producto"].ToString(),
-                                Descripcion_producto = dr["descripcion_producto"] != DBNull.Value ? dr["descripcion_producto"].ToString() : "",
-                                Precio_producto = Convert.ToDecimal(dr["precio_producto"]),
-                                PrecioUnitario_producto = dr["precioUnitario_producto"] != DBNull.Value ? Convert.ToDecimal(dr["precioUnitario_producto"]) : 0,
-                                Stock_producto = Convert.ToInt32(dr["stock_producto"]),
-                                Stock_minimo = dr["stock_minimo"] != DBNull.Value ? Convert.ToInt32(dr["stock_minimo"]) : 0,
-                                IdCategoria = new Categoria()
-                                {
-                                    IdCategoria = Convert.ToInt32(dr["idCategoria"]),
-                                    Nombre_categoria = dr["nombre_categoria"].ToString()
-                                },
-                                Estado_producto = Convert.ToBoolean(dr["estado_producto"])
-                            });
-                        }
+                        IdCategoria      = Convert.ToInt32(dr["idCategoria"]),
+                        Nombre_categoria = dr["nombre_categoria"].ToString()
                     }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Error al listar productos: " + ex.Message, ex);
-                }
+                });
             }
 
             return lista;
         }
 
+        // ── ExisteCodigo ─────────────────────────────────────────────────────
+
         public bool ExisteCodigo(string codigo, int idProductoExcluir)
         {
             if (string.IsNullOrWhiteSpace(codigo)) return false;
 
-            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
-            {
-                try
-                {
-                    string query = "SELECT COUNT(*) FROM producto WHERE estado_producto = 1 AND LOWER(codigo_producto) = LOWER(@codigo) AND idProducto != @idExcluir;";
-                    MySqlCommand cmd = new MySqlCommand(query, oconexion);
-                    cmd.Parameters.AddWithValue("@codigo", codigo.Trim());
-                    cmd.Parameters.AddWithValue("@idExcluir", idProductoExcluir);
+            ClsDataBase database = new ClsDataBase();
+            database.NameSP    = "sp_ExisteCodigoProducto";
+            database.TableName = "TablaExiste";
 
-                    oconexion.Open();
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
-                    return count > 0;
-                }
-                catch
+            database.DtParameters.Rows.Add("@p_codigo",    null, codigo.Trim());
+            database.DtParameters.Rows.Add("@p_idExcluir", null, idProductoExcluir);
+
+            database.EjecutarSelect();
+
+            if (!string.IsNullOrEmpty(database.ErrorDB)) return false;
+
+            if (database.DsResults != null
+                && database.DsResults.Tables.Contains("TablaExiste")
+                && database.DsResults.Tables["TablaExiste"].Rows.Count > 0)
+            {
+                return Convert.ToInt32(database.DsResults.Tables["TablaExiste"].Rows[0]["cantidad"]) > 0;
+            }
+
+            return false;
+        }
+
+        // ── Registrar ────────────────────────────────────────────────────────
+
+        public int Registrar(Producto obj, out string mensaje)
+        {
+            mensaje = string.Empty;
+            ClsDataBase database = new ClsDataBase();
+
+            try
+            {
+                database.NameSP = "sp_RegistrarProducto";
+                database.TableName = "TablaIdGenerado";
+
+                database.DtParameters.Rows.Add("@p_codigo",         null, string.IsNullOrWhiteSpace(obj.Codigo_producto) ? (object)DBNull.Value : obj.Codigo_producto.Trim());
+                database.DtParameters.Rows.Add("@p_nombre",         null, obj.Nombre_producto);
+                database.DtParameters.Rows.Add("@p_descripcion",    null, string.IsNullOrEmpty(obj.Descripcion_producto) ? obj.Nombre_producto : obj.Descripcion_producto);
+                database.DtParameters.Rows.Add("@p_precio",         null, obj.Precio_producto);
+                database.DtParameters.Rows.Add("@p_precioUnitario", null, obj.PrecioUnitario_producto);
+                database.DtParameters.Rows.Add("@p_stock",          null, obj.Stock_producto);
+                database.DtParameters.Rows.Add("@p_stockMinimo",    null, obj.Stock_minimo);
+                database.DtParameters.Rows.Add("@p_idCategoria",    null, obj.IdCategoria.IdCategoria);
+
+                database.EjecutarSelect(); // SELECT LAST_INSERT_ID() devuelve un resultado
+
+                if (!string.IsNullOrEmpty(database.ErrorDB))
                 {
+                    mensaje = database.ErrorDB;
+                    return 0;
+                }
+
+                if (database.DsResults != null
+                    && database.DsResults.Tables.Contains("TablaIdGenerado")
+                    && database.DsResults.Tables["TablaIdGenerado"].Rows.Count > 0)
+                {
+                    return Convert.ToInt32(database.DsResults.Tables["TablaIdGenerado"].Rows[0]["idGenerado"]);
+                }
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                mensaje = ex.Message;
+                return 0;
+            }
+        }
+
+        // ── Editar ───────────────────────────────────────────────────────────
+
+        public bool Editar(Producto obj, out string mensaje)
+        {
+            mensaje = string.Empty;
+            ClsDataBase database = new ClsDataBase();
+
+            try
+            {
+                database.NameSP = "sp_ModificarProducto";
+
+                database.DtParameters.Rows.Add("@p_idProducto",     null, obj.IdProducto);
+                database.DtParameters.Rows.Add("@p_codigo",         null, string.IsNullOrWhiteSpace(obj.Codigo_producto) ? (object)DBNull.Value : obj.Codigo_producto.Trim());
+                database.DtParameters.Rows.Add("@p_nombre",         null, obj.Nombre_producto);
+                database.DtParameters.Rows.Add("@p_descripcion",    null, string.IsNullOrEmpty(obj.Descripcion_producto) ? obj.Nombre_producto : obj.Descripcion_producto);
+                database.DtParameters.Rows.Add("@p_precio",         null, obj.Precio_producto);
+                database.DtParameters.Rows.Add("@p_precioUnitario", null, obj.PrecioUnitario_producto);
+                database.DtParameters.Rows.Add("@p_stock",          null, obj.Stock_producto);
+                database.DtParameters.Rows.Add("@p_stockMinimo",    null, obj.Stock_minimo);
+                database.DtParameters.Rows.Add("@p_idCategoria",    null, obj.IdCategoria.IdCategoria);
+                database.DtParameters.Rows.Add("@p_estado",         null, obj.Estado_producto ? 1 : 0);
+
+                database.EjecutarAccion();
+
+                if (!string.IsNullOrEmpty(database.ErrorDB))
+                {
+                    mensaje = database.ErrorDB;
                     return false;
                 }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                mensaje = ex.Message;
+                return false;
             }
         }
 
-        public int Registrar(Producto obj, out string Mensaje)
+        // ── Eliminar ─────────────────────────────────────────────────────────
+
+        public bool Eliminar(int idProducto, out string mensaje)
         {
-            int idGenerado = 0;
-            Mensaje = string.Empty;
+            mensaje = string.Empty;
+            ClsDataBase database = new ClsDataBase();
 
-            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
+            try
             {
-                try
-                {
-                    string query = @"INSERT INTO producto(codigo_producto, nombre_producto, descripcion_producto, estado_producto, precio_producto, stock_producto, idCategoria, precioUnitario_producto, stock_minimo) 
-                                     VALUES(@codigo, @nombre, @descripcion, @estado, @precio, @stock, @idCategoria, @precioUnitario, @stock_min);
-                                     SELECT LAST_INSERT_ID();";
+                database.NameSP = "sp_EliminarProducto";
+                database.DtParameters.Rows.Add("@p_idProducto", null, idProducto);
 
-                    MySqlCommand cmd = new MySqlCommand(query, oconexion);
-                    cmd.Parameters.AddWithValue("@codigo", string.IsNullOrWhiteSpace(obj.Codigo_producto) ? (object)DBNull.Value : obj.Codigo_producto.Trim().ToUpper());
-                    cmd.Parameters.AddWithValue("@nombre", obj.Nombre_producto);
-                    cmd.Parameters.AddWithValue("@descripcion", string.IsNullOrEmpty(obj.Descripcion_producto) ? obj.Nombre_producto : obj.Descripcion_producto);
-                    cmd.Parameters.AddWithValue("@estado", obj.Estado_producto);
-                    cmd.Parameters.AddWithValue("@precio", obj.Precio_producto);
-                    cmd.Parameters.AddWithValue("@stock", obj.Stock_producto);
-                    cmd.Parameters.AddWithValue("@idCategoria", obj.IdCategoria.IdCategoria);
-                    cmd.Parameters.AddWithValue("@precioUnitario", obj.PrecioUnitario_producto);
-                    cmd.Parameters.AddWithValue("@stock_min", obj.Stock_minimo);
+                database.EjecutarAccion();
 
-                    oconexion.Open();
-                    idGenerado = Convert.ToInt32(cmd.ExecuteScalar());
-                }
-                catch (Exception ex)
+                if (!string.IsNullOrEmpty(database.ErrorDB))
                 {
-                    idGenerado = 0;
-                    Mensaje = ex.Message;
+                    mensaje = database.ErrorDB;
+                    return false;
                 }
+
+                return true;
             }
-
-            return idGenerado;
-        }
-
-        public bool Editar(Producto obj, out string Mensaje)
-        {
-            bool respuesta = false;
-            Mensaje = string.Empty;
-
-            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
+            catch (Exception ex)
             {
-                try
-                {
-                    string query = @"UPDATE producto SET 
-                                     codigo_producto = @codigo,
-                                     nombre_producto = @nombre,
-                                     descripcion_producto = @descripcion,
-                                     precio_producto = @precio,
-                                     precioUnitario_producto = @precioUnitario,
-                                     stock_producto = @stock,
-                                     stock_minimo = @stock_min,
-                                     idCategoria = @idCategoria,
-                                     estado_producto = @estado
-                                     WHERE idProducto = @id;";
-
-                    MySqlCommand cmd = new MySqlCommand(query, oconexion);
-                    cmd.Parameters.AddWithValue("@id", obj.IdProducto);
-                    cmd.Parameters.AddWithValue("@codigo", string.IsNullOrWhiteSpace(obj.Codigo_producto) ? (object)DBNull.Value : obj.Codigo_producto.Trim().ToUpper());
-                    cmd.Parameters.AddWithValue("@nombre", obj.Nombre_producto);
-                    cmd.Parameters.AddWithValue("@descripcion", string.IsNullOrEmpty(obj.Descripcion_producto) ? obj.Nombre_producto : obj.Descripcion_producto);
-                    cmd.Parameters.AddWithValue("@precio", obj.Precio_producto);
-                    cmd.Parameters.AddWithValue("@precioUnitario", obj.PrecioUnitario_producto);
-                    cmd.Parameters.AddWithValue("@stock", obj.Stock_producto);
-                    cmd.Parameters.AddWithValue("@stock_min", obj.Stock_minimo);
-                    cmd.Parameters.AddWithValue("@idCategoria", obj.IdCategoria.IdCategoria);
-                    cmd.Parameters.AddWithValue("@estado", obj.Estado_producto);
-
-                    oconexion.Open();
-                    respuesta = cmd.ExecuteNonQuery() > 0;
-                }
-                catch (Exception ex)
-                {
-                    respuesta = false;
-                    Mensaje = ex.Message;
-                }
+                mensaje = ex.Message;
+                return false;
             }
-
-            return respuesta;
-        }
-
-        public bool Eliminar(int idProducto, out string Mensaje)
-        {
-            bool respuesta = false;
-            Mensaje = string.Empty;
-
-            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
-            {
-                try
-                {
-                    string query = "UPDATE producto SET estado_producto = 0 WHERE idProducto = @id;";
-                    MySqlCommand cmd = new MySqlCommand(query, oconexion);
-                    cmd.Parameters.AddWithValue("@id", idProducto);
-
-                    oconexion.Open();
-                    respuesta = cmd.ExecuteNonQuery() > 0;
-                }
-                catch (Exception ex)
-                {
-                    respuesta = false;
-                    Mensaje = ex.Message;
-                }
-            }
-
-            return respuesta;
         }
     }
 }
