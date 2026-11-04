@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -179,7 +179,7 @@ namespace PetShopDelLitoral
                 guna2TextBox7.AutoCompleteCustomSource = coleccion;
                 guna2TextBox7.PlaceholderText = "Buscar por nombre o código...";
             }
-            catch (Exception ex) { Bitacora.Registrar("Cargar autocompletado de productos en Compras", ex); }
+            catch (Exception ex) { System.Diagnostics.Debug.WriteLine("Cargar autocompletado de productos en Compras: " + ex.Message); }
         }
 
         private void btnBuscarProducto_Click(object sender, EventArgs e)

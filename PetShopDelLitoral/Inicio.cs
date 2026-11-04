@@ -34,7 +34,7 @@ namespace PetShopDelLitoral
                 Font fuentePoppins = new Font(pfc.Families[0], 12f, FontStyle.Regular);
                 panelMenu.Font = fuentePoppins;
             }
-            catch (Exception ex) { Bitacora.Registrar("Cargar la fuente Poppins", ex); }
+            catch (Exception ex) { System.Diagnostics.Debug.WriteLine("Cargar la fuente Poppins: " + ex.Message); }
         }
 
         private void Inicio_Load(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace PetShopDelLitoral
                 this.Location = area.Location;
                 this.Size = area.Size;
             }
-            catch (Exception ex) { Bitacora.Registrar("Ajustar la ventana principal a la pantalla", ex); }
+            catch (Exception ex) { System.Diagnostics.Debug.WriteLine("Ajustar la ventana principal a la pantalla: " + ex.Message); }
 
            
             ConfigurarEsteticaMenu();

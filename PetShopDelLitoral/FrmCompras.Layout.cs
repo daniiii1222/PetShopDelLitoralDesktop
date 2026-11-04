@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -168,7 +168,7 @@ namespace PetShopDelLitoral
                     }
                 }
             }
-            catch (Exception ex) { Bitacora.Registrar("Acomodar el layout de Compras", ex); }
+            catch (Exception ex) { System.Diagnostics.Debug.WriteLine("Acomodar el layout de Compras: " + ex.Message); }
         }
     }
 }

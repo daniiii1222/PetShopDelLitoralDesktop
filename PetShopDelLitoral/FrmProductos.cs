@@ -63,7 +63,7 @@ namespace PetShopDelLitoral
                 CBFiltroCateg.DataSource = comboLista;
                 CBFiltroCateg.SelectedIndex = 0;
             }
-            catch (Exception ex) { Bitacora.Registrar("Cargar categor\u00edas del filtro de Productos", ex); MessageBox.Show("No se pudieron cargar las categor\u00edas: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) { System.Diagnostics.Debug.WriteLine("Cargar categor\u00edas del filtro de Productos: " + ex.Message); MessageBox.Show("No se pudieron cargar las categor\u00edas: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void CargarProductos()
@@ -75,7 +75,7 @@ namespace PetShopDelLitoral
             }
             catch (Exception ex)
             {
-                Bitacora.Registrar("Cargar productos", ex);
+                System.Diagnostics.Debug.WriteLine("Cargar productos: " + ex.Message);
                 MessageBox.Show("No se pudieron cargar los productos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
