@@ -1,4 +1,4 @@
-﻿namespace PetShopDelLitoral
+namespace PetShopDelLitoral
 {
     partial class FrmProductos
     {
@@ -398,12 +398,13 @@
             this.guna2CustomGradientPanel6.Location = new System.Drawing.Point(679, 21);
             this.guna2CustomGradientPanel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2CustomGradientPanel6.Name = "guna2CustomGradientPanel6";
-            this.guna2CustomGradientPanel6.Size = new System.Drawing.Size(144, 32);
+            this.guna2CustomGradientPanel6.Size = new System.Drawing.Size(180, 34);
             this.guna2CustomGradientPanel6.TabIndex = 17;
             // 
             // btnCargarproducto
             // 
             this.btnCargarproducto.BackColor = System.Drawing.Color.Transparent;
+            this.btnCargarproducto.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCargarproducto.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
             this.btnCargarproducto.FlatAppearance.BorderSize = 0;
             this.btnCargarproducto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
@@ -418,7 +419,7 @@
             this.btnCargarproducto.Location = new System.Drawing.Point(0, 0);
             this.btnCargarproducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCargarproducto.Name = "btnCargarproducto";
-            this.btnCargarproducto.Size = new System.Drawing.Size(144, 32);
+            this.btnCargarproducto.Size = new System.Drawing.Size(180, 34);
             this.btnCargarproducto.TabIndex = 1;
             this.btnCargarproducto.Text = "Cargar Producto";
             this.btnCargarproducto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

@@ -68,8 +68,16 @@ namespace PetShopDelLitoral
 
         private void CargarProductos()
         {
-            _listaProductos = new CN_Producto().Listar();
-            AplicarFiltros();
+            try
+            {
+                _listaProductos = new CN_Producto().Listar();
+                AplicarFiltros();
+            }
+            catch (Exception ex)
+            {
+                Bitacora.Registrar("Cargar productos", ex);
+                MessageBox.Show("No se pudieron cargar los productos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void AplicarFiltros()
