@@ -53,6 +53,12 @@ namespace Capa_Negocio
                 return 0;
             }
 
+            if (obj.Precio_producto > 99999999.99m || obj.PrecioUnitario_producto > 99999999.99m)
+            {
+                Mensaje = "El precio ingresado supera el máximo permitido (99.999.999,99).";
+                return 0;
+            }
+
             if (obj.Stock_producto < 0)
             {
                 Mensaje = "El stock no puede ser negativo.";
@@ -111,6 +117,12 @@ namespace Capa_Negocio
             if (obj.PrecioUnitario_producto < 0)
             {
                 Mensaje = "El precio de costo no puede ser negativo.";
+                return false;
+            }
+
+            if (obj.Precio_producto > 99999999.99m || obj.PrecioUnitario_producto > 99999999.99m)
+            {
+                Mensaje = "El precio ingresado supera el máximo permitido (99.999.999,99).";
                 return false;
             }
 
