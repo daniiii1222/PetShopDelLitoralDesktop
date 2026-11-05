@@ -63,7 +63,7 @@ namespace Capa_Datos
             DtParameters = new DataTable("SpParameters");
             DtParameters.Columns.Add("Name");
             DtParameters.Columns.Add("DataType");
-            DtParameters.Columns.Add("Value");
+            DtParameters.Columns.Add("Value", typeof(object));   // conserva el tipo (decimal, int, fecha) en vez de pasarlo a texto
 
             NameDB = string.Empty;
 
