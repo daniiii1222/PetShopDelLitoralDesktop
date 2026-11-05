@@ -3,18 +3,18 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 
 namespace Capa_Datos
 {
     public class CD_Producto
     {
-        // Si alguien se trae los cambios o restaura un backup viejo sin haber corrido Scripts/Productos.sql,
-        // se crean automáticamente los 5 procedimientos para que la pantalla nunca falle.
         private static bool FaltaProcedimiento(string errorDb)
         {
             if (string.IsNullOrEmpty(errorDb)) return false;
             return errorDb.IndexOf("cannot be found", StringComparison.OrdinalIgnoreCase) >= 0
-                || errorDb.IndexOf("does not exist", StringComparison.OrdinalIgnoreCase) >= 0;
+                || errorDb.IndexOf("does not exist", StringComparison.OrdinalIgnoreCase) >= 0
+                || errorDb.IndexOf("no existe", StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         private static void AsegurarProcedimientos()
@@ -136,10 +136,14 @@ END"
                 conn.Open();
                 foreach (string sql in comandos)
                 {
-                    using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                    try
                     {
-                        cmd.ExecuteNonQuery();
+                        using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
                     }
+                    catch { }
                 }
             }
         }
@@ -252,14 +256,19 @@ END"
 
             try
             {
+                // Se formatea con punto decimal (InvariantCulture) para que aunque DtParameters convierta a string,
+                // MySQL nunca reciba una coma (ej. "1500,00") que causa "Data truncated for column 'p_precio'".
+                string precioStr         = obj.Precio_producto.ToString("0.00", CultureInfo.InvariantCulture);
+                string precioUnitarioStr = obj.PrecioUnitario_producto.ToString("0.00", CultureInfo.InvariantCulture);
+
                 database.NameSP = "sp_RegistrarProducto";
                 database.TableName = "TablaIdGenerado";
 
                 database.DtParameters.Rows.Add("@p_codigo",         null, string.IsNullOrWhiteSpace(obj.Codigo_producto) ? (object)DBNull.Value : obj.Codigo_producto.Trim());
                 database.DtParameters.Rows.Add("@p_nombre",         null, obj.Nombre_producto);
                 database.DtParameters.Rows.Add("@p_descripcion",    null, string.IsNullOrEmpty(obj.Descripcion_producto) ? obj.Nombre_producto : obj.Descripcion_producto);
-                database.DtParameters.Rows.Add("@p_precio",         null, obj.Precio_producto);
-                database.DtParameters.Rows.Add("@p_precioUnitario", null, obj.PrecioUnitario_producto);
+                database.DtParameters.Rows.Add("@p_precio",         null, precioStr);
+                database.DtParameters.Rows.Add("@p_precioUnitario", null, precioUnitarioStr);
                 database.DtParameters.Rows.Add("@p_stock",          null, obj.Stock_producto);
                 database.DtParameters.Rows.Add("@p_stockMinimo",    null, obj.Stock_minimo);
                 database.DtParameters.Rows.Add("@p_idCategoria",    null, obj.IdCategoria.IdCategoria);
@@ -275,8 +284,8 @@ END"
                     database.DtParameters.Rows.Add("@p_codigo",         null, string.IsNullOrWhiteSpace(obj.Codigo_producto) ? (object)DBNull.Value : obj.Codigo_producto.Trim());
                     database.DtParameters.Rows.Add("@p_nombre",         null, obj.Nombre_producto);
                     database.DtParameters.Rows.Add("@p_descripcion",    null, string.IsNullOrEmpty(obj.Descripcion_producto) ? obj.Nombre_producto : obj.Descripcion_producto);
-                    database.DtParameters.Rows.Add("@p_precio",         null, obj.Precio_producto);
-                    database.DtParameters.Rows.Add("@p_precioUnitario", null, obj.PrecioUnitario_producto);
+                    database.DtParameters.Rows.Add("@p_precio",         null, precioStr);
+                    database.DtParameters.Rows.Add("@p_precioUnitario", null, precioUnitarioStr);
                     database.DtParameters.Rows.Add("@p_stock",          null, obj.Stock_producto);
                     database.DtParameters.Rows.Add("@p_stockMinimo",    null, obj.Stock_minimo);
                     database.DtParameters.Rows.Add("@p_idCategoria",    null, obj.IdCategoria.IdCategoria);
@@ -314,14 +323,17 @@ END"
 
             try
             {
+                string precioStr         = obj.Precio_producto.ToString("0.00", CultureInfo.InvariantCulture);
+                string precioUnitarioStr = obj.PrecioUnitario_producto.ToString("0.00", CultureInfo.InvariantCulture);
+
                 database.NameSP = "sp_ModificarProducto";
 
                 database.DtParameters.Rows.Add("@p_idProducto",     null, obj.IdProducto);
                 database.DtParameters.Rows.Add("@p_codigo",         null, string.IsNullOrWhiteSpace(obj.Codigo_producto) ? (object)DBNull.Value : obj.Codigo_producto.Trim());
                 database.DtParameters.Rows.Add("@p_nombre",         null, obj.Nombre_producto);
                 database.DtParameters.Rows.Add("@p_descripcion",    null, string.IsNullOrEmpty(obj.Descripcion_producto) ? obj.Nombre_producto : obj.Descripcion_producto);
-                database.DtParameters.Rows.Add("@p_precio",         null, obj.Precio_producto);
-                database.DtParameters.Rows.Add("@p_precioUnitario", null, obj.PrecioUnitario_producto);
+                database.DtParameters.Rows.Add("@p_precio",         null, precioStr);
+                database.DtParameters.Rows.Add("@p_precioUnitario", null, precioUnitarioStr);
                 database.DtParameters.Rows.Add("@p_stock",          null, obj.Stock_producto);
                 database.DtParameters.Rows.Add("@p_stockMinimo",    null, obj.Stock_minimo);
                 database.DtParameters.Rows.Add("@p_idCategoria",    null, obj.IdCategoria.IdCategoria);
@@ -338,8 +350,8 @@ END"
                     database.DtParameters.Rows.Add("@p_codigo",         null, string.IsNullOrWhiteSpace(obj.Codigo_producto) ? (object)DBNull.Value : obj.Codigo_producto.Trim());
                     database.DtParameters.Rows.Add("@p_nombre",         null, obj.Nombre_producto);
                     database.DtParameters.Rows.Add("@p_descripcion",    null, string.IsNullOrEmpty(obj.Descripcion_producto) ? obj.Nombre_producto : obj.Descripcion_producto);
-                    database.DtParameters.Rows.Add("@p_precio",         null, obj.Precio_producto);
-                    database.DtParameters.Rows.Add("@p_precioUnitario", null, obj.PrecioUnitario_producto);
+                    database.DtParameters.Rows.Add("@p_precio",         null, precioStr);
+                    database.DtParameters.Rows.Add("@p_precioUnitario", null, precioUnitarioStr);
                     database.DtParameters.Rows.Add("@p_stock",          null, obj.Stock_producto);
                     database.DtParameters.Rows.Add("@p_stockMinimo",    null, obj.Stock_minimo);
                     database.DtParameters.Rows.Add("@p_idCategoria",    null, obj.IdCategoria.IdCategoria);

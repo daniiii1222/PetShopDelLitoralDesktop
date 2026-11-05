@@ -110,8 +110,16 @@ namespace Capa_Datos
                     MySqlParameter parameter = new MySqlParameter();
                     parameter.ParameterName = row["Name"].ToString();
 
+                    object val = row["Value"];
+                    if (val is decimal decVal)
+                        val = decVal.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+                    else if (val is double dblVal)
+                        val = dblVal.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                    else if (val is float fltVal)
+                        val = fltVal.ToString(System.Globalization.CultureInfo.InvariantCulture);
+
                     // Asignamos el tipo de dato y el valor correspondiente
-                    parameter.Value = row["Value"];
+                    parameter.Value = val;
                     ObjDataBase.ObjMySqlCommand.Parameters.Add(parameter);
                 }
             }
