@@ -1,5 +1,4 @@
-﻿using Capa_Datos;
-using Capa_Negocio;
+﻿using Capa_Negocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

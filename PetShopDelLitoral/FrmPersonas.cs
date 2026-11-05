@@ -8,7 +8,6 @@ using System.Runtime.Remoting;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Capa_Datos;
 using Capa_Entidad;
 using Capa_Negocio;
 namespace PetShopDelLitoral

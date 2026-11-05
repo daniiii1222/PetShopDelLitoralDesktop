@@ -265,10 +265,6 @@
     <None Include="Resources\logoPetShop.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Capa Datos\CapaDatos.csproj">
-      <Project>{0b58df2d-c777-2213-9a54-5c48d8be93d8}</Project>
-      <Name>CapaDatos</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Capa Entidad\CapaEntidad.csproj">
       <Project>{384e1266-6581-4e83-eb56-c5c3792d17ff}</Project>
       <Name>CapaEntidad</Name>
