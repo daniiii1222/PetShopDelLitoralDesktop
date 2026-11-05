@@ -272,7 +272,7 @@ namespace PetShopDelLitoral
                     string c = ObtenerCarpetaBackups();
                     if (Directory.Exists(c)) System.Diagnostics.Process.Start("explorer.exe", c);
                 }
-                catch (Exception ex) { Bitacora.Registrar("Abrir la carpeta de backups", ex); MessageBox.Show("No se pudo abrir la carpeta de copias: " + ex.Message, "Backups", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+                catch (Exception ex) { System.Diagnostics.Debug.WriteLine("Abrir la carpeta de backups: " + ex.Message); MessageBox.Show("No se pudo abrir la carpeta de copias: " + ex.Message, "Backups", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
             };
             panelRuta.Controls.Add(btnAbrirCarpeta);
 

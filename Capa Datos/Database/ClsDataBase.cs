@@ -110,7 +110,7 @@ namespace Capa_Datos
                     MySqlParameter parameter = new MySqlParameter();
                     parameter.ParameterName = row["Name"].ToString();
 
-                    // Asignamos el tipo de dato y el valor correspondiente
+                    // Asignamos el valor conservando su tipo nativo (decimal, int, etc.)
                     parameter.Value = row["Value"];
                     ObjDataBase.ObjMySqlCommand.Parameters.Add(parameter);
                 }

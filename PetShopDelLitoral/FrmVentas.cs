@@ -1,4 +1,4 @@
-﻿using Capa_Entidad;
+using Capa_Entidad;
 using Capa_Negocio;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
@@ -159,7 +159,7 @@ namespace PetShopDelLitoral
                 guna2TextBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
                 guna2TextBox1.AutoCompleteCustomSource = dnis;
             }
-            catch (Exception ex) { Bitacora.Registrar("Cargar sugerencias de DNI en Ventas", ex); }
+            catch (Exception ex) { System.Diagnostics.Debug.WriteLine("Cargar sugerencias de DNI en Ventas: " + ex.Message); }
         }
 
         private void CargarSugerenciasProductos()
@@ -182,7 +182,7 @@ namespace PetShopDelLitoral
                 guna2TextBox7.AutoCompleteSource = AutoCompleteSource.CustomSource;
                 guna2TextBox7.AutoCompleteCustomSource = coleccion;
             }
-            catch (Exception ex) { Bitacora.Registrar("Cargar sugerencias de productos en Ventas", ex); }
+            catch (Exception ex) { System.Diagnostics.Debug.WriteLine("Cargar sugerencias de productos en Ventas: " + ex.Message); }
         }
 
         // ---------- PRODUCTOS ----------

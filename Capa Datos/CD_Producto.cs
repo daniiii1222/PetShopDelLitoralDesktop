@@ -3,18 +3,18 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 
 namespace Capa_Datos
 {
     public class CD_Producto
     {
-        // Si alguien se trae los cambios o restaura un backup viejo sin haber corrido Scripts/Productos.sql,
-        // se crean automáticamente los 5 procedimientos para que la pantalla nunca falle.
         private static bool FaltaProcedimiento(string errorDb)
         {
             if (string.IsNullOrEmpty(errorDb)) return false;
             return errorDb.IndexOf("cannot be found", StringComparison.OrdinalIgnoreCase) >= 0
-                || errorDb.IndexOf("does not exist", StringComparison.OrdinalIgnoreCase) >= 0;
+                || errorDb.IndexOf("does not exist", StringComparison.OrdinalIgnoreCase) >= 0
+                || errorDb.IndexOf("no existe", StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         private static void AsegurarProcedimientos()
@@ -136,10 +136,14 @@ END"
                 conn.Open();
                 foreach (string sql in comandos)
                 {
-                    using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                    try
                     {
-                        cmd.ExecuteNonQuery();
+                        using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
                     }
+                    catch { }
                 }
             }
         }
@@ -184,8 +188,8 @@ END"
                     Codigo_producto         = dr["codigo_producto"]         != DBNull.Value ? dr["codigo_producto"].ToString()         : string.Empty,
                     Nombre_producto         = dr["nombre_producto"].ToString(),
                     Descripcion_producto    = dr["descripcion_producto"]    != DBNull.Value ? dr["descripcion_producto"].ToString()    : string.Empty,
-                    Precio_producto         = Convert.ToDecimal(dr["precio_producto"]),
-                    PrecioUnitario_producto = dr["precioUnitario_producto"] != DBNull.Value ? Convert.ToDecimal(dr["precioUnitario_producto"]) : 0,
+                    Precio_producto         = ConvertirDecimal(dr["precio_producto"]),
+                    PrecioUnitario_producto = ConvertirDecimal(dr["precioUnitario_producto"]),
                     Stock_producto          = Convert.ToInt32(dr["stock_producto"]),
                     Stock_minimo            = dr["stock_minimo"]            != DBNull.Value ? Convert.ToInt32(dr["stock_minimo"])            : 0,
                     Estado_producto         = Convert.ToBoolean(dr["estado_producto"]),
@@ -199,6 +203,35 @@ END"
             }
 
             return lista;
+        }
+
+        // Convierte valores DECIMAL o VARCHAR (ej. "3000.00" en precioUnitario_producto) sin que la configuración regional multiplique por 100
+        private static decimal ConvertirDecimal(object valor)
+        {
+            if (valor == null || valor == DBNull.Value) return 0m;
+            if (valor is decimal d) return d;
+
+            string limpio = valor.ToString().Trim().Replace("$", "").Replace(" ", "");
+            if (string.IsNullOrEmpty(limpio)) return 0m;
+
+            int ultimaComa = limpio.LastIndexOf(',');
+            int ultimoPunto = limpio.LastIndexOf('.');
+
+            if (ultimaComa >= 0 && ultimoPunto >= 0)
+            {
+                if (ultimaComa > ultimoPunto)
+                    limpio = limpio.Replace(".", "").Replace(',', '.');
+                else
+                    limpio = limpio.Replace(",", "");
+            }
+            else if (ultimaComa >= 0)
+            {
+                limpio = limpio.Replace(',', '.');
+            }
+
+            return decimal.TryParse(limpio, NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out decimal resultado)
+                ? resultado
+                : 0m;
         }
 
         // ── ExisteCodigo ─────────────────────────────────────────────────────

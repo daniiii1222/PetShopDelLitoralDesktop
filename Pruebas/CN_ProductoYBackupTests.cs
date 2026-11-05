@@ -90,6 +90,16 @@ namespace Pruebas
         }
 
         [TestMethod]
+        public void Editar_PrecioExcesivo_SeRechaza()
+        {
+            string mensaje;
+            Producto p = new Producto { IdProducto = 1, Codigo_producto = "PROD1", Nombre_producto = "Alimento", Precio_producto = 100000000m };
+
+            Assert.IsFalse(new CN_Producto().Editar(p, out mensaje));
+            StringAssert.Contains(mensaje, "máximo permitido");
+        }
+
+        [TestMethod]
         public void Eliminar_ConIdInvalido_SeRechaza()
         {
             string mensaje;

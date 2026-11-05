@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,8 +32,8 @@ namespace PetShopDelLitoral
                 LBABMProductos.Text = "Modificar Producto";
                 txtCodigo.Text = _productoEditar.Codigo_producto;
                 txtNombre.Text = _productoEditar.Nombre_producto;
-                txtStock.Text = _productoEditar.PrecioUnitario_producto.ToString("0.00");
-                guna2TextBox1.Text = _productoEditar.Precio_producto.ToString("0.00");
+                txtStock.Text = _productoEditar.PrecioUnitario_producto.ToString("0.##", CultureInfo.InvariantCulture);
+                guna2TextBox1.Text = _productoEditar.Precio_producto.ToString("0.##", CultureInfo.InvariantCulture);
                 txtPrecio.Text = _productoEditar.Stock_producto.ToString();
 
                 if (_productoEditar.IdCategoria != null)
@@ -40,6 +41,28 @@ namespace PetShopDelLitoral
                     cmbCategoria.SelectedValue = _productoEditar.IdCategoria.IdCategoria;
                 }
             }
+        }
+
+        // Convierte el texto del precio a decimal sin multiplicar por 100 aunque tenga ",00" o ".00"
+        private static decimal LeerPrecio(string texto)
+        {
+            string limpio = (texto ?? string.Empty).Trim().Replace("$", "").Replace(" ", "");
+            int ultimaComa = limpio.LastIndexOf(',');
+            int ultimoPunto = limpio.LastIndexOf('.');
+
+            if (ultimaComa >= 0 && ultimoPunto >= 0)
+            {
+                if (ultimaComa > ultimoPunto)
+                    limpio = limpio.Replace(".", "").Replace(',', '.');
+                else
+                    limpio = limpio.Replace(",", "");
+            }
+            else if (ultimaComa >= 0)
+            {
+                limpio = limpio.Replace(',', '.');
+            }
+
+            return decimal.Parse(limpio, NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture);
         }
 
         private void CargarCategorias()
@@ -91,19 +114,19 @@ namespace PetShopDelLitoral
 
             try
             {
-                decimal precioUnitario = Convert.ToDecimal(txtStock.Text.Trim().Replace('.', ','));
-                decimal precioVenta = Convert.ToDecimal(guna2TextBox1.Text.Trim().Replace('.', ','));
+                decimal precioUnitario = LeerPrecio(txtStock.Text);
+                decimal precioVenta = LeerPrecio(guna2TextBox1.Text);
                 int stock = Convert.ToInt32(txtPrecio.Text.Trim());
 
                 Producto objProducto = new Producto()
                 {
                     Codigo_producto = txtCodigo.Text.Trim().ToUpper(),
                     Nombre_producto = txtNombre.Text.Trim(),
-                    Descripcion_producto = txtNombre.Text.Trim(),
+                    Descripcion_producto = _productoEditar != null && !string.IsNullOrWhiteSpace(_productoEditar.Descripcion_producto) ? _productoEditar.Descripcion_producto : txtNombre.Text.Trim(),
                     PrecioUnitario_producto = precioUnitario,
                     Precio_producto = precioVenta,
                     Stock_producto = stock,
-                    Stock_minimo = 0,
+                    Stock_minimo = _productoEditar != null ? _productoEditar.Stock_minimo : 0,
                     IdCategoria = new Categoria()
                     {
                         IdCategoria = Convert.ToInt32(cmbCategoria.SelectedValue)
@@ -148,7 +171,6 @@ namespace PetShopDelLitoral
         }
 
         private void guna2HtmlLabel1_Click(object sender, EventArgs e) { }
-        private void LBNombreProducto_Click(object sender, EventArgs e) { }
-        private void cmbCategoria_SelectedIndexChanged(object sender, EventArgs e) { }
+        private void txtStock_TextChanged(object sender, EventArgs e) { }
     }
 }

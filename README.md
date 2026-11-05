@@ -17,7 +17,7 @@ Presentación  (PetShopDelLitoral)  ->  Negocio (Capa Negocio)  ->  Datos (Capa 
 | `Capa Entidad` | `Capa_Entidad` | Clases de datos compartidas (`Producto`, `Venta`, `Usuario`, ...). |
 | `Pruebas` | `Pruebas` | Pruebas unitarias (MSTest) de las reglas de negocio. |
 
-Los errores inesperados que la interfaz no muestra se anotan con `Bitacora.Registrar(...)` en `Logs\errores.log` (junto al ejecutable) en lugar de ignorarse.
+Los errores no críticos (autocompletado, fuente, ajustes visuales) no frenan la pantalla y se dejan en la ventana de salida de Visual Studio con `Debug.WriteLine`. Los que afectan lo que el usuario está haciendo se le muestran en un mensaje.
 
 ## Requisitos
 
