@@ -116,7 +116,7 @@ namespace PetShopDelLitoral
                     item.Codigo_producto,
                     item.Nombre_producto,
                     item.IdCategoria != null ? item.IdCategoria.Nombre_categoria : "Sin categoría",
-                    item.Precio_producto,
+                    item.Precio_producto.ToString("0.##"),
                     item.Stock_producto
                 });
                 DataGridViewProductos.Rows[index].Tag = item;
