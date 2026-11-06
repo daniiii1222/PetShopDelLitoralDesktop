@@ -31,6 +31,45 @@ namespace Capa_Negocio
                 return false;
             }
 
+            if (objCompra.IdUsuario == null || objCompra.IdUsuario.idUsuario <= 0)
+            {
+                Mensaje = "No se pudo identificar al usuario que registra la compra.";
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(objCompra.Tipo_comprobante))
+            {
+                Mensaje = "Debe indicar el tipo de comprobante.";
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(objCompra.Numero_comprobante))
+            {
+                Mensaje = "Debe ingresar el número de comprobante.";
+                return false;
+            }
+
+            decimal sumaDetalle = 0;
+            foreach (DetalleCompracs d in listaDetalle)
+            {
+                if (d.IdProducto == null || d.Cantidad <= 0)
+                {
+                    Mensaje = "Todos los productos deben tener una cantidad mayor a cero.";
+                    return false;
+                }
+                if (d.Precio_unitario <= 0)
+                {
+                    Mensaje = "Todos los productos deben tener un precio de compra mayor a cero.";
+                    return false;
+                }
+                sumaDetalle += d.Subtotal_compra;
+            }
+            if (Math.Abs(sumaDetalle - objCompra.Monto_compra) > 0.01m)
+            {
+                Mensaje = "El total de la compra no coincide con el detalle.";
+                return false;
+            }
+
             return objcd_compra.Registrar(objCompra, listaDetalle, out Mensaje);
         }
     }

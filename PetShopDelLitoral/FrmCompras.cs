@@ -424,7 +424,7 @@ namespace PetShopDelLitoral
                     Id_proveedor = Convert.ToInt32(guna2ComboBox1.SelectedValue)
                 },
                 Tipo_comprobante = comboBox1.Text,
-                Numero_comprobante = string.IsNullOrWhiteSpace(textBox1.Text) ? "0001-00000001" : textBox1.Text.Trim(),
+                Numero_comprobante = textBox1.Text.Trim(),
                 Observaciones = guna2TextBox3.Text.Trim()
             };
 

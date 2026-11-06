@@ -38,39 +38,11 @@ namespace Capa_Datos
                             MySqlCommand cmdCompra = new MySqlCommand(queryCompra, oconexion, transaccion);
                             cmdCompra.Parameters.AddWithValue("@monto", objCompra.Monto_compra);
                             cmdCompra.Parameters.AddWithValue("@fecha", objCompra.Fecha_compra.ToString("yyyy-MM-dd"));
-                            int idUsuario = 2;
-                            if (objCompra.IdUsuario != null && objCompra.IdUsuario.idUsuario > 0)
-                            {
-                                idUsuario = objCompra.IdUsuario.idUsuario;
-                            }
-                            else
-                            {
-                                using (MySqlCommand cmdU = new MySqlCommand("SELECT idUsuario FROM usuario LIMIT 1;", oconexion, transaccion))
-                                {
-                                    object val = cmdU.ExecuteScalar();
-                                    if (val != null && val != DBNull.Value) idUsuario = Convert.ToInt32(val);
-                                }
-                            }
-
-                            int idProveedor = 1;
-                            if (objCompra.IdProveedor != null && objCompra.IdProveedor.Id_proveedor > 0)
-                            {
-                                idProveedor = objCompra.IdProveedor.Id_proveedor;
-                            }
-                            else
-                            {
-                                using (MySqlCommand cmdP = new MySqlCommand("SELECT idProveedor FROM proveedor LIMIT 1;", oconexion, transaccion))
-                                {
-                                    object valP = cmdP.ExecuteScalar();
-                                    if (valP != null && valP != DBNull.Value) idProveedor = Convert.ToInt32(valP);
-                                }
-                            }
-
-                            cmdCompra.Parameters.AddWithValue("@idUsuario", idUsuario);
-                            cmdCompra.Parameters.AddWithValue("@idProveedor", idProveedor);
-                            cmdCompra.Parameters.AddWithValue("@tipo", string.IsNullOrEmpty(objCompra.Tipo_comprobante) ? "Factura" : objCompra.Tipo_comprobante);
-                            cmdCompra.Parameters.AddWithValue("@numero", string.IsNullOrEmpty(objCompra.Numero_comprobante) ? "0000-0000" : objCompra.Numero_comprobante);
-                            cmdCompra.Parameters.AddWithValue("@observaciones", string.IsNullOrEmpty(objCompra.Observaciones) ? "" : objCompra.Observaciones);
+                            cmdCompra.Parameters.AddWithValue("@idUsuario", objCompra.IdUsuario.idUsuario);
+                            cmdCompra.Parameters.AddWithValue("@idProveedor", objCompra.IdProveedor.Id_proveedor);
+                            cmdCompra.Parameters.AddWithValue("@tipo", objCompra.Tipo_comprobante);
+                            cmdCompra.Parameters.AddWithValue("@numero", objCompra.Numero_comprobante);
+                            cmdCompra.Parameters.AddWithValue("@observaciones", objCompra.Observaciones ?? string.Empty);
 
                             int idCompraGenerada = Convert.ToInt32(cmdCompra.ExecuteScalar());
 
