@@ -345,63 +345,6 @@ END"
             return lista;
         }
 
-        public int Registrar(Proveedor obj, out string Mensaje)
-        {
-            int idGenerado = 0;
-            Mensaje = string.Empty;
-
-            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
-            {
-                try
-                {
-                    string query = "INSERT INTO proveedor(id_persona, estado_proveedor) VALUES(@id_persona, @estado_proveedor); SELECT LAST_INSERT_ID();";
-
-                    MySqlCommand cmd = new MySqlCommand(query, oconexion);
-                    cmd.Parameters.AddWithValue("@id_persona", obj.Id_persona.idPersona);
-                    cmd.Parameters.AddWithValue("@estado_proveedor", obj.Estado_proveedor);
-
-                    oconexion.Open();
-                    idGenerado = Convert.ToInt32(cmd.ExecuteScalar());
-                }
-                catch (Exception ex)
-                {
-                    idGenerado = 0;
-                    Mensaje = ex.Message;
-                }
-            }
-
-            return idGenerado;
-        }
-
-        public bool Editar(Proveedor obj, out string Mensaje)
-        {
-            bool respuesta = false;
-            Mensaje = string.Empty;
-
-            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
-            {
-                try
-                {
-                    string query = "UPDATE proveedor SET id_persona = @id_persona, estado_proveedor = @estado_proveedor WHERE idProveedor = @id_proveedor";
-
-                    MySqlCommand cmd = new MySqlCommand(query, oconexion);
-                    cmd.Parameters.AddWithValue("@id_proveedor", obj.Id_proveedor);
-                    cmd.Parameters.AddWithValue("@id_persona", obj.Id_persona.idPersona);
-                    cmd.Parameters.AddWithValue("@estado_proveedor", obj.Estado_proveedor);
-
-                    oconexion.Open();
-                    respuesta = cmd.ExecuteNonQuery() > 0;
-                }
-                catch (Exception ex)
-                {
-                    respuesta = false;
-                    Mensaje = ex.Message;
-                }
-            }
-
-            return respuesta;
-        }
-
         // Carga proveedores de ejemplo (con sus personas) cuando la tabla está vacía
         public bool CrearProveedoresIniciales(out string Mensaje)
         {
