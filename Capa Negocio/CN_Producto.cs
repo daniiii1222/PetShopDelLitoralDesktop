@@ -70,8 +70,18 @@ namespace Capa_Negocio
                 Mensaje = "El stock mínimo no puede ser negativo.";
                 return 0;
             }
+            bool codigoExiste;
+            try
+            {
+                codigoExiste = objcd_producto.ExisteCodigo(obj.Codigo_producto, 0);
+            }
+            catch (Exception ex)
+            {
+                Mensaje = ex.Message;
+                return 0;
+            }
 
-            if (objcd_producto.ExisteCodigo(obj.Codigo_producto, 0))
+            if (codigoExiste)
             {
                 Mensaje = $"Ya existe un producto registrado con el código '{obj.Codigo_producto.Trim().ToUpper()}'.";
                 return 0;
@@ -137,14 +147,23 @@ namespace Capa_Negocio
                 Mensaje = "El stock mínimo no puede ser negativo.";
                 return false;
             }
+            bool codigoExiste;
+            try
+            {
+                codigoExiste = objcd_producto.ExisteCodigo(obj.Codigo_producto, obj.IdProducto);
+            }
+            catch (Exception ex)
+            {
+                Mensaje = ex.Message;
+                return false;
+            }
 
-            if (objcd_producto.ExisteCodigo(obj.Codigo_producto, obj.IdProducto))
+            if (codigoExiste)
             {
                 Mensaje = $"Ya existe otro producto registrado con el código '{obj.Codigo_producto.Trim().ToUpper()}'.";
                 return false;
             }
-
-            return objcd_producto.Editar(obj, out Mensaje);
+            return objcd_producto.Editar(obj, out Mensaje);   
         }
 
         public bool Eliminar(int idProducto, out string Mensaje)
