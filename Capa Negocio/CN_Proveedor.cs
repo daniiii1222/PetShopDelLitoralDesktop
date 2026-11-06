@@ -133,10 +133,5 @@ namespace Capa_Negocio
         {
             return obj_cd_proveedor.Listar();
         }
-
-        public bool CrearProveedoresIniciales(out string Mensaje)
-        {
-            return obj_cd_proveedor.CrearProveedoresIniciales(out Mensaje);
-        }
     }
 }

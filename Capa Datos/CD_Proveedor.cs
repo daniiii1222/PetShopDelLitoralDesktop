@@ -344,36 +344,5 @@ END"
 
             return lista;
         }
-
-        // Carga proveedores de ejemplo (con sus personas) cuando la tabla está vacía
-        public bool CrearProveedoresIniciales(out string Mensaje)
-        {
-            Mensaje = string.Empty;
-
-            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
-            {
-                try
-                {
-                    string query = @"
-                INSERT INTO persona(nombre_persona, apellido_persona, dni_persona, correo_persona, telefono_persona, direccion_persona, estado_persona, fechaCreacion_persona)
-                VALUES('Distribuidora PetFood', 'Litoral', '30-11223344-5', 'ventas@petfood.com', '3794112233', 'Av. Libertad 1234', 1, NOW()),
-                      ('Laboratorio VetSalud', 'Argentina', '30-55667788-9', 'contacto@vetsalud.com', '3794556677', 'Ruta 12 Km 5', 1, NOW());
-
-                INSERT INTO proveedor(id_persona, estado_proveedor, fechaCreacion_proveedor)
-                SELECT idPersona, 1, NOW() FROM persona WHERE dni_persona IN ('30-11223344-5', '30-55667788-9')
-                AND idPersona NOT IN (SELECT id_persona FROM proveedor);";
-
-                    MySqlCommand cmd = new MySqlCommand(query, oconexion);
-                    oconexion.Open();
-                    cmd.ExecuteNonQuery();
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    Mensaje = ex.Message;
-                    return false;
-                }
-            }
-        }
     }
 }

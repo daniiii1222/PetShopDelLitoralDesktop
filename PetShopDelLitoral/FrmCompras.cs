@@ -124,14 +124,7 @@ namespace PetShopDelLitoral
             try
             {
                 CN_Proveedor objNegocioProv = new CN_Proveedor();
-                List<Proveedor> lista = objNegocioProv.Listar();
-
-                // Si no hay proveedores en la base de datos, agregamos proveedores iniciales de ejemplo
-                if (lista == null || lista.Count == 0)
-                {
-                    objNegocioProv.CrearProveedoresIniciales(out string mensajeCarga);
-                    lista = objNegocioProv.Listar();
-                }
+                List<Proveedor> lista = objNegocioProv.Listar() ?? new List<Proveedor>();
 
                 var itemsCombo = lista.Select(p => new
                 {
