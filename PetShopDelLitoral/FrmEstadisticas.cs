@@ -13,7 +13,7 @@ namespace PetShopDelLitoral
 {
     // Reportes estadísticos (gráficos) + tabla cruzada.
     // Usa la misma consulta que la pantalla de reportes (CN_Reporte.ObtenerReporteVentas),
-    // así que no necesita procedimientos almacenados ni capas nuevas.
+    
     public class FrmEstadisticas : Form
     {
         private static readonly CultureInfo ar = new CultureInfo("es-AR");
@@ -121,7 +121,7 @@ namespace PetShopDelLitoral
             // ---- pestañas ----
             TabControl tabs = new TabControl { Dock = DockStyle.Fill, Font = new Font("Segoe UI", 10f) };
             TabPage pgGraficos = new TabPage("Gráficos") { BackColor = Crema };
-            TabPage pgCruzada = new TabPage("Tabla cruzada") { BackColor = Crema };
+            TabPage pgCruzada = new TabPage("Resumen de ventas") { BackColor = Crema };
             tabs.TabPages.Add(pgGraficos);
             tabs.TabPages.Add(pgCruzada);
 

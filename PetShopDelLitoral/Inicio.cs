@@ -80,7 +80,7 @@ namespace PetShopDelLitoral
 
                 string rol = Sesion.UsuarioActual.idRol != null ? Sesion.UsuarioActual.idRol.descripcion_rol.Trim() : "";
 
-                MessageBox.Show($"Rol detectado en sesión: '{rol}'", "Verificación de Permisos");
+                
 
                 if (rol.Equals("Administrador", StringComparison.OrdinalIgnoreCase) ||
                     rol.Equals("Admin", StringComparison.OrdinalIgnoreCase))

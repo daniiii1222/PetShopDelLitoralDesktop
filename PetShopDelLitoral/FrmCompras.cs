@@ -97,11 +97,7 @@ namespace PetShopDelLitoral
             guna2TextBox2.ReadOnly = true;
 
             // Totales iniciales
-            guna2TextBox4.Text = "$ 0,00"; // Descuento / IVA
-            guna2TextBox4.ReadOnly = true;
-
-            guna2TextBox5.Text = "$ 0,00"; // Subtotal
-            guna2TextBox5.ReadOnly = true;
+           
 
             guna2TextBox6.Text = "$ 0,00"; // Total
             guna2TextBox6.ReadOnly = true;
@@ -313,7 +309,7 @@ namespace PetShopDelLitoral
                 }
             }
 
-            guna2TextBox5.Text = $"$ {total:N2}";
+          
             guna2TextBox6.Text = $"$ {total:N2}";
         }
 

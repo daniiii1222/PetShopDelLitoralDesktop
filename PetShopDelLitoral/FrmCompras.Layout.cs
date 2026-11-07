@@ -48,9 +48,11 @@ namespace PetShopDelLitoral
                 ancho, guna2CustomGradientPanel1.Height);
 
             // Importes alineados a la derecha del bloque
-            guna2TextBox5.Left = ancho - 13 - guna2TextBox5.Width;   // Subtotal
-            guna2TextBox4.Left = ancho - 13 - guna2TextBox4.Width;   // Descuento
-            guna2TextBox6.Left = ancho - 11 - guna2TextBox6.Width;   // Total
+            // Importe Total alineado a la derecha dentro del panel marrón
+            guna2TextBox6.Left = guna2CustomGradientPanel2.ClientSize.Width
+                                 - 11 - guna2TextBox6.Width;
+
+            guna2TextBox6.TextAlign = HorizontalAlignment.Right;
 
             // 2) Reparto vertical: los 5 grupos fijos + Observaciones (que absorbe el resto)
             int altoCampo = guna2ComboBox1.Height;
@@ -134,6 +136,8 @@ namespace PetShopDelLitoral
                                         guna2TextBox7.Location = new Point(boxX, 34);
                                         guna2TextBox7.Size = new Size(boxW, 36);
                                     }
+
+ 
                                 }
                             }
                         }
@@ -145,7 +149,23 @@ namespace PetShopDelLitoral
                 {
                     int botWidth = PanelDerechoBOT.ClientSize.Width;
                     int botHeight = PanelDerechoBOT.ClientSize.Height;
-                    int yPos = Math.Max(0, (botHeight - 40) / 2);
+                    // Se usa la altura real del botón (antes un 40 fijo, que no sigue la escala de pantalla)
+                    int altoBoton = guna2CustomGradientPanel6 != null ? guna2CustomGradientPanel6.Height : 40;
+                    int yPos = Math.Max(0, (botHeight - altoBoton) / 2);
+
+                    // "Guardar Compra" con la misma letra que "Guardar Venta" (normal, no negrita):
+                    // en negrita el texto no entraba y se partía en dos líneas
+                    if (guna2CustomGradientPanel6 != null && botonGuardarCompra != null)
+                    {
+                        if (botonGuardarCompra.Font.Style != FontStyle.Regular)
+                            botonGuardarCompra.Font = new Font(botonGuardarCompra.Font, FontStyle.Regular);
+
+                        // Solo si de todos modos no entra (pantallas con mucha escala), el panel crece lo justo
+                        int anchoNecesario = botonGuardarCompra.Padding.Left + botonGuardarCompra.IconSize
+                                           + TextRenderer.MeasureText(botonGuardarCompra.Text, botonGuardarCompra.Font).Width + 24;
+                        if (guna2CustomGradientPanel6.Width < anchoNecesario)
+                            guna2CustomGradientPanel6.Width = anchoNecesario;
+                    }
 
                     // Vaciar Lista alineado a 14px a la izquierda (exacto margen de la grilla)
                     if (guna2CustomGradientPanel3 != null)
@@ -158,7 +178,8 @@ namespace PetShopDelLitoral
                     {
                         int btnGuardarX = botWidth - 14 - guna2CustomGradientPanel6.Width;
                         guna2CustomGradientPanel6.Location = new Point(btnGuardarX, yPos);
-
+                        // Alinear icono y texto del botón Guardar
+                        
                         // Cancelar separado 12px a la izquierda de Guardar Compra
                         if (guna2CustomGradientPanel4 != null)
                         {
