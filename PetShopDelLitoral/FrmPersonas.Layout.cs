@@ -48,7 +48,14 @@ namespace PetShopDelLitoral
                 if (botones[i].Visible) cantidad++;
             if (cantidad == 0) return;
 
-            int ancho = (anchoTotal - (cantidad - 1) * SEPARACION) / cantidad;
+            // Si queda un solo botón visible (por ejemplo, Cliente para el rol Vendedor),
+            // no debe estirarse a todo el ancho del formulario: se centra y conserva un ancho compacto.
+            int ancho = cantidad == 1
+                ? Math.Min(150, anchoTotal)
+                : (anchoTotal - (cantidad - 1) * SEPARACION) / cantidad;
+
+            if (cantidad == 1)
+                x += (anchoTotal - ancho) / 2;
 
             for (int i = 0; i < paneles.Length; i++)
             {
@@ -58,9 +65,22 @@ namespace PetShopDelLitoral
                 paneles[i].SetBounds(x, y, ancho, alto);
                 botones[i].SetBounds(0, 0, ancho, alto);
                 botones[i].Font = new Font(botones[i].Font.FontFamily, fuente, botones[i].Font.Style);
-
                 FontAwesome.Sharp.IconButton ib = botones[i] as FontAwesome.Sharp.IconButton;
-                if (ib != null) ib.IconSize = icono;
+                if (ib != null)
+                {
+                    ib.IconSize = icono;
+
+                    // Centra el texto respecto del botón.
+                    ib.TextAlign = ContentAlignment.MiddleCenter;
+
+                    // Ubica el ícono a la izquierda.
+                    ib.ImageAlign = ContentAlignment.MiddleLeft;
+
+                    // Superpone el texto para que no se desplace por el espacio del ícono.
+                    ib.TextImageRelation = TextImageRelation.Overlay;
+
+                    ib.Text = ib.Text.Trim();
+                }
 
                 x += ancho + SEPARACION;
             }

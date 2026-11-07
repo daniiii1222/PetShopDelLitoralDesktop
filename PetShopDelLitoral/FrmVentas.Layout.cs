@@ -92,13 +92,31 @@ namespace PetShopDelLitoral
 
             int y = Y_PRIMER_GRUPO;
 
-            // Cliente: [DNI ......(lupa)] [+]  -> el "+" termina justo en el borde derecho de los demás campos
+            // Cliente: buscador + lupa ocupan el mismo ancho que los demás campos
             label1.Location = new Point(X_ETIQUETAS, y);
-            int yCampo = y + ALTO_ETIQUETA;
 
-            iconButton1.Location = new Point(MARGEN_IZQ + ancho - iconButton1.Width, yCampo);
-            botonInicio.Location = new Point(iconButton1.Left - 4 - botonInicio.Width, yCampo);
-            guna2TextBox1.SetBounds(MARGEN_IZQ, yCampo, botonInicio.Left + 20 - MARGEN_IZQ, guna2TextBox1.Height);   // la lupa se apoya sobre su extremo
+            int yCampo = y + ALTO_ETIQUETA;
+            int anchoLupa = botonInicio.Width;
+
+            // Posición de la lupa, alineada con el extremo derecho de los campos
+            int xLupa = MARGEN_IZQ + ancho - anchoLupa;
+
+            // Buscador
+            guna2TextBox1.SetBounds(
+                MARGEN_IZQ,
+                yCampo,
+                ancho - anchoLupa,
+                guna2TextBox1.Height
+            );
+
+            // Lupa
+            botonInicio.SetBounds(
+                xLupa,
+                yCampo,
+                anchoLupa,
+                guna2TextBox1.Height
+            );
+
             y = guna2TextBox1.Bottom + gap;
 
             // Fecha, Método de pago y Vendedor: etiqueta + campo del mismo ancho
@@ -125,6 +143,7 @@ namespace PetShopDelLitoral
         //  El buscador se estira y se lleva todo el ancho que sobra;
         //  Cantidad y Agregar quedan a la derecha, alineados con el borde de la grilla.
         // ------------------------------------------------------------------
+
         private void DistribuirBarraSuperior()
         {
             int anchoBarra = PanelDerechoSUP.ClientSize.Width;
@@ -132,13 +151,30 @@ namespace PetShopDelLitoral
 
             int derecha = anchoBarra - MARGEN_BARRA;
 
-            guna2CustomGradientPanel5.Left = derecha - guna2CustomGradientPanel5.Width;                              // botón Agregar
-            guna2NumericUpDown1.Left = guna2CustomGradientPanel5.Left - SEPARACION_BARRA - guna2NumericUpDown1.Width; // campo Cantidad
-            label10.Left = guna2NumericUpDown1.Left - 3;                                                              // su etiqueta
+            // 1. Botón Agregar: pegado al margen derecho
+            guna2CustomGradientPanel5.Left =
+                derecha - guna2CustomGradientPanel5.Width;
 
-            guna2TextBox7.Width = guna2NumericUpDown1.Left - SEPARACION_BARRA - guna2TextBox7.Left;                   // buscador
-            iconButton4.Left = guna2TextBox7.Right - iconButton4.Width;                                               // lupa al final del buscador
+            // 2. Cantidad: a la izquierda del botón Agregar
+            guna2NumericUpDown1.Left =
+                guna2CustomGradientPanel5.Left
+                - SEPARACION_BARRA
+                - guna2NumericUpDown1.Width;
+
+            // 3. Etiqueta Cantidad
+            label10.Left = guna2NumericUpDown1.Left - 3;
+
+            // 4. Buscador: ocupa el espacio restante
+            int anchoBuscador = guna2NumericUpDown1.Left
+                                - SEPARACION_BARRA
+                                - guna2TextBox7.Left;
+
+            guna2TextBox7.Width = anchoBuscador;
+
+            // 5. Lupa: al final del buscador
+            iconButton4.Left = guna2TextBox7.Right - iconButton4.Width;
         }
+
 
         // ------------------------------------------------------------------
         // BOTONES DE ABAJO: pegados a la derecha (Guardar Venta en el borde, Cancelar a su izquierda)
