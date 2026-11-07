@@ -20,18 +20,6 @@ BEGIN
     ORDER BY nombre_metodo;
 END$$
 
--- Busca productos activos con stock por nombre (para agregar al detalle de la venta)
-DROP PROCEDURE IF EXISTS `sp_BuscarProductosVenta`$$
-CREATE PROCEDURE `sp_BuscarProductosVenta`(IN p_texto VARCHAR(50))
-BEGIN
-    SELECT idProducto, nombre_producto, precio_producto, stock_producto
-    FROM producto
-    WHERE estado_producto = 1
-      AND stock_producto > 0
-      AND nombre_producto LIKE CONCAT('%', p_texto, '%')
-    ORDER BY nombre_producto;
-END$$
-
 -- Busca un cliente ACTIVO por DNI (une cliente + persona).
 -- A diferencia de sp_ObtenerPersonaPorDni, devuelve idCliente, que es lo que necesita una venta.
 DROP PROCEDURE IF EXISTS `sp_ObtenerClientePorDni`$$
