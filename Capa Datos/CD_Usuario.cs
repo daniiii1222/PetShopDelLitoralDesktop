@@ -189,7 +189,7 @@ namespace Capa_Datos
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
 
             return tablaPersona;

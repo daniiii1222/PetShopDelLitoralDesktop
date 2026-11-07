@@ -26,7 +26,7 @@ namespace Capa_Negocio
             catch (Exception ex)
             {
                 // Capturamos el error y lo propagamos con un mensaje claro para la interfaz
-                throw new Exception("Error en la Capa de Negocio al listar usuarios: " + ex.Message);
+                throw new Exception("Error en la Capa de Negocio al listar usuarios: " + ex.Message, ex);
             }
         }
 

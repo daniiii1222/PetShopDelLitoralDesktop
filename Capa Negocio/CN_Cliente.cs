@@ -21,7 +21,7 @@ namespace Capa_Negocio
             }
             catch (Exception ex)
             {
-                throw new Exception("Error en la Capa de Negocio al listar clientes: " + ex.Message);
+                throw new Exception("Error en la Capa de Negocio al listar clientes: " + ex.Message, ex);
             }
         }
 
