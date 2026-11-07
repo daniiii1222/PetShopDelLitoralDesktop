@@ -13,7 +13,7 @@ Presentación  (PetShopDelLitoral)  ->  Negocio (Capa Negocio)  ->  Datos (Capa 
 |---|---|---|
 | `PetShopDelLitoral` | `PetShopDelLitoral` | Pantallas (Forms). Solo habla con la capa de Negocio; no tiene SQL ni conexiones. |
 | `Capa Negocio` | `Capa_Negocio` | Reglas y validaciones (`CN_*`). No conoce el motor de base de datos ni las pantallas. |
-| `Capa Datos` | `Capa_Datos` | Acceso a MySQL (`CD_*`) con procedimientos almacenados. La conexión se crea siempre con `ClsDataBase.CrearConexion()`. |
+| `Capa Datos` | `Capa_Datos` | Acceso a la base (`CD_*`). Casi todo usa procedimientos almacenados (carpeta `Scripts`); `CD_Categoria`, `CD_Compra` y `CD_Backup` usan consultas parametrizadas. La conexión se crea siempre con `ClsDataBase.CrearConexion()`. |
 | `Capa Entidad` | `Capa_Entidad` | Clases de datos compartidas (`Producto`, `Venta`, `Usuario`, ...). |
 | `Pruebas` | `Pruebas` | Pruebas unitarias (MSTest) de las reglas de negocio. |
 
@@ -22,7 +22,7 @@ Los errores no críticos (autocompletado, fuente, ajustes visuales) no frenan la
 ## Requisitos
 
 - Visual Studio 2022 o superior (carga de trabajo *Desarrollo de escritorio con .NET*).
-- MySQL 8 (por ejemplo desde XAMPP) corriendo en `localhost:3306`.
+- MySQL 8, o MariaDB 10.6 o superior (XAMPP incluye MariaDB), corriendo en `localhost:3306`. El procedimiento de ventas usa `JSON_TABLE`, que las versiones más viejas de MariaDB no tienen.
 - Un cliente SQL (DBeaver, MySQL Workbench o la consola `mysql`).
 
 ## Cómo preparar la base de datos
@@ -40,7 +40,7 @@ Los errores no críticos (autocompletado, fuente, ajustes visuales) no frenan la
 
    | Orden | Archivo | Qué hace |
    |---|---|---|
-   | 1 | `Ventas.sql` | Columnas de descuento y procedimientos de ventas (`sp_RegistrarVentaCompleta`, búsqueda de productos, clientes por DNI, métodos de pago). |
+   | 1 | `Ventas.sql` | Columnas de descuento y procedimientos de ventas (`sp_RegistrarVentaCompleta`, clientes por DNI, métodos de pago). |
    | 2 | `AgregarCodigoProducto.sql` | Agrega la columna `codigo_producto` (ej. `PROD2090`) y actualiza la búsqueda de productos. |
    | 3 | `ReporteVenta.sql` | Procedimiento del reporte de ventas. |
    | 4 | `ResumenDashboard.sql` | Resumen y ventas recientes del dashboard. |
@@ -48,8 +48,12 @@ Los errores no críticos (autocompletado, fuente, ajustes visuales) no frenan la
    | 6 | `SP_obtenerProductosMasVendidos.sql` | Productos más vendidos (Estadísticas). |
    | 7 | `Proveedores.sql` | Alta, modificación y baja lógica de proveedores (3 procedimientos, con transacción). |
    | 8 | `Productos.sql` | Procedimientos del ABM de productos (`sp_ListarProductos`, `sp_RegistrarProducto`, `sp_ModificarProducto`, `sp_EliminarProducto`, `sp_ExisteCodigoProducto`). |
+| 9 | `sp_ListarRoles.sql`, `sp_ListarUsuarios.sql`, `sp_LoginUsuario.sql`, `sp_RegistrarUsuarioCompleto.sql`, `sp_ModificarUsuarioCompleto.sql`, `sp_EliminarUsuario.sql` | Usuarios, roles e inicio de sesión. |
+| 10 | `sp_ListarClientes.sql`, `sp_RegistrarClienteCompleto.sql`, `sp_ModificarClienteCompleto.sql`, `sp_EliminarCliente.sql` | Alta, modificación y baja lógica de clientes. |
+| 11 | `sp_ObtenerPersonaPorDni.sql` | Búsqueda de una persona por DNI (pantalla Personas). |
+| 12 | `sp_ObtenerVentasPorVendedor.sql` | Últimas ventas de un vendedor. |
 
-   `Venta.sql` es una versión anterior del registro de ventas (procedimientos sueltos) y no hace falta ejecutarla.
+   Los archivos `sp_*.sql` (filas 9 a 12) definen un procedimiento cada uno. Ya vienen incluidos en la copia de seguridad del equipo, así que ejecutarlos es opcional, pero es seguro: cada uno elimina y vuelve a crear su procedimiento. Sirven para reconstruir la base desde el repositorio.
 
 ## Configuración de la conexión
 
@@ -77,7 +81,7 @@ Desde Visual Studio: *Prueba → Ejecutar todas las pruebas*. O por consola:
 dotnet test Pruebas/Pruebas.csproj
 ```
 
-Las pruebas actuales cubren validaciones de usuarios, productos y copias de seguridad, y **no necesitan base de datos**.
+Las pruebas actuales cubren validaciones de usuarios, productos, proveedores y copias de seguridad, y **no necesitan base de datos**.
 
 ## Flujo de trabajo en Git
 
