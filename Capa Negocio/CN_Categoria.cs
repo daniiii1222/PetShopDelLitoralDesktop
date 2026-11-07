@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Capa_Datos;
 using Capa_Entidad;
-using Capa_Datos;
+using System.Collections.Generic;
 
 namespace Capa_Negocio
 {
     public class CN_Categoria
     {
+        private const int NOMBRE_MAXIMO = 50;   // largo de la columna nombre_categoria en la base
+
         private CD_Categoria obj_cd_categoria = new CD_Categoria();
 
         public List<Categoria> Listar()
@@ -15,28 +17,46 @@ namespace Capa_Negocio
 
         public int Registrar(Categoria obj, out string Mensaje)
         {
-            Mensaje = string.Empty;
-
-            if (string.IsNullOrEmpty(obj.Nombre_categoria))
-            {
-                Mensaje = "Es necesario el nombre de la categoría";
+            if (!ValidarNombre(obj, out Mensaje))
                 return 0;
-            }
 
             return obj_cd_categoria.Registrar(obj, out Mensaje);
         }
 
         public bool Editar(Categoria obj, out string Mensaje)
         {
-            Mensaje = string.Empty;
+            if (!ValidarNombre(obj, out Mensaje))
+                return false;
 
-            if (string.IsNullOrEmpty(obj.Nombre_categoria))
+            return obj_cd_categoria.Editar(obj, out Mensaje);
+        }
+
+        // Regla de negocio: la categoría necesita un nombre que no sea solo espacios y que entre en la columna
+        private static bool ValidarNombre(Categoria obj, out string mensaje)
+        {
+            mensaje = string.Empty;
+
+            if (obj == null)
             {
-                Mensaje = "Es necesario el nombre de la categoría";
+                mensaje = "La categoría no puede ser nula.";
                 return false;
             }
 
-            return obj_cd_categoria.Editar(obj, out Mensaje);
+            string nombre = (obj.Nombre_categoria ?? string.Empty).Trim();
+
+            if (nombre.Length == 0)
+            {
+                mensaje = "Es necesario el nombre de la categoría";
+                return false;
+            }
+
+            if (nombre.Length > NOMBRE_MAXIMO)
+            {
+                mensaje = "El nombre de la categoría no puede superar los " + NOMBRE_MAXIMO + " caracteres.";
+                return false;
+            }
+
+            return true;
         }
     }
 }
