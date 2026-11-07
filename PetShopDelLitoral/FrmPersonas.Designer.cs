@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPersonas));
             this.label1 = new System.Windows.Forms.Label();
             this.PanelCategorias = new Guna.UI2.WinForms.Guna2Panel();
@@ -81,17 +81,6 @@
             this.guna2Panel6 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2CustomGradientPanel7 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.dgvPersonas = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.guna2Panel7 = new Guna.UI2.WinForms.Guna2Panel();
-            this.btVerInactivos = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2CustomGradientPanel12 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            this.btnTClientes = new FontAwesome.Sharp.IconButton();
-            this.guna2CustomGradientPanel9 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            this.btnTodosLosRegistros = new FontAwesome.Sharp.IconButton();
-            this.guna2CustomGradientPanel11 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            this.btnBuscarPersonas = new FontAwesome.Sharp.IconButton();
-            this.guna2CustomGradientPanel10 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            this.btnTUsuarios = new FontAwesome.Sharp.IconButton();
-            this.txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -105,6 +94,15 @@
             this.IdRol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.guna2Panel7 = new Guna.UI2.WinForms.Guna2Panel();
+            this.btVerInactivos = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2CustomGradientPanel12 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            this.btnTClientes = new FontAwesome.Sharp.IconButton();
+            this.guna2CustomGradientPanel11 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            this.btnBuscarPersonas = new FontAwesome.Sharp.IconButton();
+            this.guna2CustomGradientPanel10 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            this.btnTUsuarios = new FontAwesome.Sharp.IconButton();
+            this.txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
             this.PanelCategorias.SuspendLayout();
             this.PanelUsuario.SuspendLayout();
             this.guna2CustomGradientPanel6.SuspendLayout();
@@ -118,7 +116,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonas)).BeginInit();
             this.guna2Panel7.SuspendLayout();
             this.guna2CustomGradientPanel12.SuspendLayout();
-            this.guna2CustomGradientPanel9.SuspendLayout();
             this.guna2CustomGradientPanel11.SuspendLayout();
             this.guna2CustomGradientPanel10.SuspendLayout();
             this.SuspendLayout();
@@ -872,21 +869,21 @@
             // 
             this.dgvPersonas.AllowUserToResizeColumns = false;
             this.dgvPersonas.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.dgvPersonas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            this.dgvPersonas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvPersonas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPersonas.BackgroundColor = System.Drawing.Color.White;
             this.dgvPersonas.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPersonas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvPersonas.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPersonas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPersonas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvPersonas.ColumnHeadersHeight = 25;
             this.dgvPersonas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
@@ -902,27 +899,27 @@
             this.IdRol,
             this.Modificar,
             this.Eliminar});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10.5F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPersonas.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPersonas.DefaultCellStyle = dataGridViewCellStyle11;
             this.dgvPersonas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPersonas.EnableHeadersVisualStyles = false;
             this.dgvPersonas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvPersonas.Location = new System.Drawing.Point(0, 113);
             this.dgvPersonas.Name = "dgvPersonas";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPersonas.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPersonas.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvPersonas.RowHeadersVisible = false;
             this.dgvPersonas.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dgvPersonas.RowTemplate.Height = 30;
@@ -951,207 +948,6 @@
             this.dgvPersonas.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvPersonas.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.dgvPersonas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPersonas_CellContentClick);
-            // 
-            // guna2Panel7
-            // 
-            this.guna2Panel7.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Panel7.Controls.Add(this.btVerInactivos);
-            this.guna2Panel7.Controls.Add(this.guna2CustomGradientPanel12);
-            this.guna2Panel7.Controls.Add(this.guna2CustomGradientPanel9);
-            this.guna2Panel7.Controls.Add(this.guna2CustomGradientPanel11);
-            this.guna2Panel7.Controls.Add(this.btnBuscarPersonas);
-            this.guna2Panel7.Controls.Add(this.guna2CustomGradientPanel10);
-            this.guna2Panel7.Controls.Add(this.txtBuscar);
-            this.guna2Panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.guna2Panel7.Location = new System.Drawing.Point(0, 0);
-            this.guna2Panel7.Name = "guna2Panel7";
-            this.guna2Panel7.Size = new System.Drawing.Size(628, 113);
-            this.guna2Panel7.TabIndex = 33;
-            // 
-            // btVerInactivos
-            // 
-            this.btVerInactivos.BackColor = System.Drawing.Color.Transparent;
-            this.btVerInactivos.BorderColor = System.Drawing.Color.Transparent;
-            this.btVerInactivos.BorderRadius = 3;
-            this.btVerInactivos.BorderThickness = 5;
-            this.btVerInactivos.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.ToogleButton;
-            this.btVerInactivos.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btVerInactivos.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btVerInactivos.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btVerInactivos.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btVerInactivos.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            this.btVerInactivos.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btVerInactivos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.btVerInactivos.Image = ((System.Drawing.Image)(resources.GetObject("btVerInactivos.Image")));
-            this.btVerInactivos.Location = new System.Drawing.Point(468, 65);
-            this.btVerInactivos.Name = "btVerInactivos";
-            this.btVerInactivos.PressedColor = System.Drawing.Color.Azure;
-            this.btVerInactivos.Size = new System.Drawing.Size(127, 35);
-            this.btVerInactivos.TabIndex = 35;
-            this.btVerInactivos.Text = "Ver Inactivos";
-            this.btVerInactivos.Click += new System.EventHandler(this.btVerInactivos_Click);
-            // 
-            // guna2CustomGradientPanel12
-            // 
-            this.guna2CustomGradientPanel12.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CustomGradientPanel12.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2CustomGradientPanel12.BorderRadius = 10;
-            this.guna2CustomGradientPanel12.Controls.Add(this.btnTClientes);
-            this.guna2CustomGradientPanel12.Location = new System.Drawing.Point(174, 11);
-            this.guna2CustomGradientPanel12.Name = "guna2CustomGradientPanel12";
-            this.guna2CustomGradientPanel12.Size = new System.Drawing.Size(105, 36);
-            this.guna2CustomGradientPanel12.TabIndex = 28;
-            this.guna2CustomGradientPanel12.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2CustomGradientPanel12_Paint);
-            // 
-            // btnTClientes
-            // 
-            this.btnTClientes.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.btnTClientes.FlatAppearance.BorderSize = 0;
-            this.btnTClientes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
-            this.btnTClientes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
-            this.btnTClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTClientes.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTClientes.ForeColor = System.Drawing.Color.White;
-            this.btnTClientes.IconChar = FontAwesome.Sharp.IconChar.UserAlt;
-            this.btnTClientes.IconColor = System.Drawing.Color.White;
-            this.btnTClientes.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnTClientes.IconSize = 25;
-            this.btnTClientes.Location = new System.Drawing.Point(0, 0);
-            this.btnTClientes.Name = "btnTClientes";
-            this.btnTClientes.Size = new System.Drawing.Size(105, 36);
-            this.btnTClientes.TabIndex = 1;
-            this.btnTClientes.Text = "Clientes";
-            this.btnTClientes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTClientes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTClientes.UseVisualStyleBackColor = true;
-            this.btnTClientes.Click += new System.EventHandler(this.btnClientes_Click);
-            // 
-            // guna2CustomGradientPanel9
-            // 
-            this.guna2CustomGradientPanel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.guna2CustomGradientPanel9.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2CustomGradientPanel9.BorderRadius = 10;
-            this.guna2CustomGradientPanel9.Controls.Add(this.btnTodosLosRegistros);
-            this.guna2CustomGradientPanel9.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2CustomGradientPanel9.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2CustomGradientPanel9.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2CustomGradientPanel9.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2CustomGradientPanel9.Location = new System.Drawing.Point(29, 13);
-            this.guna2CustomGradientPanel9.Name = "guna2CustomGradientPanel9";
-            this.guna2CustomGradientPanel9.Size = new System.Drawing.Size(105, 36);
-            this.guna2CustomGradientPanel9.TabIndex = 27;
-            // 
-            // btnTodosLosRegistros
-            // 
-            this.btnTodosLosRegistros.BackColor = System.Drawing.Color.Transparent;
-            this.btnTodosLosRegistros.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
-            this.btnTodosLosRegistros.FlatAppearance.BorderSize = 0;
-            this.btnTodosLosRegistros.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
-            this.btnTodosLosRegistros.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
-            this.btnTodosLosRegistros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTodosLosRegistros.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnTodosLosRegistros.ForeColor = System.Drawing.Color.White;
-            this.btnTodosLosRegistros.IconChar = FontAwesome.Sharp.IconChar.AddressCard;
-            this.btnTodosLosRegistros.IconColor = System.Drawing.Color.White;
-            this.btnTodosLosRegistros.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnTodosLosRegistros.IconSize = 25;
-            this.btnTodosLosRegistros.Location = new System.Drawing.Point(0, 0);
-            this.btnTodosLosRegistros.Name = "btnTodosLosRegistros";
-            this.btnTodosLosRegistros.Size = new System.Drawing.Size(105, 36);
-            this.btnTodosLosRegistros.TabIndex = 1;
-            this.btnTodosLosRegistros.Text = "Todos";
-            this.btnTodosLosRegistros.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTodosLosRegistros.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTodosLosRegistros.UseVisualStyleBackColor = false;
-            this.btnTodosLosRegistros.Click += new System.EventHandler(this.btnTodosLosRegistros_Click);
-            // 
-            // guna2CustomGradientPanel11
-            // 
-            this.guna2CustomGradientPanel11.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CustomGradientPanel11.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2CustomGradientPanel11.BorderRadius = 10;
-            this.guna2CustomGradientPanel11.Controls.Add(this.btnTProveedores);
-            this.guna2CustomGradientPanel11.Location = new System.Drawing.Point(314, 13);
-            this.guna2CustomGradientPanel11.Name = "guna2CustomGradientPanel11";
-            this.guna2CustomGradientPanel11.Size = new System.Drawing.Size(137, 36);
-            this.guna2CustomGradientPanel11.TabIndex = 29;
-            // 
-            // btnBuscarPersonas
-            // 
-            this.btnBuscarPersonas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.btnBuscarPersonas.FlatAppearance.BorderSize = 0;
-            this.btnBuscarPersonas.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
-            this.btnBuscarPersonas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
-            this.btnBuscarPersonas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscarPersonas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
-            this.btnBuscarPersonas.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
-            this.btnBuscarPersonas.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.btnBuscarPersonas.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnBuscarPersonas.IconSize = 25;
-            this.btnBuscarPersonas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscarPersonas.Location = new System.Drawing.Point(410, 65);
-            this.btnBuscarPersonas.Margin = new System.Windows.Forms.Padding(2);
-            this.btnBuscarPersonas.Name = "btnBuscarPersonas";
-            this.btnBuscarPersonas.Size = new System.Drawing.Size(36, 35);
-            this.btnBuscarPersonas.TabIndex = 32;
-            this.btnBuscarPersonas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscarPersonas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnBuscarPersonas.UseVisualStyleBackColor = false;
-            // 
-            // guna2CustomGradientPanel10
-            // 
-            this.guna2CustomGradientPanel10.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CustomGradientPanel10.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2CustomGradientPanel10.BorderRadius = 10;
-            this.guna2CustomGradientPanel10.Controls.Add(this.btnTUsuarios);
-            this.guna2CustomGradientPanel10.Location = new System.Drawing.Point(480, 11);
-            this.guna2CustomGradientPanel10.Name = "guna2CustomGradientPanel10";
-            this.guna2CustomGradientPanel10.Size = new System.Drawing.Size(115, 36);
-            this.guna2CustomGradientPanel10.TabIndex = 30;
-            // 
-            // btnTUsuarios
-            // 
-            this.btnTUsuarios.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.btnTUsuarios.FlatAppearance.BorderSize = 0;
-            this.btnTUsuarios.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
-            this.btnTUsuarios.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
-            this.btnTUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTUsuarios.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTUsuarios.ForeColor = System.Drawing.Color.White;
-            this.btnTUsuarios.IconChar = FontAwesome.Sharp.IconChar.UserGroup;
-            this.btnTUsuarios.IconColor = System.Drawing.Color.White;
-            this.btnTUsuarios.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnTUsuarios.IconSize = 25;
-            this.btnTUsuarios.Location = new System.Drawing.Point(0, 0);
-            this.btnTUsuarios.Name = "btnTUsuarios";
-            this.btnTUsuarios.Size = new System.Drawing.Size(115, 36);
-            this.btnTUsuarios.TabIndex = 1;
-            this.btnTUsuarios.Text = "Usuarios";
-            this.btnTUsuarios.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTUsuarios.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTUsuarios.UseVisualStyleBackColor = true;
-            this.btnTUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
-            // 
-            // txtBuscar
-            // 
-            this.txtBuscar.BorderRadius = 5;
-            this.txtBuscar.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtBuscar.DefaultText = "";
-            this.txtBuscar.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtBuscar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtBuscar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtBuscar.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtBuscar.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBuscar.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtBuscar.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBuscar.Location = new System.Drawing.Point(29, 64);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.PasswordChar = '\0';
-            this.txtBuscar.PlaceholderText = "Buscar persona por nombre";
-            this.txtBuscar.SelectedText = "";
-            this.txtBuscar.Size = new System.Drawing.Size(417, 36);
-            this.txtBuscar.TabIndex = 31;
-            this.txtBuscar.TextChanged += new System.EventHandler(this.TBbuscarPersonas_TextChanged);
             // 
             // Id
             // 
@@ -1231,6 +1027,167 @@
             this.Eliminar.MinimumWidth = 6;
             this.Eliminar.Name = "Eliminar";
             // 
+            // guna2Panel7
+            // 
+            this.guna2Panel7.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Panel7.Controls.Add(this.btVerInactivos);
+            this.guna2Panel7.Controls.Add(this.guna2CustomGradientPanel12);
+            this.guna2Panel7.Controls.Add(this.guna2CustomGradientPanel11);
+            this.guna2Panel7.Controls.Add(this.btnBuscarPersonas);
+            this.guna2Panel7.Controls.Add(this.guna2CustomGradientPanel10);
+            this.guna2Panel7.Controls.Add(this.txtBuscar);
+            this.guna2Panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.guna2Panel7.Location = new System.Drawing.Point(0, 0);
+            this.guna2Panel7.Name = "guna2Panel7";
+            this.guna2Panel7.Size = new System.Drawing.Size(628, 113);
+            this.guna2Panel7.TabIndex = 33;
+            // 
+            // btVerInactivos
+            // 
+            this.btVerInactivos.BackColor = System.Drawing.Color.Transparent;
+            this.btVerInactivos.BorderColor = System.Drawing.Color.Transparent;
+            this.btVerInactivos.BorderRadius = 3;
+            this.btVerInactivos.BorderThickness = 5;
+            this.btVerInactivos.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.ToogleButton;
+            this.btVerInactivos.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btVerInactivos.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btVerInactivos.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btVerInactivos.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btVerInactivos.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.btVerInactivos.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btVerInactivos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.btVerInactivos.Image = ((System.Drawing.Image)(resources.GetObject("btVerInactivos.Image")));
+            this.btVerInactivos.Location = new System.Drawing.Point(468, 65);
+            this.btVerInactivos.Name = "btVerInactivos";
+            this.btVerInactivos.PressedColor = System.Drawing.Color.Azure;
+            this.btVerInactivos.Size = new System.Drawing.Size(127, 35);
+            this.btVerInactivos.TabIndex = 35;
+            this.btVerInactivos.Text = "Ver Inactivos";
+            this.btVerInactivos.Click += new System.EventHandler(this.btVerInactivos_Click);
+            // 
+            // guna2CustomGradientPanel12
+            // 
+            this.guna2CustomGradientPanel12.BackColor = System.Drawing.Color.Transparent;
+            this.guna2CustomGradientPanel12.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.guna2CustomGradientPanel12.BorderRadius = 10;
+            this.guna2CustomGradientPanel12.Controls.Add(this.btnTClientes);
+            this.guna2CustomGradientPanel12.Location = new System.Drawing.Point(29, 10);
+            this.guna2CustomGradientPanel12.Name = "guna2CustomGradientPanel12";
+            this.guna2CustomGradientPanel12.Size = new System.Drawing.Size(105, 36);
+            this.guna2CustomGradientPanel12.TabIndex = 28;
+            this.guna2CustomGradientPanel12.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2CustomGradientPanel12_Paint);
+            // 
+            // btnTClientes
+            // 
+            this.btnTClientes.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.btnTClientes.FlatAppearance.BorderSize = 0;
+            this.btnTClientes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
+            this.btnTClientes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
+            this.btnTClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTClientes.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTClientes.ForeColor = System.Drawing.Color.White;
+            this.btnTClientes.IconChar = FontAwesome.Sharp.IconChar.UserAlt;
+            this.btnTClientes.IconColor = System.Drawing.Color.White;
+            this.btnTClientes.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnTClientes.IconSize = 25;
+            this.btnTClientes.Location = new System.Drawing.Point(29, 10);
+            this.btnTClientes.Name = "btnTClientes";
+            this.btnTClientes.Size = new System.Drawing.Size(105, 36);
+            this.btnTClientes.TabIndex = 1;
+            this.btnTClientes.Text = "Clientes";
+            this.btnTClientes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTClientes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnTClientes.UseVisualStyleBackColor = true;
+            this.btnTClientes.Click += new System.EventHandler(this.btnClientes_Click);
+            // 
+            // guna2CustomGradientPanel11
+            // 
+            this.guna2CustomGradientPanel11.BackColor = System.Drawing.Color.Transparent;
+            this.guna2CustomGradientPanel11.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.guna2CustomGradientPanel11.BorderRadius = 10;
+            this.guna2CustomGradientPanel11.Controls.Add(this.btnTProveedores);
+            this.guna2CustomGradientPanel11.Location = new System.Drawing.Point(169, 13);
+            this.guna2CustomGradientPanel11.Name = "guna2CustomGradientPanel11";
+            this.guna2CustomGradientPanel11.Size = new System.Drawing.Size(137, 36);
+            this.guna2CustomGradientPanel11.TabIndex = 29;
+            // 
+            // btnBuscarPersonas
+            // 
+            this.btnBuscarPersonas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
+            this.btnBuscarPersonas.FlatAppearance.BorderSize = 0;
+            this.btnBuscarPersonas.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
+            this.btnBuscarPersonas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
+            this.btnBuscarPersonas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuscarPersonas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(111)))));
+            this.btnBuscarPersonas.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
+            this.btnBuscarPersonas.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.btnBuscarPersonas.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnBuscarPersonas.IconSize = 25;
+            this.btnBuscarPersonas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscarPersonas.Location = new System.Drawing.Point(410, 65);
+            this.btnBuscarPersonas.Margin = new System.Windows.Forms.Padding(2);
+            this.btnBuscarPersonas.Name = "btnBuscarPersonas";
+            this.btnBuscarPersonas.Size = new System.Drawing.Size(36, 35);
+            this.btnBuscarPersonas.TabIndex = 32;
+            this.btnBuscarPersonas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscarPersonas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBuscarPersonas.UseVisualStyleBackColor = false;
+            // 
+            // guna2CustomGradientPanel10
+            // 
+            this.guna2CustomGradientPanel10.BackColor = System.Drawing.Color.Transparent;
+            this.guna2CustomGradientPanel10.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.guna2CustomGradientPanel10.BorderRadius = 10;
+            this.guna2CustomGradientPanel10.Controls.Add(this.btnTUsuarios);
+            this.guna2CustomGradientPanel10.Location = new System.Drawing.Point(335, 11);
+            this.guna2CustomGradientPanel10.Name = "guna2CustomGradientPanel10";
+            this.guna2CustomGradientPanel10.Size = new System.Drawing.Size(115, 36);
+            this.guna2CustomGradientPanel10.TabIndex = 30;
+            // 
+            // btnTUsuarios
+            // 
+            this.btnTUsuarios.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
+            this.btnTUsuarios.FlatAppearance.BorderSize = 0;
+            this.btnTUsuarios.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
+            this.btnTUsuarios.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
+            this.btnTUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTUsuarios.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTUsuarios.ForeColor = System.Drawing.Color.White;
+            this.btnTUsuarios.IconChar = FontAwesome.Sharp.IconChar.UserGroup;
+            this.btnTUsuarios.IconColor = System.Drawing.Color.White;
+            this.btnTUsuarios.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnTUsuarios.IconSize = 25;
+            this.btnTUsuarios.Location = new System.Drawing.Point(0, 0);
+            this.btnTUsuarios.Name = "btnTUsuarios";
+            this.btnTUsuarios.Size = new System.Drawing.Size(115, 36);
+            this.btnTUsuarios.TabIndex = 1;
+            this.btnTUsuarios.Text = "Usuarios";
+            this.btnTUsuarios.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTUsuarios.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnTUsuarios.UseVisualStyleBackColor = true;
+            this.btnTUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.BorderRadius = 5;
+            this.txtBuscar.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtBuscar.DefaultText = "";
+            this.txtBuscar.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtBuscar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtBuscar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBuscar.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBuscar.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBuscar.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtBuscar.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBuscar.Location = new System.Drawing.Point(29, 64);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.PasswordChar = '\0';
+            this.txtBuscar.PlaceholderText = "Buscar persona por nombre";
+            this.txtBuscar.SelectedText = "";
+            this.txtBuscar.Size = new System.Drawing.Size(417, 36);
+            this.txtBuscar.TabIndex = 31;
+            this.txtBuscar.TextChanged += new System.EventHandler(this.TBbuscarPersonas_TextChanged);
+            // 
             // FrmPersonas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -1265,7 +1222,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonas)).EndInit();
             this.guna2Panel7.ResumeLayout(false);
             this.guna2CustomGradientPanel12.ResumeLayout(false);
-            this.guna2CustomGradientPanel9.ResumeLayout(false);
             this.guna2CustomGradientPanel11.ResumeLayout(false);
             this.guna2CustomGradientPanel10.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1315,8 +1271,6 @@
         private FontAwesome.Sharp.IconButton btnCancelar;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel6;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel7;
-        private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel9;
-        private FontAwesome.Sharp.IconButton btnTodosLosRegistros;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel10;
         private FontAwesome.Sharp.IconButton btnTUsuarios;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel11;

@@ -14,14 +14,16 @@ namespace PetShopDelLitoral
 
         // Filtros de la derecha (Todos / Clientes / Proveedores / Usuarios):
         // misma altura, mismo ancho, en la misma fila y con la misma separación.
+        // Filtros de la derecha (Clientes / Proveedores / Usuarios):
+        // misma altura, mismo ancho, en la misma fila y con la misma separación.
         private void AcomodarFiltros()
         {
-            Control[] paneles = { guna2CustomGradientPanel9, guna2CustomGradientPanel12, guna2CustomGradientPanel11, guna2CustomGradientPanel10 };
-            Control[] botones = { btnTodosLosRegistros, btnTClientes, btnTProveedores, btnTUsuarios };
+            Control[] paneles = { guna2CustomGradientPanel12, guna2CustomGradientPanel11, guna2CustomGradientPanel10 };
+            Control[] botones = { btnTClientes, btnTProveedores, btnTUsuarios };
 
-            int x = guna2CustomGradientPanel9.Left;
-            int y = guna2CustomGradientPanel9.Top;
-            const int ANCHO_FILTRO = 130;
+            int x = guna2CustomGradientPanel12.Left;
+            int y = guna2CustomGradientPanel12.Top;
+            const int ANCHO_FILTRO = 145;
             const int SEPARACION_FILTRO = 14;
 
             for (int i = 0; i < paneles.Length; i++)

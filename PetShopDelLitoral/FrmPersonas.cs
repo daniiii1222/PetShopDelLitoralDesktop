@@ -144,12 +144,7 @@ namespace PetShopDelLitoral
         }
 
         private void botonUsuario_Click(object sender, EventArgs e) { btnUsuarios_Click(sender, e); }
-        /*private void botonUsuario_Click(object sender, EventArgs e)
-        {
-            tipoSeleccionado = "Usuario";
-            panelUsuarios.Visible = true;
-        }
-        */
+      
 
         private void guna2CustomGradientPanel7_Paint(object sender, PaintEventArgs e)
         {
@@ -187,7 +182,7 @@ namespace PetShopDelLitoral
             tipoSeleccionado = "Proveedor";
             chkActivo.Checked = true;
             ConfigurarGridProveedores();
-            CargarProveedores(); // <-- Llamamos al método real que acabamos de armar
+            CargarProveedores(); 
             panelUsuarios.Visible = false;
         }
 
@@ -314,6 +309,7 @@ namespace PetShopDelLitoral
             dgvPersonas.Columns.Add("IdPersona", "IdPersona");
             dgvPersonas.Columns["IdPersona"].Visible = false;
 
+            dgvPersonas.Columns.Add("Dni", "DNI");
             dgvPersonas.Columns.Add("Dni", "DNI");
             dgvPersonas.Columns["Dni"].Visible = false;
             AgregarColumnasAcciones();
@@ -683,7 +679,7 @@ namespace PetShopDelLitoral
             CargarRoles();
             btVerInactivos.Text = "Ver Inactivos";
             // Resaltado inicial: el administrador entra viendo "Todos"; los demás roles, "Clientes"
-            MarcarFiltro(rol.Equals("Administrador", StringComparison.OrdinalIgnoreCase) ? btnTodosLosRegistros : btnTClientes);
+            MarcarFiltro(rol.Equals("Administrador", StringComparison.OrdinalIgnoreCase) ? btnTUsuarios : btnTClientes);
             FiltrarGrilla();
         }
 
@@ -701,7 +697,7 @@ namespace PetShopDelLitoral
         // El botón activo queda oscuro con letras doradas; los demás, dorados con letras oscuras
         private void MarcarFiltro(FontAwesome.Sharp.IconButton activo)
         {
-            PintarFiltro(guna2CustomGradientPanel9, btnTodosLosRegistros, activo == btnTodosLosRegistros);
+            
             PintarFiltro(guna2CustomGradientPanel12, btnTClientes, activo == btnTClientes);
             PintarFiltro(guna2CustomGradientPanel11, btnTProveedores, activo == btnTProveedores);
             PintarFiltro(guna2CustomGradientPanel10, btnTUsuarios, activo == btnTUsuarios);
@@ -1114,20 +1110,6 @@ namespace PetShopDelLitoral
             FiltrarGrilla();
         }
 
-        private void btnTodosLosRegistros_Click(object sender, EventArgs e)
-        {
-            MarcarFiltro(btnTodosLosRegistros);
-
-            // 1. Limpiamos el buscador
-            txtBuscar.Text = "";
-
-            // 2. Reseteamos el botón de inactivos
-            btVerInactivos.Text = "Ver Inactivos";
-
-            // 3. Configuramos la grilla y recargamos los datos desde la base de datos
-            ConfigurarGridUsuarios();
-            CargarUsuarios();
-        }
 
         private void TBDni_Leave(object sender, EventArgs e)
         {
