@@ -1,4 +1,4 @@
-﻿using Capa_Datos;
+using Capa_Datos;
 using System;
 using System.Data;
 
@@ -25,7 +25,7 @@ namespace Capa_Datos
             database.EjecutarSelect();
 
             if (!string.IsNullOrEmpty(database.ErrorDB))
-                throw new Exception(database.ErrorDB);
+                throw new Exception(database.ErrorDB, new Exception(database.ErrorDB));
 
             return database.DsResults.Tables["TablaReporteVentas"];
         }
@@ -43,7 +43,7 @@ namespace Capa_Datos
             database.EjecutarSelect();
 
             if (!string.IsNullOrEmpty(database.ErrorDB))
-                throw new Exception(database.ErrorDB);
+                throw new Exception(database.ErrorDB, new Exception(database.ErrorDB));
 
             return database.DsResults.Tables["TablaDetalle"];
         }
@@ -57,7 +57,7 @@ namespace Capa_Datos
             database.DtParameters.Rows.Add("p_hasta", null, hasta.ToString("yyyy-MM-dd"));
             database.DtParameters.Rows.Add("p_limite", null, limite);
             database.EjecutarSelect();
-            if (!string.IsNullOrEmpty(database.ErrorDB)) throw new Exception(database.ErrorDB);
+            if (!string.IsNullOrEmpty(database.ErrorDB)) throw new Exception(database.ErrorDB, new Exception(database.ErrorDB));
             return database.DsResults.Tables["TablaProductosMasVendidos"];
         }
     }

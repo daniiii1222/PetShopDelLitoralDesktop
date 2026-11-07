@@ -1,4 +1,4 @@
-﻿using Capa_Entidad;
+using Capa_Entidad;
 using Capa_Datos;
 using MySql.Data.MySqlClient;
 using System;
@@ -17,7 +17,7 @@ namespace Capa_Datos
             database.NameSP = "sp_ListarMetodosPago";
             database.TableName = "TablaMetodosPago";
             database.EjecutarSelect();
-            if (!string.IsNullOrEmpty(database.ErrorDB)) throw new Exception(database.ErrorDB);
+            if (!string.IsNullOrEmpty(database.ErrorDB)) throw new Exception(database.ErrorDB, new Exception(database.ErrorDB));
             return database.DsResults;
         }
 
@@ -28,7 +28,7 @@ namespace Capa_Datos
             database.TableName = "TablaProductosVenta";
             database.DtParameters.Rows.Add("p_texto", null, texto);
             database.EjecutarSelect();
-            if (!string.IsNullOrEmpty(database.ErrorDB)) throw new Exception(database.ErrorDB);
+            if (!string.IsNullOrEmpty(database.ErrorDB)) throw new Exception(database.ErrorDB, new Exception(database.ErrorDB));
             return database.DsResults.Tables["TablaProductosVenta"];
         }
 
@@ -39,7 +39,7 @@ namespace Capa_Datos
             database.TableName = "TablaClienteDni";
             database.DtParameters.Rows.Add("p_dni", null, dni);
             database.EjecutarSelect();
-            if (!string.IsNullOrEmpty(database.ErrorDB)) throw new Exception(database.ErrorDB);
+            if (!string.IsNullOrEmpty(database.ErrorDB)) throw new Exception(database.ErrorDB, new Exception(database.ErrorDB));
             return database.DsResults.Tables["TablaClienteDni"];
         }
 
@@ -90,7 +90,7 @@ namespace Capa_Datos
             database.NameSP = "sp_ObtenerVentasRecientes";
             database.TableName = "TablaVentasRecientes";
             database.EjecutarSelect();
-            if (!string.IsNullOrEmpty(database.ErrorDB)) throw new Exception(database.ErrorDB);
+            if (!string.IsNullOrEmpty(database.ErrorDB)) throw new Exception(database.ErrorDB, new Exception(database.ErrorDB));
             return database.DsResults.Tables["TablaVentasRecientes"];
         }
 
@@ -101,7 +101,7 @@ namespace Capa_Datos
             database.NameSP = "sp_ObtenerResumenDashboard";
             database.TableName = "TablaResumenDashboard";
             database.EjecutarSelect();
-            if (!string.IsNullOrEmpty(database.ErrorDB)) throw new Exception(database.ErrorDB);
+            if (!string.IsNullOrEmpty(database.ErrorDB)) throw new Exception(database.ErrorDB, new Exception(database.ErrorDB));
             return database.DsResults.Tables["TablaResumenDashboard"];
         }
 
@@ -112,7 +112,7 @@ namespace Capa_Datos
             database.TableName = "TablaVentasVendedor";
             database.DtParameters.Rows.Add("p_idUsuario", null, idUsuario);
             database.EjecutarSelect();
-            if (!string.IsNullOrEmpty(database.ErrorDB)) throw new Exception(database.ErrorDB);
+            if (!string.IsNullOrEmpty(database.ErrorDB)) throw new Exception(database.ErrorDB, new Exception(database.ErrorDB));
             return database.DsResults.Tables["TablaVentasVendedor"];
         }
     }
