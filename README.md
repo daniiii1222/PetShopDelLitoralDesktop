@@ -95,7 +95,7 @@ La sesión del usuario logueado se guarda en `Sesion.UsuarioActual`, una propied
 
 ---
 
-## 🛠️ Tecnologías
+## Tecnologías
 
 | Tecnología | Uso |
 |---|---|
@@ -110,7 +110,7 @@ La sesión del usuario logueado se guarda en `Sesion.UsuarioActual`, una propied
 
 ---
 
-## 🎨 Identidad visual
+## Identidad visual
 
 La interfaz mantiene la misma paleta en todas las pantallas:
 
@@ -123,7 +123,7 @@ La interfaz mantiene la misma paleta en todas las pantallas:
 
 ---
 
-## 🚀 Instalación
+## Instalación
 
 ### Requisitos
 
@@ -196,11 +196,6 @@ Si tu servidor usa otro usuario o contraseña, cambialo ahí, sin tocar el códi
 2. Esperá a que se restauren los paquetes NuGet.
 3. Elegí como proyecto de inicio **CapaPresentacion** y presioná <kbd>F5</kbd>.
 
-**7. Pruebas (opcional)**
-
-Desde Visual Studio: *Prueba → Ejecutar todas las pruebas*. Cubren validaciones de usuarios, productos, proveedores, compras y copias de seguridad, y **no necesitan base de datos**.
-
----
 
 ## 👤 Roles y permisos
 
@@ -238,14 +233,13 @@ PetShopDelLitoral/
 │   ├── FrmReportes*        Reportes de administrador y de vendedor
 │   ├── FrmBackup           Copias de seguridad
 │   └── Sesion.cs           Usuario logueado
-├── 📂 Pruebas/             Pruebas unitarias (MSTest) de las reglas de negocio
 ├── 📂 Scripts/             Procedimientos almacenados y cambios de esquema (.sql)
 └── 📄 PetShopCapaPresentacion.slnx
 ```
 
 ---
 
-## 🖥️ Cómo está armada la interfaz
+##  Cómo está armada la interfaz
 
 Un detalle de diseño que conviene conocer antes de tocar las pantallas:
 
@@ -258,7 +252,7 @@ Un detalle de diseño que conviene conocer antes de tocar las pantallas:
 
 
 
-## 🔀 Flujo de trabajo con Git
+## Flujo de trabajo con Git
 
 - Cada integrante trabaja en su rama (`feature/...`) y no se sube directo a `master`.
 - Antes de subir: `git pull` de la rama en la que se trabaja.
