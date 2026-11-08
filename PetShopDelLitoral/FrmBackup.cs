@@ -285,6 +285,9 @@ namespace PetShopDelLitoral
 
             this.Controls.Add(panelPrincipal);
             this.Controls.Add(panelTitulo);
+
+            pictureBox1.Image = Properties.Resources.backup;
+            pictureBox2.Image = Properties.Resources.hora__1_;
         }
 
         private void FrmBackup_Load(object sender, EventArgs e)
