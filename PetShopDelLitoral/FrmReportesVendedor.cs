@@ -25,59 +25,96 @@ namespace PetShopDelLitoral
 
         private void FrmReportesVendedor_Load(object sender, EventArgs e)
         {
-            CargarDatosEstaticos();
+            CargarReporte();
         }
 
-        private void CargarDatosEstaticos()
+
+        private void CargarReporte()
         {
-            dgvReportes.Columns.Clear();
-
-            DataTable dtRepoVendedor = new DataTable();
-            dtRepoVendedor.Columns.Add("Concepto");
-            dtRepoVendedor.Columns.Add("Cantidad");
-
-            dtRepoVendedor.Rows.Add("Ventas realizadas hoy", "8 tickets");
-            dtRepoVendedor.Rows.Add("Comisión estimada", "$ 12.000");
-            dtRepoVendedor.Rows.Add("Clientes atendidos", "5");
-
-            dgvReportes.DataSource = dtRepoVendedor;
-            dgvReportes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-            // Bloqueo y colores estéticos
-            dgvReportes.ReadOnly = true;
-            dgvReportes.AllowUserToAddRows = false;
-            dgvReportes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvReportes.DefaultCellStyle.SelectionBackColor = Color.FromArgb(225, 185, 110);
-            dgvReportes.DefaultCellStyle.SelectionForeColor = Color.Black;
-        }
-
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-          
             try
             {
                 DateTime inicio = dtpDesde.Value.Date;
                 DateTime fin = dtpHasta.Value.Date;
 
-                // Mandamos el ID del vendedor logueado directamente
                 int miId = Sesion.UsuarioActual.idUsuario;
 
                 CN_Reporte cnReporte = new CN_Reporte();
-                DataTable dt = cnReporte.ObtenerReporteVentas(inicio, fin, miId);
+
+                DataTable dt = cnReporte.ObtenerReporteVentas(
+                    inicio,
+                    fin,
+                    miId
+                );
+
+                // Eliminamos las columnas creadas desde el Designer.
+                dgvReportes.Columns.Clear();
+
+                // Permitimos que las columnas se generen desde el DataTable.
+                dgvReportes.AutoGenerateColumns = true;
 
                 dgvReportes.DataSource = dt;
-                // Botón para (re)generar el comprobante de la venta de esa fila
+
+                dgvReportes.ReadOnly = true;
+                dgvReportes.AllowUserToAddRows = false;
+                dgvReportes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgvReportes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                // Mejoramos la legibilidad.
+                dgvReportes.DefaultCellStyle.ForeColor = Color.Black;
+                dgvReportes.DefaultCellStyle.SelectionBackColor =
+                    Color.FromArgb(225, 185, 110);
+                dgvReportes.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+                dgvReportes.RowsDefaultCellStyle.ForeColor = Color.Black;
+                dgvReportes.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
+
+                // Agregamos el botón Ver Detalle.
+                DataGridViewButtonColumn columnaDetalle = new DataGridViewButtonColumn
+                {
+                    Name = "columnaDetalle",
+                    HeaderText = "Detalle",
+                    Text = "Ver Detalle",
+                    UseColumnTextForButtonValue = true,
+                    ReadOnly = true
+                };
+
+                dgvReportes.Columns.Add(columnaDetalle);
+
+                // Agregamos la columna de comprobante.
                 ComprobanteVenta.AsegurarColumna(dgvReportes);
 
-                if (dt.Rows.Count == 0)
-                    MessageBox.Show("No tenés ventas en este rango de fechas.", "Reportes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //correccion visual
+                foreach (DataGridViewColumn columna in dgvReportes.Columns)
+                {
+                    if (columna is DataGridViewButtonColumn boton)
+                    {
+                        boton.FlatStyle = FlatStyle.Flat;
+
+                        boton.DefaultCellStyle.SelectionBackColor =
+                            Color.FromArgb(225, 185, 110);
+
+                        boton.DefaultCellStyle.SelectionForeColor = Color.Black;
+                    }
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    "Error al generar el reporte: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
-        
         }
+
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CargarReporte();
+        }
+        
+        
 
         private void dgvReportes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -95,7 +132,7 @@ namespace PetShopDelLitoral
                 try
                 {
                     // Obtenemos el ID de la venta de esa fila (asegurate de que la columna se llame "Nº Venta" o "Codigo")
-                    int idVenta = Convert.ToInt32(dgvReportes.Rows[e.RowIndex].Cells["Nº Venta"].Value);
+                    int idVenta = Convert.ToInt32(dgvReportes.Rows[e.RowIndex].Cells["N° Venta"].Value);
 
                     CN_Reporte cnReporte = new CN_Reporte();
                     DataTable dtDetalle = cnReporte.ObtenerDetalleVenta(idVenta);
