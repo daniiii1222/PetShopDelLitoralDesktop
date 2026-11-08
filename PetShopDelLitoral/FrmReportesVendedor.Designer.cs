@@ -70,7 +70,6 @@
             this.panelTituloSec.Name = "panelTituloSec";
             this.panelTituloSec.Size = new System.Drawing.Size(1062, 77);
             this.panelTituloSec.TabIndex = 0;
-            this.panelTituloSec.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTituloSec_Paint);
             // 
             // tituloReportes
             // 

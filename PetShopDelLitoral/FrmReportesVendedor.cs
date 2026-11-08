@@ -51,11 +51,6 @@ namespace PetShopDelLitoral
             dgvReportes.DefaultCellStyle.SelectionForeColor = Color.Black;
         }
 
-        private void panelTituloSec_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void btnBuscar_Click(object sender, EventArgs e)
         {
           

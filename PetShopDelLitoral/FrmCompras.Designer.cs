@@ -115,7 +115,6 @@
             this.PaneContenidoSec.Padding = new System.Windows.Forms.Padding(12);
             this.PaneContenidoSec.Size = new System.Drawing.Size(1139, 621);
             this.PaneContenidoSec.TabIndex = 5;
-            this.PaneContenidoSec.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint_1);
             // 
             // PanelDerechoVenta
             // 
@@ -145,7 +144,6 @@
             this.PanelDerechoMID.Name = "PanelDerechoMID";
             this.PanelDerechoMID.Size = new System.Drawing.Size(813, 443);
             this.PanelDerechoMID.TabIndex = 1;
-            this.PanelDerechoMID.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelDerechoMID_Paint);
             // 
             // dgvCompras
             // 
@@ -213,7 +211,6 @@
             this.dgvCompras.ThemeStyle.RowsStyle.Height = 24;
             this.dgvCompras.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(185)))), ((int)(((byte)(110)))));
             this.dgvCompras.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvCompras.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCompras_CellContentClick_1);
             // 
             // columnaProducto
             // 
@@ -425,7 +422,6 @@
             this.PanelDerechoSUP.Name = "PanelDerechoSUP";
             this.PanelDerechoSUP.Size = new System.Drawing.Size(813, 82);
             this.PanelDerechoSUP.TabIndex = 0;
-            this.PanelDerechoSUP.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelDerechoSUP_Paint);
             // 
             // label14
             // 
@@ -507,7 +503,6 @@
             this.label10.Size = new System.Drawing.Size(74, 18);
             this.label10.TabIndex = 13;
             this.label10.Text = "Cantidad";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // guna2NumericUpDown1
             // 
@@ -576,7 +571,6 @@
             this.label9.Size = new System.Drawing.Size(192, 25);
             this.label9.TabIndex = 1;
             this.label9.Text = "Agregar Productos";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // guna2Panel1
             // 
@@ -693,7 +687,6 @@
             this.guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(266, 40);
             this.guna2CustomGradientPanel1.TabIndex = 21;
-            this.guna2CustomGradientPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2CustomGradientPanel1_Paint);
             // 
             // guna2CustomGradientPanel2
             // 
@@ -777,7 +770,6 @@
             this.label5.Size = new System.Drawing.Size(144, 21);
             this.label5.TabIndex = 19;
             this.label5.Text = "Observaciones";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // guna2TextBox2
             // 
@@ -826,7 +818,6 @@
             this.guna2ComboBox1.Name = "guna2ComboBox1";
             this.guna2ComboBox1.Size = new System.Drawing.Size(266, 32);
             this.guna2ComboBox1.TabIndex = 16;
-            this.guna2ComboBox1.SelectedIndexChanged += new System.EventHandler(this.guna2ComboBox1_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -941,7 +932,6 @@
             this.label1.Size = new System.Drawing.Size(111, 21);
             this.label1.TabIndex = 1;
             this.label1.Text = "Proveedor*";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // LDatosVenta
             // 
@@ -954,7 +944,6 @@
             this.LDatosVenta.Size = new System.Drawing.Size(241, 26);
             this.LDatosVenta.TabIndex = 0;
             this.LDatosVenta.Text = "Datos de la Compra";
-            this.LDatosVenta.Click += new System.EventHandler(this.LDatosVenta_Click);
             // 
             // panelTituloSec
             // 

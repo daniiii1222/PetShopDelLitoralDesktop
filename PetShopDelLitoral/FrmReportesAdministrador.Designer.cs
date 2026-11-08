@@ -86,7 +86,6 @@
             this.panelTituloSec.Name = "panelTituloSec";
             this.panelTituloSec.Size = new System.Drawing.Size(1062, 77);
             this.panelTituloSec.TabIndex = 0;
-            this.panelTituloSec.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTituloSec_Paint);
             // 
             // tituloReportes
             // 
@@ -468,7 +467,6 @@
             this.txtBuscarVendedor.SelectedText = "";
             this.txtBuscarVendedor.Size = new System.Drawing.Size(310, 38);
             this.txtBuscarVendedor.TabIndex = 22;
-            this.txtBuscarVendedor.TextChanged += new System.EventHandler(this.guna2TextBox1_TextChanged);
             // 
             // guna2CustomGradientPanel6
             // 

@@ -153,7 +153,6 @@
             this.lblEspacioUtilizado.Size = new System.Drawing.Size(57, 24);
             this.lblEspacioUtilizado.TabIndex = 5;
             this.lblEspacioUtilizado.Text = "0 MB";
-            this.lblEspacioUtilizado.Click += new System.EventHandler(this.lblEspacioUtilizado_Click);
             // 
             // panel1
             // 
@@ -303,7 +302,6 @@
             this.label8.Size = new System.Drawing.Size(141, 13);
             this.label8.TabIndex = 13;
             this.label8.Text = "UBICACION DE ARCHIVOS";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // panel5
             // 

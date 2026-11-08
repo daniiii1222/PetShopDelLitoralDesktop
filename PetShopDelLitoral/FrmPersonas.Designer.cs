@@ -129,7 +129,6 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 27);
             this.label1.TabIndex = 17;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // PanelCategorias
             // 
@@ -142,7 +141,6 @@
             this.PanelCategorias.Name = "PanelCategorias";
             this.PanelCategorias.Size = new System.Drawing.Size(1062, 69);
             this.PanelCategorias.TabIndex = 15;
-            this.PanelCategorias.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelCategorias_Paint);
             // 
             // guna2Panel1
             // 
@@ -161,7 +159,6 @@
             this.LBProveedores.Size = new System.Drawing.Size(113, 27);
             this.LBProveedores.TabIndex = 3;
             this.LBProveedores.Text = "Registro ";
-            this.LBProveedores.Click += new System.EventHandler(this.LBProveedores_Click);
             // 
             // guna2HtmlLabel1
             // 
@@ -194,7 +191,6 @@
             this.PanelPrincipal.SelectedText = "";
             this.PanelPrincipal.Size = new System.Drawing.Size(1073, 511);
             this.PanelPrincipal.TabIndex = 16;
-            this.PanelPrincipal.TextChanged += new System.EventHandler(this.PanelPrincipal_TextChanged);
             // 
             // guna2Panel2
             // 
@@ -268,7 +264,6 @@
             this.PanelUsuario.Name = "PanelUsuario";
             this.PanelUsuario.Size = new System.Drawing.Size(374, 481);
             this.PanelUsuario.TabIndex = 24;
-            this.PanelUsuario.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2CustomGradientPanel1_Paint_1);
             // 
             // label12
             // 
@@ -318,7 +313,6 @@
             this.TBNombre.SelectedText = "";
             this.TBNombre.Size = new System.Drawing.Size(159, 32);
             this.TBNombre.TabIndex = 1;
-            this.TBNombre.TextChanged += new System.EventHandler(this.TBNombre_TextChanged);
             // 
             // TBDni
             // 
@@ -339,7 +333,6 @@
             this.TBDni.SelectedText = "";
             this.TBDni.Size = new System.Drawing.Size(159, 32);
             this.TBDni.TabIndex = 31;
-            this.TBDni.TextChanged += new System.EventHandler(this.TBDni_TextChanged);
             this.TBDni.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TBDni_KeyPress);
             this.TBDni.Leave += new System.EventHandler(this.TBDni_Leave);
             // 
@@ -362,7 +355,6 @@
             this.label11.Size = new System.Drawing.Size(45, 18);
             this.label11.TabIndex = 30;
             this.label11.Text = "Dni *";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // guna2CustomGradientPanel6
             // 
@@ -516,7 +508,6 @@
             this.label9.Size = new System.Drawing.Size(95, 18);
             this.label9.TabIndex = 30;
             this.label9.Text = "Contraseña";
-            this.label9.Click += new System.EventHandler(this.label9_Click_1);
             // 
             // TBContraseniaUsuario
             // 
@@ -626,7 +617,6 @@
             this.TBTelefono.SelectedText = "";
             this.TBTelefono.Size = new System.Drawing.Size(159, 32);
             this.TBTelefono.TabIndex = 23;
-            this.TBTelefono.TextChanged += new System.EventHandler(this.TBTelefono_TextChanged);
             this.TBTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TBTelefono_KeyPress);
             // 
             // label6
@@ -638,7 +628,6 @@
             this.label6.Size = new System.Drawing.Size(61, 18);
             this.label6.TabIndex = 22;
             this.label6.Text = "Correo";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // TBCorreo
             // 
@@ -669,7 +658,6 @@
             this.label4.Size = new System.Drawing.Size(79, 18);
             this.label4.TabIndex = 20;
             this.label4.Text = "Apellido *";
-            this.label4.Click += new System.EventHandler(this.label4_Click_1);
             // 
             // TBApellido
             // 
@@ -848,7 +836,6 @@
             this.guna2Panel6.Name = "guna2Panel6";
             this.guna2Panel6.Size = new System.Drawing.Size(20, 481);
             this.guna2Panel6.TabIndex = 26;
-            this.guna2Panel6.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel6_Paint);
             // 
             // guna2CustomGradientPanel7
             // 
@@ -863,7 +850,6 @@
             this.guna2CustomGradientPanel7.Name = "guna2CustomGradientPanel7";
             this.guna2CustomGradientPanel7.Size = new System.Drawing.Size(628, 481);
             this.guna2CustomGradientPanel7.TabIndex = 27;
-            this.guna2CustomGradientPanel7.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2CustomGradientPanel7_Paint);
             // 
             // dgvPersonas
             // 
@@ -1075,7 +1061,6 @@
             this.guna2CustomGradientPanel12.Name = "guna2CustomGradientPanel12";
             this.guna2CustomGradientPanel12.Size = new System.Drawing.Size(105, 36);
             this.guna2CustomGradientPanel12.TabIndex = 28;
-            this.guna2CustomGradientPanel12.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2CustomGradientPanel12_Paint);
             // 
             // btnTClientes
             // 
@@ -1186,7 +1171,6 @@
             this.txtBuscar.SelectedText = "";
             this.txtBuscar.Size = new System.Drawing.Size(417, 36);
             this.txtBuscar.TabIndex = 31;
-            this.txtBuscar.TextChanged += new System.EventHandler(this.TBbuscarPersonas_TextChanged);
             // 
             // FrmPersonas
             // 

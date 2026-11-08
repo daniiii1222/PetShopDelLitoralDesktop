@@ -326,8 +326,6 @@ namespace PetShopDelLitoral
         // EVENTOS RESTANTES (DISEÑO Y BOTONES ESTÁTICOS QUE QUERÍAS MANTENER)
         // -------------------------------------------------------------------------
 
-        private void panelTituloSec_Paint(object sender, PaintEventArgs e) { }
-        private void guna2TextBox1_TextChanged(object sender, EventArgs e) { }
         private void botonInicio_Click(object sender, EventArgs e) { btnBuscar_Click(sender, e); }
 
         // Stock a partir del cual un producto entra en el reporte "Stock Mínimo".

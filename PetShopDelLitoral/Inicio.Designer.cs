@@ -70,7 +70,6 @@ namespace PetShopDelLitoral
             this.PanelContenedor.Name = "PanelContenedor";
             this.PanelContenedor.Size = new System.Drawing.Size(1707, 886);
             this.PanelContenedor.TabIndex = 2;
-            this.PanelContenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelContenedor_Paint);
             // 
             // panelCentral
             // 
@@ -82,7 +81,6 @@ namespace PetShopDelLitoral
             this.panelCentral.Name = "panelCentral";
             this.panelCentral.Size = new System.Drawing.Size(1440, 763);
             this.panelCentral.TabIndex = 2;
-            this.panelCentral.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCentral_Paint);
             // 
             // PanelControl
             // 
@@ -93,7 +91,6 @@ namespace PetShopDelLitoral
             this.PanelControl.Name = "PanelControl";
             this.PanelControl.Size = new System.Drawing.Size(1440, 763);
             this.PanelControl.TabIndex = 0;
-            this.PanelControl.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelControl_Paint);
             // 
             // panelSuperior
             // 
@@ -132,7 +129,6 @@ namespace PetShopDelLitoral
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(267, 886);
             this.panelMenu.TabIndex = 0;
-            this.panelMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMenu_Paint);
             // 
             // logo
             // 
@@ -145,7 +141,6 @@ namespace PetShopDelLitoral
             this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.logo.TabIndex = 0;
             this.logo.TabStop = false;
-            this.logo.Click += new System.EventHandler(this.logo_Click);
             // 
             // botonInicio
             // 
@@ -357,7 +352,6 @@ namespace PetShopDelLitoral
             this.label6.Size = new System.Drawing.Size(156, 28);
             this.label6.TabIndex = 10;
             this.label6.Text = "Tablero Principal";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // Inicio
             // 

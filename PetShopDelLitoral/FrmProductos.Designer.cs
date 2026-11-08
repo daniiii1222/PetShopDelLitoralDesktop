@@ -97,7 +97,6 @@ namespace PetShopDelLitoral
             this.PanelContenedor.Name = "PanelContenedor";
             this.PanelContenedor.Size = new System.Drawing.Size(858, 73);
             this.PanelContenedor.TabIndex = 15;
-            this.PanelContenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelContenedor_Paint);
             // 
             // guna2Panel6
             // 
@@ -371,7 +370,6 @@ namespace PetShopDelLitoral
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(858, 58);
             this.guna2Panel1.TabIndex = 13;
-            this.guna2Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint);
             // 
             // label1
             // 

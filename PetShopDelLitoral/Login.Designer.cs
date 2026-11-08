@@ -70,7 +70,6 @@
             this.LBNumDocumento.Size = new System.Drawing.Size(30, 16);
             this.LBNumDocumento.TabIndex = 1;
             this.LBNumDocumento.Text = "Dni:";
-            this.LBNumDocumento.Click += new System.EventHandler(this.label1_Click);
             // 
             // LBContraseña
             // 
@@ -82,7 +81,6 @@
             this.LBContraseña.TabIndex = 2;
             this.LBContraseña.Tag = "";
             this.LBContraseña.Text = "Contraseña:";
-            this.LBContraseña.Click += new System.EventHandler(this.LBContraseña_Click);
             // 
             // txtDni
             // 
@@ -91,7 +89,6 @@
             this.txtDni.Name = "txtDni";
             this.txtDni.Size = new System.Drawing.Size(267, 22);
             this.txtDni.TabIndex = 3;
-            this.txtDni.TextChanged += new System.EventHandler(this.TxtNombre_TextChanged);
             // 
             // txtPassword
             // 
@@ -160,7 +157,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Login_FormClosed);
-            this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

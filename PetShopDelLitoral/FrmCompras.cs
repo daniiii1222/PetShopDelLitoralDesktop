@@ -31,13 +31,6 @@ namespace PetShopDelLitoral
             this.iconButton4.Click += new EventHandler(this.btnBuscarProducto_Click);
             this.dgvCompras.CellContentClick += new DataGridViewCellEventHandler(this.dgvCompras_CellContentClick);
         }
-        private void dgvCompras_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-        }
-
-        private void LDatosVenta_Click(object sender, EventArgs e)
-        {
-        }
         private void FrmCompras_Load(object sender, EventArgs e)
         {
             ConfigurarGrilla();
@@ -450,18 +443,5 @@ namespace PetShopDelLitoral
         }
 
         // Métodos de eventos visuales del diseñador (se conservan)
-        private void guna2Panel1_Paint(object sender, PaintEventArgs e) { }
-        private void PanelDatosCompra_Paint(object sender, PaintEventArgs e) { }
-        private void guna2Panel1_Paint_1(object sender, PaintEventArgs e) { }
-        private void guna2Panel1_Paint_2(object sender, PaintEventArgs e) { }
-        private void label1_Click(object sender, EventArgs e) { }
-        private void PanelDerechoMID_Paint(object sender, PaintEventArgs e) { }
-        private void label4_Click(object sender, EventArgs e) { }
-        private void label5_Click(object sender, EventArgs e) { }
-        private void guna2CustomGradientPanel1_Paint(object sender, PaintEventArgs e) { }
-        private void label9_Click(object sender, EventArgs e) { }
-        private void label10_Click(object sender, EventArgs e) { }
-        private void guna2ComboBox1_SelectedIndexChanged(object sender, EventArgs e) { }
-        private void PanelDerechoSUP_Paint(object sender, PaintEventArgs e) { }
     }
 }

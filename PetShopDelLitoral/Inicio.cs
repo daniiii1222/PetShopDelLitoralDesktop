@@ -269,14 +269,6 @@ namespace PetShopDelLitoral
         }
 
 
-        private void panelSuperior_Paint(object sender, PaintEventArgs e) { }
-        private void PanelControl_Paint(object sender, PaintEventArgs e) { }
-        private void panelMenu_Paint(object sender, PaintEventArgs e) { }
-
-       
-        private void PanelContenedor_Paint(object sender, PaintEventArgs e) { }
-        private void panelCentral_Paint(object sender, PaintEventArgs e) { }
-        private void logo_Click(object sender, EventArgs e) { }
         private void botonInicio_Click_1(object sender, EventArgs e)
         {
             AbrirFormulario(new FrmDashboard());
@@ -285,11 +277,6 @@ namespace PetShopDelLitoral
         private void btnBackup_Click_2(object sender, EventArgs e)
         {
             AbrirFormulario(new FrmBackup());
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void MostrarDatosUsuario()

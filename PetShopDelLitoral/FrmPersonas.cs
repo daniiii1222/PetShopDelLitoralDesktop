@@ -38,118 +38,8 @@ namespace PetShopDelLitoral
         {
         }
 
-        private void PanelPrincipal_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ModifPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void PanelListaCateg_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void PanelCategorias_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void iBSearch_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2Button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LBProveedores_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void proveedoresPanel_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2CustomGradientPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label4_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2TextBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2TextBox7_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2CustomGradientPanel1_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void botonUsuario_Click(object sender, EventArgs e) { btnUsuarios_Click(sender, e); }
       
-
-        private void guna2CustomGradientPanel7_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void btnClientes_Click(object sender, EventArgs e)
         {
@@ -1060,41 +950,6 @@ namespace PetShopDelLitoral
                 MessageBox.Show("Error al cargar los proveedores: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void guna2Panel6_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label9_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2CustomGradientPanel12_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void TBbuscarPersonas_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2HtmlLabel2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtInactivos_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btVerInactivos_Click(object sender, EventArgs e)
         {
             // Alterna estrictamente entre ver solo inactivos o ver solo activos
@@ -1150,16 +1005,6 @@ namespace PetShopDelLitoral
 
         }
 
-        private void TBNombre_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TBDni_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void TBDni_KeyPress(object sender, KeyPressEventArgs e)
         {
             // char.IsControl permite usar teclas de sistema como Borrar (Backspace)
@@ -1169,11 +1014,6 @@ namespace PetShopDelLitoral
                 // Si la tecla presionada NO es un control y NO es un número, la anulamos
                 e.Handled = true;
             }
-        }
-
-        private void TBTelefono_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void TBTelefono_KeyPress(object sender, KeyPressEventArgs e)

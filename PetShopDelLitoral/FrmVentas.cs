@@ -367,14 +367,6 @@ namespace PetShopDelLitoral
             ActualizarTotales(); // Deja que esta función se encargue de calcular el subtotal y el total con el descuento de la compra
         }
 
-        private void dgvCompras_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-        }
-
-        private void LDatosVenta_Click(object sender, EventArgs e)
-        {
-        }
-
         // ---------- DESCUENTOS ----------
         // Columna "Desc. %" editable: se agrega por código para no tocar el Designer.
         // Orden resultante: Producto | Precio | Cantidad | Desc. % | Subtotal | Eliminar
@@ -647,17 +639,5 @@ namespace PetShopDelLitoral
             }
         }
 
-        private void guna2Panel1_Paint(object sender, PaintEventArgs e) { }
-        private void PanelDatosVenta_Paint(object sender, PaintEventArgs e) { }
-        private void guna2Panel1_Paint_1(object sender, PaintEventArgs e) { }
-        private void guna2Panel1_Paint_2(object sender, PaintEventArgs e) { }
-        private void label1_Click(object sender, EventArgs e) { }
-        private void PanelDerechoMID_Paint(object sender, PaintEventArgs e) { }
-        private void label4_Click(object sender, EventArgs e) { }
-        private void label5_Click(object sender, EventArgs e) { }
-        private void guna2CustomGradientPanel1_Paint(object sender, PaintEventArgs e) { }
-        private void label9_Click(object sender, EventArgs e) { }
-        private void label10_Click(object sender, EventArgs e) { }
-        private void panelTituloSec_Paint(object sender, PaintEventArgs e) { }
     }
 }

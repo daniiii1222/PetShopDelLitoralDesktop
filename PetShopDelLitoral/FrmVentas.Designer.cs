@@ -112,7 +112,6 @@
             this.PaneContenidoSec.Padding = new System.Windows.Forms.Padding(10, 10, 15, 15);
             this.PaneContenidoSec.Size = new System.Drawing.Size(1137, 572);
             this.PaneContenidoSec.TabIndex = 5;
-            this.PaneContenidoSec.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint_1);
             // 
             // PanelDerechoVenta
             // 
@@ -143,7 +142,6 @@
             this.PanelDerechoMID.Name = "PanelDerechoMID";
             this.PanelDerechoMID.Size = new System.Drawing.Size(797, 392);
             this.PanelDerechoMID.TabIndex = 1;
-            this.PanelDerechoMID.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelDerechoMID_Paint);
             // 
             // dgvVentas
             // 
@@ -461,7 +459,6 @@
             this.label10.Size = new System.Drawing.Size(74, 18);
             this.label10.TabIndex = 13;
             this.label10.Text = "Cantidad";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // guna2NumericUpDown1
             // 
@@ -530,7 +527,6 @@
             this.label9.Size = new System.Drawing.Size(192, 25);
             this.label9.TabIndex = 1;
             this.label9.Text = "Agregar Productos";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // guna2Panel1
             // 
@@ -585,7 +581,6 @@
             this.guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(268, 117);
             this.guna2CustomGradientPanel1.TabIndex = 21;
-            this.guna2CustomGradientPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2CustomGradientPanel1_Paint);
             // 
             // txtSubtotal
             // 
@@ -732,7 +727,6 @@
             this.label5.Size = new System.Drawing.Size(134, 20);
             this.label5.TabIndex = 19;
             this.label5.Text = "Observaciones";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // guna2TextBox2
             // 
@@ -872,7 +866,6 @@
             this.label1.Size = new System.Drawing.Size(75, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Cliente*";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // LDatosVenta
             // 

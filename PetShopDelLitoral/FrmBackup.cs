@@ -703,16 +703,10 @@ namespace PetShopDelLitoral
         private void btnRespaldar_Click(object sender, EventArgs e) => EjecutarRespaldoReal();
 
         private void btnAjustarHora_Click(object sender, EventArgs e) => CargarHistorialBackups();
-        private void lblEspacioUtilizado_Click(object sender, EventArgs e) { }
-
         private void FrmBackup_Load_1(object sender, EventArgs e)
         {
             CargarHistorialBackups();
         }
 
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

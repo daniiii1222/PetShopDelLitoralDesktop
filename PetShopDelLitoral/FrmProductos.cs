@@ -224,13 +224,5 @@ namespace PetShopDelLitoral
             AplicarFiltros();
         }
 
-        private void label1_Click(object sender, EventArgs e) { }
-        private void label1_Click_1(object sender, EventArgs e) { }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
-        private void guna2Button1_Click(object sender, EventArgs e) { }
-        private void panel2_Paint(object sender, PaintEventArgs e) { }
-        private void guna2Panel5_Paint(object sender, PaintEventArgs e) { }
-        private void guna2Panel1_Paint(object sender, PaintEventArgs e) { }
-        private void PanelContenedor_Paint(object sender, PaintEventArgs e) { }
     }
 }

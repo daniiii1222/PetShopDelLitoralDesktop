@@ -12,21 +12,6 @@ namespace PetShopDelLitoral
             InitializeComponent();
         }
 
-        private void Login_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LBContraseña_Click(object sender, EventArgs e)
-        {
-
-        }
-
       private void IBIngresar_Click(object sender, EventArgs e)
         {
             string dni = txtDni.Text.Trim();
@@ -65,11 +50,6 @@ namespace PetShopDelLitoral
         private void BTNCancelar_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void TxtNombre_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void Login_FormClosed(object sender, FormClosedEventArgs e)
