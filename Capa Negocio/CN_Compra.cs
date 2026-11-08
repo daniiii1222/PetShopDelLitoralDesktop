@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+using Capa_Entidad;
+using Capa_Datos;
+
+namespace Capa_Negocio
+{
+    public class CN_Compra
+    {
+        private CD_Compra objcd_compra = new CD_Compra();
+
+        public bool Registrar(CompraProveedor objCompra, List<DetalleCompracs> listaDetalle, out string Mensaje)
+        {
+            Mensaje = string.Empty;
+
+            if (objCompra == null)
+            {
+                Mensaje = "Los datos de la compra son inválidos.";
+                return false;
+            }
+
+            if (objCompra.IdProveedor == null || objCompra.IdProveedor.Id_proveedor <= 0)
+            {
+                Mensaje = "Debe seleccionar un proveedor para la compra.";
+                return false;
+            }
+
+            if (listaDetalle == null || listaDetalle.Count == 0)
+            {
+                Mensaje = "Debe agregar al menos un producto al detalle de la compra.";
+                return false;
+            }
+
+            if (objCompra.IdUsuario == null || objCompra.IdUsuario.idUsuario <= 0)
+            {
+                Mensaje = "No se pudo identificar al usuario que registra la compra.";
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(objCompra.Tipo_comprobante))
+            {
+                Mensaje = "Debe indicar el tipo de comprobante.";
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(objCompra.Numero_comprobante))
+            {
+                Mensaje = "Debe ingresar el número de comprobante.";
+                return false;
+            }
+
+            decimal sumaDetalle = 0;
+            foreach (DetalleCompracs d in listaDetalle)
+            {
+                if (d.IdProducto == null || d.Cantidad <= 0)
+                {
+                    Mensaje = "Todos los productos deben tener una cantidad mayor a cero.";
+                    return false;
+                }
+                if (d.Precio_unitario <= 0)
+                {
+                    Mensaje = "Todos los productos deben tener un precio de compra mayor a cero.";
+                    return false;
+                }
+                sumaDetalle += d.Subtotal_compra;
+            }
+            if (Math.Abs(sumaDetalle - objCompra.Monto_compra) > 0.01m)
+            {
+                Mensaje = "El total de la compra no coincide con el detalle.";
+                return false;
+            }
+
+            return objcd_compra.Registrar(objCompra, listaDetalle, out Mensaje);
+        }
+    }
+}

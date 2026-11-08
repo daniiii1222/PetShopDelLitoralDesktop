@@ -1,5 +1,5 @@
 ﻿using Capa_Entidad;
-using CapaDatos;
+using Capa_Datos;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -154,7 +154,7 @@ namespace Capa_Datos
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
 
             return tablaPersona;

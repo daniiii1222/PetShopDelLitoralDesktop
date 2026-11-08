@@ -3,5 +3,6 @@
   <Project Path="Capa Datos/CapaDatos.csproj" />
   <Project Path="Capa Entidad/CapaEntidad.csproj" />
   <Project Path="Capa Negocio/CapaNegocio.csproj" />
+  <Project Path="Pruebas/Pruebas.csproj" />
   <Project Path="PetShopDelLitoral/CapaPresentacion.csproj" Id="3c2b9ff5-74dc-47de-b306-7a7d1557199a" />
 </Solution>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,60 +8,448 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Capa_Entidad;
-using CapaNegocio;
+using Capa_Negocio;
+
 
 namespace PetShopDelLitoral
 {
     public partial class FrmCompras : Form
     {
+        private List<Producto> _listaProductos = new List<Producto>();
+        private Producto _productoSeleccionado = null;
+
         public FrmCompras()
         {
             InitializeComponent();
+            PrepararLayoutPanelIzquierdo();
+
+            // Enlazar eventos de botones del diseñador
+            this.iconButton6.Click += new EventHandler(this.btnAgregar_Click);
+            this.iconButton5.Click += new EventHandler(this.btnVaciarLista_Click);
+            this.botonGuardarCompra.Click += new EventHandler(this.btnGuardarCompra_Click);
+            this.iconButton2.Click += new EventHandler(this.btnCancelar_Click);
+            this.iconButton4.Click += new EventHandler(this.btnBuscarProducto_Click);
+            this.dgvCompras.CellContentClick += new DataGridViewCellEventHandler(this.dgvCompras_CellContentClick);
+        }
+        private void dgvCompras_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
         }
 
+        private void LDatosVenta_Click(object sender, EventArgs e)
+        {
+        }
         private void FrmCompras_Load(object sender, EventArgs e)
         {
-            // Carga de la grilla de productos / compras
-            CargarDatosEstaticos();
+            ConfigurarGrilla();
+            CargarProveedores();
+            CargarTiposComprobante();
+            CargarProductosAutocompletado();
+            InicializarCampos();
+
+            guna2TextBox7.PlaceholderText = "Buscar por nombre o código...";
+            guna2TextBox7.KeyDown += (s, ev) =>
+            {
+                if (ev.KeyCode == Keys.Enter)
+                {
+                    ev.SuppressKeyPress = true;
+                    btnBuscarProducto_Click(s, ev);
+                }
+            };
+
+            AlinearControlesCompras();
+            this.Shown += (s, ev) => AlinearControlesCompras();
+            this.Resize += (s, ev) => AlinearControlesCompras();
+            this.SizeChanged += (s, ev) => AlinearControlesCompras();
+            if (PanelDerechoSUP != null) PanelDerechoSUP.Resize += (s, ev) => AlinearControlesCompras();
+            if (PanelDerechoBOT != null) PanelDerechoBOT.Resize += (s, ev) => AlinearControlesCompras();
+            if (panelIzquierdoVenta != null) panelIzquierdoVenta.Resize += (s, ev) => AlinearControlesCompras();
+            if (PaneContenidoSec != null) PaneContenidoSec.Resize += (s, ev) => AlinearControlesCompras();
         }
 
-        private void CargarDatosEstaticos()
+        private void ConfigurarGrilla()
         {
-            // Borramos columnas viejas si las hubiera
-            dgvCompras.Columns.Clear();
-
-            // Creamos la estructura de la tabla de detalle
-            DataTable dtCompras = new DataTable();
-            dtCompras.Columns.Add("Producto");
-            dtCompras.Columns.Add("Precio Compra");
-            dtCompras.Columns.Add("Cantidad");
-            dtCompras.Columns.Add("Subtotal");
-
-            // Datos de prueba para simular la grilla
-            dtCompras.Rows.Add("Alimento perro 3kg", "$ 6.200,00", "10", "$ 62.000,00");
-            dtCompras.Rows.Add("Correa nylon", "$ 1.800,00", "5", "$ 9.000,00");
-            dtCompras.Rows.Add("Alimento gato 1kg", "$ 2.100,00", "20", "$ 42.000,00");
-
-            // Asignamos datos a la grilla y la configuramos
-            dgvCompras.DataSource = dtCompras;
-            dgvCompras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
+            dgvCompras.Rows.Clear();
             dgvCompras.ReadOnly = true;
             dgvCompras.AllowUserToAddRows = false;
             dgvCompras.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-            // Personalización visual
             dgvCompras.DefaultCellStyle.SelectionBackColor = Color.FromArgb(225, 185, 110);
             dgvCompras.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvCompras.EnableHeadersVisualStyles = false;
+            dgvCompras.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(33, 24, 21);
+            dgvCompras.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCompras.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(33, 24, 21);
+            dgvCompras.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void InicializarCampos()
         {
-            // Simulamos la registración exitosa de la compra
-            MessageBox.Show("Compra registrada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            guna2DateTimePicker1.Value = DateTime.Today;
+
+            // Encargado de la compra (Usuario actual)
+            if (Sesion.UsuarioActual != null && Sesion.UsuarioActual.idPersona != null)
+            {
+                guna2TextBox2.Text = $"{Sesion.UsuarioActual.idPersona.nombre_persona} {Sesion.UsuarioActual.idPersona.apellido_persona}";
+            }
+            else
+            {
+                guna2TextBox2.Text = "Administrador";
+            }
+            guna2TextBox2.ReadOnly = true;
+
+            // Totales iniciales
+           
+
+            guna2TextBox6.Text = "$ 0,00"; // Total
+            guna2TextBox6.ReadOnly = true;
+            guna2TextBox6.ForeColor = System.Drawing.Color.FromArgb(253, 204, 111);
+
+            guna2NumericUpDown1.Value = 1;
+            guna2NumericUpDown1.Minimum = 1;
+            guna2NumericUpDown1.Maximum = 10000;
         }
 
-        // Métodos de eventos del diseñador
+        private void CargarTiposComprobante()
+        {
+            comboBox1.Items.Clear();
+            comboBox1.Items.AddRange(new object[] { "Factura A", "Factura B", "Factura C", "Remito", "Ticket" });
+            comboBox1.SelectedIndex = 0;
+        }
+
+        private void CargarProveedores()
+        {
+            try
+            {
+                CN_Proveedor objNegocioProv = new CN_Proveedor();
+                List<Proveedor> lista = objNegocioProv.Listar() ?? new List<Proveedor>();
+
+                var itemsCombo = lista.Select(p => new
+                {
+                    Id = p.Id_proveedor,
+                    Nombre = p.Id_persona != null
+                        ? $"{p.Id_persona.nombre_persona} {p.Id_persona.apellido_persona} ({p.Id_persona.dni_persona})"
+                        : $"Proveedor #{p.Id_proveedor}"
+                }).ToList();
+
+                guna2ComboBox1.DisplayMember = "Nombre";
+                guna2ComboBox1.ValueMember = "Id";
+                guna2ComboBox1.DataSource = itemsCombo;
+
+                if (itemsCombo.Count > 0)
+                    guna2ComboBox1.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar proveedores: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void CargarProductosAutocompletado()
+        {
+            try
+            {
+                _listaProductos = new CN_Producto().Listar();
+
+                AutoCompleteStringCollection coleccion = new AutoCompleteStringCollection();
+                foreach (Producto prod in _listaProductos)
+                {
+                    if (!string.IsNullOrEmpty(prod.Codigo_producto))
+                    {
+                        coleccion.Add(prod.Codigo_producto);
+                    }
+                    if (!string.IsNullOrEmpty(prod.Nombre_producto))
+                    {
+                        coleccion.Add(prod.Nombre_producto);
+                    }
+                    coleccion.Add(prod.IdProducto.ToString());
+                }
+
+                guna2TextBox7.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                guna2TextBox7.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                guna2TextBox7.AutoCompleteCustomSource = coleccion;
+                guna2TextBox7.PlaceholderText = "Buscar por nombre o código...";
+            }
+            catch (Exception ex) { System.Diagnostics.Debug.WriteLine("Cargar autocompletado de productos en Compras: " + ex.Message); }
+        }
+
+        private void btnBuscarProducto_Click(object sender, EventArgs e)
+        {
+            SeleccionarProductoPorNombre();
+        }
+
+        private void SeleccionarProductoPorNombre()
+        {
+            string texto = guna2TextBox7.Text.Trim();
+
+            if (string.IsNullOrEmpty(texto))
+            {
+                MessageBox.Show("Ingrese el nombre o código de un producto para buscar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string textoLimpio = texto.TrimStart('#');
+            bool esNumero = int.TryParse(textoLimpio, out int codBuscado);
+
+            _productoSeleccionado = _listaProductos.FirstOrDefault(p =>
+                (!string.IsNullOrEmpty(p.Codigo_producto) && p.Codigo_producto.Equals(texto, StringComparison.OrdinalIgnoreCase)) ||
+                (!string.IsNullOrEmpty(p.Codigo_producto) && p.Codigo_producto.ToLower().Contains(texto.ToLower())) ||
+                (esNumero && p.IdProducto == codBuscado) ||
+                p.IdProducto.ToString() == textoLimpio ||
+                p.Nombre_producto.Equals(texto, StringComparison.OrdinalIgnoreCase) ||
+                p.Nombre_producto.ToLower().Contains(texto.ToLower()));
+
+            if (_productoSeleccionado != null)
+            {
+                guna2TextBox7.Text = _productoSeleccionado.Nombre_producto;
+
+                decimal costoSugerido = _productoSeleccionado.PrecioUnitario_producto > 0
+                    ? _productoSeleccionado.PrecioUnitario_producto
+                    : _productoSeleccionado.Precio_producto;
+
+                textBox2.Text = costoSugerido.ToString("F2");
+                guna2NumericUpDown1.Value = 1;
+                guna2NumericUpDown1.Focus();
+            }
+            else
+            {
+                MessageBox.Show("No se encontró ningún producto con ese nombre o código.", "No encontrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            // Si no se buscó previamente, intentamos encontrarlo por el texto actual
+            if (_productoSeleccionado == null)
+            {
+                string texto = guna2TextBox7.Text.Trim();
+                string textoLimpio = texto.TrimStart('#');
+                bool esNumero = int.TryParse(textoLimpio, out int codBuscado);
+
+                _productoSeleccionado = _listaProductos.FirstOrDefault(p =>
+                    (!string.IsNullOrEmpty(p.Codigo_producto) && p.Codigo_producto.Equals(texto, StringComparison.OrdinalIgnoreCase)) ||
+                    (esNumero && p.IdProducto == codBuscado) ||
+                    p.IdProducto.ToString() == textoLimpio ||
+                    p.Nombre_producto.Equals(texto, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (_productoSeleccionado == null)
+            {
+                MessageBox.Show("Debe seleccionar un producto válido antes de agregar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                guna2TextBox7.Focus();
+                return;
+            }
+
+            if (!decimal.TryParse(textBox2.Text.Trim().Replace('.', ','), out decimal precioCompra) || precioCompra <= 0)
+            {
+                MessageBox.Show("Ingrese un precio de compra válido mayor a cero.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBox2.Focus();
+                return;
+            }
+
+            int cantidad = (int)guna2NumericUpDown1.Value;
+            if (cantidad <= 0)
+            {
+                MessageBox.Show("La cantidad debe ser mayor a cero.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                guna2NumericUpDown1.Focus();
+                return;
+            }
+
+            decimal subtotal = precioCompra * cantidad;
+
+            // Verificar si el producto ya existe en la grilla para sumar cantidad
+            bool existe = false;
+            foreach (DataGridViewRow fila in dgvCompras.Rows)
+            {
+                if (fila.Tag is Producto p && p.IdProducto == _productoSeleccionado.IdProducto)
+                {
+                    int cantidadActual = Convert.ToInt32(fila.Cells["columnaCantidad"].Value);
+                    int nuevaCantidad = cantidadActual + cantidad;
+                    decimal nuevoSubtotal = nuevaCantidad * precioCompra;
+
+                    fila.Cells["coolumnaPrecio"].Value = precioCompra.ToString("F2");
+                    fila.Cells["columnaCantidad"].Value = nuevaCantidad;
+                    fila.Cells["columnaSubtotal"].Value = nuevoSubtotal.ToString("F2");
+
+                    existe = true;
+                    break;
+                }
+            }
+
+            if (!existe)
+            {
+                int indexFila = dgvCompras.Rows.Add(new object[] {
+                    _productoSeleccionado.Nombre_producto,
+                    precioCompra.ToString("F2"),
+                    cantidad,
+                    subtotal.ToString("F2"),
+                    "Eliminar"
+                });
+
+                dgvCompras.Rows[indexFila].Tag = _productoSeleccionado;
+            }
+
+            CalcularTotales();
+
+            // Limpiar selección para el próximo producto
+            guna2TextBox7.Text = "";
+            textBox2.Text = "";
+            guna2NumericUpDown1.Value = 1;
+            _productoSeleccionado = null;
+            guna2TextBox7.Focus();
+        }
+
+        private void CalcularTotales()
+        {
+            decimal total = 0;
+
+            foreach (DataGridViewRow fila in dgvCompras.Rows)
+            {
+                if (fila.Cells["columnaSubtotal"].Value != null)
+                {
+                    total += Convert.ToDecimal(fila.Cells["columnaSubtotal"].Value);
+                }
+            }
+
+          
+            guna2TextBox6.Text = $"$ {total:N2}";
+        }
+
+        private void dgvCompras_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                // Si hace clic en la columna Eliminar (columnaEliminar o índice 4)
+                if (dgvCompras.Columns[e.ColumnIndex].Name == "columnaEliminar" || e.ColumnIndex == 4)
+                {
+                    dgvCompras.Rows.RemoveAt(e.RowIndex);
+                    CalcularTotales();
+                }
+            }
+        }
+
+        private void btnVaciarLista_Click(object sender, EventArgs e)
+        {
+            if (dgvCompras.Rows.Count > 0)
+            {
+                DialogResult dr = MessageBox.Show("¿Está seguro de vaciar la lista de compra actual?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    dgvCompras.Rows.Clear();
+                    CalcularTotales();
+                }
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            if (dgvCompras.Rows.Count > 0)
+            {
+                DialogResult dr = MessageBox.Show("¿Desea cancelar la compra actual? Se perderán los productos agregados a la lista.", "Confirmar Cancelación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    dgvCompras.Rows.Clear();
+                    CalcularTotales();
+                    guna2TextBox7.Text = "";
+                    textBox2.Text = "";
+                }
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+
+        private void btnGuardarCompra_Click(object sender, EventArgs e)
+        {
+            if (dgvCompras.Rows.Count == 0)
+            {
+                MessageBox.Show("Debe agregar al menos un producto a la lista de compra.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (guna2ComboBox1.SelectedValue == null)
+            {
+                MessageBox.Show("Debe seleccionar un proveedor para la compra.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            decimal total = 0;
+            List<DetalleCompracs> listaDetalle = new List<DetalleCompracs>();
+
+            foreach (DataGridViewRow fila in dgvCompras.Rows)
+            {
+                if (fila.Tag is Producto prod)
+                {
+                    int cant = Convert.ToInt32(fila.Cells["columnaCantidad"].Value);
+                    decimal precio = Convert.ToDecimal(fila.Cells["coolumnaPrecio"].Value);
+                    decimal sub = Convert.ToDecimal(fila.Cells["columnaSubtotal"].Value);
+                    total += sub;
+
+                    listaDetalle.Add(new DetalleCompracs()
+                    {
+                        IdProducto = prod,
+                        Cantidad = cant,
+                        Precio_unitario = precio,
+                        Subtotal_compra = sub
+                    });
+                }
+            }
+
+            DialogResult confirmacion = MessageBox.Show(
+                $"¿Confirmar el registro de la compra por un total de $ {total:N2}?\nEl stock de los productos se actualizará automáticamente.",
+                "Confirmar Compra",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmacion != DialogResult.Yes)
+                return;
+
+            CompraProveedor objCompra = new CompraProveedor()
+            {
+                Monto_compra = total,
+                Fecha_compra = guna2DateTimePicker1.Value,
+                IdUsuario = Sesion.UsuarioActual,
+                IdProveedor = new Proveedor()
+                {
+                    Id_proveedor = Convert.ToInt32(guna2ComboBox1.SelectedValue)
+                },
+                Tipo_comprobante = comboBox1.Text,
+                Numero_comprobante = textBox1.Text.Trim(),
+                Observaciones = guna2TextBox3.Text.Trim()
+            };
+
+            string mensajeError;
+            CN_Compra objNegocioCompra = new CN_Compra();
+            bool guardado = objNegocioCompra.Registrar(objCompra, listaDetalle, out mensajeError);
+
+            if (guardado)
+            {
+                MessageBox.Show(
+                    "¡Compra registrada exitosamente!\nLos productos han sido actualizados con el nuevo stock y precio de costo.",
+                    "Éxito",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                // Limpiar grilla y formulario
+                dgvCompras.Rows.Clear();
+                CalcularTotales();
+                textBox1.Text = "";
+                guna2TextBox3.Text = "";
+                guna2TextBox7.Text = "";
+                textBox2.Text = "";
+                guna2NumericUpDown1.Value = 1;
+                _productoSeleccionado = null;
+
+                // Actualizar lista interna de productos para reflejar nuevos stocks
+                _listaProductos = new CN_Producto().Listar();
+                CargarProductosAutocompletado();
+            }
+            else
+            {
+                MessageBox.Show("No se pudo registrar la compra: " + mensajeError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Métodos de eventos visuales del diseñador (se conservan)
         private void guna2Panel1_Paint(object sender, PaintEventArgs e) { }
         private void PanelDatosCompra_Paint(object sender, PaintEventArgs e) { }
         private void guna2Panel1_Paint_1(object sender, PaintEventArgs e) { }

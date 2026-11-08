@@ -1,13 +1,31 @@
-﻿using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Text;
-namespace CapaDatos
+namespace Capa_Datos
 {
     public class ClsDataBase
     {
+        private const string NombreBD = "petshopdellitoral";
+        // Cadena de respaldo: solo se usa si App.config no define la conexión "conexion"
+        private const string CadenaConexionPorDefecto = "Server=localhost; Database=" + NombreBD + "; Uid=root; Pwd=;";
+
+        // La cadena se lee de App.config (clave "conexion"), así se cambia sin recompilar
+        private static string ObtenerCadenaConexion()
+        {
+            ConnectionStringSettings config = ConfigurationManager.ConnectionStrings["conexion"];
+            return (config != null && !string.IsNullOrWhiteSpace(config.ConnectionString))
+                ? config.ConnectionString
+                : CadenaConexionPorDefecto;
+        }
+
+        // Única definición de cómo se conecta la app a la base
+        public static MySqlConnection CrearConexion()
+        {
+            return new MySqlConnection(ObtenerCadenaConexion());
+        }
         #region Variables privadas
 
         private MySqlConnection _objMySqlConnection;
@@ -45,7 +63,7 @@ namespace CapaDatos
             DtParameters = new DataTable("SpParameters");
             DtParameters.Columns.Add("Name");
             DtParameters.Columns.Add("DataType");
-            DtParameters.Columns.Add("Value");
+            DtParameters.Columns.Add("Value", typeof(object));   // conserva el tipo (decimal, int, fecha) en vez de pasarlo a texto
 
             NameDB = string.Empty;
 
@@ -57,10 +75,8 @@ namespace CapaDatos
 
         private void CrearConexionBaseDatos(ref ClsDataBase ObjDataBase)
         {
-            ObjDataBase.NameDB = "petshopdellitoral";
-            string cadenaConexion = "Server=localhost; Database=petshopdellitoral; Uid=root; Pwd=;";
-            ObjDataBase.ObjMySqlConnection = new MySqlConnection(cadenaConexion);
-
+            ObjDataBase.NameDB = NombreBD;
+            ObjDataBase.ObjMySqlConnection = CrearConexion();
         }
 
 
@@ -94,7 +110,7 @@ namespace CapaDatos
                     MySqlParameter parameter = new MySqlParameter();
                     parameter.ParameterName = row["Name"].ToString();
 
-                    // Asignamos el tipo de dato y el valor correspondiente
+                    // Asignamos el valor conservando su tipo nativo (decimal, int, etc.)
                     parameter.Value = row["Value"];
                     ObjDataBase.ObjMySqlCommand.Parameters.Add(parameter);
                 }

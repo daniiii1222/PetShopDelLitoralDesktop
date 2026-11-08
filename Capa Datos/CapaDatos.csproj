@@ -1,12 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <RootNamespace>Capa_Datos</RootNamespace>
   </PropertyGroup>
 
+
+
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="26.7.0" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
 
   <ItemGroup>

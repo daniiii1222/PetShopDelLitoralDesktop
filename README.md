@@ -31,7 +31,7 @@
 
 **Pet Shop del Litoral** es una aplicación de escritorio para Windows que digitaliza la operación diaria de un pet shop: registrar ventas con descuentos, controlar el stock de productos, administrar clientes, usuarios y proveedores, registrar compras y consultar reportes.
 
-Está desarrollada en **C# con Windows Forms** sobre **.NET Framework 4.7.2**, usa **MySQL / MariaDB** como base de datos y se organiza en **arquitectura de tres capas** (Presentación, Negocio y Datos) más una capa de Entidades compartidas. Toda la comunicación con la base se hace mediante **procedimientos almacenados**.
+Está desarrollada en **C# con Windows Forms** sobre **.NET Framework 4.7.2**, usa **MySQL / MariaDB** como base de datos y se organiza en **arquitectura de tres capas** (Presentación, Negocio y Datos) más una capa de Entidades compartidas. Casi toda la comunicación con la base se hace mediante **procedimientos almacenados**.
 
 ---
 
@@ -54,7 +54,7 @@ Está desarrollada en **C# con Windows Forms** sobre **.NET Framework 4.7.2**, u
 
 ## 🏛️ Arquitectura
 
-El proyecto separa responsabilidades en capas. Cada una solo conoce a la que tiene debajo.
+El proyecto separa responsabilidades en capas. Cada una solo conoce a la que tiene debajo: el proyecto de Presentación no tiene referencia al de Datos, así que el compilador impide saltarse la capa de Negocio.
 
 ```
 ┌──────────────────────────────────────────────────────────┐
@@ -91,6 +91,8 @@ FrmDashboard  →  CN_Venta.ObtenerResumenDashboard()
 
 La sesión del usuario logueado se guarda en `Sesion.UsuarioActual`, una propiedad estática que cualquier pantalla puede consultar (por ejemplo, para saber el rol).
 
+**Manejo de errores:** los que afectan lo que la persona está haciendo se le muestran en un mensaje. Los no críticos (autocompletado, fuente, ajustes visuales) no frenan la pantalla y quedan en la ventana de salida de Visual Studio con `Debug.WriteLine`.
+
 ---
 
 ## 🛠️ Tecnologías
@@ -103,7 +105,8 @@ La sesión del usuario logueado se guarda en `Sesion.UsuarioActual`, una propied
 | **FontAwesome.Sharp** `6.6.0` | Íconos del menú y de las tarjetas |
 | **MySql.Data** `26.7.0` | Conexión con MySQL / MariaDB |
 | **iTextSharp** `5.5.13.3` | Generación de PDF |
-| **Procedimientos almacenados** | Toda la lógica de acceso a datos |
+| **Procedimientos almacenados** | Casi todo el acceso a datos (`CD_Categoria`, `CD_Compra` y `CD_Backup` usan consultas parametrizadas) |
+| **MSTest** | Pruebas unitarias de las reglas de negocio |
 
 ---
 
@@ -126,7 +129,8 @@ La interfaz mantiene la misma paleta en todas las pantallas:
 
 - **Windows** con **Visual Studio 2022 versión 17.10 o superior** (la solución usa el formato `.slnx`)
 - Componente **Desarrollo de escritorio con .NET** y el paquete de destino **.NET Framework 4.7.2**
-- **MariaDB 10.6 o superior** (o un MySQL compatible). El script de ventas usa `JSON_TABLE` y `ADD COLUMN IF NOT EXISTS`.
+- **MariaDB 10.6 o superior** o **MySQL 8**, corriendo en `localhost:3306`. El procedimiento de ventas usa `JSON_TABLE` y los scripts usan `ADD COLUMN IF NOT EXISTS`, que las versiones más viejas de MariaDB no tienen. Algunas versiones de XAMPP traen una MariaDB más vieja: conviene verificar con `SELECT VERSION();`.
+- Un cliente SQL (DBeaver, MySQL Workbench o la consola `mysql`)
 - Acceso a NuGet para restaurar los paquetes
 
 ### Pasos
@@ -146,35 +150,55 @@ La aplicación se conecta a una base llamada **`petshopdellitoral`**. Creala en 
 CREATE DATABASE petshopdellitoral CHARACTER SET utf8mb4;
 ```
 
-**3. Cargar el esquema y los procedimientos almacenados**
+**3. Cargar las tablas y los datos**
 
-Importá primero las tablas base de la aplicación y después ejecutá los scripts de la carpeta [`Scripts/`](Scripts/) sobre esa base:
+Restaurá una copia de seguridad `.sql` generada por la propia aplicación (pantalla *Backup*, carpeta `Backups` junto al ejecutable) que el equipo comparte. Los scripts de `Scripts/` **no crean las tablas**: solo agregan columnas y procedimientos sobre una base que ya las tiene.
 
-| Script | Contenido |
-|---|---|
-| `Ventas.sql` | Columnas de descuento y procedimientos de ventas: métodos de pago, búsqueda de productos, cliente por DNI y registro de venta. Se puede ejecutar varias veces. |
-| `Venta.sql` | Procedimientos de ventas en versión simple: cada uno hace una sola cosa y la lógica de validación vive en `CN_Venta` |
-| `SP_detalleVenta.sql` | `sp_ObtenerDetalleVenta`, que usa el botón **Ver Detalle** de Reportes. Ejecutarlo como *script* (por ejemplo `Alt+X` en DBeaver) para que tome el `DELIMITER` |
-| `ReporteVenta.sql` | `sp_Reporte_Ventas` (reporte por fechas y vendedor) |
-| `ResumenDashboard.sql` | `sp_ObtenerResumenDashboard` (ventas del día, clientes, stock bajo) |
+**4. Ejecutar los scripts**
+
+Ejecutá los archivos de [`Scripts/`](Scripts/) **como script completo** (en DBeaver: `Alt+X`) para que se respete el `DELIMITER`, en este orden:
+
+| Orden | Archivo | Qué hace |
+|---|---|---|
+| 1 | `Ventas.sql` | Columnas de descuento y procedimientos de ventas (`sp_RegistrarVentaCompleta`, clientes por DNI, métodos de pago). Se puede ejecutar varias veces. |
+| 2 | `AgregarCodigoProducto.sql` | Agrega la columna `codigo_producto` (ej. `PROD2090`) y actualiza la búsqueda de productos. |
+| 3 | `ReporteVenta.sql` | `sp_Reporte_Ventas` (reporte por fechas y vendedor). |
+| 4 | `ResumenDashboard.sql` | Resumen y ventas recientes del dashboard. |
+| 5 | `SP_detalleVenta.sql` | Detalle de una venta (botón **Ver Detalle** de Reportes). |
+| 6 | `SP_obtenerProductosMasVendidos.sql` | Productos más vendidos (Estadísticas). |
+| 7 | `Proveedores.sql` | Alta, modificación y baja lógica de proveedores (con transacción). |
+| 8 | `Productos.sql` | ABM de productos (`sp_ListarProductos`, `sp_RegistrarProducto`, `sp_ModificarProducto`, `sp_EliminarProducto`, `sp_ExisteCodigoProducto`). |
+| 9 | `sp_ListarRoles.sql`, `sp_ListarUsuarios.sql`, `sp_LoginUsuario.sql`, `sp_RegistrarUsuarioCompleto.sql`, `sp_ModificarUsuarioCompleto.sql`, `sp_EliminarUsuario.sql` | Usuarios, roles e inicio de sesión. |
+| 10 | `sp_ListarClientes.sql`, `sp_RegistrarClienteCompleto.sql`, `sp_ModificarClienteCompleto.sql`, `sp_EliminarCliente.sql` | Alta, modificación y baja lógica de clientes. |
+| 11 | `sp_ObtenerPersonaPorDni.sql` | Búsqueda de una persona por DNI (pantalla Personas). |
+| 12 | `sp_ObtenerVentasPorVendedor.sql` | Últimas ventas de un vendedor. |
+| 13 | `DatosEjemplo_Proveedores.sql` | Dos proveedores de ejemplo (opcional, solo para probar Compras). |
+
+Los archivos `sp_*.sql` (filas 9 a 12) definen un procedimiento cada uno. Ya vienen incluidos en la copia de seguridad del equipo, así que ejecutarlos es opcional, pero es seguro: cada uno elimina y vuelve a crear su procedimiento.
 
 > ⚠️ **Importante:** cada integrante debe correr los scripts en **su propia base local**.
 
-**4. Revisar la conexión**
+**5. Revisar la conexión**
 
-La cadena de conexión está definida en [`Capa Datos/Database/ClsDataBase.cs`](Capa%20Datos/Database/ClsDataBase.cs):
+La cadena de conexión está en [`PetShopDelLitoral/App.config`](PetShopDelLitoral/App.config):
 
-```csharp
-Server=localhost; Database=petshopdellitoral; Uid=root; Pwd=;
+```xml
+<connectionStrings>
+  <add name="conexion" connectionString="Server=localhost;Database=petshopdellitoral;Uid=root;Pwd= ;" providerName="MySql.Data.MySqlClient" />
+</connectionStrings>
 ```
 
-Si tu servidor usa otro usuario o contraseña, cambiá ese valor antes de compilar.
+Si tu servidor usa otro usuario o contraseña, cambialo ahí, sin tocar el código. Si falta esa entrada, `ClsDataBase` usa `localhost` / `root` sin contraseña.
 
-**5. Abrir y ejecutar**
+**6. Abrir y ejecutar**
 
 1. Abrí `PetShopCapaPresentacion.slnx` en Visual Studio.
 2. Esperá a que se restauren los paquetes NuGet.
 3. Elegí como proyecto de inicio **CapaPresentacion** y presioná <kbd>F5</kbd>.
+
+**7. Pruebas (opcional)**
+
+Desde Visual Studio: *Prueba → Ejecutar todas las pruebas*. Cubren validaciones de usuarios, productos, proveedores, compras y copias de seguridad, y **no necesitan base de datos**.
 
 ---
 
@@ -214,6 +238,7 @@ PetShopDelLitoral/
 │   ├── FrmReportes*        Reportes de administrador y de vendedor
 │   ├── FrmBackup           Copias de seguridad
 │   └── Sesion.cs           Usuario logueado
+├── 📂 Pruebas/             Pruebas unitarias (MSTest) de las reglas de negocio
 ├── 📂 Scripts/             Procedimientos almacenados y cambios de esquema (.sql)
 └── 📄 PetShopCapaPresentacion.slnx
 ```
@@ -232,6 +257,15 @@ Un detalle de diseño que conviene conocer antes de tocar las pantallas:
 ---
 
 
+
+## 🔀 Flujo de trabajo con Git
+
+- Cada integrante trabaja en su rama (`feature/...`) y no se sube directo a `master`.
+- Antes de subir: `git pull` de la rama en la que se trabaja.
+- Los commits llevan solo lo que dice su mensaje: agregar los archivos por nombre y no con `git add .`.
+- No versionar material de cátedra ni datos sensibles (por ejemplo guías en PDF), contraseñas reales ni copias de la base con datos personales.
+
+---
 
 <div align="center">
 

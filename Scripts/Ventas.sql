@@ -1,12 +1,5 @@
 -- ================================================
--- VENTAS - script unico y final (Persona B)
---   * Columnas de descuento (venta.descuento_venta, detalle_venta.descuento_detalle)
---   * SP de ventas: metodos de pago, buscar productos, cliente por DNI y registrar venta
---     (con descuento por producto y por compra, y descuento de stock en transaccion)
--- Es idempotente: se puede correr varias veces. Correr en CADA base local.
--- NO incluye datos de prueba (esos van aparte) ni los SP de cliente.
--- Requiere MariaDB >= 10.6 (JSON_TABLE y ADD COLUMN IF NOT EXISTS).
--- ================================================
+
 USE petshopdellitoral;
 
 ALTER TABLE detalle_venta
@@ -25,18 +18,6 @@ BEGIN
     FROM metodo_pago
     WHERE estado_metodo = 1
     ORDER BY nombre_metodo;
-END$$
-
--- Busca productos activos con stock por nombre (para agregar al detalle de la venta)
-DROP PROCEDURE IF EXISTS `sp_BuscarProductosVenta`$$
-CREATE PROCEDURE `sp_BuscarProductosVenta`(IN p_texto VARCHAR(50))
-BEGIN
-    SELECT idProducto, nombre_producto, precio_producto, stock_producto
-    FROM producto
-    WHERE estado_producto = 1
-      AND stock_producto > 0
-      AND nombre_producto LIKE CONCAT('%', p_texto, '%')
-    ORDER BY nombre_producto;
 END$$
 
 -- Busca un cliente ACTIVO por DNI (une cliente + persona).

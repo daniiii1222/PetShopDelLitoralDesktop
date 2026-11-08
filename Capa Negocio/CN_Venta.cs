@@ -1,4 +1,4 @@
-﻿using Capa_Datos;
+using Capa_Datos;
 using Capa_Entidad;
 using System;
 using System.Collections.Generic;
@@ -13,20 +13,20 @@ namespace Capa_Negocio
         public DataSet ListarMetodosPago()
         {
             try { return objVentaDatos.ListarMetodosPago(); }
-            catch (Exception ex) { throw new Exception("Error al listar métodos de pago: " + ex.Message); }
+            catch (Exception ex) { throw new Exception("Error al listar métodos de pago: " + ex.Message, ex); }
         }
 
         public DataTable BuscarProductos(string texto)
         {
             try { return objVentaDatos.BuscarProductos((texto ?? "").Trim()); }
-            catch (Exception ex) { throw new Exception("Error al buscar productos: " + ex.Message); }
+            catch (Exception ex) { throw new Exception("Error al buscar productos: " + ex.Message, ex); }
         }
 
         public DataTable ObtenerClientePorDni(string dni)
         {
             if (string.IsNullOrWhiteSpace(dni)) return new DataTable();
             try { return objVentaDatos.ObtenerClientePorDni(dni.Trim()); }
-            catch (Exception ex) { throw new Exception("Error al buscar el cliente: " + ex.Message); }
+            catch (Exception ex) { throw new Exception("Error al buscar el cliente: " + ex.Message, ex); }
         }
 
         public bool RegistrarVenta(Venta objVenta, List<DetalleVenta> detalles, out int idVenta, out string mensaje)
@@ -93,7 +93,9 @@ namespace Capa_Negocio
                 return false;
             }
         }
-       /* public DataTable ObtenerVentasRecientes()
+
+        // Últimas ventas para la "Actividad reciente" del dashboard
+        public DataTable ObtenerVentasRecientes()
         {
             try
             {
@@ -101,10 +103,23 @@ namespace Capa_Negocio
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al obtener ventas recientes: " + ex.Message);
+                throw new Exception("Error al obtener ventas recientes: " + ex.Message, ex);
             }
         }
-        */
+
+        // Datos de las tarjetas del dashboard: ventas_hoy, total_hoy, clientes, stock_bajo
+        public DataTable ObtenerResumenDashboard()
+        {
+            try
+            {
+                return objVentaDatos.ObtenerResumenDashboard();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el resumen del dashboard: " + ex.Message, ex);
+            }
+        }
+
         public DataTable ObtenerVentasPorVendedor(int idUsuario)
         {
             try
@@ -113,7 +128,7 @@ namespace Capa_Negocio
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al obtener las ventas del vendedor: " + ex.Message);
+                throw new Exception("Error al obtener las ventas del vendedor: " + ex.Message, ex);
             }
         }
 
@@ -126,7 +141,7 @@ namespace Capa_Negocio
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al generar el reporte de ventas: " + ex.Message);
+                throw new Exception("Error al generar el reporte de ventas: " + ex.Message, ex);
             }
         }
     }

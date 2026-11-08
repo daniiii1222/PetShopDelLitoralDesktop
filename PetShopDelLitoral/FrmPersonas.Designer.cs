@@ -81,12 +81,23 @@
             this.guna2Panel6 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2CustomGradientPanel7 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.dgvPersonas = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Teléfono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.IdPersona = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Dni = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.IdRol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.guna2Panel7 = new Guna.UI2.WinForms.Guna2Panel();
             this.btVerInactivos = new Guna.UI2.WinForms.Guna2Button();
             this.guna2CustomGradientPanel12 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.btnTClientes = new FontAwesome.Sharp.IconButton();
-            this.guna2CustomGradientPanel9 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            this.btnTodosLosRegistros = new FontAwesome.Sharp.IconButton();
             this.guna2CustomGradientPanel11 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.btnBuscarPersonas = new FontAwesome.Sharp.IconButton();
             this.guna2CustomGradientPanel10 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
@@ -105,7 +116,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonas)).BeginInit();
             this.guna2Panel7.SuspendLayout();
             this.guna2CustomGradientPanel12.SuspendLayout();
-            this.guna2CustomGradientPanel9.SuspendLayout();
             this.guna2CustomGradientPanel11.SuspendLayout();
             this.guna2CustomGradientPanel10.SuspendLayout();
             this.SuspendLayout();
@@ -814,10 +824,10 @@
             this.btnTProveedores.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
             this.btnTProveedores.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
             this.btnTProveedores.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTProveedores.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTProveedores.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
+            this.btnTProveedores.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTProveedores.ForeColor = System.Drawing.Color.White;
             this.btnTProveedores.IconChar = FontAwesome.Sharp.IconChar.TruckFast;
-            this.btnTProveedores.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
+            this.btnTProveedores.IconColor = System.Drawing.Color.White;
             this.btnTProveedores.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnTProveedores.IconSize = 25;
             this.btnTProveedores.Location = new System.Drawing.Point(0, 0);
@@ -875,6 +885,20 @@
             dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvPersonas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvPersonas.ColumnHeadersHeight = 25;
+            this.dgvPersonas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.Nombre,
+            this.Apellido,
+            this.Correo,
+            this.Teléfono,
+            this.Direccion,
+            this.Rol,
+            this.Estado,
+            this.IdPersona,
+            this.Dni,
+            this.IdRol,
+            this.Modificar,
+            this.Eliminar});
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 10.5F);
@@ -925,12 +949,89 @@
             this.dgvPersonas.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.dgvPersonas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPersonas_CellContentClick);
             // 
+            // Id
+            // 
+            this.Id.HeaderText = "Column1";
+            this.Id.MinimumWidth = 6;
+            this.Id.Name = "Id";
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Column1";
+            this.Nombre.MinimumWidth = 6;
+            this.Nombre.Name = "Nombre";
+            // 
+            // Apellido
+            // 
+            this.Apellido.HeaderText = "Column1";
+            this.Apellido.MinimumWidth = 6;
+            this.Apellido.Name = "Apellido";
+            // 
+            // Correo
+            // 
+            this.Correo.HeaderText = "Column1";
+            this.Correo.MinimumWidth = 6;
+            this.Correo.Name = "Correo";
+            // 
+            // Teléfono
+            // 
+            this.Teléfono.HeaderText = "Column1";
+            this.Teléfono.MinimumWidth = 6;
+            this.Teléfono.Name = "Teléfono";
+            // 
+            // Direccion
+            // 
+            this.Direccion.HeaderText = "Column1";
+            this.Direccion.MinimumWidth = 6;
+            this.Direccion.Name = "Direccion";
+            // 
+            // Rol
+            // 
+            this.Rol.HeaderText = "Column1";
+            this.Rol.MinimumWidth = 6;
+            this.Rol.Name = "Rol";
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Column1";
+            this.Estado.MinimumWidth = 6;
+            this.Estado.Name = "Estado";
+            // 
+            // IdPersona
+            // 
+            this.IdPersona.HeaderText = "Column1";
+            this.IdPersona.MinimumWidth = 6;
+            this.IdPersona.Name = "IdPersona";
+            // 
+            // Dni
+            // 
+            this.Dni.HeaderText = "Column1";
+            this.Dni.MinimumWidth = 6;
+            this.Dni.Name = "Dni";
+            // 
+            // IdRol
+            // 
+            this.IdRol.HeaderText = "Column1";
+            this.IdRol.MinimumWidth = 6;
+            this.IdRol.Name = "IdRol";
+            // 
+            // Modificar
+            // 
+            this.Modificar.HeaderText = "Column1";
+            this.Modificar.MinimumWidth = 6;
+            this.Modificar.Name = "Modificar";
+            // 
+            // Eliminar
+            // 
+            this.Eliminar.HeaderText = "Column1";
+            this.Eliminar.MinimumWidth = 6;
+            this.Eliminar.Name = "Eliminar";
+            // 
             // guna2Panel7
             // 
             this.guna2Panel7.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel7.Controls.Add(this.btVerInactivos);
             this.guna2Panel7.Controls.Add(this.guna2CustomGradientPanel12);
-            this.guna2Panel7.Controls.Add(this.guna2CustomGradientPanel9);
             this.guna2Panel7.Controls.Add(this.guna2CustomGradientPanel11);
             this.guna2Panel7.Controls.Add(this.btnBuscarPersonas);
             this.guna2Panel7.Controls.Add(this.guna2CustomGradientPanel10);
@@ -970,7 +1071,7 @@
             this.guna2CustomGradientPanel12.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.guna2CustomGradientPanel12.BorderRadius = 10;
             this.guna2CustomGradientPanel12.Controls.Add(this.btnTClientes);
-            this.guna2CustomGradientPanel12.Location = new System.Drawing.Point(174, 11);
+            this.guna2CustomGradientPanel12.Location = new System.Drawing.Point(29, 10);
             this.guna2CustomGradientPanel12.Name = "guna2CustomGradientPanel12";
             this.guna2CustomGradientPanel12.Size = new System.Drawing.Size(105, 36);
             this.guna2CustomGradientPanel12.TabIndex = 28;
@@ -983,13 +1084,13 @@
             this.btnTClientes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
             this.btnTClientes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
             this.btnTClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTClientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTClientes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
+            this.btnTClientes.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTClientes.ForeColor = System.Drawing.Color.White;
             this.btnTClientes.IconChar = FontAwesome.Sharp.IconChar.UserAlt;
-            this.btnTClientes.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
+            this.btnTClientes.IconColor = System.Drawing.Color.White;
             this.btnTClientes.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnTClientes.IconSize = 25;
-            this.btnTClientes.Location = new System.Drawing.Point(0, 0);
+            this.btnTClientes.Location = new System.Drawing.Point(29, 10);
             this.btnTClientes.Name = "btnTClientes";
             this.btnTClientes.Size = new System.Drawing.Size(105, 36);
             this.btnTClientes.TabIndex = 1;
@@ -999,52 +1100,13 @@
             this.btnTClientes.UseVisualStyleBackColor = true;
             this.btnTClientes.Click += new System.EventHandler(this.btnClientes_Click);
             // 
-            // guna2CustomGradientPanel9
-            // 
-            this.guna2CustomGradientPanel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.guna2CustomGradientPanel9.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2CustomGradientPanel9.BorderRadius = 10;
-            this.guna2CustomGradientPanel9.Controls.Add(this.btnTodosLosRegistros);
-            this.guna2CustomGradientPanel9.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2CustomGradientPanel9.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2CustomGradientPanel9.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2CustomGradientPanel9.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
-            this.guna2CustomGradientPanel9.Location = new System.Drawing.Point(29, 13);
-            this.guna2CustomGradientPanel9.Name = "guna2CustomGradientPanel9";
-            this.guna2CustomGradientPanel9.Size = new System.Drawing.Size(105, 36);
-            this.guna2CustomGradientPanel9.TabIndex = 27;
-            // 
-            // btnTodosLosRegistros
-            // 
-            this.btnTodosLosRegistros.BackColor = System.Drawing.Color.Transparent;
-            this.btnTodosLosRegistros.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
-            this.btnTodosLosRegistros.FlatAppearance.BorderSize = 0;
-            this.btnTodosLosRegistros.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
-            this.btnTodosLosRegistros.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
-            this.btnTodosLosRegistros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTodosLosRegistros.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnTodosLosRegistros.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.btnTodosLosRegistros.IconChar = FontAwesome.Sharp.IconChar.AddressCard;
-            this.btnTodosLosRegistros.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
-            this.btnTodosLosRegistros.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnTodosLosRegistros.IconSize = 25;
-            this.btnTodosLosRegistros.Location = new System.Drawing.Point(0, 0);
-            this.btnTodosLosRegistros.Name = "btnTodosLosRegistros";
-            this.btnTodosLosRegistros.Size = new System.Drawing.Size(105, 36);
-            this.btnTodosLosRegistros.TabIndex = 1;
-            this.btnTodosLosRegistros.Text = "Todos";
-            this.btnTodosLosRegistros.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTodosLosRegistros.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTodosLosRegistros.UseVisualStyleBackColor = false;
-            this.btnTodosLosRegistros.Click += new System.EventHandler(this.btnTodosLosRegistros_Click);
-            // 
             // guna2CustomGradientPanel11
             // 
             this.guna2CustomGradientPanel11.BackColor = System.Drawing.Color.Transparent;
             this.guna2CustomGradientPanel11.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.guna2CustomGradientPanel11.BorderRadius = 10;
             this.guna2CustomGradientPanel11.Controls.Add(this.btnTProveedores);
-            this.guna2CustomGradientPanel11.Location = new System.Drawing.Point(314, 13);
+            this.guna2CustomGradientPanel11.Location = new System.Drawing.Point(169, 13);
             this.guna2CustomGradientPanel11.Name = "guna2CustomGradientPanel11";
             this.guna2CustomGradientPanel11.Size = new System.Drawing.Size(137, 36);
             this.guna2CustomGradientPanel11.TabIndex = 29;
@@ -1077,7 +1139,7 @@
             this.guna2CustomGradientPanel10.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(24)))), ((int)(((byte)(21)))));
             this.guna2CustomGradientPanel10.BorderRadius = 10;
             this.guna2CustomGradientPanel10.Controls.Add(this.btnTUsuarios);
-            this.guna2CustomGradientPanel10.Location = new System.Drawing.Point(480, 11);
+            this.guna2CustomGradientPanel10.Location = new System.Drawing.Point(335, 11);
             this.guna2CustomGradientPanel10.Name = "guna2CustomGradientPanel10";
             this.guna2CustomGradientPanel10.Size = new System.Drawing.Size(115, 36);
             this.guna2CustomGradientPanel10.TabIndex = 30;
@@ -1089,10 +1151,10 @@
             this.btnTUsuarios.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
             this.btnTUsuarios.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
             this.btnTUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTUsuarios.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
+            this.btnTUsuarios.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTUsuarios.ForeColor = System.Drawing.Color.White;
             this.btnTUsuarios.IconChar = FontAwesome.Sharp.IconChar.UserGroup;
-            this.btnTUsuarios.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(204)))), ((int)(((byte)(110)))));
+            this.btnTUsuarios.IconColor = System.Drawing.Color.White;
             this.btnTUsuarios.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnTUsuarios.IconSize = 25;
             this.btnTUsuarios.Location = new System.Drawing.Point(0, 0);
@@ -1160,7 +1222,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonas)).EndInit();
             this.guna2Panel7.ResumeLayout(false);
             this.guna2CustomGradientPanel12.ResumeLayout(false);
-            this.guna2CustomGradientPanel9.ResumeLayout(false);
             this.guna2CustomGradientPanel11.ResumeLayout(false);
             this.guna2CustomGradientPanel10.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1210,8 +1271,6 @@
         private FontAwesome.Sharp.IconButton btnCancelar;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel6;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel7;
-        private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel9;
-        private FontAwesome.Sharp.IconButton btnTodosLosRegistros;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel10;
         private FontAwesome.Sharp.IconButton btnTUsuarios;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel11;
@@ -1229,5 +1288,18 @@
         private System.Windows.Forms.Label lbPanelUsuarios;
         private Guna.UI2.WinForms.Guna2CustomCheckBox chkActivo;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Correo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Teléfono;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;
+        private System.Windows.Forms.DataGridViewButtonColumn Rol;
+        private System.Windows.Forms.DataGridViewButtonColumn Estado;
+        private System.Windows.Forms.DataGridViewButtonColumn IdPersona;
+        private System.Windows.Forms.DataGridViewButtonColumn Dni;
+        private System.Windows.Forms.DataGridViewButtonColumn IdRol;
+        private System.Windows.Forms.DataGridViewButtonColumn Modificar;
+        private System.Windows.Forms.DataGridViewButtonColumn Eliminar;
     }
 }

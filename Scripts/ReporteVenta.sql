@@ -1,3 +1,4 @@
+DROP PROCEDURE IF EXISTS sp_Reporte_Ventas;
 DELIMITER //
 
 CREATE PROCEDURE sp_Reporte_Ventas(

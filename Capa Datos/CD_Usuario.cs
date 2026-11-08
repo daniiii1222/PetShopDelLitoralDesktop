@@ -1,5 +1,5 @@
 ﻿using Capa_Entidad;
-using CapaDatos;
+using Capa_Datos;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -189,7 +189,7 @@ namespace Capa_Datos
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
 
             return tablaPersona;

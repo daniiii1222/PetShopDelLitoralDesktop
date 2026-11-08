@@ -98,6 +98,7 @@
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -114,12 +115,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmReportesAdministrador.Layout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCompras.Layout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LayoutPantalla.cs" />
     <Compile Include="CargaProductos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CargaProductos.Designer.cs">
       <DependentUpon>CargaProductos.cs</DependentUpon>
     </Compile>
+    <Compile Include="ComprobanteVenta.cs" />
+    <Compile Include="FrmAutorizacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAutorizacion.Designer.cs" />
     <Compile Include="FrmBackup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,11 +145,17 @@
     <Compile Include="FrmDashboard.Designer.cs">
       <DependentUpon>FrmDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmEstadisticas.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmPersonas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmPersonas.Designer.cs">
       <DependentUpon>FrmPersonas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPersonas.Layout.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmReportesAdministrador.cs">
       <SubType>Form</SubType>
@@ -161,6 +180,9 @@
     </Compile>
     <Compile Include="FrmVentas.Designer.cs">
       <DependentUpon>FrmVentas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmVentas.Layout.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Inicio.cs">
       <SubType>Form</SubType>
@@ -242,10 +264,6 @@
     <None Include="Resources\logoPetShop.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Capa Datos\CapaDatos.csproj">
-      <Project>{0b58df2d-c777-2213-9a54-5c48d8be93d8}</Project>
-      <Name>CapaDatos</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Capa Entidad\CapaEntidad.csproj">
       <Project>{384e1266-6581-4e83-eb56-c5c3792d17ff}</Project>
       <Name>CapaEntidad</Name>

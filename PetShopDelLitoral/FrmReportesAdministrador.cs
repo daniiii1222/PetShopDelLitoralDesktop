@@ -1,4 +1,4 @@
-﻿using Capa_Negocio;
+using Capa_Negocio;
 using System;
 using System.Data;
 using System.Drawing;
@@ -20,6 +20,7 @@ namespace PetShopDelLitoral
             InitializeComponent();
             dtpDesde.MaxDate = DateTime.Today;
             dtpHasta.MaxDate = DateTime.Today;
+            PrepararLayout();
 
             // El Designer no siempre conecta el Load: lo enganchamos acá (el -= evita que corra dos veces si ya estaba)
             this.Load -= FrmReportesAdministrador_Load;
@@ -231,7 +232,8 @@ namespace PetShopDelLitoral
             if (!dataGridReportes.Columns.Contains(columnaDetalle))
                 dataGridReportes.Columns.Add(columnaDetalle);
             columnaDetalle.DisplayIndex = dataGridReportes.Columns.Count - 1;
-
+            // Botón para (re)generar el comprobante de la venta de esa fila
+            ComprobanteVenta.AsegurarColumna(dataGridReportes);
             AjustarColumnas(dataGridReportes);
         }
 
@@ -267,6 +269,12 @@ namespace PetShopDelLitoral
         {
             // Clic en los encabezados: no hacemos nada
             if (e.RowIndex < 0) return;
+
+            if (ComprobanteVenta.EsColumnaComprobante(dataGridReportes, e.ColumnIndex))
+            {
+                ComprobanteVenta.Generar(this, dataGridReportes, e.RowIndex);
+                return;
+            }
 
             if (dataGridReportes.Columns[e.ColumnIndex].HeaderText != "Detalle" &&
                 dataGridReportes.Columns[e.ColumnIndex].Name != "columnaDetalle") return;
@@ -320,8 +328,10 @@ namespace PetShopDelLitoral
 
         private void panelTituloSec_Paint(object sender, PaintEventArgs e) { }
         private void guna2TextBox1_TextChanged(object sender, EventArgs e) { }
-        private void botonInicio_Click(object sender, EventArgs e) { }
+        private void botonInicio_Click(object sender, EventArgs e) { btnBuscar_Click(sender, e); }
 
+        // Stock a partir del cual un producto entra en el reporte "Stock Mínimo".
+        // Poné el mismo número que usa el Dashboard para "stock bajo".
         private void ConfigurarGrilla(string tipoReporte)
         {
             dataGridReportes.Columns.Clear();
@@ -330,17 +340,42 @@ namespace PetShopDelLitoral
             switch (tipoReporte)
             {
                 case "productos":
-                    dt.Columns.Add("Codigo");
-                    dt.Columns.Add("Descripcion");
-                    dt.Columns.Add("Stock");
-                    dt.Rows.Add("P001", "Alimento Balanceado 15kg", "12");
-                    break;
                 case "stock":
-                    dt.Columns.Add("Codigo");
-                    dt.Columns.Add("Descripcion");
-                    dt.Columns.Add("Stock");
-                    dt.Rows.Add("P002", "Rascador para Gatos", "4");
+                    dt.Columns.Add("ID", typeof(int));
+                    dt.Columns.Add("C\u00f3digo", typeof(string));
+                    dt.Columns.Add("Producto", typeof(string));
+                    dt.Columns.Add("Categoría", typeof(string));
+                    dt.Columns.Add("Precio ($)", typeof(decimal));
+                    dt.Columns.Add("Stock", typeof(int));
+                    dt.Columns.Add("Stock mínimo", typeof(int));
+
+                    try
+                    {
+                        foreach (var p in new CN_Producto().Listar())
+                        {
+                            if (!p.Estado_producto) continue;   // solo productos activos, igual que FrmProductos
+
+                            // Stock mínimo: solo los que están en su mínimo o por debajo (cada producto tiene el suyo)
+                            if (tipoReporte == "stock" && p.Stock_producto > p.Stock_minimo) continue;
+
+                            dt.Rows.Add(
+                                p.IdProducto,
+                                string.IsNullOrWhiteSpace(p.Codigo_producto) ? "-" : p.Codigo_producto,
+                                p.Nombre_producto,
+                                p.IdCategoria != null ? p.IdCategoria.Nombre_categoria : "Sin categoría",
+                                p.Precio_producto,
+                                p.Stock_producto,
+                                p.Stock_minimo);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error al cargar el reporte: " + ex.Message, "Error",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                     break;
+
                 case "vendedores":
                     dt.Columns.Add("Vendedor");
                     dt.Columns.Add("CantidadVentas");
@@ -348,15 +383,26 @@ namespace PetShopDelLitoral
                     break;
             }
 
+            // Stock mínimo: primero los más críticos. Productos: orden alfabético.
+            DataView vista = dt.DefaultView;
+            if (tipoReporte == "stock") vista.Sort = "Stock ASC";
+            else if (tipoReporte == "productos") vista.Sort = "Producto ASC";
+
             HacerVisibleGrilla();
             dataGridReportes.AutoGenerateColumns = true;
-            dataGridReportes.DataSource = dt;
+            dataGridReportes.DataSource = vista;
+            if (dataGridReportes.Columns["Precio ($)"] != null)
+                dataGridReportes.Columns["Precio ($)"].DefaultCellStyle.Format = "N2";
             AjustarColumnas(dataGridReportes);
             dataGridReportes.ReadOnly = true;
             dataGridReportes.AllowUserToAddRows = false;
             dataGridReportes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridReportes.DefaultCellStyle.SelectionBackColor = Color.FromArgb(225, 185, 110);
             dataGridReportes.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            if (tipoReporte == "stock" && dt.Rows.Count == 0)
+                MessageBox.Show("No hay productos en su stock mínimo o por debajo.", "Reportes",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void botonProductos_Click(object sender, EventArgs e) { ConfigurarGrilla("productos"); }
