@@ -169,7 +169,7 @@ namespace Capa_Datos
                 db.NameSP = "sp_ObtenerPersonaPorDni";
                 db.TableName = "PersonaEncontrada";
 
-                // 2. Agregamos el parámetro que exige tu procedimiento almacenado
+                // 2. Agregamos el parámetro que exige el procedimiento almacenado
                 db.DtParameters.Rows.Add("_dni_persona", "Varchar", dni);
 
                 // 3. Ejecutamos la consulta de selección (SELECT)

@@ -9,11 +9,7 @@ namespace Capa_Negocio
     {
         private CD_Proveedor obj_cd_proveedor = new CD_Proveedor();
 
-        // =====================================================================
-        // ALTA / MODIFICACIÓN / BAJA de proveedores (mismo esquema que CN_Cliente)
-        // Las validaciones corren acá, antes de llegar a la capa de datos.
-        // =====================================================================
-
+       
         public bool RegistrarProveedor(Persona objPersona, out string mensaje)
         {
             if (!ValidarDatosPersona(objPersona, out mensaje)) return false;

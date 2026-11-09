@@ -9,7 +9,7 @@ namespace Capa_Datos
     public class CD_Compra
     {
 
-        public bool Registrar(CompraProveedor objCompra, List<DetalleCompracs> listaDetalle, out string Mensaje)
+        public bool Registrar(CompraProveedor objCompra, List<DetalleCompra> listaDetalle, out string Mensaje)
         {
             bool respuesta = false;
             Mensaje = string.Empty;
@@ -47,7 +47,7 @@ namespace Capa_Datos
                             int idCompraGenerada = Convert.ToInt32(cmdCompra.ExecuteScalar());
 
                             // 2. Insertar cada detalle de compra y actualizar el stock del producto
-                            foreach (DetalleCompracs detalle in listaDetalle)
+                            foreach (DetalleCompra detalle in listaDetalle)
                             {
                                 string queryDetalle = @"INSERT INTO detalle_compra(
                                                             cantidad, precio_unitario, subtotal_compra, 

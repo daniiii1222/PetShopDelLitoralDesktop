@@ -1,11 +1,5 @@
 -- ================================================
 -- Proveedores: alta, modificacion y baja logica
--- Mismo esquema que Cliente: cada operacion guarda Persona + Proveedor
--- dentro de UNA transaccion en la base de datos.
---
--- Ejecutar como SCRIPT completo (en DBeaver: Alt+X) para que tome el DELIMITER.
--- Se puede ejecutar mas de una vez: cada procedimiento se vuelve a crear.
--- Tablas usadas: persona, proveedor
 -- ================================================
 
 USE petshopdellitoral;

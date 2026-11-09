@@ -99,7 +99,7 @@ namespace PetShopDelLitoral
                     SetVisible(botonVentas, false);
                     SetVisible(botonCompras, true);
                     SetVisible(botonProductos, true);
-                    SetVisible(botonPersonas, false);
+                    SetVisible(botonPersonas, true);
                     SetVisible(botonReportes, true);
                     SetVisible(btnBackup, false);
                 }
@@ -236,10 +236,7 @@ namespace PetShopDelLitoral
 
             AbrirFormulario(new FrmPersonas(rol));
         }
-        private void botonInicio_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario(new FrmDashboard());
-        }
+      
 
         private void AbrirFormulario(Form formulario)
         {
@@ -289,7 +286,7 @@ namespace PetShopDelLitoral
                     string nombre = Sesion.UsuarioActual.idPersona.nombre_persona;
                     string apellido = Sesion.UsuarioActual.idPersona.apellido_persona;
 
-                    // Asigna el nombre a tu Label del encabezado (asegúrate de que el Name en el diseñador coincida)
+                    // Asigna el nombre al Label del encabezado 
                     if (lblBienvenida != null)
                     {
                         lblBienvenida.Text = $"Bienvenido/a, {nombre} {apellido}";
@@ -308,15 +305,5 @@ namespace PetShopDelLitoral
         {
             AbrirFormulario(formulario);
         }
-
-        private void ActualizarFechaHora()
-        {
-            if (lblFecha != null)
-            {
-
-                lblFecha.Text = DateTime.Now.ToString("dddd, d 'de' MMMM 'de' yyyy, hh:mm tt");
-            }
-        }
-
     }
 }

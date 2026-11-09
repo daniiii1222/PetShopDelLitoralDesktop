@@ -30,14 +30,6 @@ namespace Capa_Negocio
             }
         }
 
-        // Aquí más adelante agregaremos los métodos de Insertar, Modificar y Eliminar 
-        // aplicando las validaciones de datos (ej: verificar que las contraseñas no estén vacías, 
-        // que el DNI no esté duplicado, etc.) antes de enviarlos a la Capa de Datos.
-
-
-
-        // (Aquí ya tienes tu ListarUsuarios)
-
         public bool RegistrarUsuario(Persona objPersona, Usuario objUsuario, out string mensaje)
         {
             mensaje = string.Empty;
@@ -132,11 +124,8 @@ namespace Capa_Negocio
         }
 
 
-        // =====================================================================
         // AUTORIZACIÓN PARA RESTAURAR LA BASE DE DATOS (doble autorización)
-        // Las reglas viven acá, en la capa de negocio; la pantalla solo pide los datos y muestra el mensaje.
-        // =====================================================================
-
+     
         public static bool TieneRol(Usuario u, params string[] roles)
         {
             if (u == null || u.idRol == null) return false;

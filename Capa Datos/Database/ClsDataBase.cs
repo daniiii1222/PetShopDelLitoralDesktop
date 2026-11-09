@@ -12,7 +12,7 @@ namespace Capa_Datos
         // Cadena de respaldo: solo se usa si App.config no define la conexión "conexion"
         private const string CadenaConexionPorDefecto = "Server=localhost; Database=" + NombreBD + "; Uid=root; Pwd=;";
 
-        // La cadena se lee de App.config (clave "conexion"), así se cambia sin recompilar
+        // busca la cadena en el app.config sino usa la de respaldo
         private static string ObtenerCadenaConexion()
         {
             ConnectionStringSettings config = ConfigurationManager.ConnectionStrings["conexion"];
@@ -110,7 +110,7 @@ namespace Capa_Datos
                     MySqlParameter parameter = new MySqlParameter();
                     parameter.ParameterName = row["Name"].ToString();
 
-                    // Asignamos el valor conservando su tipo nativo (decimal, int, etc.)
+                    // Asignamos el valor conservando su tipo nativo 
                     parameter.Value = row["Value"];
                     ObjDataBase.ObjMySqlCommand.Parameters.Add(parameter);
                 }
@@ -195,9 +195,6 @@ namespace Capa_Datos
 
         #region Metodos públicos
 
-
-        #region Metodos públicos
-
         public bool ProbarConexion(out string mensajeError)
         {
             try
@@ -221,6 +218,7 @@ namespace Capa_Datos
             }
         }
 
+        //llaman a los metodos privados
 
         // Método público puente para consultas de selección (SELECT / Stored Procedures)
         public void EjecutarSelect()
@@ -237,7 +235,7 @@ namespace Capa_Datos
         }
         #endregion
 
-        #endregion
+       
 
 
     }

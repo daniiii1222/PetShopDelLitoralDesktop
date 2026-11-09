@@ -31,12 +31,6 @@ namespace PetShopDelLitoral
             PrepararLayoutFormulario();
         }
 
-        // Constructor de compatibilidad (por si algo en el sistema todavía instancia sin rol).
-        // Reenvía al constructor oficial usando "Administrador" como valor por defecto,
-        // así el diseño se puede seguir probando sin duplicar lógica.
-        public FrmPersonas() : this("Administrador")
-        {
-        }
 
         private void botonUsuario_Click(object sender, EventArgs e) { btnUsuarios_Click(sender, e); }
       
@@ -200,7 +194,6 @@ namespace PetShopDelLitoral
             dgvPersonas.Columns["IdPersona"].Visible = false;
 
             dgvPersonas.Columns.Add("Dni", "DNI");
-            dgvPersonas.Columns.Add("Dni", "DNI");
             dgvPersonas.Columns["Dni"].Visible = false;
             AgregarColumnasAcciones();
             AjustarAnchosGrid();
@@ -262,7 +255,7 @@ namespace PetShopDelLitoral
         private void dgvPersonas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
-                return;
+                return;  //si toca el encabezado de la grilla, no hace nada 
 
             string columna = dgvPersonas.Columns[e.ColumnIndex].Name;
 
@@ -487,7 +480,7 @@ namespace PetShopDelLitoral
                     string nombre = fila.Cells[1].Value?.ToString().ToLower() ?? "";
                     string apellido = fila.Cells[2].Value?.ToString().ToLower() ?? "";
 
-                    // Buscamos la celda de estado (cambiá el número '6' o el que corresponda según en qué columna tengas el Estado)
+                    // Buscamos la celda de estado
                     string estadoFila = fila.Cells[6].Value?.ToString() ?? "";
 
                     bool coincideTexto = nombre.Contains(textoBuscado) || apellido.Contains(textoBuscado);
@@ -542,11 +535,19 @@ namespace PetShopDelLitoral
             }
             else if (rol.Equals("Supervisor", StringComparison.OrdinalIgnoreCase))
             {
+                // El supervisor puede gestionar clientes y proveedores.
                 btntipoProveedor.Visible = true;
                 btnCliente.Visible = true;
 
-                // El Supervisor arranca viendo la grilla de Clientes
+                // Mostramos los filtros correspondientes.
+                btnTClientes.Visible = true;
+                btnTProveedores.Visible = true;
+                btnTUsuarios.Visible = false;
+
+                // Comienza viendo clientes.
                 tipoSeleccionado = "Cliente";
+                panelUsuarios.Visible = false;
+
                 ConfigurarGridClientes();
                 CargarClientes();
             }
@@ -578,8 +579,7 @@ namespace PetShopDelLitoral
         // ==========================================
         // COLORES DE LOS BOTONES DE FILTRO (Todos / Clientes / Proveedores / Usuarios)
         // ==========================================
-        // Antes dependían del color por defecto del panel de Guna (que cambia de una PC a otra),
-        // por eso se veían claros con letras blancas. Ahora se definen a mano, con la paleta de la app.
+     
         private static readonly Color ColorOscuro = Color.FromArgb(33, 24, 21);
         private static readonly Color ColorDorado = Color.FromArgb(253, 204, 110);
         private static readonly Font FuenteFiltro = new Font("Microsoft Sans Serif", 10.2F);   // la fuente que usaba la app antes
@@ -636,6 +636,7 @@ namespace PetShopDelLitoral
             }
 
             idSeleccionado = 0;
+            idPersonaSeleccionada = 0;
             chkActivo.Checked = true;
             ActualizarEstadoVisible();
         }
@@ -646,7 +647,7 @@ namespace PetShopDelLitoral
             bool editando = idSeleccionado != 0;
             label12.Visible = editando;
             chkActivo.Visible = editando;
-            DistribuirFormulario();   // si usaste el archivo Layout, el nombre es DistribuirFormulario
+            DistribuirFormulario();   
         }
         private void botonGuardarRegistro_Click(object sender, EventArgs e)
         {
@@ -663,7 +664,7 @@ namespace PetShopDelLitoral
                 }
 
                 // 2. Valida que el DNI sea numérico
-                if (!long.TryParse(TBDni.Text.Trim(), out _))
+                if (!long.TryParse(TBDni.Text.Trim(), out _)) //out es una variable descartable, no necesitamos su valor, solo saber si la conversión fue exitosa
                 {
                     MessageBox.Show("El campo DNI solo puede contener números válidos.", "Error de formato", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Capa_Entidad
 {
-    public class DetalleCompracs
+    public class DetalleCompra
     {
         public int IdDetalleCompra { get; set; }
         public int Cantidad { get; set; }

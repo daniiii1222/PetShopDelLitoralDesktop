@@ -29,14 +29,17 @@ namespace Capa_Negocio
         {
             mensaje = string.Empty;
 
-            if (string.IsNullOrEmpty(objPersona.nombre_persona) || string.IsNullOrEmpty(objPersona.apellido_persona))
+            if (objPersona == null)
             {
-                mensaje = "El nombre y apellido son obligatorios.";
+                mensaje = "Los datos de la persona no son válidos.";
                 return false;
             }
 
-            if (string.IsNullOrEmpty(objPersona.dni_persona))
-            {
+            if (string.IsNullOrWhiteSpace(objPersona.nombre_persona) ||
+                string.IsNullOrWhiteSpace(objPersona.apellido_persona))
+
+            if (string.IsNullOrWhiteSpace(objPersona.dni_persona))
+                {
                 mensaje = "El DNI es obligatorio.";
                 return false;
             }
@@ -62,13 +65,18 @@ namespace Capa_Negocio
         {
             mensaje = string.Empty;
 
-            if (string.IsNullOrEmpty(objPersona.nombre_persona) || string.IsNullOrEmpty(objPersona.apellido_persona))
+
+            if (objPersona == null)
             {
-                mensaje = "El nombre y apellido son obligatorios.";
+                mensaje = "Los datos de la persona no son válidos.";
                 return false;
             }
 
-            if (objCliente == null || objCliente.IdCliente <= 0)
+
+            if (string.IsNullOrWhiteSpace(objPersona.nombre_persona) ||
+                string.IsNullOrWhiteSpace(objPersona.apellido_persona))
+
+                if (objCliente == null || objCliente.IdCliente <= 0)
             {
                 mensaje = "Cliente no válido.";
                 return false;

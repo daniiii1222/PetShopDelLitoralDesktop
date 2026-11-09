@@ -1,4 +1,4 @@
--- Ejecutar como SCRIPT en DBeaver (Alt+X) para que tome el DELIMITER.
+
 -- Da de alta la persona y el usuario (con rol y contraseña) en un solo paso.
 USE petshopdellitoral;
 

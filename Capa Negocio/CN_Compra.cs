@@ -9,7 +9,7 @@ namespace Capa_Negocio
     {
         private CD_Compra objcd_compra = new CD_Compra();
 
-        public bool Registrar(CompraProveedor objCompra, List<DetalleCompracs> listaDetalle, out string Mensaje)
+        public bool Registrar(CompraProveedor objCompra, List<DetalleCompra> listaDetalle, out string Mensaje)
         {
             Mensaje = string.Empty;
 
@@ -50,7 +50,7 @@ namespace Capa_Negocio
             }
 
             decimal sumaDetalle = 0;
-            foreach (DetalleCompracs d in listaDetalle)
+            foreach (DetalleCompra d in listaDetalle)
             {
                 if (d.IdProducto == null || d.Cantidad <= 0)
                 {

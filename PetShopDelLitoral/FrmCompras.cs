@@ -366,7 +366,7 @@ namespace PetShopDelLitoral
             }
 
             decimal total = 0;
-            List<DetalleCompracs> listaDetalle = new List<DetalleCompracs>();
+            List<DetalleCompra> listaDetalle = new List<DetalleCompra>();
 
             foreach (DataGridViewRow fila in dgvCompras.Rows)
             {
@@ -377,7 +377,7 @@ namespace PetShopDelLitoral
                     decimal sub = Convert.ToDecimal(fila.Cells["columnaSubtotal"].Value);
                     total += sub;
 
-                    listaDetalle.Add(new DetalleCompracs()
+                    listaDetalle.Add(new DetalleCompra()
                     {
                         IdProducto = prod,
                         Cantidad = cant,

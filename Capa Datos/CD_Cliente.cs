@@ -133,8 +133,7 @@ namespace Capa_Datos
             ClsDataBase db = new ClsDataBase();
             DataTable tablaPersona = new DataTable();
 
-            try
-            {
+            
                 db.NameSP = "sp_ObtenerPersonaPorDni";
                 db.TableName = "PersonaEncontrada";
 
@@ -151,11 +150,8 @@ namespace Capa_Datos
                 {
                     tablaPersona = db.DsResults.Tables["PersonaEncontrada"];
                 }
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            
+           
 
             return tablaPersona;
         }
