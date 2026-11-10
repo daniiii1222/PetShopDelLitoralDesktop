@@ -29,7 +29,8 @@ namespace PetShopDelLitoral
         private int idClienteSeleccionado = 0;
         private DataRow productoSeleccionado = null;
         private bool cargandoCliente = false; // evita que el TextChanged borre el cliente recién encontrado
-
+      
+        private List<DetalleVenta> detallesPendientesComprobante;
         public FrmVentas()
         {
             InitializeComponent();
@@ -459,6 +460,8 @@ namespace PetShopDelLitoral
         }
 
         // ---------- GUARDAR / CANCELAR ----------
+
+
         private void GuardarVenta_Click(object sender, EventArgs e)
         {
             dgvVentas.EndEdit(); // confirma un descuento que haya quedado a medio escribir
@@ -466,8 +469,7 @@ namespace PetShopDelLitoral
             decimal descuentoCompra;
             if (!TryParsePorcentaje(txtDescuento.Text, out descuentoCompra))
             {
-                MessageBox.Show("El descuento de la compra debe ser un número entre 0 y 100.", "Descuento",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("El descuento de la compra debe ser un número entre 0 y 100.", "Descuento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -488,18 +490,17 @@ namespace PetShopDelLitoral
 
             if (cnVenta.RegistrarVenta(venta, detalles, out idVenta, out mensaje))
             {
-
-                // Genera y descarga el PDF automáticamente
+                // Genera el comprobante PDF
                 GenerarPdfComprobante(idVenta, venta, detalles);
 
                 LimpiarFormulario();
-
             }
             else
             {
                 MessageBox.Show(mensaje, "No se pudo registrar la venta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
 
         private void Cancelar_Click(object sender, EventArgs e)
         {
@@ -523,105 +524,118 @@ namespace PetShopDelLitoral
         }
 
 
+
+
         private void GenerarPdfComprobante(int idVenta, Venta venta, List<DetalleVenta> detalles)
         {
-            // 1. Crear el cuadro de diálogo para guardar el archivo PDF
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            try
             {
-                saveFileDialog.Filter = "Archivo PDF (*.pdf)|*.pdf";
-                saveFileDialog.FileName = "Comprobante_Venta_" + idVenta.ToString("D8") + ".pdf";
-
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                 {
-                    try
+                    saveFileDialog.Filter = "Archivo PDF (*.pdf)|*.pdf";
+                    saveFileDialog.FileName = "Comprobante_Venta_" + idVenta.ToString("D8") + ".pdf";
+                    saveFileDialog.Title = "Guardar comprobante de venta";
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
-                        // 2. Definir el documento PDF (Tamaño A4 con márgenes)
+                        // Crear documento PDF
                         Document doc = new Document(PageSize.A4, 40, 40, 40, 40);
-                        PdfWriter.GetInstance(doc, new FileStream(saveFileDialog.FileName, FileMode.Create));
-                        doc.Open();
 
-                        // 3. Estilos y Fuentes
-                        var fuenteTitulo = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18, BaseColor.DARK_GRAY);
-                        var fuenteSub = FontFactory.GetFont(FontFactory.HELVETICA, 10, BaseColor.GRAY);
-                        var fuenteNegrita = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10, BaseColor.BLACK);
-                        var fuenteNormal = FontFactory.GetFont(FontFactory.HELVETICA, 10, BaseColor.BLACK);
-
-                        // 4. Encabezado del Ticket / Factura
-                        doc.Add(new Paragraph("PET SHOP DEL LITORAL", fuenteTitulo));
-                        doc.Add(new Paragraph("Sistema de Gestión Integral", fuenteSub));
-                        doc.Add(new Paragraph("------------------------------------------------------------------------------------------------------------------", fuenteSub));
-                        doc.Add(new Paragraph("Comprobante de Venta N°: " + idVenta.ToString("D8"), fuenteNegrita));
-                        doc.Add(new Paragraph("Fecha: " + venta.Fecha_venta.ToShortDateString(), fuenteNormal));
-                        doc.Add(new Paragraph("------------------------------------------------------------------------------------------------------------------", fuenteSub));
-                        doc.Add(new Chunk(Chunk.NEWLINE));
-
-                        // 5. Tabla de Productos (5 columnas: Cantidad, Producto, Precio U., Desc %, Subtotal)
-                        PdfPTable tabla = new PdfPTable(5);
-                        tabla.WidthPercentage = 100;
-                        tabla.SetWidths(new float[] { 12f, 38f, 18f, 14f, 18f });
-
-                        // Cabeceras de tabla
-                        tabla.AddCell(new PdfPCell(new Phrase("Cant", fuenteNegrita)) { BackgroundColor = BaseColor.LIGHT_GRAY });
-                        tabla.AddCell(new PdfPCell(new Phrase("Producto", fuenteNegrita)) { BackgroundColor = BaseColor.LIGHT_GRAY });
-                        tabla.AddCell(new PdfPCell(new Phrase("Precio U.", fuenteNegrita)) { BackgroundColor = BaseColor.LIGHT_GRAY });
-                        tabla.AddCell(new PdfPCell(new Phrase("Desc %", fuenteNegrita)) { BackgroundColor = BaseColor.LIGHT_GRAY });
-                        tabla.AddCell(new PdfPCell(new Phrase("Subtotal", fuenteNegrita)) { BackgroundColor = BaseColor.LIGHT_GRAY });
-
-                        // Renglones de productos
-                        foreach (var d in detalles)
+                        using (FileStream fs = new FileStream(saveFileDialog.FileName, FileMode.Create))
                         {
-                            tabla.AddCell(new PdfPCell(new Phrase(d.Cantidad.ToString(), fuenteNormal)));
-                            tabla.AddCell(new PdfPCell(new Phrase(d.IdProducto.Nombre_producto, fuenteNormal)));
-                            tabla.AddCell(new PdfPCell(new Phrase("$ " + d.Precio.ToString("N2", cultura), fuenteNormal)));
-                            tabla.AddCell(new PdfPCell(new Phrase(d.Descuento_detalle.ToString("0.##") + "%", fuenteNormal)));
-                            tabla.AddCell(new PdfPCell(new Phrase("$ " + d.Subtotal_venta.ToString("N2", cultura), fuenteNormal)));
+                            PdfWriter.GetInstance(doc, fs);
+                            doc.Open();
+
+                            // Estilos y Fuentes
+                            var fuenteTitulo = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18, BaseColor.DARK_GRAY);
+                            var fuenteSub = FontFactory.GetFont(FontFactory.HELVETICA, 10, BaseColor.GRAY);
+                            var fuenteNegrita = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10, BaseColor.BLACK);
+                            var fuenteNormal = FontFactory.GetFont(FontFactory.HELVETICA, 10, BaseColor.BLACK);
+
+                            // Encabezado
+                            doc.Add(new Paragraph("PET SHOP DEL LITORAL", fuenteTitulo));
+                            doc.Add(new Paragraph("Sistema de Gestión Integral", fuenteSub));
+                            doc.Add(new Paragraph("------------------------------------------------------------------------------------------------------------------", fuenteSub));
+                            doc.Add(new Paragraph("Comprobante de Venta N°: " + idVenta.ToString("D8"), fuenteNegrita));
+                            doc.Add(new Paragraph("Fecha: " + venta.Fecha_venta.ToShortDateString(), fuenteNormal));
+                            doc.Add(new Paragraph("------------------------------------------------------------------------------------------------------------------", fuenteSub));
+                            doc.Add(new Chunk(Chunk.NEWLINE));
+
+                            // Tabla de productos
+                            PdfPTable tabla = new PdfPTable(5);
+                            tabla.WidthPercentage = 100;
+                            tabla.SetWidths(new float[] { 12f, 38f, 18f, 14f, 18f });
+
+                            tabla.AddCell(new PdfPCell(new Phrase("Cant", fuenteNegrita)) { BackgroundColor = BaseColor.LIGHT_GRAY });
+                            tabla.AddCell(new PdfPCell(new Phrase("Producto", fuenteNegrita)) { BackgroundColor = BaseColor.LIGHT_GRAY });
+                            tabla.AddCell(new PdfPCell(new Phrase("Precio U.", fuenteNegrita)) { BackgroundColor = BaseColor.LIGHT_GRAY });
+                            tabla.AddCell(new PdfPCell(new Phrase("Desc %", fuenteNegrita)) { BackgroundColor = BaseColor.LIGHT_GRAY });
+                            tabla.AddCell(new PdfPCell(new Phrase("Subtotal", fuenteNegrita)) { BackgroundColor = BaseColor.LIGHT_GRAY });
+
+                            foreach (var d in detalles)
+                            {
+                                tabla.AddCell(new PdfPCell(new Phrase(d.Cantidad.ToString(), fuenteNormal)));
+                                tabla.AddCell(new PdfPCell(new Phrase(d.IdProducto.Nombre_producto, fuenteNormal)));
+                                tabla.AddCell(new PdfPCell(new Phrase("$ " + d.Precio.ToString("N2", cultura), fuenteNormal)));
+                                tabla.AddCell(new PdfPCell(new Phrase(d.Descuento_detalle.ToString("0.##") + "%", fuenteNormal)));
+                                tabla.AddCell(new PdfPCell(new Phrase("$ " + d.Subtotal_venta.ToString("N2", cultura), fuenteNormal)));
+                            }
+
+                            doc.Add(tabla);
+
+                            // Totales
+                            doc.Add(new Chunk(Chunk.NEWLINE));
+
+                            decimal subtotal = detalles.Sum(d => d.Subtotal_venta);
+                            decimal totalGeneral = Math.Round(subtotal * (1 - venta.Descuento_venta / 100m), 2, MidpointRounding.AwayFromZero);
+                            decimal montoDescuento = subtotal - totalGeneral;
+
+                            Paragraph pSubtotal = new Paragraph("Subtotal: $ " + subtotal.ToString("N2", cultura), fuenteNormal);
+                            pSubtotal.Alignment = Element.ALIGN_RIGHT;
+                            doc.Add(pSubtotal);
+
+                            if (venta.Descuento_venta > 0)
+                            {
+                                Paragraph pDescuento = new Paragraph("Descuento (" + venta.Descuento_venta.ToString("0.##") + "%): - $ " + montoDescuento.ToString("N2", cultura), fuenteNormal);
+                                pDescuento.Alignment = Element.ALIGN_RIGHT;
+                                doc.Add(pDescuento);
+                            }
+
+                            Paragraph pTotal = new Paragraph("TOTAL GENERAL: $ " + totalGeneral.ToString("N2", cultura), fuenteTitulo);
+                            pTotal.Alignment = Element.ALIGN_RIGHT;
+                            doc.Add(pTotal);
+
+                            doc.Add(new Chunk(Chunk.NEWLINE));
+
+                            Paragraph pPie = new Paragraph("¡Gracias por confiar en Pet Shop del Litoral!", fuenteSub);
+                            pPie.Alignment = Element.ALIGN_CENTER;
+                            doc.Add(pPie);
+
+                            doc.Close();
                         }
 
-                        doc.Add(tabla);
+                        MessageBox.Show("¡Comprobante PDF guardado correctamente!",
+                                        "PDF Creado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        // 6. Totales (misma cuenta que la pantalla y que CD_Venta)
-                        doc.Add(new Chunk(Chunk.NEWLINE));
-                        decimal subtotal = detalles.Sum(d => d.Subtotal_venta);
-                        decimal totalGeneral = Math.Round(subtotal * (1 - venta.Descuento_venta / 100m), 2, MidpointRounding.AwayFromZero);
-                        decimal montoDescuento = subtotal - totalGeneral;
-
-                        Paragraph pSubtotal = new Paragraph("Subtotal: $ " + subtotal.ToString("N2", cultura), fuenteNormal);
-                        pSubtotal.Alignment = Element.ALIGN_RIGHT;
-                        doc.Add(pSubtotal);
-
-                        // El descuento general solo se muestra si se aplicó uno
-                        if (venta.Descuento_venta > 0)
-                        {
-                            Paragraph pDescuento = new Paragraph("Descuento (" + venta.Descuento_venta.ToString("0.##") + "%): - $ " + montoDescuento.ToString("N2", cultura), fuenteNormal);
-                            pDescuento.Alignment = Element.ALIGN_RIGHT;
-                            doc.Add(pDescuento);
-                        }
-
-                        Paragraph pTotal = new Paragraph("TOTAL GENERAL: $ " + totalGeneral.ToString("N2", cultura), fuenteTitulo);
-                        pTotal.Alignment = Element.ALIGN_RIGHT;
-                        doc.Add(pTotal);
-
-                        doc.Add(new Chunk(Chunk.NEWLINE));
-                        Paragraph pPie = new Paragraph("¡Gracias por confiar en Pet Shop del Litoral!", fuenteSub);
-                        pPie.Alignment = Element.ALIGN_CENTER;
-                        doc.Add(pPie);
-
-                        doc.Close();
-
-                        MessageBox.Show("¡Comprobante PDF generado con éxito!", "PDF Creado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        // Opcional: Abrir el PDF automáticamente luego de crearlo
-                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(saveFileDialog.FileName) { UseShellExecute = true });
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error al generar el PDF: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        // Abrir el PDF automáticamente
+                        System.Diagnostics.Process.Start(
+                            new System.Diagnostics.ProcessStartInfo(saveFileDialog.FileName)
+                            {
+                                UseShellExecute = true
+                            });
                     }
                 }
-
-
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al generar el PDF: " + ex.Message,
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
+
 
         private void CargarHistorialVentasVendedor()
         {
