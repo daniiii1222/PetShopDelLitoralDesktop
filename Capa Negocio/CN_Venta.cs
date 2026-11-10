@@ -34,10 +34,16 @@ namespace Capa_Negocio
             idVenta = 0;
             mensaje = string.Empty;
 
-            // Validaciones básicas antes de ir a la base
+            
             if (objVenta == null || objVenta.IdUsuario == null || objVenta.IdUsuario.idUsuario <= 0)
             {
                 mensaje = "No hay un vendedor con sesión iniciada.";
+                return false;
+            }
+
+            if (objVenta.Fecha_venta.Date > DateTime.Today)
+            {
+                mensaje = "La fecha de venta no puede ser posterior a la fecha actual.";
                 return false;
             }
 

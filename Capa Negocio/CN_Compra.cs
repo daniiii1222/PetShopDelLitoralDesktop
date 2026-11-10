@@ -19,6 +19,12 @@ namespace Capa_Negocio
                 return false;
             }
 
+            if (objCompra.Fecha_compra.Date > DateTime.Today)
+            {
+                Mensaje = "La fecha de compra no puede ser posterior a la fecha actual.";
+                return false;
+            }
+
             if (objCompra.IdProveedor == null || objCompra.IdProveedor.Id_proveedor <= 0)
             {
                 Mensaje = "Debe seleccionar un proveedor para la compra.";
