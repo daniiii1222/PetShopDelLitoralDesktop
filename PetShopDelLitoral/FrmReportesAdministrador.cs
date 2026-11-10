@@ -130,6 +130,8 @@ namespace PetShopDelLitoral
             dataGridReportes.Visible = true;
             dataGridReportes.ThemeStyle.RowsStyle.ForeColor = Color.Black;
             dataGridReportes.DefaultCellStyle.ForeColor = Color.Black;
+            dataGridReportes.DefaultCellStyle.SelectionBackColor = Color.FromArgb(225, 185, 110);
+            dataGridReportes.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridReportes.AllowUserToAddRows = false;   // saca la fila vacía de abajo
             dataGridReportes.AllowUserToDeleteRows = false;
             dataGridReportes.ReadOnly = true;              // los reportes no se editan (el botón "Ver Detalle" sigue andando)
@@ -231,6 +233,7 @@ namespace PetShopDelLitoral
             // ConfigurarGrilla() hace Columns.Clear(), así que el botón puede haberse perdido
             if (!dataGridReportes.Columns.Contains(columnaDetalle))
                 dataGridReportes.Columns.Add(columnaDetalle);
+            columnaDetalle.FlatStyle = FlatStyle.Flat;
             columnaDetalle.DisplayIndex = dataGridReportes.Columns.Count - 1;
             // Botón para (re)generar el comprobante de la venta de esa fila
             ComprobanteVenta.AsegurarColumna(dataGridReportes);

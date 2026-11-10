@@ -99,6 +99,7 @@ namespace PetShopDelLitoral
             dgvVentas.AllowUserToAddRows = false;
             ConfigurarColumnaDescuento();
             dgvVentas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvVentas.DefaultCellStyle.ForeColor = Color.Black;
             dgvVentas.DefaultCellStyle.SelectionBackColor = Color.FromArgb(225, 185, 110);
             dgvVentas.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvVentas.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(33, 24, 21);
