@@ -55,7 +55,20 @@ namespace Capa_Negocio
             }
         }
 
-      
+        public DataTable ObtenerReporteVendedores()
+        {
+            try
+            {
+                return objReporteDatos.ObtenerReporteVendedores();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Error al obtener el reporte de vendedores: " + ex.Message, ex);
+            }
+        }
+
+
         private static void ValidarRangoFechas(DateTime desde, DateTime hasta)
         {
             if (desde.Date > hasta.Date)

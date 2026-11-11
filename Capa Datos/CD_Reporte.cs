@@ -60,5 +60,22 @@ namespace Capa_Datos
             if (!string.IsNullOrEmpty(database.ErrorDB)) throw new Exception(database.ErrorDB, new Exception(database.ErrorDB));
             return database.DsResults.Tables["TablaProductosMasVendidos"];
         }
+
+
+        // Método para obtener la cantidad de ventas realizadas por cada vendedor
+        public DataTable ObtenerReporteVendedores()
+        {
+            ClsDataBase database = new ClsDataBase();
+
+            database.NameSP = "sp_Reporte_Vendedores";
+            database.TableName = "TablaReporteVendedores";
+
+            database.EjecutarSelect();
+
+            if (!string.IsNullOrEmpty(database.ErrorDB))
+                throw new Exception(database.ErrorDB, new Exception(database.ErrorDB));
+
+            return database.DsResults.Tables["TablaReporteVendedores"];
+        }
     }
 }

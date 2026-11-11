@@ -378,9 +378,21 @@ namespace PetShopDelLitoral
                     break;
 
                 case "vendedores":
-                    dt.Columns.Add("Vendedor");
-                    dt.Columns.Add("CantidadVentas");
-                    dt.Rows.Add("Carlos Gomez", "15");
+                    try
+                    {
+                        CN_Reporte cnReporte = new CN_Reporte();
+                        dt = cnReporte.ObtenerReporteVendedores();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(
+                            "Error al cargar el reporte de vendedores: " + ex.Message,
+                            "Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
+                        );
+                        return;
+                    }
                     break;
             }
 
@@ -392,6 +404,9 @@ namespace PetShopDelLitoral
             HacerVisibleGrilla();
             dataGridReportes.AutoGenerateColumns = true;
             dataGridReportes.DataSource = vista;
+            if (dataGridReportes.Columns["ID Vendedor"] != null)
+                dataGridReportes.Columns["ID Vendedor"].Visible = false;
+
             if (dataGridReportes.Columns["Precio ($)"] != null)
                 dataGridReportes.Columns["Precio ($)"].DefaultCellStyle.Format = "N2";
             AjustarColumnas(dataGridReportes);
