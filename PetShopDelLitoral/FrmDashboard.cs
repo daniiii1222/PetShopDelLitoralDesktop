@@ -24,9 +24,7 @@ namespace PetShopDelLitoral
             panel2_Resize(null, EventArgs.Empty);
         }
 
-        // ==========================================
-        // DATOS REALES DEL DASHBOARD
-        // ==========================================
+        
 
         private void CargarDatosDashboard()
         {
@@ -70,9 +68,7 @@ namespace PetShopDelLitoral
             }
         }
 
-        // ==========================================
-        // EVENTOS DE LOS BOTONES DE ACCIONES RÁPIDAS (tarjeta oculta)
-        // ==========================================
+        
 
         private void btnNuevaVenta_Click(object sender, EventArgs e)
         {

@@ -36,10 +36,14 @@ namespace Capa_Negocio
             }
 
             if (string.IsNullOrWhiteSpace(objPersona.nombre_persona) ||
-                string.IsNullOrWhiteSpace(objPersona.apellido_persona))
+            string.IsNullOrWhiteSpace(objPersona.apellido_persona))
+            {
+                mensaje = "El nombre y el apellido son obligatorios.";
+                return false;
+            }
 
             if (string.IsNullOrWhiteSpace(objPersona.dni_persona))
-                {
+            {
                 mensaje = "El DNI es obligatorio.";
                 return false;
             }
@@ -58,7 +62,12 @@ namespace Capa_Negocio
                 return false;
             }
 
-            return objClienteDatos.RegistrarCliente(objPersona, out mensaje);
+            bool resultado = objClienteDatos.RegistrarCliente(objPersona, out mensaje);
+
+            if (!resultado)
+                mensaje = TraducirMensajeError(mensaje);
+
+            return resultado;
         }
 
         public bool ModificarCliente(Persona objPersona, Cliente objCliente, out string mensaje)
@@ -72,11 +81,19 @@ namespace Capa_Negocio
                 return false;
             }
 
-
             if (string.IsNullOrWhiteSpace(objPersona.nombre_persona) ||
                 string.IsNullOrWhiteSpace(objPersona.apellido_persona))
+            {
+                mensaje = "El nombre y el apellido son obligatorios.";
+                return false;
+            }
 
-                if (objCliente == null || objCliente.IdCliente <= 0)
+            if (string.IsNullOrWhiteSpace(objPersona.dni_persona))
+            {
+                mensaje = "El DNI es obligatorio.";
+                return false;
+            }
+            if (objCliente == null || objCliente.IdCliente <= 0)
             {
                 mensaje = "Cliente no válido.";
                 return false;
@@ -89,7 +106,12 @@ namespace Capa_Negocio
                 return false;
             }
 
-            return objClienteDatos.ModificarCliente(objPersona, objCliente, out mensaje);
+            bool resultado = objClienteDatos.ModificarCliente(objPersona, objCliente, out mensaje);
+
+            if (!resultado)
+                mensaje = TraducirMensajeError(mensaje);
+
+            return resultado;
         }
 
         public bool EliminarCliente(int idCliente, out string mensaje)
@@ -114,6 +136,17 @@ namespace Capa_Negocio
         {
             DataTable tabla = objClienteDatos.ObtenerPersonaPorDni(dni);
             return tabla != null && tabla.Rows.Count > 0;
+        }
+
+        private static string TraducirMensajeError(string mensaje)
+        {
+            if (!string.IsNullOrEmpty(mensaje) &&
+                mensaje.IndexOf("uq_persona_correo", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                return "El correo electrónico ingresado ya se encuentra registrado. Por favor, ingresá otro correo.";
+            }
+
+            return mensaje;
         }
     }
 }
