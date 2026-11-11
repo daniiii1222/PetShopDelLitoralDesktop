@@ -47,6 +47,15 @@ namespace PetShopDelLitoral
             DataGridViewProductos.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(61, 44, 34);
             DataGridViewProductos.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.WhiteSmoke;
             DataGridViewProductos.EnableHeadersVisualStyles = false;
+
+            // El Vendedor solo puede ver los productos: se ocultan Cargar, Editar y Eliminar
+            if (Sesion.UsuarioActual?.idRol?.descripcion_rol != null &&
+                Sesion.UsuarioActual.idRol.descripcion_rol.Trim().Equals("Vendedor", StringComparison.OrdinalIgnoreCase))
+            {
+                guna2CustomGradientPanel6.Visible = false; // botón "Cargar Producto"
+                ColumnEditar.Visible = false;
+                ColumnEliminar.Visible = false;
+            }
         }
 
         private void CargarCategoriasFiltro()
