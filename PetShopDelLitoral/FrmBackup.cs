@@ -246,12 +246,12 @@ namespace PetShopDelLitoral
             panelRuta.Controls.Add(label8);
 
             txtRuta.Location = new Point(180, 18);
-            txtRuta.Size = new Size(panelPrincipal.ClientSize.Width - 340, 26);
+            txtRuta.Size = new Size(300, 26);
             txtRuta.Font = new Font("Segoe UI", 9.5F);
             txtRuta.ReadOnly = true;
             txtRuta.BackColor = Color.White;
             txtRuta.ForeColor = Color.FromArgb(40, 40, 40);
-            txtRuta.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            
             txtRuta.Text = ObtenerCarpetaBackups();
             panelRuta.Controls.Add(txtRuta);
 
@@ -264,7 +264,7 @@ namespace PetShopDelLitoral
             btnAbrirCarpeta.FlatAppearance.BorderSize = 0;
             btnAbrirCarpeta.Size = new Size(130, 28);
             btnAbrirCarpeta.Location = new Point(panelPrincipal.ClientSize.Width - 150, 17);
-            btnAbrirCarpeta.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            
             btnAbrirCarpeta.Click += (s, ev) =>
             {
                 try
@@ -275,6 +275,15 @@ namespace PetShopDelLitoral
                 catch (Exception ex) { System.Diagnostics.Debug.WriteLine("Abrir la carpeta de backups: " + ex.Message); MessageBox.Show("No se pudo abrir la carpeta de copias: " + ex.Message, "Backups", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
             };
             panelRuta.Controls.Add(btnAbrirCarpeta);
+
+            EventHandler acomodarRuta = (s, ev) =>
+            {
+                btnAbrirCarpeta.Location = new Point(panelRuta.ClientSize.Width - btnAbrirCarpeta.Width - 4, 17);
+                txtRuta.Width = Math.Max(100, btnAbrirCarpeta.Left - txtRuta.Left - 10);
+            };
+            panelRuta.Resize += acomodarRuta;
+            acomodarRuta(null, EventArgs.Empty);
+            btnAbrirCarpeta.BringToFront();
 
             // Agregar al contenedor principal en orden inverso de DockStyle.Top
             panelPrincipal.Controls.Add(panelRuta);
