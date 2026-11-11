@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Capa_Datos;
+
 namespace Capa_Negocio
 {
     public class CN_Cliente
@@ -140,11 +141,17 @@ namespace Capa_Negocio
 
         private static string TraducirMensajeError(string mensaje)
         {
-            if (!string.IsNullOrEmpty(mensaje) &&
-                mensaje.IndexOf("uq_persona_correo", StringComparison.OrdinalIgnoreCase) >= 0)
-            {
-                return "El correo electrónico ingresado ya se encuentra registrado. Por favor, ingresá otro correo.";
-            }
+            if (string.IsNullOrEmpty(mensaje))
+                return mensaje;
+
+            if (mensaje.IndexOf("uq_persona_dni", StringComparison.OrdinalIgnoreCase) >= 0)
+                return "El DNI ingresado ya se encuentra registrado.";
+
+            if (mensaje.IndexOf("uq_persona_correo", StringComparison.OrdinalIgnoreCase) >= 0)
+                return "El correo electrónico ingresado ya se encuentra registrado.";
+
+            if (mensaje.IndexOf("uq_persona_telefono", StringComparison.OrdinalIgnoreCase) >= 0)
+                return "El teléfono ingresado ya se encuentra registrado.";
 
             return mensaje;
         }

@@ -1,6 +1,7 @@
-using System.Collections.Generic;
-using Capa_Entidad;
 using Capa_Datos;
+using Capa_Entidad;
+using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Capa_Negocio
@@ -23,7 +24,12 @@ namespace Capa_Negocio
                 return false;
             }
 
-            return obj_cd_proveedor.RegistrarProveedor(objPersona, out mensaje);
+            bool resultado = obj_cd_proveedor.RegistrarProveedor(objPersona, out mensaje);
+
+            if (!resultado)
+                mensaje = TraducirMensajeError(mensaje);
+
+            return resultado;
         }
 
         public bool ModificarProveedor(Persona objPersona, Proveedor objProveedor, out string mensaje)
@@ -45,7 +51,12 @@ namespace Capa_Negocio
                 return false;
             }
 
-            return obj_cd_proveedor.ModificarProveedor(objPersona, objProveedor, out mensaje);
+            bool resultado = obj_cd_proveedor.ModificarProveedor(objPersona, objProveedor, out mensaje);
+
+            if (!resultado)
+                mensaje = TraducirMensajeError(mensaje);
+
+            return resultado;
         }
 
         public bool EliminarProveedor(int idProveedor, out string mensaje)
@@ -128,6 +139,23 @@ namespace Capa_Negocio
         public List<Proveedor> Listar()
         {
             return obj_cd_proveedor.Listar();
+        }
+
+        private static string TraducirMensajeError(string mensaje)
+        {
+            if (string.IsNullOrEmpty(mensaje))
+                return mensaje;
+
+            if (mensaje.IndexOf("uq_persona_dni", StringComparison.OrdinalIgnoreCase) >= 0)
+                return "El DNI ingresado ya se encuentra registrado.";
+
+            if (mensaje.IndexOf("uq_persona_correo", StringComparison.OrdinalIgnoreCase) >= 0)
+                return "El correo electrónico ingresado ya se encuentra registrado.";
+
+            if (mensaje.IndexOf("uq_persona_telefono", StringComparison.OrdinalIgnoreCase) >= 0)
+                return "El teléfono ingresado ya se encuentra registrado.";
+
+            return mensaje;
         }
     }
 }

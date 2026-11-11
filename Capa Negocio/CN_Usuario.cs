@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Text.RegularExpressions;
 namespace Capa_Negocio
 {
     public class CN_Usuario
@@ -34,13 +34,33 @@ namespace Capa_Negocio
         {
             mensaje = string.Empty;
 
-            if (string.IsNullOrEmpty(objPersona.nombre_persona) || string.IsNullOrEmpty(objPersona.apellido_persona))
+            if (objPersona == null || objUsuario == null)
+            {
+                mensaje = "Los datos del usuario no son válidos.";
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(objPersona.nombre_persona) ||
+                string.IsNullOrWhiteSpace(objPersona.apellido_persona))
             {
                 mensaje = "El nombre y apellido son obligatorios.";
                 return false;
             }
 
-            if (string.IsNullOrEmpty(objUsuario.contrasenia_usuario))
+            if (string.IsNullOrWhiteSpace(objPersona.dni_persona))
+            {
+                mensaje = "El DNI es obligatorio.";
+                return false;
+            }
+
+            if (!string.IsNullOrWhiteSpace(objPersona.correo_persona) &&
+                !Regex.IsMatch(objPersona.correo_persona.Trim(), @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                mensaje = "El correo ingresado no tiene un formato válido.";
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(objUsuario.contrasenia_usuario))
             {
                 mensaje = "La contraseña del usuario no puede estar vacía.";
                 return false;
@@ -52,9 +72,13 @@ namespace Capa_Negocio
                 return false;
             }
 
-            return objUsuarioDatos.RegistrarUsuario(objPersona, objUsuario, out mensaje);
-        }
+            bool resultado = objUsuarioDatos.RegistrarUsuario(objPersona, objUsuario, out mensaje);
 
+            if (!resultado)
+                mensaje = TraducirMensajeError(mensaje);
+
+            return resultado;
+        }
 
 
 
@@ -266,6 +290,23 @@ namespace Capa_Negocio
                 mensaje = "Error al validar el DNI: " + ex.Message;
                 return false;
             }
+        }
+
+        private static string TraducirMensajeError(string mensaje)
+        {
+            if (string.IsNullOrEmpty(mensaje))
+                return mensaje;
+
+            if (mensaje.IndexOf("uq_persona_dni", StringComparison.OrdinalIgnoreCase) >= 0)
+                return "El DNI ingresado ya se encuentra registrado.";
+
+            if (mensaje.IndexOf("uq_persona_correo", StringComparison.OrdinalIgnoreCase) >= 0)
+                return "El correo electrónico ingresado ya se encuentra registrado.";
+
+            if (mensaje.IndexOf("uq_persona_telefono", StringComparison.OrdinalIgnoreCase) >= 0)
+                return "El teléfono ingresado ya se encuentra registrado.";
+
+            return mensaje;
         }
     }
 
