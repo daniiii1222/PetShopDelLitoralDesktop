@@ -55,7 +55,7 @@ namespace Capa_Negocio
             }
         }
 
-        // Regla de negocio: el rango de fechas tiene que tener sentido
+      
         private static void ValidarRangoFechas(DateTime desde, DateTime hasta)
         {
             if (desde.Date > hasta.Date)

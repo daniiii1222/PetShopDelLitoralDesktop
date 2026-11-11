@@ -39,22 +39,22 @@ CREATE PROCEDURE `sp_RegistrarVentaCompleta`(
     IN p_idCliente    INT,
     IN p_idMetodoPago INT,
     IN p_fecha        DATE,
-    IN p_descuento    DECIMAL(5,2),   -- NUEVO: % sobre la compra completa
+    IN p_descuento    DECIMAL(5,2),   --  % sobre la compra completa
     IN p_detalle      LONGTEXT        -- ahora: [{"idProducto":1,"cantidad":2,"descuento":10},...]
 )
 BEGIN
     DECLARE v_idVenta INT;
-    DECLARE v_subtotal DECIMAL(12,2); -- NUEVO: suma de líneas ya con su descuento
+    DECLARE v_subtotal DECIMAL(12,2); --  suma de líneas ya con su descuento
     DECLARE v_total DECIMAL(12,2);
-    DECLARE v_desc DECIMAL(5,2);      -- NUEVO
+    DECLARE v_desc DECIMAL(5,2);      
 
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION --si se genera un error, se vuelve hacia atras y se manda el error a c#
     BEGIN
         ROLLBACK;
         RESIGNAL;
     END;
 
-    -- NUEVO: validar los porcentajes
+    --  valida los porcentajes
     SET v_desc = IFNULL(p_descuento, 0);
     IF v_desc < 0 OR v_desc > 100 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El descuento de la compra debe estar entre 0 y 100.';
@@ -62,7 +62,7 @@ BEGIN
 
     IF EXISTS (
         SELECT 1
-        FROM JSON_TABLE(p_detalle, '$[*]' COLUMNS (
+        FROM JSON_TABLE(p_detalle, '$[*]' COLUMNS (  --JSON_TABLE transforma los datos del JSON en filas y columnas para poder consultarlos como una tabla.
                 descuento DECIMAL(5,2) PATH '$.descuento')) j
         WHERE IFNULL(j.descuento, 0) < 0 OR IFNULL(j.descuento, 0) > 100
     ) THEN
@@ -113,7 +113,7 @@ BEGIN
     FROM JSON_TABLE(p_detalle, '$[*]' COLUMNS (
             idProducto INT          PATH '$.idProducto',
             cantidad   INT          PATH '$.cantidad',
-            descuento  DECIMAL(5,2) PATH '$.descuento')) j   -- NUEVO: columna descuento
+            descuento  DECIMAL(5,2) PATH '$.descuento')) j   --j: jason_table
     INNER JOIN producto p ON p.idProducto = j.idProducto;
 
     -- 5) Descontar stock (sin cambios)

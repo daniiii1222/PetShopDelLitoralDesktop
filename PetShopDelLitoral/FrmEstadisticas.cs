@@ -131,10 +131,12 @@ namespace PetShopDelLitoral
             grid.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
             grid.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
             grid.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
+
             chartTiempo = CrearChart("Ventas por día ($)", SeriesChartType.Column, false);
             chartPago = CrearChart("Ventas por método de pago", SeriesChartType.Doughnut, true);
             chartVendedores = CrearChart("Top 5 vendedores ($)", SeriesChartType.Bar, false);
             chartProductos = CrearChart("Top 5 productos más vendidos (unidades)", SeriesChartType.Bar, false);
+
             grid.Controls.Add(chartTiempo, 0, 0);
             grid.Controls.Add(chartPago, 1, 0);
             grid.Controls.Add(chartVendedores, 0, 1);
@@ -424,7 +426,7 @@ namespace PetShopDelLitoral
         {
             // 1) Evolución en el tiempo: por día si el período es corto, por mes si es largo
             bool porDia = (dtpHasta.Value.Date - dtpDesde.Value.Date).TotalDays <= 31;
-            chartTiempo.Titles[0].Text = porDia ? "Ventas por día ($)" : "Ventas por mes ($)";
+            chartTiempo.Titles[0].Text = porDia ? "Ventas por día ($)" : "Ventas por mes ($)"; //titles[0] primer titulo del grafico
             Series st = chartTiempo.Series[0];
             st.Points.Clear();
             var porTiempo = ventas
@@ -437,7 +439,7 @@ namespace PetShopDelLitoral
             Series sp = chartPago.Series[0];
             sp.Points.Clear();
             sp.Label = "#PERCENT{P0}";
-            sp.LegendText = "#VALX";
+            sp.LegendText = "#VALX"; //configura texto de la leyenda para que muestre el nombre del método de pago  
             int i = 0;
             foreach (var g in ventas.GroupBy(v => v.Pago).OrderByDescending(x => x.Sum(v => v.Total)))
             {

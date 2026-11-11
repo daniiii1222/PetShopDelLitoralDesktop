@@ -39,7 +39,7 @@ BEGIN
     LEFT JOIN persona p ON c.idPersona = p.idPersona
     WHERE v.estado_venta = 1
     ORDER BY v.idVenta DESC
-    LIMIT 15;
+    LIMIT 20;
 END$$
 
 DELIMITER ;

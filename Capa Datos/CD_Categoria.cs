@@ -1,45 +1,38 @@
+
 using System;
 using System.Collections.Generic;
 using System.Data;
-using MySql.Data.MySqlClient;
 using Capa_Entidad;
 
 namespace Capa_Datos
 {
     public class CD_Categoria
     {
-
         public List<Categoria> Listar()
         {
             List<Categoria> lista = new List<Categoria>();
 
-            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
+            ClsDataBase database = new ClsDataBase();
+            database.NameSP = "sp_ListarCategorias";
+            database.TableName = "TablaCategorias";
+
+            database.EjecutarSelect();
+
+            if (!string.IsNullOrEmpty(database.ErrorDB))
+                throw new Exception("Error al listar categorías: " + database.ErrorDB);
+
+            if (database.DsResults == null ||
+                !database.DsResults.Tables.Contains("TablaCategorias"))
+                return lista;
+
+            foreach (DataRow dr in database.DsResults.Tables["TablaCategorias"].Rows)
             {
-                try
+                lista.Add(new Categoria()
                 {
-                    string query = "SELECT idCategoria, nombre_categoria, estado_categoria FROM categoria";
-                    MySqlCommand cmd = new MySqlCommand(query, oconexion);
-                    cmd.CommandType = CommandType.Text;
-
-                    oconexion.Open();
-
-                    using (MySqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        while (dr.Read())
-                        {
-                            lista.Add(new Categoria()
-                            {
-                                IdCategoria = Convert.ToInt32(dr["idCategoria"]),
-                                Nombre_categoria = dr["nombre_categoria"].ToString(),
-                                Estado_categoria = Convert.ToBoolean(dr["estado_categoria"])
-                            });
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Error al listar categorías: " + ex.Message, ex);
-                }
+                    IdCategoria = Convert.ToInt32(dr["idCategoria"]),
+                    Nombre_categoria = dr["nombre_categoria"].ToString(),
+                    Estado_categoria = Convert.ToBoolean(dr["estado_categoria"])
+                });
             }
 
             return lista;
@@ -47,59 +40,82 @@ namespace Capa_Datos
 
         public int Registrar(Categoria obj, out string Mensaje)
         {
-            int idGenerado = 0;
             Mensaje = string.Empty;
 
-            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
+            try
             {
-                try
-                {
-                    string query = "INSERT INTO categoria(nombre_categoria, estado_categoria) VALUES(@nombre, @estado); SELECT LAST_INSERT_ID();";
+                ClsDataBase database = new ClsDataBase();
 
-                    MySqlCommand cmd = new MySqlCommand(query, oconexion);
-                    cmd.Parameters.AddWithValue("@nombre", obj.Nombre_categoria);
-                    cmd.Parameters.AddWithValue("@estado", obj.Estado_categoria);
+                database.NameSP = "sp_RegistrarCategoria";
+                database.TableName = "TablaIdGenerado";
 
-                    oconexion.Open();
-                    idGenerado = Convert.ToInt32(cmd.ExecuteScalar());
-                }
-                catch (Exception ex)
+                database.DtParameters.Rows.Add(
+                    "@p_nombre", null, obj.Nombre_categoria);
+
+                database.DtParameters.Rows.Add(
+                    "@p_estado", null, obj.Estado_categoria);
+
+                database.EjecutarSelect();
+
+                if (!string.IsNullOrEmpty(database.ErrorDB))
                 {
-                    idGenerado = 0;
-                    Mensaje = ex.Message;
+                    Mensaje = database.ErrorDB;
+                    return 0;
                 }
+
+                if (database.DsResults != null &&
+                    database.DsResults.Tables.Contains("TablaIdGenerado") &&
+                    database.DsResults.Tables["TablaIdGenerado"].Rows.Count > 0)
+                {
+                    return Convert.ToInt32(
+                        database.DsResults.Tables["TablaIdGenerado"]
+                        .Rows[0]["idGenerado"]);
+                }
+
+                Mensaje = "No se pudo obtener el ID de la categoría.";
+                return 0;
             }
-
-            return idGenerado;
+            catch (Exception ex)
+            {
+                Mensaje = ex.Message;
+                return 0;
+            }
         }
 
         public bool Editar(Categoria obj, out string Mensaje)
         {
-            bool respuesta = false;
             Mensaje = string.Empty;
 
-            using (MySqlConnection oconexion = ClsDataBase.CrearConexion())
+            try
             {
-                try
-                {
-                    string query = "UPDATE categoria SET nombre_categoria = @nombre, estado_categoria = @estado WHERE idCategoria = @id";
+                ClsDataBase database = new ClsDataBase();
 
-                    MySqlCommand cmd = new MySqlCommand(query, oconexion);
-                    cmd.Parameters.AddWithValue("@id", obj.IdCategoria);
-                    cmd.Parameters.AddWithValue("@nombre", obj.Nombre_categoria);
-                    cmd.Parameters.AddWithValue("@estado", obj.Estado_categoria);
+                database.NameSP = "sp_ModificarCategoria";
 
-                    oconexion.Open();
-                    respuesta = cmd.ExecuteNonQuery() > 0;
-                }
-                catch (Exception ex)
+                database.DtParameters.Rows.Add(
+                    "@p_id", null, obj.IdCategoria);
+
+                database.DtParameters.Rows.Add(
+                    "@p_nombre", null, obj.Nombre_categoria);
+
+                database.DtParameters.Rows.Add(
+                    "@p_estado", null, obj.Estado_categoria);
+
+                database.EjecutarAccion();
+
+                if (!string.IsNullOrEmpty(database.ErrorDB))
                 {
-                    respuesta = false;
-                    Mensaje = ex.Message;
+                    Mensaje = database.ErrorDB;
+                    return false;
                 }
+
+                return true;
             }
-
-            return respuesta;
+            catch (Exception ex)
+            {
+                Mensaje = ex.Message;
+                return false;
+            }
         }
     }
 }

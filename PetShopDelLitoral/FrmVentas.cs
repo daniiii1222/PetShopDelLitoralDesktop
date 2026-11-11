@@ -30,7 +30,7 @@ namespace PetShopDelLitoral
         private DataRow productoSeleccionado = null;
         private bool cargandoCliente = false; // evita que el TextChanged borre el cliente recién encontrado
       
-        private List<DetalleVenta> detallesPendientesComprobante;
+       
         public FrmVentas()
         {
             InitializeComponent();
@@ -404,7 +404,7 @@ namespace PetShopDelLitoral
                                           2, MidpointRounding.AwayFromZero);
         }
 
-        // Acepta "10", "10,5", "10.5" y "10%". Vacío = 0. Devuelve false si no es número o no está entre 0 y 100.
+  
         private bool TryParsePorcentaje(string texto, out decimal valor)
         {
             valor = 0m;
@@ -421,6 +421,7 @@ namespace PetShopDelLitoral
             return true;
         }
 
+        //controlar los descuentos por producto
         private void DgvVentas_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.RowIndex >= detalles.Count) return;
@@ -464,10 +465,10 @@ namespace PetShopDelLitoral
 
         private void GuardarVenta_Click(object sender, EventArgs e)
         {
-            dgvVentas.EndEdit(); // confirma un descuento que haya quedado a medio escribir
+            dgvVentas.EndEdit(); 
 
             decimal descuentoCompra;
-            if (!TryParsePorcentaje(txtDescuento.Text, out descuentoCompra))
+            if (!TryParsePorcentaje(txtDescuento.Text, out descuentoCompra)) // intenta convertir el texto ingresado en txtDescuento a un número decimal y comprobar que sea un porcentaje válido
             {
                 MessageBox.Show("El descuento de la compra debe ser un número entre 0 y 100.", "Descuento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -490,7 +491,7 @@ namespace PetShopDelLitoral
 
             if (cnVenta.RegistrarVenta(venta, detalles, out idVenta, out mensaje))
             {
-                // Genera el comprobante PDF
+               
                 GenerarPdfComprobante(idVenta, venta, detalles);
 
                 LimpiarFormulario();
@@ -630,29 +631,6 @@ namespace PetShopDelLitoral
             {
                 MessageBox.Show("Error al generar el PDF: " + ex.Message,
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-
-
-
-        private void CargarHistorialVentasVendedor()
-        {
-            try
-            {
-                if (Sesion.UsuarioActual != null)
-                {
-                    int idUsuarioLogueado = Sesion.UsuarioActual.idUsuario;
-                    DataTable dt = cnVenta.ObtenerVentasPorVendedor(idUsuarioLogueado);
-
-                    // Si tenés otra grilla en FrmVentas destinada a esto (por ejemplo dgvHistorialVentas):
-                    // dgvHistorialVentas.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar historial: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

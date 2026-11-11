@@ -43,10 +43,8 @@ namespace Capa_Datos
             return database.DsResults.Tables["TablaClienteDni"];
         }
 
-        // Registra la venta COMPLETA en UNA transacción que vive en la base de datos:
-        // el procedimiento sp_RegistrarVentaCompleta (Scripts/Ventas.sql) valida el stock, toma el precio real
-        // de cada producto, calcula descuentos y total, guarda cabecera + detalle, descuenta el stock y hace
-        // COMMIT. Si algo falla hace ROLLBACK, y el error vuelve acá como excepción.
+        // Registra la venta COMPLETA en UNA transacción que vive en la base de datos
+       
         public int RegistrarVentaTransaccional(Venta objVenta, List<DetalleVenta> detalles)
         {
             // El detalle viaja como JSON: [{"idProducto":1,"cantidad":2,"descuento":10},...]
@@ -62,7 +60,7 @@ namespace Capa_Datos
                     .Append("}");
             }
             json.Append("]");
-
+            //using garantiza que los recursos de conexión se liberen al terminar, incluso si ocurre una excepción. 
             using (MySqlConnection conexion = ClsDataBase.CrearConexion())
             {
                 conexion.Open();

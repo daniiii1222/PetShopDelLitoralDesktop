@@ -110,7 +110,7 @@ namespace PetShopDelLitoral
 
         private void CargarProveedores()
         {
-            try
+            try//usamos linq ya que trabajamos con una lista de proveedores y queremos proyectar solo los datos necesarios para el comboBox
             {
                 CN_Proveedor objNegocioProv = new CN_Proveedor();
                 List<Proveedor> lista = objNegocioProv.Listar() ?? new List<Proveedor>();
@@ -365,6 +365,19 @@ namespace PetShopDelLitoral
                 return;
             }
 
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                MessageBox.Show(
+                    "Debe ingresar el número de comprobante.",
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                textBox1.Focus();
+                return;
+            }
+
             decimal total = 0;
             List<DetalleCompra> listaDetalle = new List<DetalleCompra>();
 
@@ -442,6 +455,6 @@ namespace PetShopDelLitoral
             }
         }
 
-        // Métodos de eventos visuales del diseñador (se conservan)
+        
     }
 }

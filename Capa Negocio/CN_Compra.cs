@@ -55,21 +55,43 @@ namespace Capa_Negocio
                 return false;
             }
 
+
             decimal sumaDetalle = 0;
+
             foreach (DetalleCompra d in listaDetalle)
             {
-                if (d.IdProducto == null || d.Cantidad <= 0)
+                if (d == null || d.IdProducto == null ||
+                    d.IdProducto.IdProducto <= 0 || d.Cantidad <= 0)
                 {
-                    Mensaje = "Todos los productos deben tener una cantidad mayor a cero.";
+                    Mensaje = "Todos los productos deben ser válidos y tener una cantidad mayor a cero.";
                     return false;
                 }
+
                 if (d.Precio_unitario <= 0)
                 {
                     Mensaje = "Todos los productos deben tener un precio de compra mayor a cero.";
                     return false;
                 }
+
+                if (d.Subtotal_compra < 0)
+                {
+                    Mensaje = "El subtotal de los productos no puede ser negativo.";
+                    return false;
+                }
+
+                decimal subtotalCalculado = Math.Round(
+                    d.Cantidad * d.Precio_unitario, 2,
+                    MidpointRounding.AwayFromZero);
+
+                if (d.Subtotal_compra != subtotalCalculado)
+                {
+                    Mensaje = "El subtotal de un producto no coincide con su cantidad y precio.";
+                    return false;
+                }
+
                 sumaDetalle += d.Subtotal_compra;
             }
+
             if (Math.Abs(sumaDetalle - objCompra.Monto_compra) > 0.01m)
             {
                 Mensaje = "El total de la compra no coincide con el detalle.";
@@ -77,6 +99,9 @@ namespace Capa_Negocio
             }
 
             return objcd_compra.Registrar(objCompra, listaDetalle, out Mensaje);
+
+
+         
         }
     }
 }

@@ -474,7 +474,7 @@ namespace PetShopDelLitoral
         private System.Collections.Generic.IEnumerable<Control> GetAllControls(Control control)
         {
             var controls = control.Controls.Cast<Control>();
-            return controls.SelectMany(ctrl => GetAllControls(ctrl)).Concat(controls);
+            return controls.SelectMany(ctrl => GetAllControls(ctrl)).Concat(controls);  //Une los controles encontrados dentro de otros controles con los controles hijos directos.
         }
 
         private void Tabla_CellClick(object sender, DataGridViewCellEventArgs e)

@@ -7,9 +7,7 @@ using System.Globalization;
 
 namespace Capa_Datos
 {
-    // Los procedimientos almacenados de productos (sp_ListarProductos, sp_RegistrarProducto, sp_ModificarProducto,
-    // sp_EliminarProducto y sp_ExisteCodigoProducto) están definidos en Scripts/Productos.sql.
-    // Hay que ejecutar ese script una vez en la base: esta clase no los crea.
+   
     public class CD_Producto
     {
         // ── Listar ───────────────────────────────────────────────────────────
