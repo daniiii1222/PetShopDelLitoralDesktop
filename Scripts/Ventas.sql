@@ -48,7 +48,7 @@ BEGIN
     DECLARE v_total DECIMAL(12,2);
     DECLARE v_desc DECIMAL(5,2);      
 
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION --si se genera un error, se vuelve hacia atras y se manda el error a c#
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION -- si se genera un error, se vuelve hacia atras y se manda el error a c#
     BEGIN
         ROLLBACK;
         RESIGNAL;
@@ -62,7 +62,7 @@ BEGIN
 
     IF EXISTS (
         SELECT 1
-        FROM JSON_TABLE(p_detalle, '$[*]' COLUMNS (  --JSON_TABLE transforma los datos del JSON en filas y columnas para poder consultarlos como una tabla.
+        FROM JSON_TABLE(p_detalle, '$[*]' COLUMNS (  -- JSON_TABLE transforma los datos del JSON en filas y columnas para poder consultarlos como una tabla.
                 descuento DECIMAL(5,2) PATH '$.descuento')) j
         WHERE IFNULL(j.descuento, 0) < 0 OR IFNULL(j.descuento, 0) > 100
     ) THEN
@@ -113,7 +113,7 @@ BEGIN
     FROM JSON_TABLE(p_detalle, '$[*]' COLUMNS (
             idProducto INT          PATH '$.idProducto',
             cantidad   INT          PATH '$.cantidad',
-            descuento  DECIMAL(5,2) PATH '$.descuento')) j   --j: jason_table
+            descuento  DECIMAL(5,2) PATH '$.descuento')) j   -- j: json_table
     INNER JOIN producto p ON p.idProducto = j.idProducto;
 
     -- 5) Descontar stock (sin cambios)

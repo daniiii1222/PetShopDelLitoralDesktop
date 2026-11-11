@@ -206,12 +206,12 @@ El menú lateral cambia según el rol del usuario logueado.
 | Inicio | ✅ | ✅ | ✅ |
 | Ventas | ✅ | — | ✅ |
 | Compras | ✅ | ✅ | — |
-| Productos | ✅ | ✅ | ✅ |
-| Personas | ✅ | — | ✅ |
-| Reportes | ✅ | ✅ | ✅ |
-| Backup | ✅ | — | — |
+| Productos | ✅ | ✅ | 👁️ (solo lectura) |
+| Personas | ✅ | ✅ (Clientes y Proveedores) | ✅ (solo Clientes) |
+| Reportes | ✅ | ✅ | ✅ (propios) |
+| Backup | ✅ | 🔑 (autoriza restauración) | — |
 
-Dentro de **Personas**, cada rol ve distintos tipos de registro: el administrador gestiona usuarios, clientes y proveedores; el vendedor, solo clientes.
+Dentro de **Personas**, cada rol ve distintos tipos de registro: el administrador gestiona usuarios, clientes y proveedores; el supervisor, clientes y proveedores; y el vendedor, solo clientes. En **Productos**, el vendedor puede consultar y buscar el catálogo pero no cargar, editar ni eliminar productos.
 
 
 
