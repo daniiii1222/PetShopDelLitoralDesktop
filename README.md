@@ -10,7 +10,7 @@
 ![C#](https://img.shields.io/badge/C%23-WinForms-FDCC6E?style=for-the-badge&labelColor=211815&logo=csharp&logoColor=FDCC6E)
 ![MySQL](https://img.shields.io/badge/MySQL%20%2F%20MariaDB-Base%20de%20datos-FDCC6E?style=for-the-badge&labelColor=211815&logo=mysql&logoColor=FDCC6E)
 ![Guna UI2](https://img.shields.io/badge/UI-Guna.UI2-FDCC6E?style=for-the-badge&labelColor=211815)
-![Estado](https://img.shields.io/badge/Estado-En%20desarrollo-FFFFA0?style=for-the-badge&labelColor=211815)
+
 
 <br>
 
@@ -27,7 +27,7 @@
 
 ---
 
-## ✨ Sobre el proyecto
+## Sobre el proyecto
 
 **Pet Shop del Litoral** es una aplicación de escritorio para Windows que digitaliza la operación diaria de un pet shop: registrar ventas con descuentos, controlar el stock de productos, administrar clientes, usuarios y proveedores, registrar compras y consultar reportes.
 
@@ -35,7 +35,7 @@ Está desarrollada en **C# con Windows Forms** sobre **.NET Framework 4.7.2**, u
 
 ---
 
-## 🧩 Módulos
+## Módulos
 
 | Módulo | Qué permite hacer |
 |---|---|
@@ -52,7 +52,7 @@ Está desarrollada en **C# con Windows Forms** sobre **.NET Framework 4.7.2**, u
 
 ---
 
-## 🏛️ Arquitectura
+## Arquitectura
 
 El proyecto separa responsabilidades en capas. Cada una solo conoce a la que tiene debajo: el proyecto de Presentación no tiene referencia al de Datos, así que el compilador impide saltarse la capa de Negocio.
 
@@ -176,7 +176,7 @@ Ejecutá los archivos de [`Scripts/`](Scripts/) **como script completo** (en DBe
 
 Los archivos `sp_*.sql` (filas 9 a 12) definen un procedimiento cada uno. Ya vienen incluidos en la copia de seguridad del equipo, así que ejecutarlos es opcional, pero es seguro: cada uno elimina y vuelve a crear su procedimiento.
 
-> ⚠️ **Importante:** cada integrante debe correr los scripts en **su propia base local**.
+> **Importante:** cada integrante debe correr los scripts en **su propia base local**.
 
 **5. Revisar la conexión**
 
@@ -197,7 +197,7 @@ Si tu servidor usa otro usuario o contraseña, cambialo ahí, sin tocar el códi
 3. Elegí como proyecto de inicio **CapaPresentacion** y presioná <kbd>F5</kbd>.
 
 
-## 👤 Roles y permisos
+## Roles y permisos
 
 El menú lateral cambia según el rol del usuario logueado.
 
@@ -261,8 +261,4 @@ Un detalle de diseño que conviene conocer antes de tocar las pantallas:
 
 ---
 
-<div align="center">
 
-**Pet Shop del Litoral** · Hecho con 🧡 por el equipo de desarrollo
-
-</div>
